@@ -1,0 +1,2 @@
+public enum Speciality {    RESHAPER,PAINTER,ELECTRICIAN,MECHANIC;
+}
