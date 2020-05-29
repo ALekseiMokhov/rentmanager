@@ -1,14 +1,16 @@
 package CarFactory;
 
 public class CarAssembler implements IAssembleLine{
-   private ChassisBuilder firstStep;
-   private CarBodyBuilder secondStep;
-   private MotorBuilder thirdStep;
 
-    public CarAssembler() {
-        this.firstStep = new ChassisBuilder();
-        this.secondStep = new CarBodyBuilder();
-        this.thirdStep = new MotorBuilder();
+    private final ChassisBuilder firstStep;
+    private final CarBodyBuilder secondStep;
+    private final MotorBuilder thirdStep;
+
+    public CarAssembler(ChassisBuilder firstStep, CarBodyBuilder secondStep, MotorBuilder thirdStep) {
+
+        this.firstStep = firstStep;
+        this.secondStep = secondStep;
+        this.thirdStep = thirdStep;
     }
 
     @Override
