@@ -1,6 +1,5 @@
 package service;
 
-import dao.MasterRepository;
 import dao.OrderRepository;
 import entities.Master;
 import entities.Order;
@@ -10,10 +9,7 @@ import java.time.LocalDate;
 
 public class OrderService {
     OrderRepository repository = new OrderRepository();
-    MasterRepository masterRepository = new MasterRepository();
-
     private Order[] orders = (Order[]) repository.findAll();
-    private Master[] masters = (Master[]) masterRepository.findAll();
 
 
     public void addOrder(Master master, Place place, LocalDate date) {
@@ -46,7 +42,7 @@ public class OrderService {
             if (orders != null && order.getId() == id) {
                 return order;
             }
-            throw new IllegalArgumentException( "No such entities.Order in order list!" );
+            throw new IllegalArgumentException( "No such Order in order list!" );
         }
 
         return null;
