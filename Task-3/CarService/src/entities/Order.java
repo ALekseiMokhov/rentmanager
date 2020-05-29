@@ -1,7 +1,9 @@
+package entities;
+
 import java.time.LocalDate;
 
 public class Order {
-    private long id;
+    private int id;
     private LocalDate dateBooked;
     private Master master;
     private Place place;
@@ -13,15 +15,18 @@ public class Order {
         this.master = master;
         this.place = place;
         this.isDone = false;
-        if(place.isFreeForBooking( dateBooked )==false)   throw new IllegalArgumentException( "The date is already booked!") ;
+        if(place.isFreeForBooking( dateBooked )==false)   {
+            throw new IllegalArgumentException( "The date is already booked!") ;
+
+        }
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,7 +65,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "entities.Order{" +
                 "id=" + id +
                 ", dateBooked=" + dateBooked +
                 ", master=" + master +

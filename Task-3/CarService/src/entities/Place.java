@@ -1,15 +1,17 @@
+package entities;
+
 import java.time.LocalDate;
 
 public class Place {
-    private long id;
+    private int id;
     private boolean isFree = true;
     private LocalDate [] bookedDates = new LocalDate[365];
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public boolean isFreeForBooking(LocalDate dateToCheck){
