@@ -6,7 +6,6 @@ import entities.Place;
 public class PlaceService {
 
     PlaceRepository repository = new PlaceRepository();
-    Place [] places = (Place[]) repository.findAll();
 
     public PlaceService() {
         for (int i = 0; i < 10; i++) {
@@ -15,7 +14,7 @@ public class PlaceService {
     }
 
     public Place[] getPlaces() {
-        return places;
+        return repository.findAll();
     }
 
 
@@ -26,9 +25,9 @@ public class PlaceService {
 
     public void addPlace( Place place) {
         for (int i = 0; i < 100; i++) {
-            if (places[ i ] == null) {
+            if (repository.findAll()[ i ] == null) {
                 place.setId( i );
-                places[ i ] = place;
+                repository.findAll()[ i ] = place;
                 repository.save( place );
                 break;
             }
@@ -36,7 +35,7 @@ public class PlaceService {
         }
     }
     public Place findFreePlace(){
-        for (Place place : places) {
+        for (Place place : repository.findAll()) {
             if(place.isFree()&&place!=null)   return place;
             throw new IllegalStateException( "All places in Garage are booked!" );
         }

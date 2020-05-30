@@ -7,11 +7,9 @@ import entities.Speciality;
 public class MasterService {
     MasterRepository repository = new MasterRepository();
 
-    Master[] masters = (Master[]) repository.findAll();
-
 
     public Master findByName(String name) {
-        for (Master master : masters) {
+        for (Master master : repository.findAll()) {
             if (master != null && master.getFullName() == name) return master;
 
         }
@@ -22,10 +20,10 @@ public class MasterService {
 
     public Master addMaster(String name, Speciality speciality) {
         Master master = new Master( speciality, name );
-        for (int i = 0; i < masters.length; i++) {
-            if (masters[ i ] == null) {
+        for (int i = 0; i < repository.findAll().length; i++) {
+            if (repository.findAll()[ i ] == null) {
                 master.setId( i );
-                masters[ i ] = master;
+                repository.findAll()[ i ] = master;
                 repository.save( master );
                 return master;
             }
@@ -34,7 +32,7 @@ public class MasterService {
     }
 
     public void removeMaster(int id) {
-        masters[ id ] = null;
+        repository.findAll()[ id ] = null;
         repository.delete( id );
     }
 

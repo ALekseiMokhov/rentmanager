@@ -9,18 +9,17 @@ import java.time.LocalDate;
 
 public class OrderService {
     OrderRepository repository = new OrderRepository();
-    private Order[] orders = (Order[]) repository.findAll();
 
 
     public void addOrder(Master master, Place place, LocalDate date) {
-        for (int i = 0; i < orders.length; i++) {
-            if (orders[ i ] != null && orders[ i ].getId() == orders.length - 1) {
+        for (int i = 0; i < repository.findAll().length; i++) {
+            if (repository.findAll()[ i ] != null && repository.findAll()[ i ].getId() == repository.findAll().length - 1) {
                 clearOrders();
             }
-            if (orders[ i ] == null) {
+            if (repository.findAll()[ i ] == null) {
                 Order order = new Order( date, master, place );
                 order.setId( i );
-                orders[ i ] = order;
+                repository.findAll()[ i ] = order;
                 repository.save( order );
                 break;
             }
@@ -29,17 +28,17 @@ public class OrderService {
     }
 
     public void removeOrder(long id) {
-        for (int i = 0; i < orders.length; i++) {
-            if (orders[ i ] != null && orders[ i ].getId() == id) {
-                orders[ i ] = null;
+        for (int i = 0; i < repository.findAll().length; i++) {
+            if (repository.findAll()[ i ] != null && repository.findAll()[ i ].getId() == id) {
+                repository.findAll()[ i ] = null;
                 repository.delete( i );
             }
         }
     }
 
     public Order findOrderById(long id) {
-        for (Order order : orders) {
-            if (orders != null && order.getId() == id) {
+        for (Order order : repository.findAll()) {
+            if (repository.findAll() != null && order.getId() == id) {
                 return order;
             }
             throw new IllegalArgumentException( "No such Order in order list!" );
@@ -60,7 +59,7 @@ public class OrderService {
     }
 
     public void closeOrder(int id) {
-        for (Order order : orders) {
+        for (Order order : repository.findAll()) {
             if (order != null && order.getId() == id  )     {
                 order.setDone();
             repository.save( order );
@@ -69,13 +68,13 @@ public class OrderService {
 
     }
     public Order[] getOrders() {
-        return orders;
+        return repository.findAll();
     }
 
     private void clearOrders() {
-        for (int i = 0; i < orders.length; i++) {
+        for (int i = 0; i < repository.findAll().length; i++) {
             repository.delete( i );
-            orders[ i ] = null;
+            repository.findAll()[ i ] = null;
         }
     }
 }

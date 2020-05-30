@@ -15,10 +15,6 @@ public class Order {
         this.master = master;
         this.place = place;
         this.isDone = false;
-        if(place.isFreeForBooking( dateBooked )==false)   {
-            throw new IllegalArgumentException( "The date is already booked!") ;
-
-        }
 
     }
 

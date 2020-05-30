@@ -2,16 +2,16 @@ package dao;
 
 import entities.Master;
 
-public class  MasterRepository implements Dao{
+public class  MasterRepository implements Dao<Master>{
     private Master[] masters = new Master[ 100 ];
 
     @Override
-    public Object findById(int id) {
+    public Master findById(int id) {
          return masters[ id ];
     }
 
     @Override
-    public Object[] findAll() {
+    public Master[] findAll() {
         return masters;
     }
 
@@ -22,12 +22,10 @@ public class  MasterRepository implements Dao{
     }
 
     @Override
-    public void save(Object o) {
-        if(o instanceof Master ==false)   {
-            throw new IllegalArgumentException( "Wrong object type!" )  ;
-        }
-        if(masters[((Master) o).getId()]==null) {
-            masters[((Master) o).getId()] = (Master) o;
+    public void save(Master master) {
+
+        if(masters[master.getId()]==null) {
+            masters[master.getId()] = master;
         }
     }
 

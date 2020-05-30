@@ -3,16 +3,16 @@ package dao;
 import entities.Master;
 import entities.Order;
 
-public class OrderRepository implements Dao{
+public class OrderRepository implements Dao<Order>{
     private Order[] orders = new Order[ 100 ];
 
     @Override
-    public Object findById(int id) {
+    public Order findById(int id) {
         return null;
     }
 
     @Override
-    public Object[] findAll() {
+    public Order[] findAll() {
         return orders;
     }
 
@@ -22,12 +22,10 @@ public class OrderRepository implements Dao{
     }
 
     @Override
-    public void save(Object o) {
-        if(o instanceof Order ==false)   {
-            throw new IllegalArgumentException( "Wrong object type!" )  ;
-        }
-        if(orders[((Order) o).getId()]==null) {
-            orders[((Order) o).getId()] = (Order) o;
+    public void save(Order order) {
+
+        if(orders[order.getId()]==null) {
+            orders[order.getId()] = order;
         }
     }
 

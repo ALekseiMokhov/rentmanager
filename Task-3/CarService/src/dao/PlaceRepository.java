@@ -3,11 +3,11 @@ package dao;
 import entities.Master;
 import entities.Place;
 
-public class PlaceRepository implements Dao {
+public class PlaceRepository implements Dao <Place>{
     private Place[] places = new Place[ 100 ];
 
     @Override
-    public Object findById(int id) {
+    public Place findById(int id) {
         for (Place place : places) {
           if(place!=null && place.getId()==id)     {
               return place;
@@ -17,7 +17,7 @@ public class PlaceRepository implements Dao {
     }
 
     @Override
-    public Object[] findAll() {
+    public Place[] findAll() {
         return places;
     }
 
@@ -31,12 +31,9 @@ public class PlaceRepository implements Dao {
     }
 
     @Override
-    public void save(Object o) {
-        if(o instanceof Place ==false)   {
-            throw new IllegalArgumentException( "Wrong object type!" )  ;
-        }
-        if(places[((Place) o).getId()]==null) {
-            places[((Place) o).getId()] = (Place) o;
+    public void save(Place place) {
+        if(places[place.getId()]==null) {
+            places[place.getId()] = place;
         }
     }
 
