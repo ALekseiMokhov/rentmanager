@@ -1,6 +1,6 @@
 package service;
 
-import dao.PlaceRepository;
+import repository.PlaceRepository;
 import entities.Place;
 
 public class PlaceService {

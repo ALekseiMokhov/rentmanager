@@ -1,6 +1,6 @@
 package service;
 
-import dao.OrderRepository;
+import repository.OrderRepository;
 import entities.Master;
 import entities.Order;
 import entities.Place;

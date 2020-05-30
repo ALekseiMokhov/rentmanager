@@ -1,6 +1,6 @@
-package dao;
+package repository;
 
-public interface Dao <T> {
+public interface Repository<T> {
     T findById(int id);
     T [] findAll();
     void delete(int id);

@@ -1,8 +1,8 @@
-package dao;
+package repository
 
 import entities.Master;
 
-public class  MasterRepository implements Dao<Master>{
+public class  MasterRepository implements Repository<Master>{
     private Master[] masters = new Master[ 100 ];
 
     @Override

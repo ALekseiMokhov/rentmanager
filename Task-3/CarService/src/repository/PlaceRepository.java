@@ -1,9 +1,9 @@
-package dao;
+package repository;
 
 import entities.Master;
 import entities.Place;
 
-public class PlaceRepository implements Dao <Place>{
+public class PlaceRepository implements Repository<Place>{
     private Place[] places = new Place[ 100 ];
 
     @Override

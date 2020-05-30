@@ -1,6 +1,6 @@
 package service;
 
-import dao.MasterRepository;
+import repository.MasterRepository;
 import entities.Master;
 import entities.Speciality;
 
