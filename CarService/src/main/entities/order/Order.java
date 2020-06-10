@@ -4,15 +4,14 @@ import main.entities.garage.Place;
 import main.entities.master.Master;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Order {
-    private OrderStatus status;
     private UUID id;
+    private OrderStatus status;
     private LocalDate dateBooked;
     private LocalDate startOfExecution;
     private LocalDate finishOfExecution;
@@ -85,7 +84,10 @@ public class Order {
     }
 
     public double getTotalPrice() {
-        return this.masters.stream().mapToDouble( master -> master.getDailyPayment() ).sum();
+        return this.masters
+                .stream()
+                .mapToDouble( master -> master.getDailyPayment() )
+                .sum();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package main.entities.master;
 
+import main.util.Calendar;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -10,10 +12,8 @@ public interface Master {
 
     double getDailyPayment();
 
-    boolean isFreeForDate(LocalDate date);
+    Calendar getCalendar();
 
-    void bookMaster(LocalDate date);
-
-    void unBookMaster(LocalDate date);
+    Speciality getSpeciality();
 
 }

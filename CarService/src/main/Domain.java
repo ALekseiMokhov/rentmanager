@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Domain {
     public static void main(String[] args) {
-        OrderService orderService = new OrderService();
+     /*   OrderService orderService = new OrderService( repository, masterService, placeService );
         Place place = new Place();
         Master Ivan = new Mechanic( "Ivan", 22.3 );
 
         orderService.addOrder( LocalDate.now(), LocalDate.of( 2020, 06, 30 ), List.of( Ivan ), place );
 
-        orderService.getOrders().stream().forEach( System.out::println );
+        orderService.getOrders().stream().forEach( System.out::println );*/
     }
 }

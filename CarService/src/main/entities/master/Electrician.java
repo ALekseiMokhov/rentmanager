@@ -1,9 +1,11 @@
 package main.entities.master;
 
+import main.util.Calendar;
+
 public class Electrician extends AbstractMaster {
 
-    public Electrician(String fullName, double dailiPayment) {
-        super( fullName, dailiPayment );
+    public Electrician(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {
+        super( fullName, dailiPayment, calendar, speciality );
     }
 
     @Override

@@ -11,7 +11,10 @@ public class OrderRepository implements Repository <Order> {
 
     @Override
     public Order findById(UUID id) {
-        return this.orders.stream().filter( master -> master.getId().equals( id ) ).findFirst().get();
+        return this.orders.stream()
+                .filter( master -> master.getId().equals( id ) )
+                .findFirst()
+                .get();
     }
 
     @Override

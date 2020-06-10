@@ -1,36 +1,27 @@
 package main.entities.garage;
 
-import java.time.LocalDate;
-import java.util.HashMap;
+import main.util.Calendar;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Place {
-    private UUID id;
-    private HashMap <LocalDate, Boolean> bookedDates = new HashMap <>();
 
-    public Place() {
+    private UUID id;
+    private Calendar calendar;
+
+    public Place(Calendar calendar) {
         this.id = UUID.randomUUID();
+        this.calendar = calendar;
+
     }
 
     public UUID getId() {
         return this.id;
     }
 
-    public boolean isFreeForBooking(LocalDate dateToCheck) {
-        return this.bookedDates.getOrDefault( dateToCheck, true );
-    }
-
-    public void bookPlace(LocalDate date) {
-        this.bookedDates.put( date, false );
-    }
-
-    public void unBookPlace(LocalDate date) {
-        this.bookedDates.put( date, true );
-    }
-
-    public HashMap <LocalDate, Boolean> getBookedDates() {
-        return this.bookedDates;
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     @Override

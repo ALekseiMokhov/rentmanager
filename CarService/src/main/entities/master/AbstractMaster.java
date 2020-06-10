@@ -1,5 +1,7 @@
 package main.entities.master;
 
+import main.util.Calendar;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Objects;
@@ -7,14 +9,17 @@ import java.util.UUID;
 
 public abstract class AbstractMaster implements Master {
     private UUID id;
-    private HashMap <LocalDate, Boolean> bookedDates = new HashMap <>();
+    private Calendar calendar;
     private String fullName;
     private double dailyPayment;
+    private Speciality speciality;
 
-    public AbstractMaster(String fullName, double dailyPayment) {
+    public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
         this.id = UUID.randomUUID();
         this.fullName = fullName;
         this.dailyPayment = dailyPayment;
+        this.calendar = calendar;
+        this.speciality = speciality;
     }
 
 
@@ -27,18 +32,6 @@ public abstract class AbstractMaster implements Master {
     }
 
 
-    public boolean isFreeForDate(LocalDate date) {
-        return this.bookedDates.getOrDefault( date, true );
-    }
-
-    public void bookMaster(LocalDate date) {
-        this.bookedDates.put( date, false );
-    }
-
-    public void unBookMaster(LocalDate date) {
-        this.bookedDates.put( date, true );
-    }
-
     public UUID getId() {
         return this.id;
     }
@@ -47,6 +40,14 @@ public abstract class AbstractMaster implements Master {
         return this.fullName;
     }
 
+    public Calendar getCalendar(){
+        return  this.calendar;
+    }
+
+    @Override
+    public Speciality getSpeciality() {
+        return speciality;
+    }
 
     @Override
     public int hashCode() {

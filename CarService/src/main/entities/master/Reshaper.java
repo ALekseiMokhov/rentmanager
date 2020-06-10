@@ -1,8 +1,10 @@
 package main.entities.master;
 
+import main.util.Calendar;
+
 public class Reshaper extends AbstractMaster {
-    public Reshaper(String fullName, double dailyPayment) {
-        super( fullName, dailyPayment );
+    public Reshaper(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {
+        super( fullName, dailiPayment, calendar, speciality );
     }
 
     @Override

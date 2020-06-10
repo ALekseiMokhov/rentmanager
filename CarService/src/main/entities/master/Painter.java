@@ -1,10 +1,11 @@
 package main.entities.master;
 
-public class Painter extends AbstractMaster {
-    public Painter(String fullName, double dailyPayment) {
-        super( fullName, dailyPayment );
-    }
+import main.util.Calendar;
 
+public class Painter extends AbstractMaster {
+    public Painter(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {
+        super( fullName, dailiPayment, calendar, speciality );
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

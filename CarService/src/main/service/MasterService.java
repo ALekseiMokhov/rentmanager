@@ -1,6 +1,8 @@
 package main.service;
 
+import main.entities.garage.Place;
 import main.entities.master.Master;
+import main.entities.master.Speciality;
 import main.repository.MasterRepository;
 
 import java.time.LocalDate;
@@ -8,17 +10,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class MasterService {
-    private final MasterRepository repository = new MasterRepository();
+    private final MasterRepository repository;
 
-
-    public Master findByNameAndSpeciality(String name, Class clazz) {
-        for (Master master : this.repository.findAll()) {
-            if (master.getFullName() == name && master.getClass() == clazz) return master;
-
-        }
-        throw new NoSuchElementException( "There is no Master with that name & skills!" );
+    public MasterService(MasterRepository repository) {
+        this.repository = repository;
     }
-
 
     public void saveMaster(Master master) {
         this.repository.save( master );
@@ -29,28 +25,54 @@ public class MasterService {
         this.repository.delete( id );
     }
 
+
+    public boolean isBookedForDate(Master master, LocalDate date) {
+        return master.getCalendar().isDateBooked( date );
+    }
+
+    public void setMasterForDate(Master master, LocalDate date) {
+        master.getCalendar().setDateForBooking( date );
+        this.repository.save( master );
+    }
+    public void setBookedDateFree(Master master,LocalDate date){
+        master.getCalendar().deleteBookedDate( date );
+    }
+
+    public Master getByNameAndSpeciality(String name, Speciality speciality) {
+       return this.repository.getByNameAndSpeciality( name,speciality )  ;
+    }
+
+    public Master getBySpeciality(Speciality speciality){
+        return  this.repository.getBySpeciality(speciality);
+    }
+
+
+    public Master getFreeBySpeciality(LocalDate date,Speciality speciality){
+        return  this.repository.getFreeBySpeciality(date,speciality);
+    }
+
+
     public List <Master> getMastersByAlphabet() {
         Comparator <Master> comparator = Comparator.comparing( m -> m.getFullName() );
-        Collections.sort( repository.findAll(), comparator );
-        return this.repository.findAll();
+        List <Master> sortedList = this.repository.findAll();
+        Collections.sort( sortedList, comparator );
+        return sortedList;
     }
 
     public List <Master> getFreeMasters(LocalDate date) {
-        return this.repository.findAll().stream().filter( (m) -> m.isFreeForDate( date ) ).collect( Collectors.toList() );
+        return this.repository
+                .findAll()
+                .stream()
+                .filter( (m) -> m.getCalendar().isDateBooked( date ) == false)
+                .collect( Collectors.toList() );
     }
 
-    public List <Master> getMastersBySpeciality(Class <? extends Master> clazz) {
-        return this.repository.findAll().stream().filter( ((m) -> m.getClass() == clazz) ).collect( Collectors.toList() );
-    }
-
-    public void bookMaster(Master master, LocalDate date) {
-        master.bookMaster( date );
-        this.repository.save( master );
-    }
-
-    public void unBookMaster(Master master, LocalDate date) {
-        master.unBookMaster( date );
-        this.repository.save( master );
+    public List <Master> getMastersBySpeciality(Speciality speciality) {
+        return this.repository
+                .findAll()
+                .stream()
+                .filter( ((m) -> m.getSpeciality() == speciality) )
+                .collect( Collectors.toList() );
     }
 
 

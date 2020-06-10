@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class PlaceService {
 
-    private final PlaceRepository repository = new PlaceRepository();
+    private final PlaceRepository repository;
 
-    public PlaceService() {
-
+    public PlaceService(PlaceRepository repository) {
+        this.repository = repository;
     }
 
     public List <Place> getPlaces() {
@@ -22,18 +22,40 @@ public class PlaceService {
     }
 
     public List <Place> getFreePlacesForDate(LocalDate date) {
-        return this.repository.findAll().stream().filter( p -> p.isFreeForBooking( date ) == true ).collect( Collectors.toList() );
+        return this
+                .repository
+                .findAll()
+                .stream()
+                .filter( p -> p.getCalendar().isDateBooked( date ) == false )
+                .collect( Collectors.toList() );
+    }
+
+    public boolean isPlaceSetForDate(Place place, LocalDate date) {
+        return place.getCalendar()
+                .isDateBooked( date );
+    }
+
+
+    public void setPlaceForDate(Place place, LocalDate date) {
+        place.getCalendar().setDateForBooking( date );
+        this.repository.save( place );
+    }
+
+    public void setPlaceFree(Place place, LocalDate date) {
+        place.getCalendar().deleteBookedDate( date );
+        this.repository.save( place );
     }
 
 
     public void savePlace(Place place) {
         this.repository.save( place );
-        ;
+
     }
 
-    public Place findFreePlace(LocalDate date) {
+    public Place getFreePlace(LocalDate date) {
         for (Place place : this.repository.findAll()) {
-            if (place.isFreeForBooking( date )) {
+            if (!place.getCalendar()
+                    .isDateBooked( date )) {
                 return place;
             }
 
@@ -41,17 +63,9 @@ public class PlaceService {
         throw new NoSuchElementException( "There is no free places for this Date!" );
     }
 
-    public Place findPlaceById(UUID id) {
-        for (Place place : this.repository.findAll()) {
-            if (place.getId().equals( id )) {
-                return place;
-            }
-        }
-        throw new NoSuchElementException( "There is no place with such id!" );
+    public Place getPlaceById(UUID id) {
+     return this.repository.findById( id ) ;
     }
 
-    public void bookPlaceForDate(Place place, LocalDate date) {
-        place.bookPlace( date );
-        this.repository.save( place );
-    }
+
 }
