@@ -56,9 +56,9 @@ public abstract class AbstractMaster implements Master {
 
     @Override
     public String toString() {
-        return "Master { " + this.getClass() +
-                "id=" + id +
+        return "Master { " + speciality +
                 ", fullName='" + fullName + '\'' +
+                ", booked dates= " + calendar.getBookedDates() +
                 '}';
     }
 }

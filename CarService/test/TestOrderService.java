@@ -1,6 +1,7 @@
 import main.entities.garage.Place;
 import main.entities.master.*;
 import main.entities.order.Order;
+import main.entities.order.OrderStatus;
 import main.repository.MasterRepository;
 import main.repository.OrderRepository;
 import main.repository.PlaceRepository;
@@ -49,16 +50,24 @@ public class TestOrderService {
 
         orderService.addOrder( LocalDate.of( 2020, 07, 01 )
                 , LocalDate.of( 2020, 07, 02 ), specialitySet );
-        orderService.addOrder( LocalDate.of( 2020, 07, 01 )
+        orderService.addOrder( LocalDate.of( 2020, 02, 01 )
                 , LocalDate.of( 2020, 07, 03 ), specialitySet );
         orderService.addOrder( LocalDate.of( 2020, 07, 01 )
                 , LocalDate.of( 2020, 07, 04 ), specialitySet );
+        orderService.addOrder( LocalDate.of( 2020, 07, 01 )
+                , LocalDate.of( 2020, 07, 05 ), specialitySet );
+        orderService.addOrder( LocalDate.of( 2020, 07, 01 )
+                , LocalDate.of( 2020, 07, 06 ), specialitySet );
+        orderService.addOrder( LocalDate.of( 2020, 07, 01 )
+                , LocalDate.of( 2020, 07, 07 ), specialitySet );
+
 
 
     }
 
     @Test
     void testFindOrderById() {
+        System.out.println("Test findOrderById:");
         UUID id = orderService.getOrders().get( 0 ).getId();
         Assertions.assertNotNull( orderService.findOrderById( id ) );
         for (Order order : orderService.getOrders()) {
@@ -68,6 +77,7 @@ public class TestOrderService {
 
     @Test
     void testShiftOrdersDate() {
+        System.out.println("Test shiftOrdersDate: ");
         for (Order order : orderService.getOrders()) {
             System.out.println( "Old date :" + order.getStartOfExecution() );
         }
@@ -79,21 +89,33 @@ public class TestOrderService {
 
     @Test
     void testSetNewMasters() {
-        Order order = orderService.getOrders().get( 2 );
+        Order order = orderService.getOrders().get( 1 );
+        System.out.println("Test setNewMasters: ");
         System.out.println( "Booking: " + order.getDateBooked() );
         System.out.println( "Start: " + order.getStartOfExecution() );
-        System.out.println( "Fin: " + order.getFinishOfExecution() );
+        System.out.println( "Finish: " + order.getFinishOfExecution() );
         List <Master> old = order.getMasters();
-        this.orderService.setNewMasters( order );
-        List <Master> current = order.getMasters();
+
         for (Master master : old) {
-            System.out.println( master.getCalendar().getBookedDates() );
+            System.out.println(master);
         }
-        System.out.println("current__________");
+        System.out.println("_________________");
+        this.orderService.setNewMasters( order );
+        List<Master> current = this.orderService.getOrders().get( 1 ).getMasters();
         for (Master master : current) {
-            System.out.println( master.getCalendar().getBookedDates() );
+            System.out.println(master);
         }
+        Assertions.assertNotEquals(old.get(0  ),current.get( 0 ));
+        Assertions.assertNotEquals(old.get(1  ),current.get( 1 ));
+        Assertions.assertNotEquals(old.get(2  ),current.get( 2 ));
+        Assertions.assertNotEquals(old.get(3  ),current.get( 3 ));
 
-
+    }
+    @Test
+    void testCancelOrder(){
+        Order orderToCancel = this.orderService.getOrdersByBookedDate( OrderStatus.MANAGED ).get( 0 );
+        UUID id = orderToCancel.getId();
+        this.orderService.cancelOrder( id );
+        Assertions.assertEquals( this.orderService.findOrderById( id ).getStatus(), OrderStatus.CANCELLED);
     }
 }

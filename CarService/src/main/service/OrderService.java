@@ -29,7 +29,7 @@ public class OrderService {
             Master master = masterService.getFreeBySpeciality( startOfExecution, speciality );
             availableMasters.add( master );
             masterService.setMasterForDate( master, startOfExecution );
-            masterService.saveMaster( master );
+            /*masterService.saveMaster( master );*/
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
         this.placeService.setPlaceForDate( place, startOfExecution );
@@ -81,15 +81,18 @@ public class OrderService {
 
     public void setNewMasters(Order order) {
         List <Master> newMasters = new ArrayList <>();
+
         for (Master master : order.getMasters()) {
             Master master1 = this.masterService
                     .getFreeBySpeciality( order.getStartOfExecution(), master.getSpeciality() );
-            newMasters.add( master1 );
-            this.masterService.setMasterForDate( master1,order.getStartOfExecution() );
+            this.masterService.setMasterForDate( master1, order.getStartOfExecution() );
             this.masterService.saveMaster( master1 );
+            newMasters.add( master1 );
+
             this.masterService.setBookedDateFree( master, order.getStartOfExecution() );
             this.masterService.saveMaster( master );
         }
+        order.setMasters( newMasters );
         this.orderRepository.save( order );
 
     }
