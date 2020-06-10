@@ -64,7 +64,7 @@ public class PlaceService {
     }
 
     public Place getPlaceById(UUID id) {
-     return this.repository.findById( id ) ;
+        return this.repository.findById( id );
     }
 
 

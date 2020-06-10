@@ -62,12 +62,11 @@ public class TestOrderService {
                 , LocalDate.of( 2020, 07, 07 ), specialitySet );
 
 
-
     }
 
     @Test
     void testFindOrderById() {
-        System.out.println("Test findOrderById:");
+        System.out.println( "Test findOrderById:" );
         UUID id = orderService.getOrders().get( 0 ).getId();
         Assertions.assertNotNull( orderService.findOrderById( id ) );
         for (Order order : orderService.getOrders()) {
@@ -77,7 +76,7 @@ public class TestOrderService {
 
     @Test
     void testShiftOrdersDate() {
-        System.out.println("Test shiftOrdersDate: ");
+        System.out.println( "Test shiftOrdersDate: " );
         for (Order order : orderService.getOrders()) {
             System.out.println( "Old date :" + order.getStartOfExecution() );
         }
@@ -90,32 +89,33 @@ public class TestOrderService {
     @Test
     void testSetNewMasters() {
         Order order = orderService.getOrders().get( 1 );
-        System.out.println("Test setNewMasters: ");
+        System.out.println( "Test setNewMasters: " );
         System.out.println( "Booking: " + order.getDateBooked() );
         System.out.println( "Start: " + order.getStartOfExecution() );
         System.out.println( "Finish: " + order.getFinishOfExecution() );
         List <Master> old = order.getMasters();
 
         for (Master master : old) {
-            System.out.println(master);
+            System.out.println( master );
         }
-        System.out.println("_________________");
+        System.out.println( "_________________" );
         this.orderService.setNewMasters( order );
-        List<Master> current = this.orderService.getOrders().get( 1 ).getMasters();
+        List <Master> current = this.orderService.getOrders().get( 1 ).getMasters();
         for (Master master : current) {
-            System.out.println(master);
+            System.out.println( master );
         }
-        Assertions.assertNotEquals(old.get(0  ),current.get( 0 ));
-        Assertions.assertNotEquals(old.get(1  ),current.get( 1 ));
-        Assertions.assertNotEquals(old.get(2  ),current.get( 2 ));
-        Assertions.assertNotEquals(old.get(3  ),current.get( 3 ));
+        Assertions.assertNotEquals( old.get( 0 ), current.get( 0 ) );
+        Assertions.assertNotEquals( old.get( 1 ), current.get( 1 ) );
+        Assertions.assertNotEquals( old.get( 2 ), current.get( 2 ) );
+        Assertions.assertNotEquals( old.get( 3 ), current.get( 3 ) );
 
     }
+
     @Test
-    void testCancelOrder(){
+    void testCancelOrder() {
         Order orderToCancel = this.orderService.getOrdersByBookedDate( OrderStatus.MANAGED ).get( 0 );
         UUID id = orderToCancel.getId();
         this.orderService.cancelOrder( id );
-        Assertions.assertEquals( this.orderService.findOrderById( id ).getStatus(), OrderStatus.CANCELLED);
+        Assertions.assertEquals( this.orderService.findOrderById( id ).getStatus(), OrderStatus.CANCELLED );
     }
 }

@@ -32,7 +32,7 @@ public class TestMasterService {
     void testFindByNameAndSpeciality() {
         Assertions.assertNotEquals( this.service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC ),
                 this.service.getByNameAndSpeciality( "Ivan", Speciality.RESHAPER ) );
-        System.out.println( this.service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC) );
+        System.out.println( this.service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC ) );
     }
 
     @Test
@@ -63,12 +63,12 @@ public class TestMasterService {
     void tetstGetFreeMastersForDate() {
         Master master = service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC );
         master.getCalendar().setDateForBooking( LocalDate.now() );
-        Assertions.assertTrue( service.getFreeMasters( LocalDate.now() ).size() == 8);
+        Assertions.assertTrue( service.getFreeMasters( LocalDate.now() ).size() == 8 );
 
     }
 
     @Test
     void testReturnMastersBySpeciality() {
-        Assertions.assertEquals( service.getMastersBySpeciality( Speciality.RESHAPER).size(), 3 );
+        Assertions.assertEquals( service.getMastersBySpeciality( Speciality.RESHAPER ).size(), 3 );
     }
 }

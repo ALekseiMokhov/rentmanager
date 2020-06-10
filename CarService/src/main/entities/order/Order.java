@@ -117,7 +117,7 @@ public class Order {
                 ", dateBooked=" + dateBooked +
                 ", startOfExecution=" + startOfExecution +
                 ", finishOfExecution=" + finishOfExecution +
-                ", masters=" + masters.stream().map(m->m.toString()).collect( Collectors.toList() ) +
+                ", masters=" + masters.stream().map( m -> m.toString() ).collect( Collectors.toList() ) +
                 ", place=" + place +
                 '}';
     }

@@ -17,9 +17,9 @@ public class PlaceRepository implements Repository <Place> {
     @Override
     public Place findById(UUID id) {
         for (Place place : places) {
-           if(place.getId().equals( id )) {
-               return place;
-           }
+            if (place.getId().equals( id )) {
+                return place;
+            }
         }
         throw new NoSuchElementException( "There is no place with such id!" );
     }

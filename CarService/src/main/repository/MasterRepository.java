@@ -32,11 +32,11 @@ public class MasterRepository implements Repository <Master> {
 
     @Override
     public void delete(UUID id) {
-        if(!this.masters
+        if (!this.masters
                 .contains( findById( id ) )) {
-             throw new IllegalStateException( "Repository doesn't contain master with such id!" );
+            throw new IllegalStateException( "Repository doesn't contain master with such id!" );
         }
-        this.masters.remove(this.findById( id )  ) ;
+        this.masters.remove( this.findById( id ) );
     }
 
     @Override
@@ -47,33 +47,34 @@ public class MasterRepository implements Repository <Master> {
             this.masters.set( this.masters.indexOf( master ), master );
         }
     }
+
     public Master getBySpeciality(Speciality speciality) {
         for (Master master : masters) {
-           if(master.getSpeciality()==speciality){
-               return master;
-           }
+            if (master.getSpeciality() == speciality) {
+                return master;
+            }
         }
-        throw new IllegalStateException( "There is no masters with given speciality" )  ;
+        throw new IllegalStateException( "There is no masters with given speciality" );
     }
-    public Master getFreeBySpeciality(LocalDate date,Speciality speciality) {
+
+    public Master getFreeBySpeciality(LocalDate date, Speciality speciality) {
         for (Master master : masters) {
-           if(master.getSpeciality()==speciality
-              && !master.getCalendar().isDateBooked( date )){
-               return master;
-           }
+            if (master.getSpeciality() == speciality
+                    && !master.getCalendar().isDateBooked( date )) {
+                return master;
+            }
         }
-        throw new IllegalStateException( "There is no masters with given speciality for the chosen Date!" )  ;
+        throw new IllegalStateException( "There is no masters with given speciality for the chosen Date!" );
     }
 
     public Master getByNameAndSpeciality(String name, Speciality speciality) {
-        for (Master master :masters) {
+        for (Master master : masters) {
             if (master.getFullName() == name
                     && master.getSpeciality() == speciality) return master;
 
         }
         throw new NoSuchElementException( "There is no Master with that name & skills!" );
     }
-
 
 
 }

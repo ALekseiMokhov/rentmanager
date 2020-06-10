@@ -40,8 +40,8 @@ public abstract class AbstractMaster implements Master {
         return this.fullName;
     }
 
-    public Calendar getCalendar(){
-        return  this.calendar;
+    public Calendar getCalendar() {
+        return this.calendar;
     }
 
     @Override

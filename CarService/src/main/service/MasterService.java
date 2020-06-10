@@ -1,12 +1,14 @@
 package main.service;
 
-import main.entities.garage.Place;
 import main.entities.master.Master;
 import main.entities.master.Speciality;
 import main.repository.MasterRepository;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MasterService {
@@ -34,21 +36,22 @@ public class MasterService {
         master.getCalendar().setDateForBooking( date );
         this.repository.save( master );
     }
-    public void setBookedDateFree(Master master,LocalDate date){
+
+    public void setBookedDateFree(Master master, LocalDate date) {
         master.getCalendar().deleteBookedDate( date );
     }
 
     public Master getByNameAndSpeciality(String name, Speciality speciality) {
-       return this.repository.getByNameAndSpeciality( name,speciality )  ;
+        return this.repository.getByNameAndSpeciality( name, speciality );
     }
 
-    public Master getBySpeciality(Speciality speciality){
-        return  this.repository.getBySpeciality(speciality);
+    public Master getBySpeciality(Speciality speciality) {
+        return this.repository.getBySpeciality( speciality );
     }
 
 
-    public Master getFreeBySpeciality(LocalDate date,Speciality speciality){
-        return  this.repository.getFreeBySpeciality(date,speciality);
+    public Master getFreeBySpeciality(LocalDate date, Speciality speciality) {
+        return this.repository.getFreeBySpeciality( date, speciality );
     }
 
 
@@ -63,7 +66,7 @@ public class MasterService {
         return this.repository
                 .findAll()
                 .stream()
-                .filter( (m) -> m.getCalendar().isDateBooked( date ) == false)
+                .filter( (m) -> m.getCalendar().isDateBooked( date ) == false )
                 .collect( Collectors.toList() );
     }
 
