@@ -12,19 +12,19 @@ public class AddOrderAction extends AbstractOrderAction {
     public void execute() {
         System.out.println( "Enter specialities required for your Order using ',' as delimiter " );
         System.out.println( "(available are: " );
-        System.out.println("____________");
-        availableSpecialities.stream().forEach( System.out::println);
+        System.out.println( "____________" );
+        availableSpecialities.stream().forEach( System.out::println );
         System.out.print( " ):" );
 
         try {
-            List <String> input = List.of( reader.readLine().split( "," ));
+            List <String> input = List.of( reader.readLine().split( "," ) );
             required = input.stream()
                     .map( s -> Speciality.valueOf( s.toUpperCase() ) )
-                    .collect( Collectors.toSet());
+                    .collect( Collectors.toSet() );
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Enter the date of execution: ");
+        System.out.println( "Enter the date of execution: " );
 
         try {
             startOfExecution = LocalDate.parse( reader.readLine() );
@@ -32,6 +32,6 @@ public class AddOrderAction extends AbstractOrderAction {
             e.printStackTrace();
         }
 
-        controller.addOrder( LocalDate.now(),startOfExecution,required );
+        controller.addOrder( LocalDate.now(), startOfExecution, required );
     }
 }

@@ -7,7 +7,10 @@ import java.util.UUID;
 
 public interface IOrderRepository {
     Order findById(UUID id);
+
     List <Order> findAll();
+
     void delete(UUID id);
+
     void save(Order order);
 }

@@ -20,7 +20,7 @@ public interface IMasterRepository {
 
     IMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
 
-     IMaster getByNameAndSpeciality(String name, Speciality speciality);
+    IMaster getByNameAndSpeciality(String name, Speciality speciality);
 
 
 }

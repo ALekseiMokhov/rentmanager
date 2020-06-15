@@ -6,7 +6,7 @@ import java.util.UUID;
 public class CompleteOrderAction extends AbstractOrderAction {
     @Override
     public void execute() {
-        System.out.println("Enter the id of completed order : ");
+        System.out.println( "Enter the id of completed order : " );
         try {
             id = UUID.fromString( reader.readLine() );
         } catch (IOException e) {

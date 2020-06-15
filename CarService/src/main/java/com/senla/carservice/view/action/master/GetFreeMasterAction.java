@@ -17,15 +17,14 @@ public class GetFreeMasterAction extends AbstractMasterAction {
         }
 
 
-        System.out.println("Enter the date: ");
+        System.out.println( "Enter the date: " );
         try {
-            date = LocalDate.parse( reader.readLine()  );
-        }
-        catch (IOException e)  {
+            date = LocalDate.parse( reader.readLine() );
+        } catch (IOException e) {
 
         }
 
-        master = controller.getFreeBySpeciality( date,speciality ) ;
+        master = controller.getFreeBySpeciality( date, speciality );
         System.out.println( "master is: " + master );
     }
 }

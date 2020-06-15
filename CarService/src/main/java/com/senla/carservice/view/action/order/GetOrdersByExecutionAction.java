@@ -13,7 +13,7 @@ public class GetOrdersByExecutionAction extends AbstractOrderAction {
     public void execute() {
 
 
-        System.out.println("Enter the date of execution: ");
+        System.out.println( "Enter the date of execution: " );
 
         try {
             finishOfExecution = LocalDate.parse( reader.readLine() );
@@ -22,8 +22,8 @@ public class GetOrdersByExecutionAction extends AbstractOrderAction {
         }
 
         List <Order> executedOrders = controller.getOrdersByExecutionDate( OrderStatus.COMPLETED ).stream()
-                .filter( o->o.getFinishOfExecution().equals( finishOfExecution ) )
+                .filter( o -> o.getFinishOfExecution().equals( finishOfExecution ) )
                 .peek( System.out::print )
-                .collect( Collectors.toList());
+                .collect( Collectors.toList() );
     }
 }

@@ -4,6 +4,7 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.domain.service.IOrderService;
+import com.senla.carservice.domain.service.OrderService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.UUID;
 public class OrderController {
     private IOrderService orderService;
 
-    public OrderController(IOrderService orderService) {
-        this.orderService = orderService;
+    public OrderController() {
+
+        this.orderService = OrderService.getINSTANCE();
     }
+
 
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         this.orderService.addOrder( date, startOfExecution, required );

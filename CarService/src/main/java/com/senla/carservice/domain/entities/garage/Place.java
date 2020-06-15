@@ -40,4 +40,11 @@ public class Place {
     public int hashCode() {
         return Objects.hash( getId() );
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                '}';
+    }
 }

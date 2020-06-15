@@ -8,12 +8,12 @@ public class GetPlacesAction extends AbstractPlaceAction {
     @Override
     public void execute() {
         System.out.println(
-             "All places in Garage: "
+                "All places in Garage: "
         );
 
-        List <Place> placeList =this.controller.getPlaces();
-        for (Place val : placeList) {
-            System.out.println(val);
-        }
+        this.controller.getPlaces()
+                .stream()
+                .forEach( System.out::print );
+
     }
 }

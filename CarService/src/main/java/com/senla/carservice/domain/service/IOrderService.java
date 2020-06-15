@@ -11,13 +11,22 @@ import java.util.UUID;
 
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
-    Order findOrderById(UUID id) ;
+
+    Order findOrderById(UUID id);
+
     void shiftOrderExecutionDate(Order order, LocalDate newDate);
+
     void setNewMasters(Order order);
+
     void cancelOrder(UUID id);
+
     void completeOrder(UUID id);
+
     List <Order> getOrders();
+
     List <Order> getOrdersByBookedDate(OrderStatus status);
+
     List <Order> getOrdersByExecutionDate(OrderStatus status);
+
     List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
 }

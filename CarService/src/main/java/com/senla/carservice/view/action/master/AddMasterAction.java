@@ -29,6 +29,7 @@ public class AddMasterAction extends AbstractMasterAction {
             e.printStackTrace();
         }
         controller.addMaster( fullName,salary,new Calendar(),speciality );
-        System.out.println("Master " + fullName + " was successfully added!");
+        System.out.println("Master " +
+                controller.getByNameAndSpeciality(fullName, speciality) + " was successfully added!");
     }
 }

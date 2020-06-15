@@ -1,14 +1,13 @@
 package com.senla.carservice.domain.repository;
 
 import com.senla.carservice.domain.entities.garage.Place;
-import com.senla.carservice.domain.service.IPlaceService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class PlaceRepository implements IPlaceRepository  {
+public class PlaceRepository implements IPlaceRepository {
     private List <Place> places;
 
     public PlaceRepository() {
@@ -37,11 +36,7 @@ public class PlaceRepository implements IPlaceRepository  {
 
     @Override
     public void save(Place place) {
-        if (!this.places.contains( place )) {
-            this.places.add( place );
-        } else {
-            this.places.set( this.places.indexOf( place ), place );
-        }
+        this.places.add( place );
     }
 
 

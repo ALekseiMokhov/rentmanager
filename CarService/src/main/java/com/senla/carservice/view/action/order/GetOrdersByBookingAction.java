@@ -3,7 +3,6 @@ package com.senla.carservice.view.action.order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class GetOrdersByBookingAction extends AbstractOrderAction {
     @Override
@@ -16,7 +15,7 @@ public class GetOrdersByBookingAction extends AbstractOrderAction {
             e.printStackTrace();
         }
         controller.getOrdersByBookedDate( status ).stream()
-        .forEach( o-> System.out.println("order id: "+o.getId() + " date of booking: " + o.getDateBooked()) );
+                .forEach( o -> System.out.println( "order id: " + o.getId() + " date of booking: " + o.getDateBooked() ) );
 
     }
 }

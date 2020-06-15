@@ -9,21 +9,19 @@ import java.util.UUID;
 public class UnbookPlaceAction extends AbstractPlaceAction {
     @Override
     public void execute() {
-        System.out.println(" Enter the id of booked place: ");
+        System.out.println( " Enter the id of booked place: " );
         try {
-            id = UUID.fromString( Scanner.getInstance().getReader().readLine());
-        }
-        catch (IOException e)  {
+            id = UUID.fromString( Scanner.getInstance().getReader().readLine() );
+        } catch (IOException e) {
 
         }
-        System.out.println("Enter the Date to unbook place: ");
+        System.out.println( "Enter the Date to unbook place: " );
         try {
-            date = LocalDate.parse(Scanner.getInstance().getReader().readLine()  );
-        }
-        catch (IOException e)  {
+            date = LocalDate.parse( Scanner.getInstance().getReader().readLine() );
+        } catch (IOException e) {
 
         }
-        this.controller.setPlaceFree( this.controller.getPlaceById( id ),date );
-        System.out.println("The place was unbooked successfully!");
+        this.controller.setPlaceFree( this.controller.getPlaceById( id ), date );
+        System.out.println( "The place was unbooked successfully!" );
     }
 }

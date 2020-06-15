@@ -10,23 +10,34 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class PlaceService implements IPlaceService{
+public class PlaceService implements IPlaceService {
 
     private final IPlaceRepository repository;
+    private static PlaceService INSTANCE;
 
-    public PlaceService(PlaceRepository repository) {
-        this.repository = repository;
+    public IPlaceRepository getRepository() {
+        return repository;
+    }
+
+    public static PlaceService getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new PlaceService();
+        }
+        return INSTANCE;
+    }
+
+    private PlaceService() {
+        this.repository = new PlaceRepository();
     }
 
     public List <Place> getPlaces() {
         return this.repository.findAll();
     }
 
-    public void addPlaces(int i){
+    public void addPlaces(int i) {
         for (int j = 0; j < i; j++) {
-            this.repository.save( new Place(new Calendar()) );
+            this.repository.save( new Place( new Calendar() ) );
         }
     }
 
@@ -49,6 +60,7 @@ public class PlaceService implements IPlaceService{
         place.getCalendar().setDateForBooking( date );
         this.repository.save( place );
     }
+
     public void setPlaceId(Place place, UUID id) {
         place.setId( id );
         this.repository.save( place );

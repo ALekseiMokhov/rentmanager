@@ -6,12 +6,6 @@ import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
-import com.senla.carservice.domain.repository.MasterRepository;
-import com.senla.carservice.domain.repository.OrderRepository;
-import com.senla.carservice.domain.repository.PlaceRepository;
-import com.senla.carservice.domain.service.MasterService;
-import com.senla.carservice.domain.service.OrderService;
-import com.senla.carservice.domain.service.PlaceService;
 import com.senla.carservice.view.action.IAction;
 import util.Scanner;
 
@@ -23,10 +17,8 @@ import java.util.UUID;
 
 public abstract class AbstractOrderAction implements IAction {
 
-    OrderController controller =
-            new OrderController( new OrderService( new OrderRepository(),
-                    new MasterService( new MasterRepository() ),
-                    new PlaceService( new PlaceRepository() ) ) );
+    OrderController controller = new OrderController();
+
     Order order;
 
     OrderStatus status;

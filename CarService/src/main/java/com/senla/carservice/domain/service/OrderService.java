@@ -12,17 +12,24 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
     private final IOrderRepository orderRepository;
     private final IMasterService masterService;
     private final IPlaceService placeService;
+    private static OrderService INSTANCE;
 
-    public OrderService(OrderRepository orderRepository, MasterService masterService, PlaceService placeService) {
-        this.orderRepository = orderRepository;
-        this.masterService = masterService;
-        this.placeService = placeService;
+    private OrderService() {
+        this.orderRepository = new OrderRepository();
+        this.masterService = MasterService.getINSTANCE();
+        this.placeService = PlaceService.getINSTANCE();
     }
 
+    public static OrderService getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new OrderService();
+        }
+        return INSTANCE;
+    }
 
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         List <IMaster> availableMasters = new ArrayList <>();
@@ -30,7 +37,7 @@ public class OrderService implements IOrderService{
             IMaster master = masterService.getFreeBySpeciality( startOfExecution, speciality );
             availableMasters.add( master );
             masterService.setMasterForDate( master, startOfExecution );
-            /*masterService.saveMaster( master );*/
+
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
         this.placeService.setPlaceForDate( place, startOfExecution );

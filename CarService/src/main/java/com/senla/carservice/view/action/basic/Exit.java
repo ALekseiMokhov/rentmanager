@@ -5,6 +5,6 @@ import com.senla.carservice.view.action.IAction;
 public class Exit implements IAction {
     @Override
     public void execute() {
-        System.out.println("Goodbye visitor! Hope to see you again!");
+        System.out.println( "Goodbye visitor! Hope to see you again!" );
     }
 }

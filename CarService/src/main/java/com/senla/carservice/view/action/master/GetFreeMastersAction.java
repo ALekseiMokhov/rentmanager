@@ -7,11 +7,10 @@ public class GetFreeMastersAction extends AbstractMasterAction {
     @Override
     public void execute() {
 
-        System.out.println("Enter the date : ");
+        System.out.println( "Enter the date : " );
         try {
-            date = LocalDate.parse( reader.readLine()  );
-        }
-        catch (IOException e)  {
+            date = LocalDate.parse( reader.readLine() );
+        } catch (IOException e) {
 
         }
         this.controller.getFreeMasters( date )

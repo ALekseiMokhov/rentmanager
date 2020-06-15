@@ -31,6 +31,6 @@ public class MenuItem {
 
 
     public void doAction() throws IOException {
-      action.execute();
+        action.execute();
     }
 }

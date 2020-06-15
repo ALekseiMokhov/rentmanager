@@ -2,6 +2,7 @@ package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
+import com.senla.carservice.domain.repository.MasterRepository;
 import util.Calendar;
 
 import java.time.LocalDate;
@@ -10,9 +11,22 @@ import java.util.stream.Collectors;
 
 public class MasterService implements IMasterService {
     private final IMasterRepository repository;
+    private static MasterService INSTANCE;
 
-    public MasterService(IMasterRepository repository) {
-        this.repository = repository;
+    private MasterService() {
+        this.repository = new MasterRepository();
+    }
+
+    public IMasterRepository getRepository() {
+        return repository;
+    }
+
+    public static MasterService getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new MasterService();
+
+        }
+        return INSTANCE;
     }
 
     public void saveMaster(IMaster master) {
@@ -51,7 +65,7 @@ public class MasterService implements IMasterService {
     @Override
     public IMaster getById(UUID id) {
 
-      return   this.repository.findById( id ) ;
+        return this.repository.findById( id );
     }
 
     public boolean isBookedForDate(IMaster master, LocalDate date) {
@@ -75,8 +89,8 @@ public class MasterService implements IMasterService {
         return this.repository.getBySpeciality( speciality );
     }
 
-    public Set <Speciality> getAvailableSpecialities(){
-        return Set.of(Speciality.values());
+    public Set <Speciality> getAvailableSpecialities() {
+        return Set.of( Speciality.values() );
     }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {

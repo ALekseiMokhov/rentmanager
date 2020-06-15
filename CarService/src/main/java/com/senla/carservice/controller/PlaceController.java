@@ -2,6 +2,7 @@ package com.senla.carservice.controller;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.service.IPlaceService;
+import com.senla.carservice.domain.service.PlaceService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.UUID;
 public class PlaceController {
     private IPlaceService placeService;
 
-    public PlaceController(IPlaceService placeService) {
-        this.placeService = placeService;
+    public PlaceController() {
+        this.placeService = PlaceService.getINSTANCE();
     }
 
     public List <Place> getPlaces() {
