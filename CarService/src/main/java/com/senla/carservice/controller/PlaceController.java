@@ -22,6 +22,9 @@ public class PlaceController {
         return this.placeService.getFreePlacesForDate( date );
     }
 
+    public void addPlaces(int i) {
+        this.placeService.addPlaces( i );
+    }
 
     public boolean isPlaceSetForDate(Place place, LocalDate date) {
         return this.placeService.isPlaceSetForDate( place, date );
@@ -32,7 +35,7 @@ public class PlaceController {
     }
 
     public void setPlaceId(Place place, UUID id) {
-        this.placeService.setPlaceId( place,id );
+        this.placeService.setPlaceId( place, id );
     }
 
     public void setPlaceFree(Place place, LocalDate date) {

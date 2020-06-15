@@ -1,30 +1,28 @@
 package com.senla.carservice.view.action.place;
 
 import com.senla.carservice.domain.entities.garage.Place;
-import util.Scanner;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class GetFreePlacesAction extends AbstractPlaceAction{
+public class GetFreePlacesAction extends AbstractPlaceAction {
 
     @Override
     public void execute() {
-        
-        System.out.println("Enter convinient Date: ");
+
+        System.out.println( "Enter convinient Date: " );
         try {
-            date = LocalDate.parse(Scanner.getInstance().getReader().readLine()  );
-        }
-        catch (IOException e)  {
+            date = LocalDate.parse( reader.readLine() );
+        } catch (IOException e) {
 
         }
         System.out.println(
-               "Available places are: "
+                "Available places are: "
         );
-        List <Place> placeList = this.controller.getFreePlacesForDate(date  );
+        List <Place> placeList = this.controller.getFreePlacesForDate( date );
         for (Place val : placeList) {
-            System.out.println(val);
+            System.out.println( val );
         }
     }
 }

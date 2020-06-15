@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class SetPlaceFreeAction extends AbstractPlaceAction {
+public class UnbookPlaceAction extends AbstractPlaceAction {
     @Override
     public void execute() {
         System.out.println(" Enter the id of booked place: ");

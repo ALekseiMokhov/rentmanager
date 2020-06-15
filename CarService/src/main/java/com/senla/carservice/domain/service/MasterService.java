@@ -1,17 +1,14 @@
 package com.senla.carservice.domain.service;
 
-import com.senla.carservice.domain.entities.master.IMaster;
-import com.senla.carservice.domain.entities.master.Speciality;
+import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
+import util.Calendar;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class MasterService implements IMasterService{
+public class MasterService implements IMasterService {
     private final IMasterRepository repository;
 
     public MasterService(IMasterRepository repository) {
@@ -23,10 +20,39 @@ public class MasterService implements IMasterService{
 
     }
 
+    @Override
+    public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
+        IMaster master;
+        switch (speciality) {
+            case RESHAPER -> {
+                master = new Reshaper( fullName, dailyPayment, calendar, speciality );
+            }
+            case ELECTRICIAN -> {
+                master = new Electrician( fullName, dailyPayment, calendar, speciality );
+            }
+            case PAINTER -> {
+                master = new Painter( fullName, dailyPayment, calendar, speciality );
+            }
+            case MECHANIC -> {
+                master = new Mechanic( fullName, dailyPayment, calendar, speciality );
+            }
+            default -> {
+                throw new IllegalStateException( "there is no suitable speciality!" );
+            }
+        }
+        this.repository.save( master );
+
+    }
+
     public void removeMaster(UUID id) {
         this.repository.delete( id );
     }
 
+    @Override
+    public IMaster getById(UUID id) {
+
+      return   this.repository.findById( id ) ;
+    }
 
     public boolean isBookedForDate(IMaster master, LocalDate date) {
         return master.getCalendar().isDateBooked( date );
@@ -49,6 +75,9 @@ public class MasterService implements IMasterService{
         return this.repository.getBySpeciality( speciality );
     }
 
+    public Set <Speciality> getAvailableSpecialities(){
+        return Set.of(Speciality.values());
+    }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
         return this.repository.getFreeBySpeciality( date, speciality );

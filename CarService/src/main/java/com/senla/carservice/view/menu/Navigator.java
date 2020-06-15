@@ -24,19 +24,22 @@ public class Navigator {
         }
         return INSTANCE;
     }
-    public void navigate(Menu rootMenu, Integer index){
+    public void navigate(Menu rootMenu, Integer index) throws IOException {
+        rootMenu.getMenuItems().get( 1 ).doAction();
         while (!isExit) {
             try {
+
                 String line = reader.readLine();
                 currentIndex = Integer.parseInt(line);
-                print( currentIndex );
+                print( currentIndex );       /*TODO remove*/
 
                 MenuItem menuItem = rootMenu.getMenuItems().get( currentIndex );
                 menuItem.doAction();
                 if(menuItem.getTitle().equals( "exit" ))  {
                     this.isExit = true;
                 }
-
+                MenuItem shortMenu = rootMenu.getMenuItems().get( 33 );
+                shortMenu.doAction();
             } catch ( IOException e) {
                 e.printStackTrace();
             }

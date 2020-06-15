@@ -10,6 +10,7 @@ public interface IPlaceService {
     List <Place> getPlaces();
 
     List <Place> getFreePlacesForDate(LocalDate date);
+    void addPlaces(int i);
 
     boolean isPlaceSetForDate(Place place, LocalDate date);
 

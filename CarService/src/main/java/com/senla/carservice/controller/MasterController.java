@@ -3,9 +3,11 @@ package com.senla.carservice.controller;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.service.IMasterService;
+import util.Calendar;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class MasterController {
@@ -19,8 +21,15 @@ public class MasterController {
         this.masterService.saveMaster( master );
     }
 
+    public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
+        this.masterService.addMaster( fullName, dailyPayment, calendar, speciality );
+    }
+
     public void removeMaster(UUID id) {
         this.masterService.removeMaster( id );
+    }
+    public IMaster getById(UUID id){
+        return this.masterService.getById( id ) ;
     }
 
     public boolean isBookedForDate(IMaster master, LocalDate date) {
@@ -45,6 +54,10 @@ public class MasterController {
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
         return this.masterService.getFreeBySpeciality( date, speciality );
+    }
+
+    public Set <Speciality> getAvailableSpecialities() {
+        return this.masterService.getAvailableSpecialities();
     }
 
     public List <IMaster> getMastersByAlphabet() {

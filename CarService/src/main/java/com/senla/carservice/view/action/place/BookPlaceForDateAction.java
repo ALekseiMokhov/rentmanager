@@ -1,29 +1,27 @@
 package com.senla.carservice.view.action.place;
 
-import util.Scanner;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class IsPlaceSetAction extends AbstractPlaceAction {
+public class BookPlaceForDateAction extends AbstractPlaceAction {
     @Override
     public void execute() {
-        System.out.println( "Enter UUID of place to check: " );
+
+        System.out.println( " Enter the id of booking place: " );
         try {
             id = UUID.fromString( reader.readLine() );
         } catch (IOException e) {
 
         }
-        System.out.println( "Enter the Date to check: " );
-
+        System.out.println( "Enter the Date to book place: " );
         try {
             date = LocalDate.parse( reader.readLine() );
         } catch (IOException e) {
 
         }
-
-        boolean isFree = controller.isPlaceSetForDate( controller.getPlaceById( id ), date );
-        System.out.println( " The place with id " + id + " is free: " + isFree );
+        this.controller.setPlaceForDate( this.controller.getPlaceById( id ), date );
+        System.out.println( "The place was booked successfully!" );
     }
+
 }
