@@ -1,3 +1,8 @@
-.idea/*
-/target
+
+out/
+*.iml
+.bak
 *.class
+target/
+.idea
+>>>>>>> f0d11cc4f10d2ce7fb00670e1b4af36100dae01e
