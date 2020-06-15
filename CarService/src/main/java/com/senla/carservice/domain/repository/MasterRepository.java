@@ -1,7 +1,7 @@
-package repository;
+package com.senla.carservice.domain.repository;
 
-import entities.master.IMaster;
-import entities.master.Speciality;
+import com.senla.carservice.domain.entities.master.IMaster;
+import com.senla.carservice.domain.entities.master.Speciality;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class MasterRepository implements IRepository <IMaster> {
+public class MasterRepository implements IMasterRepository {
     private final List <IMaster> masters;
 
     public MasterRepository() {

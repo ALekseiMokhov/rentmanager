@@ -1,8 +1,8 @@
-package service;
+package com.senla.carservice.domain.service;
 
-import entities.master.IMaster;
-import entities.master.Speciality;
-import repository.MasterRepository;
+import com.senla.carservice.domain.entities.master.IMaster;
+import com.senla.carservice.domain.entities.master.Speciality;
+import com.senla.carservice.domain.repository.IMasterRepository;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class MasterService implements IService{
-    private final MasterRepository repository;
+public class MasterService implements IMasterService{
+    private final IMasterRepository repository;
 
-    public MasterService(MasterRepository repository) {
+    public MasterService(IMasterRepository repository) {
         this.repository = repository;
     }
 

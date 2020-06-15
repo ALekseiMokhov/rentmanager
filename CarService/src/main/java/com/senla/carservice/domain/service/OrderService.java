@@ -1,20 +1,21 @@
-package service;
+package com.senla.carservice.domain.service;
 
-import entities.garage.Place;
-import entities.master.IMaster;
-import entities.master.Speciality;
-import entities.order.Order;
-import entities.order.OrderStatus;
-import repository.OrderRepository;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.IMaster;
+import com.senla.carservice.domain.entities.master.Speciality;
+import com.senla.carservice.domain.entities.order.Order;
+import com.senla.carservice.domain.entities.order.OrderStatus;
+import com.senla.carservice.domain.repository.IOrderRepository;
+import com.senla.carservice.domain.repository.OrderRepository;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class OrderService implements IService{
-    private final OrderRepository orderRepository;
-    private final MasterService masterService;
-    private final PlaceService placeService;
+public class OrderService implements IOrderService{
+    private final IOrderRepository orderRepository;
+    private final IMasterService masterService;
+    private final IPlaceService placeService;
 
     public OrderService(OrderRepository orderRepository, MasterService masterService, PlaceService placeService) {
         this.orderRepository = orderRepository;

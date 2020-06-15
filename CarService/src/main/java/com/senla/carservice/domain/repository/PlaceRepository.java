@@ -1,13 +1,14 @@
-package repository;
+package com.senla.carservice.domain.repository;
 
-import entities.garage.Place;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.service.IPlaceService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class PlaceRepository implements IRepository <Place> {
+public class PlaceRepository implements IPlaceRepository  {
     private List <Place> places;
 
     public PlaceRepository() {

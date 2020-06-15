@@ -1,4 +1,4 @@
-package entities.master;
+package com.senla.carservice.domain.entities.master;
 
 import util.Calendar;
 

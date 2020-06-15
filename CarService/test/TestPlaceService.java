@@ -1,7 +1,7 @@
-import main.entities.garage.Place;
-import main.repository.PlaceRepository;
-import main.service.PlaceService;
-import main.util.Calendar;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.repository.PlaceRepository;
+import com.senla.carservice.domain.service.PlaceService;
+import util.Calendar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

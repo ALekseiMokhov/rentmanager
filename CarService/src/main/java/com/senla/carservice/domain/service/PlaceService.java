@@ -1,7 +1,8 @@
-package service;
+package com.senla.carservice.domain.service;
 
-import entities.garage.Place;
-import repository.PlaceRepository;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.repository.IPlaceRepository;
+import com.senla.carservice.domain.repository.PlaceRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class PlaceService implements IService{
+public class PlaceService implements IPlaceService{
 
-    private final PlaceRepository repository;
+    private final IPlaceRepository repository;
 
     public PlaceService(PlaceRepository repository) {
         this.repository = repository;
@@ -38,6 +39,10 @@ public class PlaceService implements IService{
 
     public void setPlaceForDate(Place place, LocalDate date) {
         place.getCalendar().setDateForBooking( date );
+        this.repository.save( place );
+    }
+    public void setPlaceId(Place place, UUID id) {
+        place.setId( id );
         this.repository.save( place );
     }
 

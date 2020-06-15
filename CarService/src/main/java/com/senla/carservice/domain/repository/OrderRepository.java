@@ -1,12 +1,12 @@
-package repository;
+package com.senla.carservice.domain.repository;
 
-import entities.order.Order;
+import com.senla.carservice.domain.entities.order.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class OrderRepository implements IRepository <Order> {
+public class OrderRepository implements IOrderRepository {
     private List <Order> orders = new ArrayList <>();
 
     @Override

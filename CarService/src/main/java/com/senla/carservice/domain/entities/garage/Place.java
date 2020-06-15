@@ -1,4 +1,4 @@
-package entities.garage;
+package com.senla.carservice.domain.entities.garage;
 
 import util.Calendar;
 
@@ -18,6 +18,10 @@ public class Place {
 
     public UUID getId() {
         return this.id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Calendar getCalendar() {

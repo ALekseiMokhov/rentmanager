@@ -1,7 +1,7 @@
-package entities.order;
+package com.senla.carservice.domain.entities.order;
 
-import entities.garage.Place;
-import entities.master.IMaster;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.IMaster;
 
 import java.time.LocalDate;
 import java.util.List;
