@@ -12,7 +12,7 @@ public class GetPlacesAction extends AbstractPlaceAction {
         );
 
         this.controller.getPlaces().stream()
-                .forEach( System.out::print );
+                .forEach( System.out::println );
 
     }
 }

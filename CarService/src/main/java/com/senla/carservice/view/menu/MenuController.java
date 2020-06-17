@@ -3,13 +3,16 @@ package com.senla.carservice.view.menu;
 import java.io.IOException;
 
 public class MenuController {
-    private Navigator navigator = Navigator.getInstance();
+    private Navigator navigator;
     private Builder builder = Builder.getInstance();
-    private Menu rootMenu;
 
 
     public void run() throws IOException {
-        rootMenu = builder.buildMenu();
-        navigator.navigate( this.rootMenu, 1 );
+        navigator = new Navigator(
+                  builder.buildRootMenu()
+                , builder.buildPlaceMenu()
+                , builder.buildMasterMenu()
+                , builder.buildOrderMenu() );
+        navigator.navigate( navigator.getRootMenu() );
     }
 }

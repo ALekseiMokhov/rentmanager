@@ -1,10 +1,6 @@
 package com.senla.carservice.view.action.place;
 
-import com.senla.carservice.domain.entities.garage.Place;
-
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.UUID;
 
 public class AddPlacesAction extends AbstractPlaceAction {
     private int var = 0;

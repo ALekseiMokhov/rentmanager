@@ -23,7 +23,4 @@ public class Menu {
         return menuItems;
     }
 
-    public void setMenuItems(List <MenuItem> menuItems) {
-        this.menuItems = menuItems;
-    }
 }
