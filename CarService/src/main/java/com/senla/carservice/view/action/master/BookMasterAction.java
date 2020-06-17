@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class BookMasterAction extends AbstractMasterAction {
+    private UUID id;
+    private LocalDate date;
+
     @Override
     public void execute() {
         System.out.println( "Enter the id of master : " );
@@ -13,7 +16,6 @@ public class BookMasterAction extends AbstractMasterAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        master = controller.getById( id );
 
         System.out.println( "Enter the date to book: " );
         try {
@@ -21,8 +23,8 @@ public class BookMasterAction extends AbstractMasterAction {
         } catch (IOException e) {
 
         }
-        controller.setMasterForDate( master, date );
+        controller.setMasterForDate( id, date );
 
-        System.out.println( "Master " + master.getFullName() + " was booked for " + date.toString() );
+        System.out.println( "Master  was booked for " + date.toString() );
     }
 }

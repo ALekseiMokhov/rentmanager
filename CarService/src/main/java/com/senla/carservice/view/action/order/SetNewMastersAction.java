@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class SetNewMastersAction extends AbstractOrderAction {
+    private UUID id;
+
     @Override
     public void execute() {
         System.out.println( "Enter the id of the order: " );
@@ -12,7 +14,7 @@ public class SetNewMastersAction extends AbstractOrderAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        controller.setNewMasters( controller.findOrderById( id ) );
+        controller.setNewMasters( id );
         System.out.println( "New masters serving your order are: " + controller.findOrderById( id ).getMasters() );
     }
 }

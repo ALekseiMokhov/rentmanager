@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class IsMasterBookedAction extends AbstractMasterAction {
+    private UUID id;
+    private LocalDate date;
+
     @Override
     public void execute() {
         boolean isBooked = false;
@@ -20,7 +23,7 @@ public class IsMasterBookedAction extends AbstractMasterAction {
         } catch (IOException e) {
 
         }
-        isBooked = controller.isBookedForDate( controller.getById( id ), date );
+        isBooked = controller.isBookedForDate( id, date );
         System.out.println( "Master with id " + id + " is booked for date " + date + " : " + isBooked );
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GetOrdersByExecutionAction extends AbstractOrderAction {
+    private LocalDate finishOfExecution;
     @Override
     public void execute() {
 

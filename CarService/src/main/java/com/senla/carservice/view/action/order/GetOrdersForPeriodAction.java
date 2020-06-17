@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class GetOrdersForPeriodAction extends AbstractOrderAction {
-    LocalDate start;
-    LocalDate end;
+    private LocalDate start;
+    private LocalDate end;
 
     @Override
     public void execute() {

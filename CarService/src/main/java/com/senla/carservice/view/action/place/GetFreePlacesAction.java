@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GetFreePlacesAction extends AbstractPlaceAction {
+    private LocalDate date;
 
     @Override
     public void execute() {

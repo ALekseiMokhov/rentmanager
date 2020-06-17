@@ -10,7 +10,7 @@ public class Navigator {
     private int currentIndex;
     private BufferedReader reader;
     private boolean isExit ;
-    private static Navigator INSTANCE;
+    private static Navigator instance;
 
     
     private Navigator() {
@@ -18,11 +18,11 @@ public class Navigator {
 
     }
 
-    public static Navigator getINSTANCE() {
-        if(INSTANCE==null){
-            INSTANCE=new Navigator();
+    public static Navigator getInstance() {
+        if(instance ==null){
+            instance =new Navigator();
         }
-        return INSTANCE;
+        return instance;
     }
     public void navigate(Menu rootMenu, Integer index) throws IOException {
         rootMenu.getMenuItems().get( 1 ).doAction();

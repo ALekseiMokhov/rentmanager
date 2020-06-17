@@ -5,6 +5,9 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import java.io.IOException;
 
 public class GetMastersBySpecialityAction extends AbstractMasterAction {
+
+    private Speciality speciality;
+
     @Override
     public void execute() {
 

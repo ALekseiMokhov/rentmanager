@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class UnbookPlaceAction extends AbstractPlaceAction {
+    private LocalDate date;
+    private UUID id;
+
     @Override
     public void execute() {
         System.out.println( " Enter the id of booked place: " );
@@ -21,7 +24,7 @@ public class UnbookPlaceAction extends AbstractPlaceAction {
         } catch (IOException e) {
 
         }
-        this.controller.setPlaceFree( this.controller.getPlaceById( id ), date );
+        this.controller.setPlaceFree( id, date );
         System.out.println( "The place was unbooked successfully!" );
     }
 }

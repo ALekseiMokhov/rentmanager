@@ -13,12 +13,5 @@ import java.util.UUID;
 
 public abstract class AbstractMasterAction implements IAction {
     MasterController controller = new MasterController();
-    LocalDate date;
-    UUID id;
-    IMaster master;
-    String fullName;
-    double salary;
-    Set <Speciality> availableSpecialities = Set.of( Speciality.values() );
-    Speciality speciality;
     BufferedReader reader = Scanner.getInstance().getReader();
 }

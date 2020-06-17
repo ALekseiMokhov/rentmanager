@@ -11,22 +11,18 @@ import java.util.stream.Collectors;
 
 public class MasterService implements IMasterService {
     private final IMasterRepository repository;
-    private static MasterService INSTANCE;
+    private static MasterService instance;
 
     private MasterService() {
         this.repository = new MasterRepository();
     }
 
-    public IMasterRepository getRepository() {
-        return repository;
-    }
-
-    public static MasterService getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new MasterService();
+    public static MasterService getInstance() {
+        if (instance == null) {
+            instance = new MasterService();
 
         }
-        return INSTANCE;
+        return instance;
     }
 
     public void saveMaster(IMaster master) {
@@ -68,16 +64,19 @@ public class MasterService implements IMasterService {
         return this.repository.findById( id );
     }
 
-    public boolean isBookedForDate(IMaster master, LocalDate date) {
+    public boolean isBookedForDate(UUID id, LocalDate date) {
+        IMaster master = this.repository.findById( id );
         return master.getCalendar().isDateBooked( date );
     }
 
-    public void setMasterForDate(IMaster master, LocalDate date) {
+    public void setMasterForDate(UUID id, LocalDate date) {
+        IMaster master = this.repository.findById( id );
         master.getCalendar().setDateForBooking( date );
         this.repository.save( master );
     }
 
-    public void setBookedDateFree(IMaster master, LocalDate date) {
+    public void setBookedDateFree(UUID id, LocalDate date) {
+        IMaster master = this.repository.findById( id );
         master.getCalendar().deleteBookedDate( date );
     }
 
@@ -106,17 +105,13 @@ public class MasterService implements IMasterService {
     }
 
     public List <IMaster> getFreeMasters(LocalDate date) {
-        return this.repository
-                .findAll()
-                .stream()
+        return this.repository.findAll().stream()
                 .filter( (m) -> m.getCalendar().isDateBooked( date ) == false )
                 .collect( Collectors.toList() );
     }
 
     public List <IMaster> getMastersBySpeciality(Speciality speciality) {
-        return this.repository
-                .findAll()
-                .stream()
+        return this.repository.findAll().stream()
                 .filter( ((m) -> m.getSpeciality() == speciality) )
                 .collect( Collectors.toList() );
     }

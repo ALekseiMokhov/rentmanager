@@ -4,9 +4,13 @@ import com.senla.carservice.domain.entities.garage.Place;
 import util.Calendar;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class SavePlaceAction extends AbstractPlaceAction {
+    private UUID id;
+    private Place place;
+
     @Override
     public void execute() {
         System.out.println( " Enter id of the saving place: " );
@@ -17,11 +21,13 @@ public class SavePlaceAction extends AbstractPlaceAction {
         }
         if (this.controller.getPlaceById( id ) != null) {
             place = this.controller.getPlaceById( id );
+            this.controller.savePlace( id );
+            System.out.println( "Place has been saved with id= " + id );
         } else {
-            place = new Place( new Calendar() );
-            place.setId( id );
+            UUID newId = controller.addPlace();
+            System.out.println( "Place has been saved with id= " + newId );
         }
-        this.controller.savePlace( place );
-        System.out.println( "Place has been saved with id= " + id );
+
+
     }
 }

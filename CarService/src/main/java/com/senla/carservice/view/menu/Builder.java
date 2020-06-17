@@ -10,17 +10,17 @@ import com.senla.carservice.view.action.place.*;
 
 public class Builder {
 
-    private static Builder INSTANCE;
+    private static Builder instance;
 
     private Builder() {
 
     }
 
-    public static Builder getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new Builder();
+    public static Builder getInstance() {
+        if (instance == null) {
+            instance = new Builder();
         }
-        return INSTANCE;
+        return instance;
     }
 
 

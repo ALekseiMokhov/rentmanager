@@ -12,7 +12,5 @@ import java.util.UUID;
 public abstract class AbstractPlaceAction implements IAction {
     PlaceController controller = new PlaceController();
     BufferedReader reader = Scanner.getInstance().getReader();
-    LocalDate date;
-    UUID id;
-    Place place;
+
 }

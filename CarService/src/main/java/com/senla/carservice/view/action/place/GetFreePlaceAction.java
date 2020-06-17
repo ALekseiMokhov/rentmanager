@@ -4,8 +4,11 @@ import com.senla.carservice.domain.entities.garage.Place;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class GetFreePlaceAction extends AbstractPlaceAction {
+    private LocalDate date;
+
     @Override
     public void execute() {
         System.out.println( "Enter convinient Date: " );

@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class BookPlaceForDateAction extends AbstractPlaceAction {
+   private LocalDate date;
+   private UUID id;
+
     @Override
     public void execute() {
 
@@ -20,7 +23,7 @@ public class BookPlaceForDateAction extends AbstractPlaceAction {
         } catch (IOException e) {
 
         }
-        this.controller.setPlaceForDate( this.controller.getPlaceById( id ), date );
+        this.controller.setPlaceForDate( id, date );
         System.out.println( "The place was booked successfully!" );
     }
 

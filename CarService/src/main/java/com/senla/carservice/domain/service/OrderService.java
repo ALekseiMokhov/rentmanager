@@ -16,19 +16,22 @@ public class OrderService implements IOrderService {
     private final IOrderRepository orderRepository;
     private final IMasterService masterService;
     private final IPlaceService placeService;
-    private static OrderService INSTANCE;
+    private static OrderService instance;
 
-    private OrderService() {
-        this.orderRepository = new OrderRepository();
-        this.masterService = MasterService.getINSTANCE();
-        this.placeService = PlaceService.getINSTANCE();
+
+    private OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
+        this.orderRepository = orderRepository;
+        this.masterService = masterService;
+        this.placeService = placeService;
     }
 
-    public static OrderService getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new OrderService();
+    public static OrderService getInstance() {
+        if (instance == null) {
+            instance = new OrderService(
+                    new OrderRepository(), MasterService.getInstance(), PlaceService.getInstance()
+            );
         }
-        return INSTANCE;
+        return instance;
     }
 
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
@@ -36,12 +39,12 @@ public class OrderService implements IOrderService {
         for (Speciality speciality : required) {
             IMaster master = masterService.getFreeBySpeciality( startOfExecution, speciality );
             availableMasters.add( master );
-            masterService.setMasterForDate( master, startOfExecution );
+            masterService.setMasterForDate( master.getId(), startOfExecution );
 
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
-        this.placeService.setPlaceForDate( place, startOfExecution );
-        this.placeService.savePlace( place );
+        this.placeService.setPlaceForDate( place.getId(), startOfExecution );
+        this.placeService.savePlace( place.getId() );
         Order order = new Order( date, startOfExecution, availableMasters, place );
         order.setStatus( OrderStatus.MANAGED );
         this.orderRepository.save( order );
@@ -54,8 +57,8 @@ public class OrderService implements IOrderService {
     }
 
 
-    public void shiftOrderExecutionDate(Order order, LocalDate newDate) {
-
+    public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
+        Order order = this.orderRepository.findById( id );
         LocalDate oldDate = order.getStartOfExecution();
         Place oldPlace = order.getPlace();
         Place newPlace = this.placeService.getFreePlace( newDate );
@@ -65,10 +68,10 @@ public class OrderService implements IOrderService {
                 .collect( Collectors.toSet() );
         List <IMaster> newMasters = new ArrayList <>();
 
-        this.placeService.setPlaceFree( oldPlace, oldDate );
-        this.placeService.savePlace( oldPlace );
+        this.placeService.setPlaceFree( oldPlace.getId(), oldDate );
+        this.placeService.savePlace( oldPlace.getId() );
         newPlace.getCalendar().setDateForBooking( newDate );
-        this.placeService.savePlace( newPlace );
+        this.placeService.savePlace( newPlace.getId() );
 
         oldMasters.stream()
                 .forEach( master -> master.getCalendar()
@@ -77,7 +80,7 @@ public class OrderService implements IOrderService {
         for (Speciality speciality : required) {
             IMaster master = masterService.getFreeBySpeciality( newDate, speciality );
             newMasters.add( master );
-            masterService.setMasterForDate( master, newDate );
+            masterService.setMasterForDate( master.getId(), newDate );
             masterService.saveMaster( master );
         }
         order.setPlace( newPlace );
@@ -87,17 +90,18 @@ public class OrderService implements IOrderService {
 
     }
 
-    public void setNewMasters(Order order) {
+    public void setNewMasters(UUID id) {
+        Order order = this.orderRepository.findById( id );
         List <IMaster> newMasters = new ArrayList <>();
 
         for (IMaster master : order.getMasters()) {
             IMaster master1 = this.masterService
                     .getFreeBySpeciality( order.getStartOfExecution(), master.getSpeciality() );
-            this.masterService.setMasterForDate( master1, order.getStartOfExecution() );
+            this.masterService.setMasterForDate( master1.getId(), order.getStartOfExecution() );
             this.masterService.saveMaster( master1 );
             newMasters.add( master1 );
 
-            this.masterService.setBookedDateFree( master, order.getStartOfExecution() );
+            this.masterService.setBookedDateFree( master.getId(), order.getStartOfExecution() );
             this.masterService.saveMaster( master );
         }
         order.setMasters( newMasters );
@@ -109,16 +113,15 @@ public class OrderService implements IOrderService {
         for (Order order : this.orderRepository.findAll()) {
             if (order.getId().equals( id )) {
                 order.setStatus( OrderStatus.CANCELLED );
-                order.getMasters()
-                        .stream()
+                order.getMasters().stream()
                         .forEach( master -> master.getCalendar().deleteBookedDate( order.getStartOfExecution() ) );
                 order.getMasters()
                         .stream()
                         .forEach( master -> this.masterService.saveMaster( master ) );
 
                 Place place = order.getPlace();
-                this.placeService.setPlaceFree( place, order.getStartOfExecution() );
-                this.placeService.savePlace( place );
+                this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
+                this.placeService.savePlace( place.getId() );
 
                 this.orderRepository.save( order );
             }
@@ -130,13 +133,11 @@ public class OrderService implements IOrderService {
         for (Order order : this.orderRepository.findAll()) {
             if (order.getId().equals( id )) {
                 order.getPlace().getCalendar().deleteBookedDate( LocalDate.now() );
-                this.placeService.savePlace( order.getPlace() );
+                this.placeService.savePlace( order.getPlace().getId() );
 
-                order.getMasters()
-                        .stream()
+                order.getMasters().stream()
                         .forEach( master -> master.getCalendar().deleteBookedDate( LocalDate.now() ) );
-                order.getMasters()
-                        .stream()
+                order.getMasters().stream()
                         .forEach( master -> this.masterService.saveMaster( master ) );
 
                 order.setStatus( OrderStatus.COMPLETED );
@@ -155,8 +156,7 @@ public class OrderService implements IOrderService {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
         List <Order> sortedList = this.orderRepository.findAll();
         Collections.sort( sortedList, priceComparator );
-        return sortedList
-                .stream()
+        return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
                 .collect( Collectors.toList() );
     }
@@ -165,8 +165,7 @@ public class OrderService implements IOrderService {
         Comparator <Order> dateOfBookingComparator = Comparator.comparing( o -> o.getDateBooked() );
         List <Order> sortedList = this.orderRepository.findAll();
         Collections.sort( sortedList, dateOfBookingComparator );
-        return sortedList
-                .stream()
+        return sortedList.stream()
                 .filter( o -> o.getStatus() == status ).collect( Collectors.toList() );
     }
 
@@ -174,16 +173,13 @@ public class OrderService implements IOrderService {
         Comparator <Order> dateOfExecutionComparator = Comparator.comparing( o -> o.getStartOfExecution() );
         List <Order> sortedList = this.orderRepository.findAll();
         Collections.sort( sortedList, dateOfExecutionComparator );
-        return sortedList
-                .stream()
+        return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
                 .collect( Collectors.toList() );
     }
 
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
-        return this.orderRepository
-                .findAll()
-                .stream()
+        return this.orderRepository.findAll().stream()
                 .filter( o -> o.getStartOfExecution()
                         .compareTo( start ) >= 0 && o.getFinishOfExecution().compareTo( end ) <= 0 )
                 .collect( Collectors.toList() );

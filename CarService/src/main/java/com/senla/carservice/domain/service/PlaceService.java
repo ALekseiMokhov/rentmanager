@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 public class PlaceService implements IPlaceService {
 
     private final IPlaceRepository repository;
-    private static PlaceService INSTANCE;
+    private static PlaceService instance;
 
     public IPlaceRepository getRepository() {
         return repository;
     }
 
-    public static PlaceService getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new PlaceService();
+    public static PlaceService getInstance() {
+        if (instance == null) {
+            instance = new PlaceService();
         }
-        return INSTANCE;
+        return instance;
     }
 
     private PlaceService() {
@@ -50,29 +50,40 @@ public class PlaceService implements IPlaceService {
                 .collect( Collectors.toList() );
     }
 
-    public boolean isPlaceSetForDate(Place place, LocalDate date) {
+    public boolean isPlaceSetForDate(UUID id, LocalDate date) {
+        Place place = this.repository.findById( id );
         return place.getCalendar()
                 .isDateBooked( date );
     }
 
 
-    public void setPlaceForDate(Place place, LocalDate date) {
+    public void setPlaceForDate(UUID id, LocalDate date) {
+        Place place = this.repository.findById( id );
         place.getCalendar().setDateForBooking( date );
         this.repository.save( place );
     }
 
-    public void setPlaceId(Place place, UUID id) {
-        place.setId( id );
+    public void setPlaceId(UUID id, UUID newId) {
+        Place place = this.repository.findById( id );
+        place.setId( newId );
         this.repository.save( place );
     }
 
-    public void setPlaceFree(Place place, LocalDate date) {
+    public void setPlaceFree(UUID id, LocalDate date) {
+        Place place = this.repository.findById( id );
         place.getCalendar().deleteBookedDate( date );
         this.repository.save( place );
     }
 
+    public UUID addPlace() {
+        Place place = new Place( new Calendar() );
+        this.repository.save( place );
+        return place.getId();
+    }
 
-    public void savePlace(Place place) {
+
+    public void savePlace(UUID id) {
+        Place place = this.repository.findById( id );
         this.repository.save( place );
 
     }

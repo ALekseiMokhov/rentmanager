@@ -13,17 +13,20 @@ public interface IPlaceService {
 
     void addPlaces(int i);
 
-    boolean isPlaceSetForDate(Place place, LocalDate date);
+    boolean isPlaceSetForDate(UUID id, LocalDate date);
 
-    void setPlaceForDate(Place place, LocalDate date);
+    void setPlaceForDate(UUID id, LocalDate date);
 
-    void setPlaceFree(Place place, LocalDate date);
+    void setPlaceFree(UUID id, LocalDate date);
 
-    void setPlaceId(Place place, UUID id);
+    void setPlaceId(UUID current, UUID newId);
 
-    void savePlace(Place place);
+    void savePlace(UUID id);
+
+    UUID addPlace();
 
     Place getFreePlace(LocalDate date);
 
     Place getPlaceById(UUID id);
+
 }

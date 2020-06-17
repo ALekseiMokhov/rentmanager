@@ -14,9 +14,9 @@ public interface IOrderService {
 
     Order findOrderById(UUID id);
 
-    void shiftOrderExecutionDate(Order order, LocalDate newDate);
+    void shiftOrderExecutionDate(UUID id, LocalDate newDate);
 
-    void setNewMasters(Order order);
+    void setNewMasters(UUID id);
 
     void cancelOrder(UUID id);
 

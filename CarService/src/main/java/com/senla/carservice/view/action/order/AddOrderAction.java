@@ -5,9 +5,15 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AddOrderAction extends AbstractOrderAction {
+    private Set <Speciality> availableSpecialities = Set.of( Speciality.values() );
+    private Set <Speciality> required;
+    private LocalDate startOfExecution;
+
+
     @Override
     public void execute() {
         System.out.println( "Enter specialities required for your Order using ',' as delimiter " );
@@ -19,7 +25,7 @@ public class AddOrderAction extends AbstractOrderAction {
         try {
             List <String> input = List.of( reader.readLine().split( "," ) );
             required = input.stream()
-                    .map( s -> Speciality.valueOf( s.toUpperCase() ) )
+                    .map( s -> Speciality.valueOf( s ) )
                     .collect( Collectors.toSet() );
         } catch (IOException e) {
             e.printStackTrace();

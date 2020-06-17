@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class ShiftDateAction extends AbstractOrderAction {
+    private UUID id;
+    private LocalDate startOfExecution;
+
     @Override
     public void execute() {
         System.out.println( "Enter the id of the order: " );
@@ -22,7 +25,7 @@ public class ShiftDateAction extends AbstractOrderAction {
             e.printStackTrace();
         }
 
-        controller.shiftOrderExecutionDate( controller.findOrderById( id ), startOfExecution );
+        controller.shiftOrderExecutionDate( id, startOfExecution );
         System.out.println( "The date of execution has been shifted successfully!" );
         System.out.println( "The new date is " + startOfExecution );
 

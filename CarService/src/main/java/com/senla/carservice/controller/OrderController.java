@@ -16,7 +16,7 @@ public class OrderController {
 
     public OrderController() {
 
-        this.orderService = OrderService.getINSTANCE();
+        this.orderService = OrderService.getInstance();
     }
 
 
@@ -28,12 +28,12 @@ public class OrderController {
         return this.orderService.findOrderById( id );
     }
 
-    public void shiftOrderExecutionDate(Order order, LocalDate newDate) {
-        this.orderService.shiftOrderExecutionDate( order, newDate );
+    public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
+        this.orderService.shiftOrderExecutionDate( id, newDate );
     }
 
-    public void setNewMasters(Order order) {
-        this.orderService.setNewMasters( order );
+    public void setNewMasters(UUID id) {
+        this.orderService.setNewMasters(id);
     }
 
     public void cancelOrder(UUID id) {

@@ -18,11 +18,11 @@ public interface IMasterService {
 
     IMaster getById(UUID id);
 
-    boolean isBookedForDate(IMaster master, LocalDate date);
+    boolean isBookedForDate(UUID id, LocalDate date);
 
-    void setMasterForDate(IMaster master, LocalDate date);
+    void setMasterForDate(UUID id, LocalDate date);
 
-    void setBookedDateFree(IMaster master, LocalDate date);
+    void setBookedDateFree(UUID id, LocalDate date);
 
     IMaster getByNameAndSpeciality(String name, Speciality speciality);
 

@@ -1,11 +1,16 @@
 package com.senla.carservice.view.action.master;
 
+import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class GetFreeMasterAction extends AbstractMasterAction {
+    private LocalDate date;
+    private IMaster master;
+    private Speciality speciality;
+
     @Override
     public void execute() {
 

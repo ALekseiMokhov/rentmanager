@@ -1,9 +1,14 @@
 package com.senla.carservice.view.action.place;
 
+import com.senla.carservice.domain.entities.garage.Place;
+
 import java.io.IOException;
 import java.util.UUID;
 
 public class SetPlaceIdAction extends AbstractPlaceAction {
+    private Place place;
+    private UUID id;
+
     @Override
     public void execute() {
         UUID newId = UUID.randomUUID();
@@ -20,7 +25,7 @@ public class SetPlaceIdAction extends AbstractPlaceAction {
 
         }
         place = this.controller.getPlaceById( id );
-        this.controller.setPlaceId( place, newId );
-        this.controller.savePlace( place );
+        this.controller.setPlaceId( id, newId );
+        this.controller.savePlace( id );
     }
 }

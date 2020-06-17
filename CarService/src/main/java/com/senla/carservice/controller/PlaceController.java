@@ -12,7 +12,7 @@ public class PlaceController {
     private IPlaceService placeService;
 
     public PlaceController() {
-        this.placeService = PlaceService.getINSTANCE();
+        this.placeService = PlaceService.getInstance();
     }
 
     public List <Place> getPlaces() {
@@ -27,24 +27,28 @@ public class PlaceController {
         this.placeService.addPlaces( i );
     }
 
-    public boolean isPlaceSetForDate(Place place, LocalDate date) {
-        return this.placeService.isPlaceSetForDate( place, date );
+    public UUID addPlace(){
+        return   this.placeService.addPlace();
     }
 
-    public void setPlaceForDate(Place place, LocalDate date) {
-        this.placeService.setPlaceForDate( place, date );
+    public boolean isPlaceSetForDate(UUID id, LocalDate date) {
+        return this.placeService.isPlaceSetForDate( id, date );
     }
 
-    public void setPlaceId(Place place, UUID id) {
-        this.placeService.setPlaceId( place, id );
+    public void setPlaceForDate(UUID id, LocalDate date) {
+        this.placeService.setPlaceForDate( id, date );
     }
 
-    public void setPlaceFree(Place place, LocalDate date) {
-        this.placeService.setPlaceFree( place, date );
+    public void setPlaceId(UUID current, UUID newId) {
+        this.placeService.setPlaceId( current, newId );
     }
 
-    public void savePlace(Place place) {
-        this.placeService.savePlace( place );
+    public void setPlaceFree(UUID id, LocalDate date) {
+        this.placeService.setPlaceFree( id, date );
+    }
+
+    public void savePlace(UUID id) {
+        this.placeService.savePlace( id );
     }
 
     public Place getFreePlace(LocalDate date) {

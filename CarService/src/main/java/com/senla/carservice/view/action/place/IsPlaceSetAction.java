@@ -1,5 +1,6 @@
 package com.senla.carservice.view.action.place;
 
+import com.senla.carservice.domain.entities.garage.Place;
 import util.Scanner;
 
 import java.io.IOException;
@@ -7,6 +8,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class IsPlaceSetAction extends AbstractPlaceAction {
+    private LocalDate date;
+    private UUID id;
+
     @Override
     public void execute() {
         System.out.println( "Enter UUID of place to check: " );
@@ -23,7 +27,7 @@ public class IsPlaceSetAction extends AbstractPlaceAction {
 
         }
 
-        boolean isFree = controller.isPlaceSetForDate( controller.getPlaceById( id ), date );
+        boolean isFree = controller.isPlaceSetForDate( id, date );
         System.out.println( " The place with id " + id + " is free: " + isFree );
     }
 }

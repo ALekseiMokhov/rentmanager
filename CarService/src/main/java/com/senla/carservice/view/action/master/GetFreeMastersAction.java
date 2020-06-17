@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class GetFreeMastersAction extends AbstractMasterAction {
+
+    private LocalDate date;
+
     @Override
     public void execute() {
 
@@ -13,8 +16,7 @@ public class GetFreeMastersAction extends AbstractMasterAction {
         } catch (IOException e) {
 
         }
-        this.controller.getFreeMasters( date )
-                .stream()
+        this.controller.getFreeMasters( date ).stream()
                 .forEach( System.out::println );
     }
 }

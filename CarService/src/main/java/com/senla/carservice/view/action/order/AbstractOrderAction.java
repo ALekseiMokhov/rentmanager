@@ -19,28 +19,7 @@ public abstract class AbstractOrderAction implements IAction {
 
     OrderController controller = new OrderController();
 
-    Order order;
-
-    OrderStatus status;
-
-    LocalDate dateBooked;
-
-    LocalDate startOfExecution;
-
-    LocalDate finishOfExecution;
-
-    List <IMaster> masters;
-
-    Place place;
-
-    UUID id;
-
     BufferedReader reader = Scanner.getInstance().getReader();
 
-    Set <OrderStatus> possibleStatus = Set.of( OrderStatus.values() );
-
-    Set <Speciality> required;
-
-    Set <Speciality> availableSpecialities = Set.of( Speciality.values() );
 
 }
