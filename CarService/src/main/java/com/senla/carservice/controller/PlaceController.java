@@ -31,6 +31,7 @@ public class PlaceController {
         return   this.placeService.addPlace();
     }
 
+
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
         return this.placeService.isPlaceSetForDate( id, date );
     }

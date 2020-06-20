@@ -20,6 +20,15 @@ public abstract class AbstractMaster implements IMaster {
         this.speciality = speciality;
     }
 
+    public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
+
+        this.fullName = fullName;
+        this.dailyPayment = dailyPayment;
+        this.calendar = calendar;
+        this.speciality = speciality;
+        this.id = id;
+    }
+
 
     public double getDailyPayment() {
         return this.dailyPayment;
@@ -56,6 +65,7 @@ public abstract class AbstractMaster implements IMaster {
     public String toString() {
         return "Master { " + speciality +
                 ", fullName='" + fullName + '\'' +
+                ", id = ' " + id + '\'' +
                 ", booked dates= " + calendar.getBookedDates() +
                 '}';
     }

@@ -2,9 +2,15 @@ package com.senla.carservice.domain.entities.master;
 
 import util.Calendar;
 
+import java.util.UUID;
+
 public class Reshaper extends AbstractMaster {
     public Reshaper(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {
         super( fullName, dailiPayment, calendar, speciality );
+    }
+
+    public Reshaper(String fullName, double dailiPayment, Calendar calendar, Speciality speciality, UUID id) {
+        super( fullName, dailiPayment, calendar, speciality, id );
     }
 
     @Override

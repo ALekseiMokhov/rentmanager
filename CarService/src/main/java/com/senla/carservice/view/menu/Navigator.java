@@ -1,6 +1,6 @@
 package com.senla.carservice.view.menu;
 
-import util.Scanner;
+import util.ConsoleScanner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class Navigator {
 
 
     public Navigator(Menu rootMenu, Menu placeMenu, Menu masterMenu, Menu orderMenu) {
-        this.reader = Scanner.getInstance().getReader();
+        this.reader = ConsoleScanner.getInstance().getReader();
         this.rootMenu = rootMenu;
         this.placeMenu = placeMenu;
         this.masterMenu = masterMenu;

@@ -18,12 +18,16 @@ public class MasterController {
         this.masterService = MasterService.getInstance();;
     }
 
-    public void saveMaster(IMaster master) {
+    public void saveMaster(UUID id) {
+        IMaster master = this.masterService.getById( id );
         this.masterService.saveMaster( master );
     }
 
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
         this.masterService.addMaster( fullName, dailyPayment, calendar, speciality );
+    }
+    public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
+        this.masterService.addMaster( fullName, dailyPayment, calendar, speciality,id );
     }
 
     public void removeMaster(UUID id) {

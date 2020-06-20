@@ -54,6 +54,29 @@ public class MasterService implements IMasterService {
 
     }
 
+    @Override
+    public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
+        IMaster master;
+        switch (speciality) {
+            case RESHAPER -> {
+                master = new Reshaper( fullName, dailyPayment, calendar, speciality, id );
+            }
+            case ELECTRICIAN -> {
+                master = new Electrician( fullName, dailyPayment, calendar, speciality, id );
+            }
+            case PAINTER -> {
+                master = new Painter( fullName, dailyPayment, calendar, speciality, id );
+            }
+            case MECHANIC -> {
+                master = new Mechanic( fullName, dailyPayment, calendar, speciality, id );
+            }
+            default -> {
+                throw new IllegalStateException( "there is no suitable speciality!" );
+            }
+        }
+        this.repository.save( master );
+    }
+
     public void removeMaster(UUID id) {
         this.repository.delete( id );
     }

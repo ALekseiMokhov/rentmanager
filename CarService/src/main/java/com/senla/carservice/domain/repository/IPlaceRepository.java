@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface IPlaceRepository {
     Place findById(UUID id);
 
+    boolean isPresent(UUID id);
+
     List <Place> findAll();
 
     void delete(UUID id);

@@ -3,16 +3,16 @@ package util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Scanner {
+public class ConsoleScanner {
     private static BufferedReader reader = new BufferedReader( new InputStreamReader( System.in  ) );
-    private Scanner(){
+    private ConsoleScanner(){
 
     }
-    private static Scanner INSTANCE;
+    private static ConsoleScanner INSTANCE;
 
-    public static Scanner getInstance(){
+    public static ConsoleScanner getInstance(){
         if(INSTANCE==null)  {
-            INSTANCE = new Scanner();
+            INSTANCE = new ConsoleScanner();
         }
         return INSTANCE;
     }

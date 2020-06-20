@@ -23,6 +23,8 @@ public interface IPlaceService {
 
     void savePlace(UUID id);
 
+    boolean isPresent(UUID id) ;
+
     UUID addPlace();
 
     Place getFreePlace(LocalDate date);

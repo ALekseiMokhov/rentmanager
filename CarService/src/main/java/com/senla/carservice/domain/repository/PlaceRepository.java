@@ -1,6 +1,7 @@
 package com.senla.carservice.domain.repository;
 
 import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.IMaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,15 @@ public class PlaceRepository implements IPlaceRepository {
     }
 
     @Override
-    public List <Place> findAll() {
-        return this.places;
+    public boolean isPresent(UUID id) {
+        for (Place place : places) {
+            if (place.getId().equals( id )) {
+                return true;
+            }
+        }
+        return false;
     }
+
 
     @Override
     public void delete(UUID id) {
@@ -36,8 +43,16 @@ public class PlaceRepository implements IPlaceRepository {
 
     @Override
     public void save(Place place) {
-        this.places.add( place );
+        if (!this.places.contains( place )) {
+            this.places.add( place );
+        } else {
+            this.places.set( this.places.indexOf( place ), place );
+        }
+
     }
 
-
+    @Override
+    public List <Place> findAll() {
+        return this.places;
+    }
 }

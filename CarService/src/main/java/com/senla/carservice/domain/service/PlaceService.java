@@ -81,10 +81,18 @@ public class PlaceService implements IPlaceService {
         return place.getId();
     }
 
+    @Override
+    public boolean isPresent(UUID id) {
+        return this.repository.isPresent( id );
+    }
 
     public void savePlace(UUID id) {
-        Place place = this.repository.findById( id );
-        this.repository.save( place );
+        if(!this.repository.isPresent( id )){
+            Place place = new Place( new Calendar() );
+             place.setId( id );
+             this.repository.save( place );
+        }
+        else  this.repository.save( this.repository.findById( id ) );
 
     }
 
