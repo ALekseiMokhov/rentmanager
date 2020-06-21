@@ -1,10 +1,10 @@
-import main.entities.master.*;
-import main.repository.MasterRepository;
-import main.service.MasterService;
-import main.util.Calendar;
+import com.senla.carservice.domain.entities.master.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.senla.carservice.domain.repository.MasterRepository;
+import com.senla.carservice.domain.service.MasterService;
+import util.Calendar;
 
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
@@ -52,7 +52,7 @@ public class TestMasterService {
 
     @Test
     void testMastersByAlphabet() {
-        for (Master master : service.getMastersByAlphabet()) {
+        for (IMaster master : service.getMastersByAlphabet()) {
             System.out.println( master.getFullName() );
         }
         Assertions.assertEquals( service.getMastersByAlphabet().get( 1 ), service.getByNameAndSpeciality( "Anton", Speciality.MECHANIC ) );
@@ -61,7 +61,7 @@ public class TestMasterService {
 
     @Test
     void tetstGetFreeMastersForDate() {
-        Master master = service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC );
+        IMaster master = service.getByNameAndSpeciality( "Ivan", Speciality.MECHANIC );
         master.getCalendar().setDateForBooking( LocalDate.now() );
         Assertions.assertTrue( service.getFreeMasters( LocalDate.now() ).size() == 8 );
 

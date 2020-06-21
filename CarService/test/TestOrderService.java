@@ -1,17 +1,17 @@
-import main.entities.garage.Place;
-import main.entities.master.*;
-import main.entities.order.Order;
-import main.entities.order.OrderStatus;
-import main.repository.MasterRepository;
-import main.repository.OrderRepository;
-import main.repository.PlaceRepository;
-import main.service.MasterService;
-import main.service.OrderService;
-import main.service.PlaceService;
-import main.util.Calendar;
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.*;
+import com.senla.carservice.domain.entities.order.Order;
+import com.senla.carservice.domain.entities.order.OrderStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.senla.carservice.domain.repository.MasterRepository;
+import com.senla.carservice.domain.repository.OrderRepository;
+import com.senla.carservice.domain.repository.PlaceRepository;
+import com.senla.carservice.domain.service.MasterService;
+import com.senla.carservice.domain.service.OrderService;
+import com.senla.carservice.domain.service.PlaceService;
+import util.Calendar;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -29,7 +29,7 @@ public class TestOrderService {
         this.placeService = new PlaceService( new PlaceRepository() );
         this.orderService = new OrderService( orderRepository, masterService, placeService );
 
-        List <Master> masters = Arrays.asList
+        List <IMaster> masters = Arrays.asList
                 ( new Reshaper( "Andrew", 2.3, new Calendar(), Speciality.RESHAPER ),
                         new Painter( "John", 4.4, new Calendar(), Speciality.PAINTER ),
                         new Electrician( "Fred", 1.4, new Calendar(), Speciality.ELECTRICIAN ),
@@ -38,7 +38,7 @@ public class TestOrderService {
                         new Painter( "BBB", 2.2, new Calendar(), Speciality.PAINTER ),
                         new Electrician( "CCC", 3.3, new Calendar(), Speciality.ELECTRICIAN ),
                         new Mechanic( "DDD", 4.4, new Calendar(), Speciality.MECHANIC ) );
-        for (Master master : masters) {
+        for (IMaster master : masters) {
             this.masterService.saveMaster( master );
         }
 
@@ -93,15 +93,15 @@ public class TestOrderService {
         System.out.println( "Booking: " + order.getDateBooked() );
         System.out.println( "Start: " + order.getStartOfExecution() );
         System.out.println( "Finish: " + order.getFinishOfExecution() );
-        List <Master> old = order.getMasters();
+        List <IMaster> old = order.getMasters();
 
-        for (Master master : old) {
+        for (IMaster master : old) {
             System.out.println( master );
         }
         System.out.println( "_________________" );
         this.orderService.setNewMasters( order );
-        List <Master> current = this.orderService.getOrders().get( 1 ).getMasters();
-        for (Master master : current) {
+        List <IMaster> current = this.orderService.getOrders().get( 1 ).getMasters();
+        for (IMaster master : current) {
             System.out.println( master );
         }
         Assertions.assertNotEquals( old.get( 0 ), current.get( 0 ) );
