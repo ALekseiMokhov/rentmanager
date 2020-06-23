@@ -12,6 +12,8 @@ public class ExportMastersAction extends AbstractMasterAction{
             CsvMasterWriter.writeMasters( controller.getMastersByAlphabet() );
         } catch (IOException e) {
             e.printStackTrace();
+
         }
+        System.out.println(controller.getMastersByAlphabet().size() + " masters were successfully written to csv file!");
     }
 }

@@ -3,8 +3,11 @@ package util.csv;
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.order.Order;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +16,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class CsvOrderParser {
+
+    private static File file = new File( "./files/order.csv" );
+
     public static List <Order> load() throws IOException {
-        return parseOrdersFromString( intermediateList( parse( new File( "./files/order.csv" ) ) ) );
+
+        return parseOrdersFromString( intermediateList( parse( file ) ) );
 
     }
 
@@ -26,8 +33,10 @@ public class CsvOrderParser {
                 new FileInputStream( file )
         ) )) {
             String line;
-            while ((line = br.readLine()) != null&&!line.isEmpty()) {
-                resultStringBuilder.append( line ).append( " " );
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    resultStringBuilder.append( line ).append( " " );
+                }
             }
         }
         return resultStringBuilder.toString();
@@ -64,5 +73,7 @@ public class CsvOrderParser {
                 .map( s -> UUID.fromString( s ) )
                 .collect( Collectors.toList() );
     }
+
+
 
 }

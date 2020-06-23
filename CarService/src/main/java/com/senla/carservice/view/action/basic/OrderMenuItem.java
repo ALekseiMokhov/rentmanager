@@ -16,8 +16,9 @@ public class OrderMenuItem implements IAction {
         System.out.println(" |-print '8' to find all orders for specific period" );
         System.out.println(" |-print '9' to set new masters for the order" );
         System.out.println(" |-print '10' to move on date of execution of the chosen order" );
-        System.out.println(" |-print '11' to load all orders from csv file" );
-        System.out.println(" |-print '12' to go back to the RootMenu" );
-        System.out.println(" |-print '13' if you want to exit Application" );
+        System.out.println(" |-print '11' to write all orders to csv file" );
+        System.out.println(" |-print '12' to load all orders from csv file" );
+        System.out.println(" |-print '13' to go back to the RootMenu" );
+        System.out.println(" |-print '14' if you want to exit Application" );
     }
 }

@@ -35,8 +35,10 @@ public class CsvPlaceParser  {
                              new FileInputStream( file )
         ) )) {
             String line;
-            while ((line = br.readLine()) != null&&!line.isEmpty()) {
+            while ((line = br.readLine()) != null) {
+                if(!line.isEmpty()){
                 resultStringBuilder.append( line ).append( " " );
+                }
             }
         }
         return resultStringBuilder.toString();
@@ -57,7 +59,6 @@ public class CsvPlaceParser  {
         if(list.size()>1){
             place.getCalendar().setBookedDates( parseCalendar( list.subList( 1,list.size() ) ) );
         }
-        System.out.println("dates in calendar : " + place.getCalendar().getBookedDates());
 
         return place;
     }

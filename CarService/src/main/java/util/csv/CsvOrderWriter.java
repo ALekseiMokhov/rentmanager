@@ -7,34 +7,49 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CsvOrderWriter {
-    public static void writeOrder (Order order) throws IOException {
 
-        File file = new File( "./files/order.csv" );
+    private static File file = new File( "./files/order.csv" );
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( file ,true) )) {
+    public static void writeOrder(Order order) throws IOException {
+         removeOldMaster( order.getId() );
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( file, true ) )) {
             bufferedWriter.append( "\n" );
-            bufferedWriter.append(order.getId().toString()+ "," ) ;
+            bufferedWriter.append( order.getId().toString() + "," );
             bufferedWriter.append( order.getDateBooked() + "," );
-            bufferedWriter.append( order.getStartOfExecution()+ "," );
-            bufferedWriter.append(order.getPlace().getId() + "," );
+            bufferedWriter.append( order.getStartOfExecution() + "," );
+            bufferedWriter.append( order.getPlace().getId() + "," );
             for (IMaster master : order.getMasters()) {
-                bufferedWriter.append( master.getId()+ "," );
+                bufferedWriter.append( master.getId() + "," );
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        CsvPlaceWriter.writePlace( order.getPlace() );
+        CsvMasterWriter.writeMasters( order.getMasters() );
 
     }
 
     public static void writeOrders(List <Order> orders) throws IOException {
 
         for (Order order : orders) {
-           writeOrder( order );
+            writeOrder( order );
         }
 
+    }
+
+    private static void removeOldMaster(UUID id) throws IOException {
+        String existingId = String.valueOf( id );
+        List <String> out = Files.lines( file.toPath() )
+                .filter( line -> !line.startsWith( existingId ) )
+                .collect( Collectors.toList() );
+        Files.write( file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
     }
 }

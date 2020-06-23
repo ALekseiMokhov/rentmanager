@@ -46,8 +46,8 @@ public class Builder {
         addItem( placeMenu, new BookPlaceForDateAction(), "book the Place for the Date" );
         addItem( placeMenu, new UnbookPlaceAction(), "unbook the Place for the Date" );
         addItem( placeMenu, new SetPlaceIdAction(), "set custom id for the Place" );
-        addItem( placeMenu, new ImportPlacesAction(),"load places from csv file" );
-        addItem( placeMenu, new ExportPlacesAction(),"load places to csv file" );
+        addItem( placeMenu, new ImportPlacesAction(),"load places to csv file" );
+        addItem( placeMenu, new ExportPlacesAction(),"load places from csv file" );
         addItem( placeMenu, new RootMenuItem(), "Root menu" );
         addItem( placeMenu, new ExitItem(), "Exit" );
 
@@ -93,6 +93,7 @@ public class Builder {
         addItem( orderMenu, new GetOrdersForPeriodAction(), "find all orders for specific period" );
         addItem( orderMenu, new SetNewMastersAction(), "set new masters for the order" );
         addItem( orderMenu, new ShiftDateAction(), "move on date of execution of the chosen order" );
+        addItem( orderMenu, new ExportOrdersAction(),"load orders to csv file" );
         addItem( orderMenu, new ImportOrdersAction(),"load orders from csv file" );
         addItem( orderMenu, new RootMenuItem(), "Root menu" );
         addItem( orderMenu, new ExitItem(), "Exit" );

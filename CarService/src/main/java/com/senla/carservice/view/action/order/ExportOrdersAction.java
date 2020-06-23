@@ -13,7 +13,7 @@ public class ExportOrdersAction extends AbstractOrderAction {
                 IOException e) {
             e.printStackTrace();
         }
-        System.out.println(controller.getOrders().size() + " places were successfully written to csv file!");
+        System.out.println(controller.getOrders().size() + " orders were successfully written to csv file!");
     }
 
 }

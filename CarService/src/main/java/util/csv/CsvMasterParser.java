@@ -11,14 +11,15 @@ import java.util.stream.Collectors;
 public class CsvMasterParser {
 
     public static List <IMaster> load() throws IOException {
-        return parseMastersFromString( intermediateList( parse(new File( "./files/master.csv" )) ) );
+        return parseMastersFromString( intermediateList( parse( new File( "./files/master.csv" ) ) ) );
 
     }
-    public static List<IMaster> loadMastersById(List<UUID>input) throws IOException {
+
+    public static List <IMaster> loadMastersById(List <UUID> input) throws IOException {
         return load().stream()
-                .filter( m->input.contains( m.getId() ) )
-                .collect( Collectors.toList() ) ;
-                
+                .filter( m -> input.contains( m.getId() ) )
+                .collect( Collectors.toList() );
+
     }
 
     private static List <String> intermediateList(String result) {   /* splits String into chunks equal IMaster constructors params*/
@@ -34,11 +35,13 @@ public class CsvMasterParser {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br
                      = new BufferedReader( new InputStreamReader(
-                             new FileInputStream( file )
+                new FileInputStream( file )
         ) )) {
             String line;
-            while ((line = br.readLine()) != null&&!line.isEmpty()) {
-                resultStringBuilder.append( line ).append( " " );
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    resultStringBuilder.append( line ).append( " " );
+                }
             }
         }
         return resultStringBuilder.toString();
@@ -75,9 +78,9 @@ public class CsvMasterParser {
                     throw new IllegalStateException( "there is no suitable speciality!" );
                 }
             }
-             if(var.size()>4){
-                 master.getCalendar().setBookedDates( parseCalendar( var.subList( 4,var.size() ) ) );
-             }
+            if (var.size() > 4) {
+                master.getCalendar().setBookedDates( parseCalendar( var.subList( 4, var.size() ) ) );
+            }
 
             res.add( master );
         }
@@ -91,11 +94,11 @@ public class CsvMasterParser {
     }
 
     private static HashMap <LocalDate, Boolean> parseCalendar(List <String> input) {
-        HashMap <LocalDate,Boolean> datesBooked = new HashMap <>();
+        HashMap <LocalDate, Boolean> datesBooked = new HashMap <>();
         for (String s : input) {
-            datesBooked.put( LocalDate.parse( s ) ,true) ;
+            datesBooked.put( LocalDate.parse( s ), true );
         }
-        return datesBooked ;
+        return datesBooked;
 
     }
 }
