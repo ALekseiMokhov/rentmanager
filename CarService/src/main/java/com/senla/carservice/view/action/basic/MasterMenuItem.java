@@ -18,8 +18,9 @@ public class MasterMenuItem implements IAction {
         System.out.println(" |-print '10' to find all masters sorted by alphabet" );
         System.out.println(" |-print '11' to find all masters of chosen speciality" );
         System.out.println(" |-print '12' to find all available specialities" );
-        System.out.println(" |-print '13' to load all masters from csv file" );
-        System.out.println(" |-print '14' to go back to the RootMenu" );
-        System.out.println(" |-print '15' if you want to exit Application" );
+        System.out.println(" |-print '13' to load all masters to csv file" );
+        System.out.println(" |-print '14' to load all masters from csv file" );
+        System.out.println(" |-print '15' to go back to the RootMenu" );
+        System.out.println(" |-print '16' if you want to exit Application" );
     }
 }

@@ -43,6 +43,7 @@ public class MasterRepository implements IMasterRepository {
     public void save(IMaster master) {
         if (!this.masters.contains( master )) {
             this.masters.add( master );
+            System.out.println(master.getCalendar()); /**/
         } else {
             this.masters.set( this.masters.indexOf( master ), master );
         }

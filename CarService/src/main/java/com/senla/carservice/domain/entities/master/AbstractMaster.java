@@ -66,6 +66,7 @@ public abstract class AbstractMaster implements IMaster {
         return "Master { " + speciality +
                 ", fullName='" + fullName + '\'' +
                 ", id = ' " + id + '\'' +
+                ", salary = ' " + dailyPayment + '\'' +
                 ", booked dates= " + calendar.getBookedDates() +
                 '}';
     }

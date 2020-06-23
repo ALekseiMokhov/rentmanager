@@ -52,6 +52,10 @@ public class PlaceController {
         this.placeService.savePlace( id );
     }
 
+    public void loadPlace(Place place) {
+        this.placeService.loadPlace( place );
+    }
+
     public Place getFreePlace(LocalDate date) {
         return this.placeService.getFreePlace( date );
     }

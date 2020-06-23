@@ -18,9 +18,12 @@ public class MasterController {
         this.masterService = MasterService.getInstance();;
     }
 
-    public void saveMaster(UUID id) {
+    public void saveMasterById(UUID id) {
         IMaster master = this.masterService.getById( id );
         this.masterService.saveMaster( master );
+    }
+    public void loadMaster(IMaster master) {
+        this.masterService.saveMaster( master);
     }
 
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {

@@ -1,5 +1,7 @@
 package com.senla.carservice.controller;
 
+import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
@@ -22,6 +24,12 @@ public class OrderController {
 
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         this.orderService.addOrder( date, startOfExecution, required );
+    }
+    public void addOrder(LocalDate date, LocalDate startOfExecution, List<IMaster>masters, Place place, UUID id) {
+        this.orderService.addOrder( date, startOfExecution, masters, place, id );
+    }
+    public void loadOrder(Order order){
+        this.orderService.saveOrder(order);
     }
 
     public Order findOrderById(UUID id) {

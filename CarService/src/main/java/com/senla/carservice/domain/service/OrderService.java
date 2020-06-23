@@ -45,10 +45,25 @@ public class OrderService implements IOrderService {
         Place place = this.placeService.getFreePlace( startOfExecution );
         this.placeService.setPlaceForDate( place.getId(), startOfExecution );
         this.placeService.savePlace( place.getId() );
-        Order order = new Order( date, startOfExecution, availableMasters, place );
+        Order order = new Order( date, startOfExecution, place, availableMasters );
         order.setStatus( OrderStatus.MANAGED );
         this.orderRepository.save( order );
 
+    }
+
+    public void addOrder(LocalDate date, LocalDate startOfExecution, List <IMaster> masters, Place place, UUID id) {
+        this.placeService.savePlace( place.getId() );
+        masters.stream()
+                .forEach( m -> this.masterService.saveMaster( m ) );
+
+        this.orderRepository.save( new Order( id , date, startOfExecution, place, masters) );
+
+
+    }
+
+    @Override
+    public void saveOrder(Order order) {
+        this.orderRepository.save( order );
     }
 
     public Order findOrderById(UUID id) {

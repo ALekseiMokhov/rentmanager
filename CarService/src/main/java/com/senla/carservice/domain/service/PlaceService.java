@@ -96,6 +96,11 @@ public class PlaceService implements IPlaceService {
 
     }
 
+    @Override
+    public void loadPlace(Place place) {
+        this.repository.save( place );
+    }
+
     public Place getFreePlace(LocalDate date) {
         for (Place place : this.repository.findAll()) {
             if (!place.getCalendar()

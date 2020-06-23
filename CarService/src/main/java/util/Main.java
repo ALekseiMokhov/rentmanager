@@ -1,9 +1,7 @@
 package util;
 
 
-import com.senla.carservice.view.action.master.LoadExternalMastersAction;
 import com.senla.carservice.view.menu.MenuController;
-import util.csv.CsvMasterParser;
 
 import java.io.IOException;
 
@@ -12,8 +10,7 @@ public class Main {
 
         MenuController controller = new MenuController();
         controller.run();
-     /*   LoadExternalMastersAction action = new LoadExternalMastersAction();
-        action.execute();*/
-
+       /* CsvPlaceParser.load();*/
+      /*  CsvPlaceWriter.writePlace(new Place( new Calendar() ) );*/
     }
 }

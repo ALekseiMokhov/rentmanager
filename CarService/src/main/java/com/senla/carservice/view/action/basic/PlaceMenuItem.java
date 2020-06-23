@@ -17,8 +17,9 @@ public class PlaceMenuItem implements IAction {
         System.out.println(" |-print '8' to unbook the Place for the Date" );
         System.out.println(" |-print '9' to set custom id for the Place" );
         System.out.println(" |-print '10' to load all places from csv file" );
-        System.out.println(" |-print '11' to go back to the RootMenu" );
-        System.out.println(" |-Print '12' if you want to exit Application   ");
+        System.out.println(" |-print '11' to write all places to csv file" );
+        System.out.println(" |-print '12' to go back to the RootMenu" );
+        System.out.println(" |-Print '13' if you want to exit Application   ");
 
     }
 }

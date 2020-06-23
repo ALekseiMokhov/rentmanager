@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class PlaceRepository implements IPlaceRepository {
-    private List <Place> places;
+    private final List <Place> places;
 
     public PlaceRepository() {
         this.places = new ArrayList <>();
@@ -45,6 +45,7 @@ public class PlaceRepository implements IPlaceRepository {
     public void save(Place place) {
         if (!this.places.contains( place )) {
             this.places.add( place );
+            System.out.println(place.getCalendar());   /**/
         } else {
             this.places.set( this.places.indexOf( place ), place );
         }

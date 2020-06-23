@@ -18,12 +18,20 @@ public class Order {
     private List <IMaster> masters;
     private Place place;
 
-    public Order(LocalDate dateBooked, LocalDate startOfExecution, List <IMaster> masters, Place place) {
+    public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
         this.place = place;
         this.id = UUID.randomUUID();
+    }
+    /* overloaded to inject id from remote sources*/
+    public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
+        this.dateBooked = dateBooked;
+        this.startOfExecution = startOfExecution;
+        this.masters = masters;
+        this.place = place;
+        this.id = id ;
     }
 
     public UUID getId() {

@@ -45,6 +45,7 @@ public class Place {
     public String toString() {
         return "Place{" +
                 "id=" + id +
+                ", calendar=" + calendar +
                 '}';
     }
 }
