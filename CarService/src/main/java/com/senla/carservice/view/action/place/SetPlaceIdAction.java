@@ -12,20 +12,19 @@ public class SetPlaceIdAction extends AbstractPlaceAction {
     @Override
     public void execute() {
         UUID newId = UUID.randomUUID();
-        System.out.println( " Enter the old id of place: " );
         try {
+            System.out.println( " Enter the old id of place: " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-
-        }
-        System.out.println( " Enter the id of booked place: " );
-        try {
+            place = this.controller.getPlaceById( id );
+            System.out.println( " Enter the new id of the booked place: " );
             newId = UUID.fromString( reader.readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "UUID should be in proper format!" );
         }
-        place = this.controller.getPlaceById( id );
+
         this.controller.setPlaceId( id, newId );
-        this.controller.savePlace( id );
+
     }
 }

@@ -1,10 +1,8 @@
 package com.senla.carservice.view.action.master;
 
 import com.senla.carservice.domain.entities.master.IMaster;
-import com.senla.carservice.domain.entities.master.Speciality;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.UUID;
 
 public class GetMasterByIdAction extends AbstractMasterAction {

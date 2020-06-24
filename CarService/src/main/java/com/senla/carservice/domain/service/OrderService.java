@@ -56,7 +56,7 @@ public class OrderService implements IOrderService {
         masters.stream()
                 .forEach( m -> this.masterService.saveMaster( m ) );
 
-        this.orderRepository.save( new Order( id , date, startOfExecution, place, masters) );
+        this.orderRepository.save( new Order( id, date, startOfExecution, place, masters ) );
 
 
     }

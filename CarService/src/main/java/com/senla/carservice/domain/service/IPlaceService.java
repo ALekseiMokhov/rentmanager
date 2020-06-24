@@ -26,7 +26,7 @@ public interface IPlaceService {
     void loadPlace(Place place);
 
 
-    boolean isPresent(UUID id) ;
+    boolean isPresent(UUID id);
 
     UUID addPlace();
 

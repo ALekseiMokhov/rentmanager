@@ -15,7 +15,10 @@ public class GetMastersBySpecialityAction extends AbstractMasterAction {
         try {
             speciality = Speciality.valueOf( reader.readLine() );
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Some problems with input occur!");
+        }
+        catch (IllegalArgumentException e){
+            System.err.println("Speciality of provided type doesn't exist!");
         }
         this.controller.getMastersBySpeciality( speciality )
                 .stream()

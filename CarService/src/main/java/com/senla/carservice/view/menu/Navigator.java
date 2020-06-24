@@ -40,7 +40,8 @@ public class Navigator {
 
                 if (menuItem.getTitle().equals( "Exit" )) {
                     this.isExit = true;
-                   
+                    rootMenu.getMenuItems().get( 4 ).doAction();
+
                 }
                 if (menuItem.getTitle().equals( "Root menu" )) {
                     current = this.rootMenu;
@@ -59,18 +60,20 @@ public class Navigator {
                     navigate( current );
                 }
 
-                if(!isExit){
+                if (!isExit) {
                     System.out.println( "Menu current: " + current.getName() );
                     System.out.println( "MenuItem current :" + menuItem.getTitle() );
                     System.out.println();
-                menuItem.doAction();      }
+                    menuItem.doAction();
+                }
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+            
+                navigate( rootMenu );
             }
-        }
 
+        }
 
     }
 

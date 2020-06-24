@@ -32,25 +32,33 @@ public class MasterService implements IMasterService {
 
     @Override
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
+
         IMaster master;
-        switch (speciality) {
-            case RESHAPER -> {
-                master = new Reshaper( fullName, dailyPayment, calendar, speciality );
+        try {
+            switch (speciality) {
+                case RESHAPER -> {
+                    master = new Reshaper( fullName, dailyPayment, calendar, speciality );
+                }
+                case ELECTRICIAN -> {
+                    master = new Electrician( fullName, dailyPayment, calendar, speciality );
+                }
+                case PAINTER -> {
+                    master = new Painter( fullName, dailyPayment, calendar, speciality );
+                }
+                case MECHANIC -> {
+                    master = new Mechanic( fullName, dailyPayment, calendar, speciality );
+                }
+                default -> {
+                    throw new NoSuchElementException( "there is no suitable speciality!" );
+                }
+
             }
-            case ELECTRICIAN -> {
-                master = new Electrician( fullName, dailyPayment, calendar, speciality );
-            }
-            case PAINTER -> {
-                master = new Painter( fullName, dailyPayment, calendar, speciality );
-            }
-            case MECHANIC -> {
-                master = new Mechanic( fullName, dailyPayment, calendar, speciality );
-            }
-            default -> {
-                throw new IllegalStateException( "there is no suitable speciality!" );
-            }
+            this.repository.save( master );
+        } catch (Exception e) {
+            System.err.println("Failed to save master!");
         }
-        this.repository.save( master );
+
+
 
     }
 
@@ -71,14 +79,19 @@ public class MasterService implements IMasterService {
                 master = new Mechanic( fullName, dailyPayment, calendar, speciality, id );
             }
             default -> {
-                throw new IllegalStateException( "there is no suitable speciality!" );
+                throw new NoSuchElementException( "There is no suitable speciality!" );
             }
         }
         this.repository.save( master );
     }
 
     public void removeMaster(UUID id) {
-        this.repository.delete( id );
+        try {
+            this.repository.delete( id );
+        }
+        catch(NoSuchElementException e){
+            System.out.println("The Master with provided id was probably already deleted!");
+        }
     }
 
     @Override
@@ -104,11 +117,24 @@ public class MasterService implements IMasterService {
     }
 
     public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
-        return this.repository.getByNameAndSpeciality( name, speciality );
+        try {
+            return this.repository.getByNameAndSpeciality( name, speciality );
+        } catch (NoSuchElementException e) {
+           
+        }
+        throw new NoSuchElementException( "There is no Master with required a name & skills!" );
     }
 
     public IMaster getBySpeciality(Speciality speciality) {
-        return this.repository.getBySpeciality( speciality );
+
+        try{
+            IMaster  master = this.repository.getBySpeciality( speciality );
+            return master;
+        }
+        catch (IllegalStateException e) {
+
+        }
+         throw new NoSuchElementException( " Repository doesn't contain master with provided id!" ) ;
     }
 
     public Set <Speciality> getAvailableSpecialities() {
@@ -116,7 +142,12 @@ public class MasterService implements IMasterService {
     }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
-        return this.repository.getFreeBySpeciality( date, speciality );
+        try {
+            return this.repository.getFreeBySpeciality( date, speciality );
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" ) ;
     }
 
 
@@ -134,9 +165,14 @@ public class MasterService implements IMasterService {
     }
 
     public List <IMaster> getMastersBySpeciality(Speciality speciality) {
-        return this.repository.findAll().stream()
-                .filter( ((m) -> m.getSpeciality() == speciality) )
-                .collect( Collectors.toList() );
+        try {
+            return this.repository.findAll().stream()
+                    .filter( ((m) -> m.getSpeciality() == speciality) )
+                    .collect( Collectors.toList() );
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+        throw new NoSuchElementException( "There is no masters of required speciality" );
     }
 
 

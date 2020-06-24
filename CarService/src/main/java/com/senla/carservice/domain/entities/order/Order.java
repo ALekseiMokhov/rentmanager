@@ -25,13 +25,14 @@ public class Order {
         this.place = place;
         this.id = UUID.randomUUID();
     }
+
     /* overloaded to inject id from remote sources*/
     public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
         this.place = place;
-        this.id = id ;
+        this.id = id;
     }
 
     public UUID getId() {

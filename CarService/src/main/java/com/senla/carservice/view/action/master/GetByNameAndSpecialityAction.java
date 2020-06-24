@@ -9,6 +9,7 @@ public class GetByNameAndSpecialityAction extends AbstractMasterAction {
     private String fullName;
     private IMaster master;
     Speciality speciality;
+
     @Override
     public void execute() {
         System.out.println( "Enter full name of the Master: " );

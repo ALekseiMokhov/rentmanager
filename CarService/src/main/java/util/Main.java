@@ -10,7 +10,7 @@ public class Main {
 
         MenuController controller = new MenuController();
         controller.run();
-       /* CsvPlaceParser.load();*/
-      /*  CsvPlaceWriter.writePlace(new Place( new Calendar() ) );*/
+        /* CsvPlaceParser.load();*/
+        /*  CsvPlaceWriter.writePlace(new Place( new Calendar() ) );*/
     }
 }

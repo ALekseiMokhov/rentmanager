@@ -9,9 +9,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CsvMasterParser {
+    private static File file = new File( "./files/master.csv"  );
 
     public static List <IMaster> load() throws IOException {
-        return parseMastersFromString( intermediateList( parse( new File( "./files/master.csv" ) ) ) );
+        return parseMastersFromString( intermediateList( parse( file) ) );
 
     }
 

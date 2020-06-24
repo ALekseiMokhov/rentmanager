@@ -9,19 +9,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class CsvPlaceParser  {
+public class CsvPlaceParser {
+    private static File file = new File( "./files/place.csv" );
 
     public static Optional <Place> loadById(UUID id) throws IOException {
         return load().stream()
-                .filter( p->p.getId().equals( id ) )
+                .filter( p -> p.getId().equals( id ) )
                 .findFirst();
     }
 
 
     public static List <Place> load() throws IOException {
 
-        List <Place> list = listOfStrings( parse( new File( "./files/place.csv" ) ) );
-     
+        List <Place> list = listOfStrings( parse( file ) );
+
 
         return list;
 
@@ -32,12 +33,12 @@ public class CsvPlaceParser  {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br
                      = new BufferedReader( new InputStreamReader(
-                             new FileInputStream( file )
+                new FileInputStream( file )
         ) )) {
             String line;
             while ((line = br.readLine()) != null) {
-                if(!line.isEmpty()){
-                resultStringBuilder.append( line ).append( " " );
+                if (!line.isEmpty()) {
+                    resultStringBuilder.append( line ).append( " " );
                 }
             }
         }
@@ -52,23 +53,23 @@ public class CsvPlaceParser  {
                 .collect( Collectors.toList() );
     }
 
-    private static  Place parsePlace (String input){
-         List<String> list = Arrays.asList( input.split( "," ) );
-         Place place = new Place( new Calendar() ) ;
-         place.setId( UUID.fromString( list.get( 0 ) ) );
-        if(list.size()>1){
-            place.getCalendar().setBookedDates( parseCalendar( list.subList( 1,list.size() ) ) );
+    private static Place parsePlace(String input) {
+        List <String> list = Arrays.asList( input.split( "," ) );
+        Place place = new Place( new Calendar() );
+        place.setId( UUID.fromString( list.get( 0 ) ) );
+        if (list.size() > 1) {
+            place.getCalendar().setBookedDates( parseCalendar( list.subList( 1, list.size() ) ) );
         }
 
         return place;
     }
 
     private static HashMap <LocalDate, Boolean> parseCalendar(List <String> input) {
-        HashMap <LocalDate,Boolean> datesBooked = new HashMap <>();
+        HashMap <LocalDate, Boolean> datesBooked = new HashMap <>();
         for (String s : input) {
-            datesBooked.put( LocalDate.parse( s ) ,true) ;
+            datesBooked.put( LocalDate.parse( s ), true );
         }
-        return datesBooked ;
+        return datesBooked;
 
     }
 }

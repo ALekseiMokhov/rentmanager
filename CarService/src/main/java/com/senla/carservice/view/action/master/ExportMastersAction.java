@@ -1,11 +1,10 @@
 package com.senla.carservice.view.action.master;
 
 import util.csv.CsvMasterWriter;
-import util.csv.CsvPlaceWriter;
 
 import java.io.IOException;
 
-public class ExportMastersAction extends AbstractMasterAction{
+public class ExportMastersAction extends AbstractMasterAction {
     @Override
     public void execute() {
         try {
@@ -14,6 +13,6 @@ public class ExportMastersAction extends AbstractMasterAction{
             e.printStackTrace();
 
         }
-        System.out.println(controller.getMastersByAlphabet().size() + " masters were successfully written to csv file!");
+        System.out.println( controller.getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
     }
 }

@@ -18,7 +18,7 @@ public class CsvOrderWriter {
     private static File file = new File( "./files/order.csv" );
 
     public static void writeOrder(Order order) throws IOException {
-         removeOldMaster( order.getId() );
+        removeOldMaster( order.getId() );
 
         try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( file, true ) )) {
             bufferedWriter.append( "\n" );

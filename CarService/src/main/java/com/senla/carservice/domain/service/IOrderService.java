@@ -15,6 +15,7 @@ public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
 
     void addOrder(LocalDate date, LocalDate startOfExecution, List <IMaster> masters, Place place, UUID id);
+
     void saveOrder(Order order);
 
     Order findOrderById(UUID id);

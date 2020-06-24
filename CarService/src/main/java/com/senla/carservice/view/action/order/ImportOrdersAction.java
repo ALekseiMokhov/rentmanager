@@ -1,18 +1,10 @@
 package com.senla.carservice.view.action.order;
 
-import com.senla.carservice.domain.entities.garage.Place;
-import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.order.Order;
-import util.Calendar;
 import util.csv.CsvOrderParser;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class ImportOrdersAction extends AbstractOrderAction {
     @Override

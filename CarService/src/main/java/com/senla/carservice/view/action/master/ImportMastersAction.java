@@ -10,9 +10,9 @@ public class ImportMastersAction extends AbstractMasterAction {
     @Override
     public void execute() {
         try {
-          List<IMaster>list = CsvMasterParser.load();
+            List <IMaster> list = CsvMasterParser.load();
             for (IMaster master : list) {
-                 controller.loadMaster( master );
+                controller.loadMaster( master );
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -87,12 +87,11 @@ public class PlaceService implements IPlaceService {
     }
 
     public void savePlace(UUID id) {
-        if(!this.repository.isPresent( id )){
+        if (!this.repository.isPresent( id )) {
             Place place = new Place( new Calendar() );
-             place.setId( id );
-             this.repository.save( place );
-        }
-        else  this.repository.save( this.repository.findById( id ) );
+            place.setId( id );
+            this.repository.save( place );
+        } else this.repository.save( this.repository.findById( id ) );
 
     }
 
@@ -109,11 +108,16 @@ public class PlaceService implements IPlaceService {
             }
 
         }
-        throw new NoSuchElementException( "There is no free places for this Date!" );
+        throw new NoSuchElementException( "There are no free places for this Date!" );
     }
 
     public Place getPlaceById(UUID id) {
-        return this.repository.findById( id );
+        try {
+            return this.repository.findById( id );
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+        throw new NoSuchElementException( "There is no place with provided id!" );
     }
 
 

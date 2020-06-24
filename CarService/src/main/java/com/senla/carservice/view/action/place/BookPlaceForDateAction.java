@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class BookPlaceForDateAction extends AbstractPlaceAction {
-   private LocalDate date;
-   private UUID id;
+    private LocalDate date;
+    private UUID id;
 
     @Override
     public void execute() {
@@ -16,6 +16,9 @@ public class BookPlaceForDateAction extends AbstractPlaceAction {
             id = UUID.fromString( reader.readLine() );
         } catch (IOException e) {
 
+        }
+        catch (IllegalArgumentException e){
+            System.err.println("UUID should be in proper format!");
         }
         System.out.println( "Enter the Date to book place: " );
         try {

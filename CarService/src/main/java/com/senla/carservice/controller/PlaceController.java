@@ -27,8 +27,8 @@ public class PlaceController {
         this.placeService.addPlaces( i );
     }
 
-    public UUID addPlace(){
-        return   this.placeService.addPlace();
+    public UUID addPlace() {
+        return this.placeService.addPlace();
     }
 
 

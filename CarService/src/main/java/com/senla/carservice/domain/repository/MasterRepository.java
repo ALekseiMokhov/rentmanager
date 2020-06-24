@@ -34,7 +34,7 @@ public class MasterRepository implements IMasterRepository {
     public void delete(UUID id) {
         if (!this.masters
                 .contains( findById( id ) )) {
-            throw new IllegalStateException( "Repository doesn't contain master with such id!" );
+            throw new NoSuchElementException( "Repository doesn't contain master with the provided id!" );
         }
         this.masters.remove( this.findById( id ) );
     }
@@ -43,7 +43,7 @@ public class MasterRepository implements IMasterRepository {
     public void save(IMaster master) {
         if (!this.masters.contains( master )) {
             this.masters.add( master );
-            System.out.println(master.getCalendar()); /**/
+            System.out.println( master.getCalendar() );
         } else {
             this.masters.set( this.masters.indexOf( master ), master );
         }
@@ -55,7 +55,7 @@ public class MasterRepository implements IMasterRepository {
                 return master;
             }
         }
-        throw new IllegalStateException( "There is no masters with given speciality" );
+        throw new NoSuchElementException( "There is no masters of required speciality" );
     }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
@@ -65,7 +65,7 @@ public class MasterRepository implements IMasterRepository {
                 return master;
             }
         }
-        throw new IllegalStateException( "There is no masters with given speciality for the chosen Date!" );
+        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
     }
 
     public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
@@ -74,7 +74,7 @@ public class MasterRepository implements IMasterRepository {
                     && master.getSpeciality() == speciality) return master;
 
         }
-        throw new NoSuchElementException( "There is no Master with that name & skills!" );
+        throw new NoSuchElementException( "There is no Master with required name & skills!" );
     }
 
 

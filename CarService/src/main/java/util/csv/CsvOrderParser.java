@@ -1,13 +1,8 @@
 package util.csv;
 
-import com.senla.carservice.domain.entities.garage.Place;
-import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.order.Order;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +68,6 @@ public class CsvOrderParser {
                 .map( s -> UUID.fromString( s ) )
                 .collect( Collectors.toList() );
     }
-
 
 
 }

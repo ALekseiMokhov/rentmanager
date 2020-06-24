@@ -12,6 +12,6 @@ public class ExportPlacesAction extends AbstractPlaceAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(controller.getPlaces().size() + " places were successfully written to csv file!");
+        System.out.println( controller.getPlaces().size() + " places were successfully written to csv file!" );
     }
 }

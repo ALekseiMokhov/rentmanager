@@ -9,7 +9,7 @@ public class MenuController {
 
     public void run() throws IOException {
         navigator = new Navigator(
-                  builder.buildRootMenu()
+                builder.buildRootMenu()
                 , builder.buildPlaceMenu()
                 , builder.buildMasterMenu()
                 , builder.buildOrderMenu() );

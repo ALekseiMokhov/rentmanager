@@ -1,7 +1,6 @@
 package com.senla.carservice.domain.repository;
 
 import com.senla.carservice.domain.entities.garage.Place;
-import com.senla.carservice.domain.entities.master.IMaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class PlaceRepository implements IPlaceRepository {
                 return place;
             }
         }
-        throw new NoSuchElementException( "There is no place with such id!" );
+        throw new NoSuchElementException( "There is no place with provided id!" );
     }
 
     @Override
@@ -45,7 +44,7 @@ public class PlaceRepository implements IPlaceRepository {
     public void save(Place place) {
         if (!this.places.contains( place )) {
             this.places.add( place );
-            System.out.println(place.getCalendar());   /**/
+            System.out.println( place.getCalendar() );
         } else {
             this.places.set( this.places.indexOf( place ), place );
         }

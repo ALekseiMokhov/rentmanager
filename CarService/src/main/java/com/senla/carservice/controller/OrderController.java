@@ -25,11 +25,13 @@ public class OrderController {
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         this.orderService.addOrder( date, startOfExecution, required );
     }
-    public void addOrder(LocalDate date, LocalDate startOfExecution, List<IMaster>masters, Place place, UUID id) {
+
+    public void addOrder(LocalDate date, LocalDate startOfExecution, List <IMaster> masters, Place place, UUID id) {
         this.orderService.addOrder( date, startOfExecution, masters, place, id );
     }
-    public void loadOrder(Order order){
-        this.orderService.saveOrder(order);
+
+    public void loadOrder(Order order) {
+        this.orderService.saveOrder( order );
     }
 
     public Order findOrderById(UUID id) {
@@ -41,7 +43,7 @@ public class OrderController {
     }
 
     public void setNewMasters(UUID id) {
-        this.orderService.setNewMasters(id);
+        this.orderService.setNewMasters( id );
     }
 
     public void cancelOrder(UUID id) {

@@ -12,25 +12,28 @@ import java.util.Set;
 import java.util.UUID;
 
 public class MasterController {
-    private IMasterService masterService ;
+    private IMasterService masterService;
 
     public MasterController() {
-        this.masterService = MasterService.getInstance();;
+        this.masterService = MasterService.getInstance();
+        ;
     }
 
     public void saveMasterById(UUID id) {
         IMaster master = this.masterService.getById( id );
         this.masterService.saveMaster( master );
     }
+
     public void loadMaster(IMaster master) {
-        this.masterService.saveMaster( master);
+        this.masterService.saveMaster( master );
     }
 
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
         this.masterService.addMaster( fullName, dailyPayment, calendar, speciality );
     }
+
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
-        this.masterService.addMaster( fullName, dailyPayment, calendar, speciality,id );
+        this.masterService.addMaster( fullName, dailyPayment, calendar, speciality, id );
     }
 
     public void removeMaster(UUID id) {
@@ -42,7 +45,7 @@ public class MasterController {
     }
 
     public boolean isBookedForDate(UUID id, LocalDate date) {
-        return this.masterService.isBookedForDate(  id, date );
+        return this.masterService.isBookedForDate( id, date );
     }
 
     public void setMasterForDate(UUID id, LocalDate date) {

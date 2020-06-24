@@ -26,14 +26,20 @@ public class AddMasterAction extends AbstractMasterAction {
             salary = Double.parseDouble( reader.readLine() );
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.out.println();
+            System.err.println( "Salary should be made of digits!" );
         }
-        System.out.println( "Enter speciality of new Master ( " );
-        System.out.println( " available specialities are: " );
+        System.out.println( "Enter speciality of the new Master ( " );
+        System.out.println( "Available specialities are: " );
         System.out.print( controller.getAvailableSpecialities() + " ) :" );
         try {
             speciality = Speciality.valueOf( reader.readLine() );
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.err.println( "Speciality you required for doesn't exist!" );
+
         }
         controller.addMaster( fullName, salary, new Calendar(), speciality );
         System.out.println( "Master " +
