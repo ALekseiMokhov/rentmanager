@@ -36,6 +36,7 @@ public class AddOrderAction extends AbstractOrderAction {
             System.out.println( "Enter the date of execution: " );
             startOfExecution = LocalDate.parse( reader.readLine() );
             controller.addOrder( LocalDate.now(), startOfExecution, required );
+            System.out.println("Order was created, the date is: "+ startOfExecution);
         } catch (IOException | IllegalArgumentException e) {
             System.err.println( "The Date should have format like 'YYYY-MM-DD'" );
         }

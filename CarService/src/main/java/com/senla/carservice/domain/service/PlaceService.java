@@ -4,7 +4,10 @@ import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.repository.IPlaceRepository;
 import com.senla.carservice.domain.repository.PlaceRepository;
 import util.Calendar;
+import util.csv.CsvPlaceParser;
+import util.csv.CsvPlaceWriter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -118,6 +121,34 @@ public class PlaceService implements IPlaceService {
             e.printStackTrace();
         }
         throw new NoSuchElementException( "There is no place with provided id!" );
+    }
+
+    @Override
+    public void loadFromCsv() {
+        try {
+            List <Place> list = CsvPlaceParser.load();
+            for (Place place : list) {
+              loadPlace( place );
+            }
+            System.out.println( list.size() + " places were loaded from file!" );
+        } catch (IOException e) {
+            System.err.println( "Check the path to file!" );
+        }
+
+    }
+
+    @Override
+    public void exportToCsv() {
+
+        try {
+            CsvPlaceWriter.writePlaces( this.repository.findAll() );
+
+            System.out.println( this.repository.findAll().size() + " places were successfully written to csv file!" );
+
+        } catch (IOException e) {
+            System.err.println( "There is a problem with export!Check path to the file!" );
+        }
+
     }
 
 

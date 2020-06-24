@@ -1,6 +1,7 @@
 package util.csv;
 
 import com.senla.carservice.domain.entities.order.Order;
+import com.senla.carservice.domain.entities.order.OrderStatus;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -15,8 +16,8 @@ public class CsvOrderParser {
     private static File file = new File( "./files/order.csv" );
 
     public static List <Order> load() throws IOException {
-
-        return parseOrdersFromString( intermediateList( parse( file ) ) );
+        List <Order> res = parseOrdersFromString( intermediateList( parse( file ) ) );
+        return res;
 
     }
 
@@ -39,7 +40,6 @@ public class CsvOrderParser {
 
     private static List <String> intermediateList(String result) {
         List <String> intermidiate = Arrays.asList( result.split( " " ) );
-
         return intermidiate;
     }
 
@@ -57,7 +57,8 @@ public class CsvOrderParser {
                     , CsvPlaceParser.loadById( UUID.fromString( var.get( 3 ) ) ).get()
                     , CsvMasterParser.loadMastersById( parseMastersId( var.subList( 4, var.size() ) ) )
             );
-
+            order.setStatus( order.getFinishOfExecution()==null? OrderStatus.MANAGED : OrderStatus.COMPLETED);
+            res.add( order );
         }
 
         return res;

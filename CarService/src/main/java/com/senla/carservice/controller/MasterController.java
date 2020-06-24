@@ -83,4 +83,10 @@ public class MasterController {
     public List <IMaster> getMastersBySpeciality(Speciality speciality) {
         return this.masterService.getMastersBySpeciality( speciality );
     }
+    public void loadMastersFromCsv() {
+        this.masterService.loadMastersFromCsv();
+    }
+    public void exportMastersToCsv() {
+        this.masterService.exportMastersToCsv();
+    }
 }

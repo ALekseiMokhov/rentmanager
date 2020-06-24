@@ -30,10 +30,6 @@ public class OrderController {
         this.orderService.addOrder( date, startOfExecution, masters, place, id );
     }
 
-    public void loadOrder(Order order) {
-        this.orderService.saveOrder( order );
-    }
-
     public Order findOrderById(UUID id) {
         return this.orderService.findOrderById( id );
     }
@@ -68,5 +64,14 @@ public class OrderController {
 
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
         return this.orderService.getOrdersForPeriod( start, end );
+    }
+
+
+    public void loadFromCsv() {
+        this.orderService.loadFromCsv();
+    }
+
+    public void exportToCsv() {
+        this.orderService.exportToCsv();
     }
 }

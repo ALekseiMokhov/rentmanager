@@ -7,7 +7,10 @@ import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.domain.repository.IOrderRepository;
 import com.senla.carservice.domain.repository.OrderRepository;
+import util.csv.CsvOrderParser;
+import util.csv.CsvOrderWriter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -198,6 +201,29 @@ public class OrderService implements IOrderService {
                 .filter( o -> o.getStartOfExecution()
                         .compareTo( start ) >= 0 && o.getFinishOfExecution().compareTo( end ) <= 0 )
                 .collect( Collectors.toList() );
+    }
+
+    @Override
+    public void loadFromCsv() {
+        try {
+            List <Order> orderList = CsvOrderParser.load();
+            for (Order order : orderList) {
+                saveOrder( order );
+            }
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+        }
+    }
+
+    @Override
+    public void exportToCsv() {
+
+        try {
+            CsvOrderWriter.writeOrders( getOrders() );
+            System.out.println( getOrders().size() + " orders were successfully written to csv file!" );
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+        }
     }
 
 }

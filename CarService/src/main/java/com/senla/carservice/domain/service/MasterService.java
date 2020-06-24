@@ -4,7 +4,10 @@ import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
 import com.senla.carservice.domain.repository.MasterRepository;
 import util.Calendar;
+import util.csv.CsvMasterParser;
+import util.csv.CsvMasterWriter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -170,6 +173,29 @@ public class MasterService implements IMasterService {
             e.printStackTrace();
         }
         throw new NoSuchElementException( "There is no masters of required speciality" );
+    }
+
+    @Override
+    public void loadMastersFromCsv() {
+        try {
+            List <IMaster> list = CsvMasterParser.load();
+            for (IMaster master : list) {
+                this.repository.save( master );
+            }
+        } catch (IOException e) {
+            System.err.println( "Check a path of the file!" );
+        }
+    }
+
+    @Override
+    public void exportMastersToCsv() {
+        try {
+            CsvMasterWriter.writeMasters( getMastersByAlphabet() );
+            System.out.println( getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+
+        }
     }
 
 

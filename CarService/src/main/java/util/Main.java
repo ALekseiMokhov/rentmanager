@@ -2,6 +2,7 @@ package util;
 
 
 import com.senla.carservice.view.menu.MenuController;
+import util.csv.CsvOrderParser;
 
 import java.io.IOException;
 
@@ -10,7 +11,6 @@ public class Main {
 
         MenuController controller = new MenuController();
         controller.run();
-        /* CsvPlaceParser.load();*/
-        /*  CsvPlaceWriter.writePlace(new Place( new Calendar() ) );*/
+
     }
 }

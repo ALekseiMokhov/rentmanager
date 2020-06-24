@@ -39,4 +39,8 @@ public interface IMasterService {
     public List <IMaster> getFreeMasters(LocalDate date);
 
     public List <IMaster> getMastersBySpeciality(Speciality speciality);
+
+    public void loadMastersFromCsv();
+
+    public void exportMastersToCsv();
 }

@@ -35,4 +35,8 @@ public interface IOrderService {
     List <Order> getOrdersByExecutionDate(OrderStatus status);
 
     List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
+
+    void loadFromCsv();
+
+    void exportToCsv();
 }

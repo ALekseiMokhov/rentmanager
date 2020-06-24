@@ -25,7 +25,6 @@ public interface IPlaceService {
 
     void loadPlace(Place place);
 
-
     boolean isPresent(UUID id);
 
     UUID addPlace();
@@ -33,5 +32,9 @@ public interface IPlaceService {
     Place getFreePlace(LocalDate date);
 
     Place getPlaceById(UUID id);
+
+    void loadFromCsv();
+
+    void exportToCsv();
 
 }
