@@ -69,7 +69,7 @@ public class Navigator {
 
 
             } catch (Exception e) {
-            
+
                 navigate( rootMenu );
             }
 

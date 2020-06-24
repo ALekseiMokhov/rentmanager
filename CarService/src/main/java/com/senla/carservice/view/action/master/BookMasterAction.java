@@ -10,21 +10,24 @@ public class BookMasterAction extends AbstractMasterAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of master : " );
+
         try {
+            System.out.println( "Enter the id of master : " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should be in proper format!" );
         }
 
-        System.out.println( "Enter the date to book: " );
+
         try {
+            System.out.println( "Enter the date to book: " );
             date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-
+            controller.setMasterForDate( id, date );
+            System.out.println( "Master  was booked for " + date.toString() );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "Date should be in format 'YYYY-MM-DD'!" );
         }
-        controller.setMasterForDate( id, date );
 
-        System.out.println( "Master  was booked for " + date.toString() );
+
     }
 }

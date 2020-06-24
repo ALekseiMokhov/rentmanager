@@ -8,13 +8,15 @@ public class SetNewMastersAction extends AbstractOrderAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of the order: " );
         try {
+            System.out.println( "Enter the id of the order: " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            controller.setNewMasters( id );
+            System.out.println( "New masters serving your order are: " + controller.findOrderById( id ).getMasters() );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID shoud have proper format!" );
         }
-        controller.setNewMasters( id );
-        System.out.println( "New masters serving your order are: " + controller.findOrderById( id ).getMasters() );
+
     }
 }

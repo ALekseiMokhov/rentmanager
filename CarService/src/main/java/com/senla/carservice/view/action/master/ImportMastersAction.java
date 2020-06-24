@@ -15,7 +15,7 @@ public class ImportMastersAction extends AbstractMasterAction {
                 controller.loadMaster( master );
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println( "Check a path of the file!" );
         }
 
     }

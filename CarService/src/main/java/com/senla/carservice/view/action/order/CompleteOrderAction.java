@@ -8,12 +8,14 @@ public class CompleteOrderAction extends AbstractOrderAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of completed order : " );
         try {
+            System.out.println( "Enter the id of completed order : " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            controller.completeOrder( id );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format!" );
         }
-        controller.completeOrder( id );
+
     }
 }

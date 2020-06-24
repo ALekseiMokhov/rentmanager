@@ -9,10 +9,11 @@ public class ExportMastersAction extends AbstractMasterAction {
     public void execute() {
         try {
             CsvMasterWriter.writeMasters( controller.getMastersByAlphabet() );
+            System.out.println( controller.getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println( "Check a path to the file!" );
 
         }
-        System.out.println( controller.getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
+
     }
 }

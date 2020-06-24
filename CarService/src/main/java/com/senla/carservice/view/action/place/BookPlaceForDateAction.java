@@ -11,23 +11,24 @@ public class BookPlaceForDateAction extends AbstractPlaceAction {
     @Override
     public void execute() {
 
-        System.out.println( " Enter the id of booking place: " );
+
         try {
+            System.out.println( " Enter the id of booking place: " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should be in proper format!" );
+        }
 
-        }
-        catch (IllegalArgumentException e){
-            System.err.println("UUID should be in proper format!");
-        }
-        System.out.println( "Enter the Date to book place: " );
         try {
+            System.out.println( "Enter the Date to book place: " );
             date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
 
+            this.controller.setPlaceForDate( id, date );
+            System.out.println( "The place was booked successfully!" );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should be in format 'YYYY-MM-DD'" );
         }
-        this.controller.setPlaceForDate( id, date );
-        System.out.println( "The place was booked successfully!" );
     }
 
 }

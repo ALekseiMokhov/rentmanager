@@ -9,11 +9,11 @@ public class ExportOrdersAction extends AbstractOrderAction {
     public void execute() {
         try {
             CsvOrderWriter.writeOrders( controller.getOrders() );
-        } catch (
-                IOException e) {
-            e.printStackTrace();
+            System.out.println( controller.getOrders().size() + " orders were successfully written to csv file!" );
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
         }
-        System.out.println( controller.getOrders().size() + " orders were successfully written to csv file!" );
+
     }
 
 }

@@ -17,19 +17,20 @@ public class GetFreeMasterAction extends AbstractMasterAction {
         System.out.println( "Enter speciality: " );
         try {
             speciality = Speciality.valueOf( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "There is no chosen speciality available!" );
         }
 
-
-        System.out.println( "Enter the date: " );
         try {
+            System.out.println( "Enter the date: " );
             date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
 
+            master = controller.getFreeBySpeciality( date, speciality );
+            System.out.println( "master is: " + master );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have format 'YYYY-MM-DD'!" );
         }
 
-        master = controller.getFreeBySpeciality( date, speciality );
-        System.out.println( "master is: " + master );
+
     }
 }

@@ -28,16 +28,18 @@ public class AddOrderAction extends AbstractOrderAction {
                     .map( s -> Speciality.valueOf( s ) )
                     .collect( Collectors.toSet() );
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
-        System.out.println( "Enter the date of execution: " );
+
 
         try {
+            System.out.println( "Enter the date of execution: " );
             startOfExecution = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+            controller.addOrder( LocalDate.now(), startOfExecution, required );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have format like 'YYYY-MM-DD'" );
         }
 
-        controller.addOrder( LocalDate.now(), startOfExecution, required );
+
     }
 }

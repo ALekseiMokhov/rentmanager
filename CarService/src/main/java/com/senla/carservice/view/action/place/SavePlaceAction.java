@@ -11,11 +11,13 @@ public class SavePlaceAction extends AbstractPlaceAction {
 
     @Override
     public void execute() {
-        System.out.println( " Enter id of the saving place: " );
+        System.out.println( "Enter id of the saving place: " );
         try {
             id = UUID.fromString( reader.readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format! " );
         }
         if (this.controller.getPlaceById( id ) != null) {
             place = this.controller.getPlaceById( id );

@@ -3,7 +3,6 @@ package com.senla.carservice.view.action.place;
 import com.senla.carservice.domain.entities.garage.Place;
 import util.csv.CsvPlaceParser;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class ImportPlacesAction extends AbstractPlaceAction {
             }
             System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {
-            System.err.println("File csv not found!");
+            System.err.println( "Check the path to file!" );
         }
 
 

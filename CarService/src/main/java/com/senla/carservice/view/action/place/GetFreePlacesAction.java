@@ -12,11 +12,13 @@ public class GetFreePlacesAction extends AbstractPlaceAction {
     @Override
     public void execute() {
 
-        System.out.println( "Enter convinient Date: " );
+        System.out.println( "Enter convenient Date: " );
         try {
             date = LocalDate.parse( reader.readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "The Date should be formatted like 'YYYY-MM-DD' " );
         }
         System.out.println(
                 "Available places are: "

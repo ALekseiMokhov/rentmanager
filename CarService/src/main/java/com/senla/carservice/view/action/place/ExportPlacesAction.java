@@ -10,7 +10,7 @@ public class ExportPlacesAction extends AbstractPlaceAction {
         try {
             CsvPlaceWriter.writePlaces( controller.getPlaces() );
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println( "There is a problem with export!Check path to the file!" );
         }
         System.out.println( controller.getPlaces().size() + " places were successfully written to csv file!" );
     }

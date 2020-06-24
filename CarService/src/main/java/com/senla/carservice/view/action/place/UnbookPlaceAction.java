@@ -12,18 +12,19 @@ public class UnbookPlaceAction extends AbstractPlaceAction {
 
     @Override
     public void execute() {
-        System.out.println( " Enter the id of booked place: " );
-        try {
-            id = UUID.fromString( ConsoleScanner.getInstance().getReader().readLine() );
-        } catch (IOException e) {
 
-        }
-        System.out.println( "Enter the Date to unbook place: " );
         try {
+            System.out.println( " Enter the id of booked place: " );
+            id = UUID.fromString( ConsoleScanner.getInstance().getReader().readLine() );
+            System.out.println( "Enter the Date to unbook place: " );
             date = LocalDate.parse( ConsoleScanner.getInstance().getReader().readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "Date and UUID should have proper format!" );
         }
+
+
         this.controller.setPlaceFree( id, date );
         System.out.println( "The place was unbooked successfully!" );
     }

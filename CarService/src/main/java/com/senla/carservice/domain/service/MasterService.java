@@ -55,9 +55,8 @@ public class MasterService implements IMasterService {
             }
             this.repository.save( master );
         } catch (Exception e) {
-            System.err.println("Failed to save master!");
+            System.err.println( "Failed to save master!" );
         }
-
 
 
     }
@@ -88,9 +87,8 @@ public class MasterService implements IMasterService {
     public void removeMaster(UUID id) {
         try {
             this.repository.delete( id );
-        }
-        catch(NoSuchElementException e){
-            System.out.println("The Master with provided id was probably already deleted!");
+        } catch (NoSuchElementException e) {
+            System.out.println( "The Master with provided id was probably already deleted!" );
         }
     }
 
@@ -120,21 +118,20 @@ public class MasterService implements IMasterService {
         try {
             return this.repository.getByNameAndSpeciality( name, speciality );
         } catch (NoSuchElementException e) {
-           
+
         }
         throw new NoSuchElementException( "There is no Master with required a name & skills!" );
     }
 
     public IMaster getBySpeciality(Speciality speciality) {
 
-        try{
-            IMaster  master = this.repository.getBySpeciality( speciality );
+        try {
+            IMaster master = this.repository.getBySpeciality( speciality );
             return master;
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
 
         }
-         throw new NoSuchElementException( " Repository doesn't contain master with provided id!" ) ;
+        throw new NoSuchElementException( " Repository doesn't contain master with provided id!" );
     }
 
     public Set <Speciality> getAvailableSpecialities() {
@@ -147,7 +144,7 @@ public class MasterService implements IMasterService {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" ) ;
+        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
     }
 
 

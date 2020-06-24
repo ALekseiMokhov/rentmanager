@@ -15,6 +15,8 @@ public class IsPlaceSetAction extends AbstractPlaceAction {
             id = UUID.fromString( reader.readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "The UUID should have proper format!" );
         }
         System.out.println( "Enter the Date to check: " );
 
@@ -22,6 +24,8 @@ public class IsPlaceSetAction extends AbstractPlaceAction {
             date = LocalDate.parse( reader.readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "The Date should be formatted like 'YYYY-MM-DD' " );
         }
 
         boolean isFree = controller.isPlaceSetForDate( id, date );
