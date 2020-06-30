@@ -57,7 +57,7 @@ public class CsvOrderParser {
                     , CsvPlaceParser.loadById( UUID.fromString( var.get( 3 ) ) ).get()
                     , CsvMasterParser.loadMastersById( parseMastersId( var.subList( 4, var.size() ) ) )
             );
-            order.setStatus( order.getFinishOfExecution()==null? OrderStatus.MANAGED : OrderStatus.COMPLETED);
+            order.setStatus( order.getFinishOfExecution() == null ? OrderStatus.MANAGED : OrderStatus.COMPLETED );
             res.add( order );
         }
 

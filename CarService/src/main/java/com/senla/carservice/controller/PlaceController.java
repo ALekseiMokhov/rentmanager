@@ -60,9 +60,13 @@ public class PlaceController {
         return this.placeService.getPlaceById( id );
     }
 
-    public void loadPlacesFromCsv(){this.placeService.loadFromCsv();}
+    public void loadPlacesFromCsv() {
+        this.placeService.loadFromCsv();
+    }
 
-    public void exportPlacesToCsv(){this.placeService.exportToCsv();}
+    public void exportPlacesToCsv() {
+        this.placeService.exportToCsv();
+    }
 
 
 }

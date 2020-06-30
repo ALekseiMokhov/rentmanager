@@ -128,7 +128,7 @@ public class PlaceService implements IPlaceService {
         try {
             List <Place> list = CsvPlaceParser.load();
             for (Place place : list) {
-              loadPlace( place );
+                loadPlace( place );
             }
             System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {

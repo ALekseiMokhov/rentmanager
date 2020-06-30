@@ -1,5 +1,7 @@
 package com.senla.carservice.view.menu;
 
+import com.senla.carservice.controller.ConfigController;
+
 import java.io.IOException;
 
 public class MenuController {
@@ -8,11 +10,13 @@ public class MenuController {
 
 
     public void run() throws IOException {
+        builder.requireAccessRights();
         navigator = new Navigator(
                 builder.buildRootMenu()
                 , builder.buildPlaceMenu()
                 , builder.buildMasterMenu()
-                , builder.buildOrderMenu() );
+                , builder.buildOrderMenu()
+                , builder.buildAccessMenu() );
         navigator.navigate( navigator.getRootMenu() );
     }
 }
