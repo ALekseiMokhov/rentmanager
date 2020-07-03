@@ -1,7 +1,6 @@
 package util.serialisation;
 
 import com.google.gson.Gson;
-import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.order.Order;
 
 import java.io.BufferedWriter;
@@ -28,7 +27,7 @@ public class GsonOrdersWriter {
                      new BufferedWriter( new FileWriter( FILE, true ) )) {
             writer.append( "\n" );
             writer.append( jsonFromEntity );
-            GsonPlaceWriter.serializePlace( order.getPlace() );
+            GsonPlacesWriter.serializePlace( order.getPlace() );
             GsonMasterWriter.serializeMasters( order.getMasters() );
         }
 
