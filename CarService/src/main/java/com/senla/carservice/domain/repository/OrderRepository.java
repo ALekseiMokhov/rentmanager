@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class OrderRepository implements IOrderRepository {
-    private List <Order> orders = new ArrayList <>();
+    private final List <Order> orders = new ArrayList <>();
 
     @Override
     public Order findById(UUID id) {

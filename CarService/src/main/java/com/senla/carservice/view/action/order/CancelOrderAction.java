@@ -8,12 +8,15 @@ public class CancelOrderAction extends AbstractOrderAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of order to cancel : " );
+
         try {
+            System.out.println( "Enter the id of order to cancel : " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            controller.cancelOrder( id );
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format!" );
         }
-        controller.cancelOrder( id );
+
     }
 }

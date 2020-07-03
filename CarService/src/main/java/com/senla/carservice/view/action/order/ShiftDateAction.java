@@ -13,21 +13,25 @@ public class ShiftDateAction extends AbstractOrderAction {
         System.out.println( "Enter the id of the order: " );
         try {
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format" );
         }
 
-        System.out.println( "Enter the date of execution: " );
 
         try {
+
+            System.out.println( "Enter the date of execution: " );
             startOfExecution = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            controller.shiftOrderExecutionDate( id, startOfExecution );
+
+            System.out.println( "The date of execution has been shifted successfully!" );
+            System.out.println( "The new date is " + startOfExecution );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have proper format!" );
         }
 
-        controller.shiftOrderExecutionDate( id, startOfExecution );
-        System.out.println( "The date of execution has been shifted successfully!" );
-        System.out.println( "The new date is " + startOfExecution );
 
     }
 }

@@ -4,7 +4,10 @@ import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.repository.IPlaceRepository;
 import com.senla.carservice.domain.repository.PlaceRepository;
 import util.Calendar;
+import util.csv.CsvPlaceParser;
+import util.csv.CsvPlaceWriter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -81,11 +84,23 @@ public class PlaceService implements IPlaceService {
         return place.getId();
     }
 
+    @Override
+    public boolean isPresent(UUID id) {
+        return this.repository.isPresent( id );
+    }
 
     public void savePlace(UUID id) {
-        Place place = this.repository.findById( id );
-        this.repository.save( place );
+        if (!this.repository.isPresent( id )) {
+            Place place = new Place( new Calendar() );
+            place.setId( id );
+            this.repository.save( place );
+        } else this.repository.save( this.repository.findById( id ) );
 
+    }
+
+    @Override
+    public void loadPlace(Place place) {
+        this.repository.save( place );
     }
 
     public Place getFreePlace(LocalDate date) {
@@ -96,11 +111,44 @@ public class PlaceService implements IPlaceService {
             }
 
         }
-        throw new NoSuchElementException( "There is no free places for this Date!" );
+        throw new NoSuchElementException( "There are no free places for this Date!" );
     }
 
     public Place getPlaceById(UUID id) {
-        return this.repository.findById( id );
+        try {
+            return this.repository.findById( id );
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+        throw new NoSuchElementException( "There is no place with provided id!" );
+    }
+
+    @Override
+    public void loadFromCsv() {
+        try {
+            List <Place> list = CsvPlaceParser.load();
+            for (Place place : list) {
+              loadPlace( place );
+            }
+            System.out.println( list.size() + " places were loaded from file!" );
+        } catch (IOException e) {
+            System.err.println( "Check the path to file!" );
+        }
+
+    }
+
+    @Override
+    public void exportToCsv() {
+
+        try {
+            CsvPlaceWriter.writePlaces( this.repository.findAll() );
+
+            System.out.println( this.repository.findAll().size() + " places were successfully written to csv file!" );
+
+        } catch (IOException e) {
+            System.err.println( "There is a problem with export!Check path to the file!" );
+        }
+
     }
 
 

@@ -1,6 +1,6 @@
 package com.senla.carservice.view.action.place;
 
-import util.Scanner;
+import util.ConsoleScanner;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,18 +12,19 @@ public class UnbookPlaceAction extends AbstractPlaceAction {
 
     @Override
     public void execute() {
-        System.out.println( " Enter the id of booked place: " );
+
         try {
-            id = UUID.fromString( Scanner.getInstance().getReader().readLine() );
+            System.out.println( " Enter the id of booked place: " );
+            id = UUID.fromString( ConsoleScanner.getInstance().getReader().readLine() );
+            System.out.println( "Enter the Date to unbook place: " );
+            date = LocalDate.parse( ConsoleScanner.getInstance().getReader().readLine() );
         } catch (IOException e) {
 
+        } catch (IllegalArgumentException e) {
+            System.err.println( "Date and UUID should have proper format!" );
         }
-        System.out.println( "Enter the Date to unbook place: " );
-        try {
-            date = LocalDate.parse( Scanner.getInstance().getReader().readLine() );
-        } catch (IOException e) {
 
-        }
+
         this.controller.setPlaceFree( id, date );
         System.out.println( "The place was unbooked successfully!" );
     }

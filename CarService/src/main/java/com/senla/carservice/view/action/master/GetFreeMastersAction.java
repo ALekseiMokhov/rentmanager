@@ -9,14 +9,16 @@ public class GetFreeMastersAction extends AbstractMasterAction {
 
     @Override
     public void execute() {
-
-        System.out.println( "Enter the date : " );
         try {
+            System.out.println( "Enter the date : " );
             date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
 
+            this.controller.getFreeMasters( date ).stream()
+                    .forEach( System.out::println );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have proper format 'YYYY-MM-DD'" );
         }
-        this.controller.getFreeMasters( date ).stream()
-                .forEach( System.out::println );
+
     }
 }

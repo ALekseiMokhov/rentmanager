@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class PlaceRepository implements IPlaceRepository {
-    private List <Place> places;
+    private final List <Place> places;
 
     public PlaceRepository() {
         this.places = new ArrayList <>();
@@ -21,13 +21,19 @@ public class PlaceRepository implements IPlaceRepository {
                 return place;
             }
         }
-        throw new NoSuchElementException( "There is no place with such id!" );
+        throw new NoSuchElementException( "There is no place with provided id!" );
     }
 
     @Override
-    public List <Place> findAll() {
-        return this.places;
+    public boolean isPresent(UUID id) {
+        for (Place place : places) {
+            if (place.getId().equals( id )) {
+                return true;
+            }
+        }
+        return false;
     }
+
 
     @Override
     public void delete(UUID id) {
@@ -36,8 +42,17 @@ public class PlaceRepository implements IPlaceRepository {
 
     @Override
     public void save(Place place) {
-        this.places.add( place );
+        if (!this.places.contains( place )) {
+            this.places.add( place );
+            System.out.println( place.getCalendar() );
+        } else {
+            this.places.set( this.places.indexOf( place ), place );
+        }
+
     }
 
-
+    @Override
+    public List <Place> findAll() {
+        return this.places;
+    }
 }

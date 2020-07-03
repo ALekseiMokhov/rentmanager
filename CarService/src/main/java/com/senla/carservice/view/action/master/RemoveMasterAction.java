@@ -8,13 +8,16 @@ public class RemoveMasterAction extends AbstractMasterAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of master you want to delete: " );
         try {
+            System.out.println( "Enter the id of master you want to delete: " );
             id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            controller.removeMaster( id );
+            System.out.println( "Master with id " + id + " was successfully removed!" );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format!" );
         }
-        controller.removeMaster( id );
-        System.out.println( "Master with id " + id + " was successfully removed!" );
+
     }
 }

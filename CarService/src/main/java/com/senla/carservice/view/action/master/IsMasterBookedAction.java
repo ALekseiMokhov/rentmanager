@@ -7,23 +7,28 @@ import java.util.UUID;
 public class IsMasterBookedAction extends AbstractMasterAction {
     private UUID id;
     private LocalDate date;
+    private boolean isBooked;
 
     @Override
     public void execute() {
-        boolean isBooked = false;
-        System.out.println( "Enter the id of master you want to check: " );
-        try {
-            id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println( "Enter the date to check: " );
-        try {
-            date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
 
+        try {
+            System.out.println( "Enter the id of master you want to check: " );
+            id = UUID.fromString( reader.readLine() );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format!" );
         }
-        isBooked = controller.isBookedForDate( id, date );
-        System.out.println( "Master with id " + id + " is booked for date " + date + " : " + isBooked );
+
+        try {
+            System.out.println( "Enter the date to check: " );
+            date = LocalDate.parse( reader.readLine() );
+            isBooked = controller.isBookedForDate( id, date );
+            System.out.println( "Master with id " + id + " is booked for date " + date + " : " + isBooked );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have format 'YYYY-MM-DD'" );
+        }
+
     }
 }

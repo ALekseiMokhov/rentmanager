@@ -4,24 +4,25 @@ import com.senla.carservice.domain.entities.garage.Place;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class GetFreePlaceAction extends AbstractPlaceAction {
     private LocalDate date;
 
     @Override
     public void execute() {
-        System.out.println( "Enter convinient Date: " );
-        try {
-            date = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
 
+        try {
+            System.out.println( "Enter convinient Date: " );
+            date = LocalDate.parse( reader.readLine() );
+
+            System.out.println( "Available place is: " );
+            Place place = this.controller.getFreePlace( date );
+            System.out.println( place );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should be formatted like 'YYYY-MM-DD' " );
         }
-        System.out.println(
-                "Available place is: "
-        );
-        Place place = this.controller.getFreePlace( date );
-        System.out.println( place );
+
 
     }
 }

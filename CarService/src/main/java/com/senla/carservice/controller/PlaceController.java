@@ -27,9 +27,10 @@ public class PlaceController {
         this.placeService.addPlaces( i );
     }
 
-    public UUID addPlace(){
-        return   this.placeService.addPlace();
+    public UUID addPlace() {
+        return this.placeService.addPlace();
     }
+
 
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
         return this.placeService.isPlaceSetForDate( id, date );
@@ -58,6 +59,10 @@ public class PlaceController {
     public Place getPlaceById(UUID id) {
         return this.placeService.getPlaceById( id );
     }
+
+    public void loadPlacesFromCsv(){this.placeService.loadFromCsv();}
+
+    public void exportPlacesToCsv(){this.placeService.exportToCsv();}
 
 
 }

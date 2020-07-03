@@ -11,14 +11,17 @@ public class FindOrderByIdAction extends AbstractOrderAction {
 
     @Override
     public void execute() {
-        System.out.println( "Enter the id of order : " );
-        try {
-            id = UUID.fromString( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        order = controller.findOrderById( id );
 
-        System.out.println( order );
+        try {
+            System.out.println( "Enter the id of order : " );
+            id = UUID.fromString( reader.readLine() );
+
+            order = controller.findOrderById( id );
+            System.out.println( order );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "UUID should have proper format!" );
+        }
+
     }
 }

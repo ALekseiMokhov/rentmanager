@@ -13,21 +13,22 @@ public class GetOrdersForPeriodAction extends AbstractOrderAction {
 
         try {
             start = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have proper format 'YYYY-MM-DD'" );
         }
 
-        System.out.println( "Enter the end of the period: " );
 
         try {
+            System.out.println( "Enter the end of the period: " );
             end = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println( "Orders for the chosen period are: " );
-        controller.getOrdersForPeriod( start, end ).stream()
-                .forEach( System.out::println );
+            System.out.println( "Orders for the chosen period are: " );
+            controller.getOrdersForPeriod( start, end ).stream()
+                    .forEach( System.out::println );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have proper format 'YYYY-MM-DD'" );
+        }
 
     }
 }

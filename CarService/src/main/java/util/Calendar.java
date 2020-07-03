@@ -30,4 +30,11 @@ public class Calendar {
     public boolean isDateBooked(LocalDate date) {
         return bookedDates.getOrDefault( date, false );
     }
+
+    @Override
+    public String toString() {
+        return "Calendar{" +
+                "bookedDates=" + bookedDates.keySet() +
+                '}';
+    }
 }

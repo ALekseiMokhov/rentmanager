@@ -14,6 +14,8 @@ public interface IMasterService {
 
     void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality);
 
+    void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id);
+
     void removeMaster(UUID id);
 
     IMaster getById(UUID id);
@@ -37,4 +39,8 @@ public interface IMasterService {
     public List <IMaster> getFreeMasters(LocalDate date);
 
     public List <IMaster> getMastersBySpeciality(Speciality speciality);
+
+    public void loadMastersFromCsv();
+
+    public void exportMastersToCsv();
 }

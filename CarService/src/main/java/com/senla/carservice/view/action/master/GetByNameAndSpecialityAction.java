@@ -9,22 +9,24 @@ public class GetByNameAndSpecialityAction extends AbstractMasterAction {
     private String fullName;
     private IMaster master;
     Speciality speciality;
+
     @Override
     public void execute() {
-        System.out.println( "Enter full name of the Master: " );
+
         try {
+            System.out.println( "Enter full name of the Master: " );
             fullName = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            System.out.println( "Enter speciality: " );
+            speciality = Speciality.valueOf( reader.readLine() );
+
+            master = this.controller.getByNameAndSpeciality( fullName, speciality );
+            System.out.println( "Master found : " + master );
+
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "There is no chosen speciality available!" );
         }
 
-        System.out.println( "Enter speciality: " );
-        try {
-            speciality = Speciality.valueOf( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        master = this.controller.getByNameAndSpeciality( fullName, speciality );
-        System.out.println( "Master found : " + master );
+
     }
 }

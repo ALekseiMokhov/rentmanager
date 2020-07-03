@@ -8,13 +8,16 @@ public class AddPlacesAction extends AbstractPlaceAction {
     @Override
     public void execute() {
 
-        System.out.println( "Enter a quantity of new places: " );
         try {
+            System.out.println( "Enter a quantity of new places: " );
             var = Integer.parseInt( reader.readLine() );
+
+            this.controller.addPlaces( var );
+            System.out.println( var + " places were added to Garage!" );
+
         } catch (IOException e) {
 
         }
-        this.controller.addPlaces( var );
-        System.out.println( var + " places were added to Garage!" );
+
     }
 }

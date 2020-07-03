@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
 
 public class GetOrdersByExecutionAction extends AbstractOrderAction {
     private LocalDate finishOfExecution;
+
     @Override
     public void execute() {
 
-
-        System.out.println( "Enter the date of execution: " );
-
         try {
+
+            System.out.println( "Enter the date of execution: " );
             finishOfExecution = LocalDate.parse( reader.readLine() );
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println( "The Date should have proper format" );
         }
 
         List <Order> executedOrders = controller.getOrdersByExecutionDate( OrderStatus.COMPLETED ).stream()
