@@ -91,4 +91,12 @@ public class MasterController {
     public void exportMastersToCsv() {
         this.masterService.exportMastersToCsv();
     }
+
+    public void loadFromJson() {
+        this.masterService.loadMastersFromJson();
+    }
+
+    public void exportToJson() {
+        this.masterService.exportMastersToJson();
+    }
 }

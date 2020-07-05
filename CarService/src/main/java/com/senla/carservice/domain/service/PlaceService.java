@@ -6,6 +6,8 @@ import com.senla.carservice.domain.repository.PlaceRepository;
 import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;
 import util.csv.CsvPlaceWriter;
+import util.serialisation.GsonPlaceParser;
+import util.serialisation.GsonPlaceWriter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -149,6 +151,28 @@ public class PlaceService implements IPlaceService {
             System.err.println( "There is a problem with export!Check path to the file!" );
         }
 
+    }
+
+    @Override
+    public void loadPlacesFromJson() {
+        try {
+            List <Place> list = GsonPlaceParser.load();
+            for (Place place : list) {
+                loadPlace( place );
+            }
+
+        } catch (IOException e) {
+            System.err.println( "There is a problem with import!Check path to the .json file!" );
+        }
+    }
+
+    @Override
+    public void exportPlacesToJson() {
+        try {
+            GsonPlaceWriter.serializePlaces( this.repository.findAll() );
+        } catch (IOException e) {
+            System.err.println( "There is a problem with export!Check path to the file!" );
+        }
     }
 
 

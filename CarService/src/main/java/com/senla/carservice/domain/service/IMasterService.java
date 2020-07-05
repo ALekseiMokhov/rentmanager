@@ -43,4 +43,8 @@ public interface IMasterService {
     public void loadMastersFromCsv();
 
     public void exportMastersToCsv();
+
+    public void loadMastersFromJson();
+
+    public void exportMastersToJson();
 }

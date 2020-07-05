@@ -68,5 +68,12 @@ public class PlaceController {
         this.placeService.exportToCsv();
     }
 
+    public void loadFromJson() {
+        this.placeService.loadPlacesFromJson();
+    }
+
+    public void exportToJson() {
+        this.placeService.exportPlacesToJson();
+    }
 
 }

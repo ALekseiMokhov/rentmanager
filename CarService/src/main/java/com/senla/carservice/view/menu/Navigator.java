@@ -65,10 +65,7 @@ public class Navigator {
                     current = this.orderMenu;
                     navigate( current );
                 }
-               /* if (menuItem.getTitle().equals( "Access menu")) {
-                    current = this.accessMenu;
-                    navigate( current );
-                }*/
+
 
                 if (!isExit) {
                     System.out.println( "Menu current: " + current.getName() );
