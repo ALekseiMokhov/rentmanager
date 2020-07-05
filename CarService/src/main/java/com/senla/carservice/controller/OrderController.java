@@ -7,18 +7,21 @@ import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.domain.service.IOrderService;
 import com.senla.carservice.domain.service.OrderService;
+import dependency.injection.annotations.Autowired;
+import dependency.injection.annotations.components.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
+@Component
 public class OrderController {
+    @Autowired
     private IOrderService orderService;
 
     public OrderController() {
 
-        this.orderService = OrderService.getInstance();
+
     }
 
 

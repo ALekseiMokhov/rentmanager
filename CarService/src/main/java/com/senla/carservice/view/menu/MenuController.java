@@ -2,11 +2,16 @@ package com.senla.carservice.view.menu;
 
 
 
-import java.io.IOException;
+import dependency.injection.annotations.Autowired;
+import dependency.injection.annotations.components.Component;
 
+import java.io.IOException;
+@Component
 public class MenuController {
+    @Autowired
     private Navigator navigator;
-    private Builder builder = Builder.getInstance();
+    @Autowired
+    private Builder builder ;
 
 
     public void run() throws IOException {

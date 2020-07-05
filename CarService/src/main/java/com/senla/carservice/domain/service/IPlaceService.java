@@ -1,11 +1,12 @@
 package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
+import dependency.injection.annotations.components.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
+@Component
 public interface IPlaceService {
     List <Place> getPlaces();
 

@@ -1,10 +1,11 @@
 package com.senla.carservice.domain.entities.master;
 
+import dependency.injection.annotations.Qualifier;
 import util.calendar.Calendar;
 
 import java.util.UUID;
-
 public class Electrician extends AbstractMaster {
+
 
     public Electrician(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {
         super( fullName, dailiPayment, calendar, speciality );

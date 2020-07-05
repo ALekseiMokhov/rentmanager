@@ -8,28 +8,24 @@ import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
+import dependency.injection.annotations.Autowired;
+import dependency.injection.annotations.components.Component;
 import util.properties.PropertyStorage;
-
+ @Component
 public class Builder {
 
-    private static Builder instance;
 
     private Boolean isGarageModificationPermitted;
     private Boolean isMasterModificationPermitted;
     private Boolean isOrderModificationPermitted;
+      @Autowired
+    private IConfigService configService ;
 
-    private IConfigService configService = ConfigService.getInstance();
-
-    private Builder() {
+    public Builder() {
 
     }
 
-    public static Builder getInstance() {
-        if (instance == null) {
-            instance = new Builder();
-        }
-        return instance;
-    }
+
 
 
     public void requireAccessRights() {

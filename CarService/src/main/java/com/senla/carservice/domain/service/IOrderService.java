@@ -5,12 +5,13 @@ import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
+import dependency.injection.annotations.components.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
+@Component
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
 

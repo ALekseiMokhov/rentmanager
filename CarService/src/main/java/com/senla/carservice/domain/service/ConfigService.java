@@ -7,17 +7,12 @@ import java.io.IOException;
 
 public class ConfigService implements IConfigService {
 
-    private static ConfigService instance;
 
-    private ConfigService() {
+
+    public ConfigService() {
     }
 
-    public static ConfigService getInstance() {
-        if (instance == null) {
-            instance = new ConfigService();
-        }
-        return instance;
-    }
+
 
     @Override
     public void loadCustomProps(String propName) {

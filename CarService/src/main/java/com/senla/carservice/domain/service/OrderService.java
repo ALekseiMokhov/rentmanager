@@ -7,6 +7,8 @@ import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.domain.repository.IOrderRepository;
 import com.senla.carservice.domain.repository.OrderRepository;
+import dependency.injection.annotations.Autowired;
+import dependency.injection.annotations.components.Component;
 import util.csv.CsvOrderParser;
 import util.csv.CsvOrderWriter;
 import util.serialisation.GsonOrderParser;
@@ -18,26 +20,21 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderService implements IOrderService {
+      @Autowired
     private final IOrderRepository orderRepository;
+      @Autowired
     private final IMasterService masterService;
+      @Autowired
     private final IPlaceService placeService;
-    private static OrderService instance;
 
 
-    private OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
+
+    public OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
         this.orderRepository = orderRepository;
         this.masterService = masterService;
         this.placeService = placeService;
     }
 
-    public static OrderService getInstance() {
-        if (instance == null) {
-            instance = new OrderService(
-                    new OrderRepository(), MasterService.getInstance(), PlaceService.getInstance()
-            );
-        }
-        return instance;
-    }
 
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         List <IMaster> availableMasters = new ArrayList <>();
