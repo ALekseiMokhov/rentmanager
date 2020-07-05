@@ -1,11 +1,14 @@
 package com.senla.carservice.view.menu;
 
-import com.senla.carservice.controller.ConfigController;
+
+import com.senla.carservice.domain.service.ConfigService;
+import com.senla.carservice.domain.service.IConfigService;
 import com.senla.carservice.view.action.IAction;
 import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
+import util.properties.PropertyStorage;
 
 public class Builder {
 
@@ -14,7 +17,8 @@ public class Builder {
     private Boolean isGarageModificationPermitted;
     private Boolean isMasterModificationPermitted;
     private Boolean isOrderModificationPermitted;
-    private ConfigController configController = new ConfigController();
+
+    private IConfigService configService = ConfigService.getInstance();
 
     private Builder() {
 
@@ -29,9 +33,10 @@ public class Builder {
 
 
     public void requireAccessRights() {
-        isGarageModificationPermitted = Boolean.valueOf( configController.get( "garage.admin.mode" ) );
-        isMasterModificationPermitted = Boolean.valueOf( configController.get( "master.admin.mode" ) );
-        isOrderModificationPermitted = Boolean.valueOf( configController.get( "order.admin.mode" ) );
+        configService.loadDefaultProps();
+        isGarageModificationPermitted = Boolean.valueOf( PropertyStorage.get( "garage.admin.mode" ) );
+        isMasterModificationPermitted = Boolean.valueOf( PropertyStorage.get( "master.admin.mode" ) );
+        isOrderModificationPermitted = Boolean.valueOf( PropertyStorage.get( "order.admin.mode" ) );
     }
 
 

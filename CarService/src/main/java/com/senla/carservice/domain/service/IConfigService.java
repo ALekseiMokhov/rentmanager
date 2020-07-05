@@ -3,9 +3,9 @@ package com.senla.carservice.domain.service;
 import java.io.IOException;
 
 public interface IConfigService {
-    void readAll();
+    void loadDefaultProps();
 
-    void read(String s);
+    void loadCustomProps(String propName);
 
     void write(String k, String v);
 
