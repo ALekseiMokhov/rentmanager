@@ -1,6 +1,6 @@
 package com.senla.carservice.domain.entities.garage;
 
-import util.Calendar;
+import util.calendar.Calendar;
 
 import java.util.Objects;
 import java.util.UUID;

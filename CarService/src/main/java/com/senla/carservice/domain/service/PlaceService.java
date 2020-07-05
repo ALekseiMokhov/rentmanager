@@ -3,7 +3,7 @@ package com.senla.carservice.domain.service;
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.repository.IPlaceRepository;
 import com.senla.carservice.domain.repository.PlaceRepository;
-import util.Calendar;
+import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;
 import util.csv.CsvPlaceWriter;
 

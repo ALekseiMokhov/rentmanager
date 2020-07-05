@@ -1,4 +1,4 @@
-package util.serialisation;
+package util.serialisation.deserializers;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;

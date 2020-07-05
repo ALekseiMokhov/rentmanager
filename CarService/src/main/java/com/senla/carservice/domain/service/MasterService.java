@@ -3,7 +3,7 @@ package com.senla.carservice.domain.service;
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
 import com.senla.carservice.domain.repository.MasterRepository;
-import util.Calendar;
+import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
 import util.csv.CsvMasterWriter;
 

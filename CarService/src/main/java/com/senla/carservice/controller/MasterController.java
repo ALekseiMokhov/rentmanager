@@ -4,7 +4,7 @@ import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.service.IMasterService;
 import com.senla.carservice.domain.service.MasterService;
-import util.Calendar;
+import util.calendar.Calendar;
 
 import java.time.LocalDate;
 import java.util.List;
