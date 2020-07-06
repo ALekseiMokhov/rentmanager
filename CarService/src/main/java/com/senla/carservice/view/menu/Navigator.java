@@ -6,7 +6,7 @@ import util.ConsoleScanner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-  @Component
+
 public class Navigator {
 
     private int currentIndex;

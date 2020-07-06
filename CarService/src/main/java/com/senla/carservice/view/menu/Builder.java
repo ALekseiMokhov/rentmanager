@@ -1,40 +1,30 @@
 package com.senla.carservice.view.menu;
 
 
-import com.senla.carservice.domain.service.ConfigService;
-import com.senla.carservice.domain.service.IConfigService;
 import com.senla.carservice.view.action.IAction;
 import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
-import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
-import util.properties.PropertyStorage;
- @Component
-public class Builder {
 
+public class Builder {
 
     private Boolean isGarageModificationPermitted;
     private Boolean isMasterModificationPermitted;
     private Boolean isOrderModificationPermitted;
-      @Autowired
-    private IConfigService configService ;
 
-    public Builder() {
 
+    public void setGarageModificationPermitted(Boolean garageModificationPermitted) {
+        isGarageModificationPermitted = garageModificationPermitted;
     }
 
-
-
-
-    public void requireAccessRights() {
-        configService.loadDefaultProps();
-        isGarageModificationPermitted = Boolean.valueOf( PropertyStorage.get( "garage.admin.mode" ) );
-        isMasterModificationPermitted = Boolean.valueOf( PropertyStorage.get( "master.admin.mode" ) );
-        isOrderModificationPermitted = Boolean.valueOf( PropertyStorage.get( "order.admin.mode" ) );
+    public void setMasterModificationPermitted(Boolean masterModificationPermitted) {
+        isMasterModificationPermitted = masterModificationPermitted;
     }
 
+    public void setOrderModificationPermitted(Boolean orderModificationPermitted) {
+        isOrderModificationPermitted = orderModificationPermitted;
+    }
 
     public Menu buildRootMenu() {
         Menu menu = new Menu();

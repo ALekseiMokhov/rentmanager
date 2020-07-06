@@ -1,21 +1,26 @@
 package com.senla.carservice.view.menu;
 
 
-
-import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
+import com.senla.carservice.domain.service.IConfigService;
 
 import java.io.IOException;
-@Component
+
 public class MenuController {
-    @Autowired
+    private IConfigService configService;
+
     private Navigator navigator;
-    @Autowired
-    private Builder builder ;
+    private Builder builder;
+
+    private Boolean isGarageModificationPermitted;
+    private Boolean isMasterModificationPermitted;
+    private Boolean isOrderModificationPermitted;
 
 
     public void run() throws IOException {
-        builder.requireAccessRights();
+        requireAccessRights();
+        builder.setGarageModificationPermitted( isGarageModificationPermitted );
+        builder.setMasterModificationPermitted( isMasterModificationPermitted );
+        builder.setOrderModificationPermitted( isOrderModificationPermitted );
         navigator = new Navigator(
                 builder.buildRootMenu()
                 , builder.buildPlaceMenu()
@@ -24,4 +29,14 @@ public class MenuController {
                 , builder.buildAccessMenu() );
         navigator.navigate( navigator.getRootMenu() );
     }
+
+
+    public void requireAccessRights() {
+        configService.loadDefaultProps();
+        isGarageModificationPermitted = Boolean.valueOf( configService.get( "garage.admin.mode" ) );
+        isMasterModificationPermitted = Boolean.valueOf( configService.get( "master.admin.mode" ) );
+        isOrderModificationPermitted = Boolean.valueOf( configService.get( "order.admin.mode" ) );
+    }
 }
+
+
