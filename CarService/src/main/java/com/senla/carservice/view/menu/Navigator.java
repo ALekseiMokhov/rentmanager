@@ -1,5 +1,6 @@
 package com.senla.carservice.view.menu;
 
+import com.senla.carservice.domain.entities.master.Mechanic;
 import util.ConsoleScanner;
 
 import java.io.BufferedReader;
@@ -14,15 +15,16 @@ public class Navigator {
     private Menu placeMenu;
     private Menu masterMenu;
     private Menu orderMenu;
+    private Menu accessMenu;
 
 
-    public Navigator(Menu rootMenu, Menu placeMenu, Menu masterMenu, Menu orderMenu) {
+    public Navigator(Menu rootMenu, Menu placeMenu, Menu masterMenu, Menu orderMenu, Menu accessMenu) {
         this.reader = ConsoleScanner.getInstance().getReader();
         this.rootMenu = rootMenu;
         this.placeMenu = placeMenu;
         this.masterMenu = masterMenu;
         this.orderMenu = orderMenu;
-
+        this.accessMenu = accessMenu;
     }
 
 
@@ -43,6 +45,10 @@ public class Navigator {
                     rootMenu.getMenuItems().get( 4 ).doAction();
 
                 }
+                if (menuItem.getAccessPermitted() == false) {
+                    current = this.accessMenu;
+                    navigate( current );
+                }
                 if (menuItem.getTitle().equals( "Root menu" )) {
                     current = this.rootMenu;
                     navigate( current );
@@ -59,6 +65,7 @@ public class Navigator {
                     current = this.orderMenu;
                     navigate( current );
                 }
+
 
                 if (!isExit) {
                     System.out.println( "Menu current: " + current.getName() );

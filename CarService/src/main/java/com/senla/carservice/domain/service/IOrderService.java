@@ -39,4 +39,8 @@ public interface IOrderService {
     void loadFromCsv();
 
     void exportToCsv();
+
+    public void loadOrdersFromJson();
+
+    public void exportOrdersToJson();
 }

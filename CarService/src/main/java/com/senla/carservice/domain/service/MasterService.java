@@ -3,9 +3,11 @@ package com.senla.carservice.domain.service;
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
 import com.senla.carservice.domain.repository.MasterRepository;
-import util.Calendar;
+import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
 import util.csv.CsvMasterWriter;
+import util.serialisation.GsonMasterParser;
+import util.serialisation.GsonMasterWriter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -192,6 +194,31 @@ public class MasterService implements IMasterService {
         try {
             CsvMasterWriter.writeMasters( getMastersByAlphabet() );
             System.out.println( getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+
+        }
+    }
+
+    @Override
+    public void loadMastersFromJson() {
+        try {
+            List <IMaster> list = GsonMasterParser.load();
+            for (IMaster master : list) {
+                this.repository.save( master );
+            }
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+        }
+
+
+    }
+
+    @Override
+    public void exportMastersToJson() {
+        try {
+            GsonMasterWriter.serializeMasters( getMastersByAlphabet() );
+
         } catch (IOException e) {
             System.err.println( "Check a path to the file!" );
 

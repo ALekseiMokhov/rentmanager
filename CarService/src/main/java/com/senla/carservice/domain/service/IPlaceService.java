@@ -37,4 +37,8 @@ public interface IPlaceService {
 
     void exportToCsv();
 
+    public void loadPlacesFromJson();
+
+    public void exportPlacesToJson();
+
 }

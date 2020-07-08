@@ -74,4 +74,12 @@ public class OrderController {
     public void exportToCsv() {
         this.orderService.exportToCsv();
     }
+
+    public void loadFromJson() {
+        this.orderService.loadOrdersFromJson();
+    }
+
+    public void exportToJson() {
+        this.orderService.exportOrdersToJson();
+    }
 }

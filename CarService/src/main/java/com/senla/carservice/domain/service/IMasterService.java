@@ -2,7 +2,7 @@ package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
-import util.Calendar;
+import util.calendar.Calendar;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,4 +43,8 @@ public interface IMasterService {
     public void loadMastersFromCsv();
 
     public void exportMastersToCsv();
+
+    public void loadMastersFromJson();
+
+    public void exportMastersToJson();
 }

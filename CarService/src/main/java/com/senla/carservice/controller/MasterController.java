@@ -4,7 +4,7 @@ import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.service.IMasterService;
 import com.senla.carservice.domain.service.MasterService;
-import util.Calendar;
+import util.calendar.Calendar;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -83,10 +83,20 @@ public class MasterController {
     public List <IMaster> getMastersBySpeciality(Speciality speciality) {
         return this.masterService.getMastersBySpeciality( speciality );
     }
+
     public void loadMastersFromCsv() {
         this.masterService.loadMastersFromCsv();
     }
+
     public void exportMastersToCsv() {
         this.masterService.exportMastersToCsv();
+    }
+
+    public void loadFromJson() {
+        this.masterService.loadMastersFromJson();
+    }
+
+    public void exportToJson() {
+        this.masterService.exportMastersToJson();
     }
 }

@@ -9,6 +9,8 @@ import com.senla.carservice.domain.repository.IOrderRepository;
 import com.senla.carservice.domain.repository.OrderRepository;
 import util.csv.CsvOrderParser;
 import util.csv.CsvOrderWriter;
+import util.serialisation.GsonOrderParser;
+import util.serialisation.GsonOrderWriter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -221,6 +223,27 @@ public class OrderService implements IOrderService {
         try {
             CsvOrderWriter.writeOrders( getOrders() );
             System.out.println( getOrders().size() + " orders were successfully written to csv file!" );
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+        }
+    }
+
+    @Override
+    public void loadOrdersFromJson() {
+        try {
+            List <Order> orderList = GsonOrderParser.load();
+            for (Order order : orderList) {
+                saveOrder( order );
+            }
+        } catch (IOException e) {
+            System.err.println( "Check a path to the file!" );
+        }
+    }
+
+    @Override
+    public void exportOrdersToJson() {
+        try {
+            GsonOrderWriter.serializeOrders( getOrders() );
         } catch (IOException e) {
             System.err.println( "Check a path to the file!" );
         }

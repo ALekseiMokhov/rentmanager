@@ -1,7 +1,7 @@
 package com.senla.carservice.view.action.master;
 
 import com.senla.carservice.domain.entities.master.Speciality;
-import util.Calendar;
+import util.calendar.Calendar;
 
 import java.io.IOException;
 
