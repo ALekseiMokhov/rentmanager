@@ -6,9 +6,9 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import java.io.IOException;
 
 public class GetByNameAndSpecialityAction extends AbstractMasterAction {
+    Speciality speciality;
     private String fullName;
     private IMaster master;
-    Speciality speciality;
 
     @Override
     public void execute() {

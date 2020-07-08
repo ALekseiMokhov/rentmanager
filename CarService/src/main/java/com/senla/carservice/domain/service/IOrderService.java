@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
 @Component
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);

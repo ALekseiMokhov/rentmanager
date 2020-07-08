@@ -1,4 +1,4 @@
 package dependency.injection.beanfactory.exceptions;
 
-public class BeanCollisionException extends IllegalArgumentException{
+public class BeanCollisionException extends IllegalArgumentException {
 }

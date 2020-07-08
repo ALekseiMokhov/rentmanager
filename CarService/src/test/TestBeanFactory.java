@@ -25,7 +25,7 @@ public class TestBeanFactory {
         Field field = beanFactory.getClass().getDeclaredField( "metaData" );
         field.setAccessible( true );
         HashMap <String, Object> testMap = (HashMap <String, Object>) field.get( beanFactory );
-        Assertions.assertEquals( testMap.keySet().size(), 10 );
+        Assertions.assertEquals( 11, testMap.keySet().size() );
     }
 
     @Test

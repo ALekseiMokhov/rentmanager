@@ -7,6 +7,7 @@ import dependency.injection.annotations.components.Component;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
 @Component
 public interface IMasterRepository {
     IMaster findById(UUID id);

@@ -1,7 +1,5 @@
 package com.senla.carservice.view.menu;
 
-import com.senla.carservice.domain.entities.master.Mechanic;
-import dependency.injection.annotations.components.Component;
 import util.ConsoleScanner;
 
 import java.io.BufferedReader;

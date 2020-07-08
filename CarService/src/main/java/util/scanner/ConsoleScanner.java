@@ -5,12 +5,11 @@ import java.io.InputStreamReader;
 
 public class ConsoleScanner {
     private static BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+    private static ConsoleScanner INSTANCE;
 
     private ConsoleScanner() {
 
     }
-
-    private static ConsoleScanner INSTANCE;
 
     public static ConsoleScanner getInstance() {
         if (INSTANCE == null) {

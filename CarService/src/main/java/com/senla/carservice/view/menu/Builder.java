@@ -6,25 +6,16 @@ import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
+import property.configurer.annotations.ConfigProperty;
 
 public class Builder {
-
+    @ConfigProperty(propertyName = "garage.admin.mode", type = Boolean.class)
     private Boolean isGarageModificationPermitted;
+    @ConfigProperty(propertyName = "master.admin.mode", type = Boolean.class)
     private Boolean isMasterModificationPermitted;
+    @ConfigProperty(propertyName = "order.admin.mode", type = Boolean.class)
     private Boolean isOrderModificationPermitted;
 
-
-    public void setGarageModificationPermitted(Boolean garageModificationPermitted) {
-        isGarageModificationPermitted = garageModificationPermitted;
-    }
-
-    public void setMasterModificationPermitted(Boolean masterModificationPermitted) {
-        isMasterModificationPermitted = masterModificationPermitted;
-    }
-
-    public void setOrderModificationPermitted(Boolean orderModificationPermitted) {
-        isOrderModificationPermitted = orderModificationPermitted;
-    }
 
     public Menu buildRootMenu() {
         Menu menu = new Menu();

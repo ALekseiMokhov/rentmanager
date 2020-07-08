@@ -6,19 +6,16 @@ import dependency.injection.annotations.Qualifier;
 import dependency.injection.annotations.components.Component;
 import dependency.injection.beanfactory.exceptions.BeanCollisionException;
 import dependency.injection.beanfactory.exceptions.BeanInitException;
-import org.apache.logging.log4j.core.util.JsonUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.*;
-import java.util.function.DoubleToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BeanFactory {
     private final HashMap <Class, List <Class>> metaData = new HashMap <>();
@@ -42,6 +39,11 @@ public class BeanFactory {
         for (Class <?> beanType : allBeanTypes) {
             List <Class> fieldsToInject = new ArrayList <>();
             Field[] fields = beanType.getDeclaredFields();
+
+            /*store accessability of each field*/
+            Map <Field, Boolean> accessModeMap = Stream.of( fields )
+                    .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
+
             Arrays.stream( fields )
                     .forEach( f -> f.setAccessible( true ) );
 
@@ -49,12 +51,15 @@ public class BeanFactory {
                     .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                     .map( f -> f.getType() )
                     .collect( Collectors.toList() ) );
+            /*restore accessability of each field*/
+            Arrays.stream( fields )
+                    .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
             metaData.put( beanType, fieldsToInject );
         }
 
     }
 
-    /*creating beans with null autowired fields*/
+    /*create beans with null autowired fields*/
     public void instantiate(String pakcage) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         for (Class clazz : metaData.keySet()) {
             singletons.put( formatBeanName( clazz.getSimpleName() ), clazz.newInstance() );
@@ -62,7 +67,7 @@ public class BeanFactory {
         }
     }
 
-    /*inject all dependencies*/
+    /*inject bean dependencies*/
     public void injectDependencies() throws IllegalAccessException {
         for (Class clazz : metaData.keySet()) {
             for (Class injecting : metaData.get( clazz )) {
@@ -72,20 +77,26 @@ public class BeanFactory {
                         .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                         .collect( Collectors.toList() );
 
+                /*store accessability of each field*/
+                Map <Field, Boolean> accessModeMap = fieldsToInject.stream()
+                        .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
+
                 for (Field field : fieldsToInject) {
                     field.setAccessible( true );
-                    Class<?> type =  field.getType();
+                    Class <?> type = field.getType();
 
 
-                    Object injectedBean =  singletons.values().stream()
-                            .filter(v-> type.isAssignableFrom( v.getClass()) )
+                    Object injectedBean = singletons.values().stream()
+                            .filter( v -> type.isAssignableFrom( v.getClass() ) )
                             .findFirst().get();
 
 
                     field.set( bean, injectedBean );
-
+                    /*restore accessability of each field*/
+                    fieldsToInject.stream()
+                            .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
                 }
-                   
+
                 singletons.put( formatBeanName( clazz.getSimpleName() ), bean );
 
             }
@@ -127,15 +138,5 @@ public class BeanFactory {
     }
 
 
-    /*public void printTest(Object object) throws IllegalAccessException {
 
-
-            Field [] fields = object.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible( true );
-                System.out.println("field: "+ field.getName());
-                Object value = field.get(object);
-                System.out.println("value: "+ value);
-            }
-        }*/
-    }
+}

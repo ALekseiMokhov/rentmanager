@@ -3,7 +3,6 @@ package com.senla.carservice.domain.service;
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.repository.IPlaceRepository;
 import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
 import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;
 import util.csv.CsvPlaceWriter;
@@ -22,13 +21,12 @@ public class PlaceService implements IPlaceService {
     @Autowired
     private IPlaceRepository repository;
 
-    public IPlaceRepository getRepository() {
-        return repository;
-    }
-
-
     public PlaceService() {
 
+    }
+
+    public IPlaceRepository getRepository() {
+        return repository;
     }
 
     public List <Place> getPlaces() {

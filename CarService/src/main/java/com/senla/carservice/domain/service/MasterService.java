@@ -4,7 +4,6 @@ import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
 import com.senla.carservice.domain.repository.MasterRepository;
 import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
 import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
 import util.csv.CsvMasterWriter;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class MasterService implements IMasterService {
     @Autowired
-    private  IMasterRepository repository;
+    private IMasterRepository repository;
 
     public MasterService() {
         this.repository = new MasterRepository();
