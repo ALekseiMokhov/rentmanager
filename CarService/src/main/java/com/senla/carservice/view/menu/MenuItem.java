@@ -1,8 +1,6 @@
-
 package com.senla.carservice.view.menu;
 
 import com.senla.carservice.view.action.IAction;
-import com.senla.carservice.view.action.basic.AccessMenuItem;
 
 import java.io.IOException;
 

@@ -64,6 +64,10 @@ public class Order {
         return this.dateBooked;
     }
 
+    public void setDateBooked(LocalDate dateBooked) {
+        this.dateBooked = dateBooked;
+    }
+
     public List <IMaster> getMasters() {
         return this.masters;
     }
@@ -76,16 +80,12 @@ public class Order {
         return this.startOfExecution;
     }
 
-    public LocalDate getFinishOfExecution() {
-        return finishOfExecution;
-    }
-
-    public void setDateBooked(LocalDate dateBooked) {
-        this.dateBooked = dateBooked;
-    }
-
     public void setStartOfExecution(LocalDate startOfExecution) {
         this.startOfExecution = startOfExecution;
+    }
+
+    public LocalDate getFinishOfExecution() {
+        return finishOfExecution;
     }
 
     public void setFinishOfExecution(LocalDate finishOfExecution) {

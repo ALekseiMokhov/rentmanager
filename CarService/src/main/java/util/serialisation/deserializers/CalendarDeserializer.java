@@ -22,15 +22,15 @@ public class CalendarDeserializer implements JsonDeserializer <Calendar> {
 
     private HashMap <LocalDate, Boolean> parseDates(String input) {
         HashMap <LocalDate, Boolean> res = new HashMap <>();
-        int start = input.indexOf( "{" ) ;
-        int end = input.indexOf( "}" ) ;
-        String intermediate = input.substring( start+1, end ) ;
+        int start = input.indexOf( "{" );
+        int end = input.indexOf( "}" );
+        String intermediate = input.substring( start + 1, end );
         if (intermediate.isEmpty()) {
             return res;
         }
-        String [] entries = intermediate.split( "," ) ;
+        String[] entries = intermediate.split( "," );
         for (String entry : entries) {
-           res.put( LocalDate.parse(entry.substring( 1,11 )  ),true );
+            res.put( LocalDate.parse( entry.substring( 1, 11 ) ), true );
         }
         return res;
     }

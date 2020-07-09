@@ -2,6 +2,7 @@ package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
+import dependency.injection.annotations.components.Component;
 import util.calendar.Calendar;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+@Component
 public interface IMasterService {
     void saveMaster(IMaster master);
 

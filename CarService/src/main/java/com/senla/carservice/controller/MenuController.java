@@ -1,16 +1,25 @@
-package com.senla.carservice.view.menu;
+package com.senla.carservice.controller;
 
 
+import com.senla.carservice.view.menu.Builder;
+import com.senla.carservice.view.menu.Navigator;
+import dependency.injection.annotations.components.Component;
+import dependency.injection.annotations.scope.Singleton;
 
 import java.io.IOException;
 
+@Component
+@Singleton
 public class MenuController {
-    private Navigator navigator;
-    private Builder builder = Builder.getInstance();
 
+    private Navigator navigator;
+    private Builder builder;
 
     public void run() throws IOException {
-        builder.requireAccessRights();
+
+
+        builder = new Builder();
+
         navigator = new Navigator(
                 builder.buildRootMenu()
                 , builder.buildPlaceMenu()
@@ -19,4 +28,8 @@ public class MenuController {
                 , builder.buildAccessMenu() );
         navigator.navigate( navigator.getRootMenu() );
     }
+
+
 }
+
+

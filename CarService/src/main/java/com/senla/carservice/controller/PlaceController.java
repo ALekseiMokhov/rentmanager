@@ -2,17 +2,20 @@ package com.senla.carservice.controller;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.service.IPlaceService;
-import com.senla.carservice.domain.service.PlaceService;
+import dependency.injection.annotations.Autowired;
+import dependency.injection.annotations.components.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class PlaceController {
+    @Autowired
     private IPlaceService placeService;
 
     public PlaceController() {
-        this.placeService = PlaceService.getInstance();
+
     }
 
     public List <Place> getPlaces() {

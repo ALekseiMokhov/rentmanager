@@ -1,4 +1,4 @@
-package util.properties;
+package property.configurer;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 public class PropertyLoader {
     static String rootPath = "";
 
-    public static void loadDefaultProperties(){
+    public static void loadDefaultProperties() {
         rootPath = Thread.currentThread().getContextClassLoader().getResource( "" ).getPath() + "config.properties";
         try {
             PropertyStorage.getCachedProperties().load( new FileInputStream( rootPath ) );
@@ -14,7 +14,8 @@ public class PropertyLoader {
             e.printStackTrace();
         }
     }
-    public static void loadCustomProperties(String propsName){
+
+    public static void loadCustomProperties(String propsName) {
         rootPath = Thread.currentThread().getContextClassLoader().getResource( "" ).getPath() + propsName;
         try {
             PropertyStorage.getCachedProperties().load( new FileInputStream( rootPath ) );

@@ -1,7 +1,8 @@
 package com.senla.carservice.domain.service;
 
-import java.io.IOException;
+import dependency.injection.annotations.components.Component;
 
+@Component
 public interface IConfigService {
     void loadDefaultProps();
 

@@ -2,7 +2,7 @@ package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.repository.IPlaceRepository;
-import com.senla.carservice.domain.repository.PlaceRepository;
+import dependency.injection.annotations.Autowired;
 import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;
 import util.csv.CsvPlaceWriter;
@@ -16,24 +16,17 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class PlaceService implements IPlaceService {
 
-    private final IPlaceRepository repository;
-    private static PlaceService instance;
+public class PlaceService implements IPlaceService {
+    @Autowired
+    private IPlaceRepository repository;
+
+    public PlaceService() {
+
+    }
 
     public IPlaceRepository getRepository() {
         return repository;
-    }
-
-    public static PlaceService getInstance() {
-        if (instance == null) {
-            instance = new PlaceService();
-        }
-        return instance;
-    }
-
-    private PlaceService() {
-        this.repository = new PlaceRepository();
     }
 
     public List <Place> getPlaces() {

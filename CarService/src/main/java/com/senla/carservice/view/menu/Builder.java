@@ -1,43 +1,20 @@
 package com.senla.carservice.view.menu;
 
 
-import com.senla.carservice.domain.service.ConfigService;
-import com.senla.carservice.domain.service.IConfigService;
 import com.senla.carservice.view.action.IAction;
 import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
-import util.properties.PropertyStorage;
+import property.configurer.annotations.ConfigProperty;
 
 public class Builder {
-
-    private static Builder instance;
-
+    @ConfigProperty(propertyName = "garage.admin.mode", type = Boolean.class)
     private Boolean isGarageModificationPermitted;
+    @ConfigProperty(propertyName = "master.admin.mode", type = Boolean.class)
     private Boolean isMasterModificationPermitted;
+    @ConfigProperty(propertyName = "order.admin.mode", type = Boolean.class)
     private Boolean isOrderModificationPermitted;
-
-    private IConfigService configService = ConfigService.getInstance();
-
-    private Builder() {
-
-    }
-
-    public static Builder getInstance() {
-        if (instance == null) {
-            instance = new Builder();
-        }
-        return instance;
-    }
-
-
-    public void requireAccessRights() {
-        configService.loadDefaultProps();
-        isGarageModificationPermitted = Boolean.valueOf( PropertyStorage.get( "garage.admin.mode" ) );
-        isMasterModificationPermitted = Boolean.valueOf( PropertyStorage.get( "master.admin.mode" ) );
-        isOrderModificationPermitted = Boolean.valueOf( PropertyStorage.get( "order.admin.mode" ) );
-    }
 
 
     public Menu buildRootMenu() {

@@ -6,7 +6,6 @@ public class PlaceMenuItem implements IAction {
     @Override
     public void execute() {
         System.out.println( " |-*****************Place Business Logic**************************" );
-
         System.out.println( " |-print '1' to add places to the Garage" );
         System.out.println( " |-print '2' to show all places in garage" );
         System.out.println( " |-print '3' to find a free place for the Date" );
