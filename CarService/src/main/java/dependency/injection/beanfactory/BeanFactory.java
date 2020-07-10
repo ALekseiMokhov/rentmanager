@@ -39,10 +39,7 @@ public class BeanFactory {
         for (Class <?> beanType : allBeanTypes) {
             List <Class> fieldsToInject = new ArrayList <>();
             Field[] fields = beanType.getDeclaredFields();
-
-            /*store accessability of each field*/
-            Map <Field, Boolean> accessModeMap = Stream.of( fields )
-                    .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
+            
 
             Arrays.stream( fields )
                     .forEach( f -> f.setAccessible( true ) );
@@ -51,9 +48,7 @@ public class BeanFactory {
                     .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                     .map( f -> f.getType() )
                     .collect( Collectors.toList() ) );
-            /*restore accessability of each field*/
-            Arrays.stream( fields )
-                    .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
+
             metaData.put( beanType, fieldsToInject );
         }
 
@@ -77,9 +72,7 @@ public class BeanFactory {
                         .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                         .collect( Collectors.toList() );
 
-                /*store accessability of each field*/
-                Map <Field, Boolean> accessModeMap = fieldsToInject.stream()
-                        .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
+              
 
                 for (Field field : fieldsToInject) {
                     field.setAccessible( true );
@@ -92,9 +85,7 @@ public class BeanFactory {
 
 
                     field.set( bean, injectedBean );
-                    /*restore accessability of each field*/
-                    fieldsToInject.stream()
-                            .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
+                
                 }
 
                 singletons.put( formatBeanName( clazz.getSimpleName() ), bean );
