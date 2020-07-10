@@ -24,7 +24,8 @@ public class BeanFactory {
 
     /*loading Class type of singletons and fields to inject*/
     public void loadMetadata(String pakcage) throws NoSuchMethodException, InstantiationException, IllegalAccessException {
-        Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner(), new SubTypesScanner(), new FieldAnnotationsScanner() );
+        Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner()
+                , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
         Set <Class <?>> allBeanTypes = reflections.getTypesAnnotatedWith( Component.class );
 

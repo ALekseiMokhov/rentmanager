@@ -20,8 +20,7 @@ public class PropertyInjector {
         Field[] fields = object.getClass().getDeclaredFields();
 
         /*store accessability of each field*/
-        Map <Field, Boolean> accessModeMap = Stream.of( fields )
-                .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
+
         Arrays.stream( fields )
                 .forEach( f -> f.setAccessible( true ) );
         Arrays.stream( fields )
@@ -33,10 +32,7 @@ public class PropertyInjector {
                         e.printStackTrace();
                     }
                 } );
-        /*restore accessability of each field*/
-
-        Arrays.stream( fields )
-                .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
+       
 
     }
 
