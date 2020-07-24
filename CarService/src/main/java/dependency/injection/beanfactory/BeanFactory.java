@@ -21,10 +21,16 @@ import java.util.stream.Collectors;
 
 
 public class BeanFactory {
+    private static final BeanFactory INSTANCE = new BeanFactory();
     private final HashMap <Class, List <Class>> metaData = new HashMap <>();
     private final HashMap <String, Object> singletons = new HashMap <>();
     private final HashSet <String> prototypeNames = new HashSet <>();
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanFactory.class.getClass());
+
+    private BeanFactory(){
+
+    }
+
     
 
     /*loading Class type of singletons and fields to inject*/
@@ -116,6 +122,9 @@ public class BeanFactory {
         return null;
     }
 
+    public static BeanFactory getInstance() {
+        return INSTANCE;
+    }
 
     private Class findImplementationClass(Class clazz) throws IllegalAccessException, InstantiationException {
         Reflections reflections = new Reflections( clazz.getPackageName(), new TypeAnnotationsScanner(), new SubTypesScanner() );

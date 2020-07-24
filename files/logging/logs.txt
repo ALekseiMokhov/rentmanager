@@ -1,0 +1,21 @@
+2020-07-23 15:00:26 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:00:28 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:00:48 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:00:50 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:00:52 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:43:18 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:43:52 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:43:55 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:43:57 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:44:25 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:44:47 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:44:49 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 15:57:20 ERROR Class:80 - There is some error in Navigator: java.time.format.DateTimeParseException: Text '20-20-07-07' could not be parsed at index 0
+2020-07-23 15:57:34 ERROR Class:80 - There is some error in Navigator: java.time.format.DateTimeParseException: Text '1' could not be parsed at index 0
+2020-07-23 15:57:54 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 16:32:16 ERROR Class:80 - There is some error in Navigator: java.util.NoSuchElementException: There is no place with provided id!
+2020-07-23 16:32:27 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 16:32:31 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 16:32:35 ERROR Class:80 - There is some error in Navigator: java.lang.IndexOutOfBoundsException: Index 11 out of bounds for length 5
+2020-07-23 16:32:39 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-23 16:32:48 ERROR Class:80 - There is some error in Navigator: java.lang.IndexOutOfBoundsException: Index 13 out of bounds for length 5

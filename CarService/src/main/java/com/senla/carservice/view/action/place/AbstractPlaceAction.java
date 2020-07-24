@@ -8,7 +8,7 @@ import util.ConsoleScanner;
 import java.io.BufferedReader;
 
 public abstract class AbstractPlaceAction implements IAction {
-    PlaceController controller = BeanFactory
+    PlaceController controller = (PlaceController) BeanFactory.getInstance().getSingleton( "placecontroller" );
     BufferedReader reader = ConsoleScanner.getInstance().getReader();
 
 }

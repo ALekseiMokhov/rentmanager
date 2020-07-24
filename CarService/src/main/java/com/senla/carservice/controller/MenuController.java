@@ -9,7 +9,7 @@ import dependency.injection.annotations.scope.Singleton;
 import java.io.IOException;
 
 @Component
-@Singleton
+
 public class MenuController {
 
     private Navigator navigator;

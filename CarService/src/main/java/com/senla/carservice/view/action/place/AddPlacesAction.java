@@ -15,7 +15,7 @@ public class AddPlacesAction extends AbstractPlaceAction {
             this.controller.addPlaces( var );
             System.out.println( var + " places were added to Garage!" );
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
         }
 
