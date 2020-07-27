@@ -20,24 +20,22 @@ public class App {
         @Override
         public void run() {
             while (true) {
-                synchronized (BUFFER) {
                     while (BUFFER.size() == MAX_SIZE) {
                         try {
-                            BUFFER.wait();
+                            Thread.currentThread().sleep( 1400 );
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    BUFFER.notify();
+
                     try {
-                        Thread.currentThread().sleep( 100 );
+                        Thread.currentThread().sleep( 70 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     int x = getRandom();
                     BUFFER.add( x );
                     System.out.println( "Integer produced: " + x );
-                }
             }
         }
     }
@@ -46,22 +44,22 @@ public class App {
         @Override
         public void run() {
             while (true) {
-                synchronized (BUFFER) {
+
                     while (BUFFER.size() == 0) {
                         try {
-                            BUFFER.wait();
+                            Thread.currentThread().sleep( 270 );
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    BUFFER.notify();
+
                     try {
-                        Thread.currentThread().sleep( 100 );
+                        Thread.currentThread().sleep( 70 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     System.out.println( "Integer consumed: " + BUFFER.poll() );
-                }
+
             }
         }
     }
