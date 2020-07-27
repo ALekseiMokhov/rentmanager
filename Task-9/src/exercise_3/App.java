@@ -21,7 +21,7 @@ public class App {
         public void run() {
             while (true) {
                 synchronized (BUFFER) {
-                    while (BUFFER.size() > MAX_SIZE) {
+                    while (BUFFER.size() == MAX_SIZE) {
                         try {
                             BUFFER.wait();
                         } catch (InterruptedException e) {
@@ -30,7 +30,7 @@ public class App {
                     }
                     BUFFER.notify();
                     try {
-                        Thread.currentThread().sleep( 400 );
+                        Thread.currentThread().sleep( 100 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -56,7 +56,7 @@ public class App {
                     }
                     BUFFER.notify();
                     try {
-                        Thread.currentThread().sleep( 400 );
+                        Thread.currentThread().sleep( 100 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
