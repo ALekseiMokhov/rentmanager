@@ -22,14 +22,14 @@ public class App {
             while (true) {
                     while (BUFFER.size() == MAX_SIZE) {
                         try {
-                            Thread.currentThread().sleep( 1400 );
+                            Thread.currentThread().sleep( getRandomLong());
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
 
                     try {
-                        Thread.currentThread().sleep( 70 );
+                        Thread.currentThread().sleep( getRandomLong() );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -47,14 +47,14 @@ public class App {
 
                     while (BUFFER.size() == 0) {
                         try {
-                            Thread.currentThread().sleep( 270 );
+                            Thread.currentThread().sleep( getRandomLong() );
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
 
                     try {
-                        Thread.currentThread().sleep( 70 );
+                        Thread.currentThread().sleep( getRandomLong());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -66,5 +66,9 @@ public class App {
 
     private static int getRandom() {
         return (int) (Math.random() * 101);
+    }
+
+    private static long getRandomLong() {
+        return (long) (Math.random() * 1000);
     }
 }
