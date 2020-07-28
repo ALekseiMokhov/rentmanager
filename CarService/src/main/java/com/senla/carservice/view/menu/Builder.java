@@ -106,6 +106,10 @@ public class Builder {
         return accessMenu;
     }
 
+    public Boolean getGarageModificationPermitted() {
+        return isGarageModificationPermitted;
+    }
+
     private void addItem(Menu menu, IAction action, String title, Boolean isAccessPermitted) {
         menu.getMenuItems()
                 .add( new MenuItem( action, title, isAccessPermitted ) );

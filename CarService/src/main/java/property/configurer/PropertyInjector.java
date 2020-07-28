@@ -1,6 +1,8 @@
 package property.configurer;
 
 import dependency.injection.annotations.components.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import property.configurer.annotations.ConfigProperty;
 
 import java.lang.reflect.Field;
@@ -9,6 +11,7 @@ import java.util.Properties;
 
 @Component
 public class PropertyInjector {
+    private static final Logger LOGGER = LoggerFactory.getLogger( PropertyInjector.class );
 
     private Properties properties = PropertyStorage.getCachedProperties();
 
@@ -24,17 +27,18 @@ public class PropertyInjector {
                 .forEach( f -> {
                     try {
                         inject( object, f, f.getAnnotation( ConfigProperty.class ).propertyName() );
+
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
                 } );
-       
+
 
     }
 
     private void inject(Object object, Field field, String propertyName) throws IllegalAccessException {
         String propValue = properties.getProperty( propertyName );
-
+        LOGGER.info( field + " " + propertyName + " " );
         if (field.getType().isAssignableFrom( Boolean.class ) || field.getType().isAssignableFrom( boolean.class )) {
             field.set( object, Boolean.valueOf( propValue ) );
         }
@@ -47,6 +51,9 @@ public class PropertyInjector {
 
         if (field.getType().isAssignableFrom( Long.class ) || field.getType().isAssignableFrom( long.class )) {
             field.set( object, Long.valueOf( properties.getProperty( propertyName ) ) );
+        }
+        if (field.getType().isAssignableFrom( String.class )) {
+            field.set( object, properties.getProperty( propertyName ) );
         }
 
 

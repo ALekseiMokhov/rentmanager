@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Navigator {
-    private static final Logger LOGGER  = LoggerFactory.getLogger( Navigator.class.getClass() )  ;
+    private static final Logger LOGGER = LoggerFactory.getLogger( Navigator.class.getClass() );
     private int currentIndex;
     private BufferedReader reader;
     private boolean isExit;
@@ -77,7 +77,7 @@ public class Navigator {
 
 
             } catch (Exception e) {
-                LOGGER.error( "There is some error in Navigator: " + e);
+                LOGGER.error( "There is some error in Navigator: " + e );
                 navigate( rootMenu );
             }
 

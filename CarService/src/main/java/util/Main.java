@@ -4,7 +4,7 @@ package util;
 import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.controller.MenuController;
 import dependency.injection.beanfactory.BeanFactory;
-import org.apache.log4j.BasicConfigurator;
+import property.configurer.PropertyLoader;
 import util.warning.Supressor;
 
 import java.io.IOException;
@@ -19,14 +19,15 @@ public class Main {
         beanFactory.instantiate( "com.senla.carservice" );
         beanFactory.injectDependencies();
 
-        JsonController jsonController = (JsonController) beanFactory.getSingleton( "jsoncontroller" );
+        PropertyLoader.loadDefaultProperties();
+
+        JsonController jsonController =
+                (JsonController) beanFactory.getSingleton( "jsoncontroller" );
         jsonController.loadFromJson();
 
 
         MenuController menuController = (MenuController) beanFactory.getSingleton( "menucontroller" );
         menuController.run();
-
-        jsonController.exportToJson();
 
 
     }

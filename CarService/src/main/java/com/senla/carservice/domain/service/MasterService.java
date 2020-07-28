@@ -2,7 +2,7 @@ package com.senla.carservice.domain.service;
 
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.repository.IMasterRepository;
-import com.senla.carservice.domain.repository.MasterRepository;
+import com.senla.carservice.domain.repository.MasterInMemoryRepository;
 import dependency.injection.annotations.Autowired;
 import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
@@ -20,7 +20,7 @@ public class MasterService implements IMasterService {
     private IMasterRepository repository;
 
     public MasterService() {
-        this.repository = new MasterRepository();
+        this.repository = new MasterInMemoryRepository();
     }
 
     public void saveMaster(IMaster master) {

@@ -13,7 +13,6 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
@@ -22,16 +21,18 @@ import java.util.stream.Collectors;
 
 public class BeanFactory {
     private static final BeanFactory INSTANCE = new BeanFactory();
+    private static final Logger LOGGER = LoggerFactory.getLogger( BeanFactory.class.getClass() );
     private final HashMap <Class, List <Class>> metaData = new HashMap <>();
     private final HashMap <String, Object> singletons = new HashMap <>();
     private final HashSet <String> prototypeNames = new HashSet <>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(BeanFactory.class.getClass());
 
-    private BeanFactory(){
+    private BeanFactory() {
 
     }
 
-    
+    public static BeanFactory getInstance() {
+        return INSTANCE;
+    }
 
     /*loading Class type of singletons and fields to inject*/
     public void loadMetadata(String pakcage) throws NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -39,7 +40,7 @@ public class BeanFactory {
                 , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
         Set <Class <?>> allBeanTypes = reflections.getTypesAnnotatedWith( Component.class );
-        LOGGER.info( "Beans found: " +allBeanTypes.size() );
+        LOGGER.info( "Beans found: " + allBeanTypes.size() );
 
         /*finding implementation for interface*/
         for (Class <?> clazz : List.copyOf( allBeanTypes )) {
@@ -52,7 +53,7 @@ public class BeanFactory {
         for (Class <?> beanType : allBeanTypes) {
             List <Class> fieldsToInject = new ArrayList <>();
             Field[] fields = beanType.getDeclaredFields();
-            
+
 
             Arrays.stream( fields )
                     .forEach( f -> f.setAccessible( true ) );
@@ -74,7 +75,7 @@ public class BeanFactory {
 
         }
 
-        LOGGER.info( "Beans loaded: " + metaData.keySet());
+        LOGGER.info( "Beans loaded: " + metaData.keySet() );
     }
 
     /*inject bean dependencies*/
@@ -87,7 +88,6 @@ public class BeanFactory {
                         .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                         .collect( Collectors.toList() );
 
-              
 
                 for (Field field : fieldsToInject) {
                     field.setAccessible( true );
@@ -100,7 +100,7 @@ public class BeanFactory {
 
 
                     field.set( bean, injectedBean );
-                
+
                 }
 
                 singletons.put( formatBeanName( clazz.getSimpleName() ), bean );
@@ -122,8 +122,10 @@ public class BeanFactory {
         return null;
     }
 
-    public static BeanFactory getInstance() {
-        return INSTANCE;
+    public ArrayList <Object> getSingletons() {
+        ArrayList <Object> copyBeans = new ArrayList <>();
+        copyBeans.addAll( singletons.values() );
+        return copyBeans;
     }
 
     private Class findImplementationClass(Class clazz) throws IllegalAccessException, InstantiationException {

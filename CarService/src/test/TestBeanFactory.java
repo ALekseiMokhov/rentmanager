@@ -14,7 +14,7 @@ public class TestBeanFactory {
 
     @BeforeEach
     void init() throws NoSuchMethodException, IllegalAccessException, InstantiationException, IOException, ClassNotFoundException {
-        beanFactory =  BeanFactory.getInstance();
+        beanFactory = BeanFactory.getInstance();
         beanFactory.loadMetadata( "com.senla.carservice" );
         beanFactory.instantiate( "com.senla.carservice" );
     }

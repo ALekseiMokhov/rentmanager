@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class PlaceRepository implements IPlaceRepository {
-    private final List <Place> places;
+public class PlaceInMemoryRepository implements IPlaceRepository {
+    private final List <Place> places = new ArrayList <>();
+    ;
 
-    public PlaceRepository() {
-        this.places = new ArrayList <>();
+    public PlaceInMemoryRepository() {
+
     }
 
     @Override

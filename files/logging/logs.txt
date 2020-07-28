@@ -19,3 +19,33 @@
 2020-07-23 16:32:35 ERROR Class:80 - There is some error in Navigator: java.lang.IndexOutOfBoundsException: Index 11 out of bounds for length 5
 2020-07-23 16:32:39 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
 2020-07-23 16:32:48 ERROR Class:80 - There is some error in Navigator: java.lang.IndexOutOfBoundsException: Index 13 out of bounds for length 5
+2020-07-28 10:41:01 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 10:42:31 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:36:14 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:36:17 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:44:37 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:44:44 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:44:45 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:44:46 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:44:46 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:45:02 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:51:33 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:51:35 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:52:05 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:54:13 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:54:15 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 12:54:16 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:26:28 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:26:35 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:36:36 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:36:36 ERROR Class:80 - There is some error in Navigator: java.lang.NumberFormatException: For input string: ""
+2020-07-28 15:38:29 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:51:44 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 15:59:45 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 16:32:39 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 16:32:42 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 16:32:44 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 16:34:46 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 16:42:19 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 17:14:45 ERROR Class:80 - There is some error in Navigator: java.lang.NullPointerException
+2020-07-28 17:56:38 ERROR Class:80 - There is some error in Navigator: java.lang.NumberFormatException: For input string: ""
