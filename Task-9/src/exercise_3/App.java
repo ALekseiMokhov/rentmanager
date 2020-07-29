@@ -22,6 +22,7 @@ public class App {
             while (true) {
                 while (BUFFER.size() == MAX_SIZE) {
                     try {
+                        System.out.println("Producer sleeping..");
                         Thread.currentThread().sleep( 1000 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -30,7 +31,11 @@ public class App {
                 int x = getRandom();
                 BUFFER.add( x );
                 System.out.println( "Integer produced: " + x );
-
+                try {
+                    Thread.currentThread().sleep( getRandomLong() );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -42,6 +47,7 @@ public class App {
 
                 while (BUFFER.size() == 0) {
                     try {
+                        System.out.println("Consumer sleeping..");
                         Thread.currentThread().sleep( 1000 );
                     } catch (InterruptedException e) {
                         e.printStackTrace();
