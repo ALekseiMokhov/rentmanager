@@ -2,82 +2,50 @@ package exercise_1;
 
 public class ThreadStatePrinter {
 
-    static Thread t1 = new Thread( new ThreadGate() );
-    static Thread t2 = new Thread( new ThreadGate() );
-    static Thread t3 = new Thread( new ThreadWaiter() );
-    static Thread t4 = new Thread( new ThreadBlocker() );
-    static Thread t5 = new Thread();
+    private static final Object FLAG = new Object();
 
     public static void main(String[] args) throws InterruptedException {
-
-
-        /*NEW*/
-        System.out.println( t1.getState() );
-        t1.start();
-        /*RUNNABLE*/
-        System.out.println( t1.getState() );
-        t2.start();
-
-        Thread.sleep( 2000 );
-        /*BLOCKED*/
-        System.out.println( t2.getState() );
-
-        t3.start();
-        Thread.sleep( 1000 );
-        /*TIMED_WAITING*/
-        System.out.println( t3.getState() );
-
-        /*WAITING*/
-        t4.start();
-        Thread.sleep( 1000 );
-        System.out.println( t4.getState() );
-
-        /*TERMINATED*/
-        t5.start();
-        Thread.sleep( 1000 );
-        System.out.println( t5.getState() );
-        System.exit( 0 );
-    }
-}
-
-class ThreadGate implements Runnable {
-    @Override
-    public void run() {
-        commonResource();
-    }
-
-    public static synchronized void commonResource() {
-        while (true) {
-            /*simulates blocking resource for thread t2*/
+        ThreadStateSwitcher switcher = new ThreadStateSwitcher();
+        Thread t = new Thread(switcher);
+        printstate( t );
+        t.start();
+        printstate( t );
+        Thread.currentThread().sleep( 1000 );
+        printstate( t );
+        synchronized (FLAG){
+            FLAG.notify();
         }
+        printstate( t );
+
+        Thread.currentThread().sleep( 1000 );
+        printstate( t );
+        Thread.currentThread().sleep( 5000 );
+        printstate( t );
 
     }
-}
 
-/*allows achieve time-waiting state*/
-class ThreadWaiter implements Runnable {
-    @Override
-    public void run() {
-        try {
-            Thread.sleep( 10000 );
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+    public static void printstate (Thread thread){
+        System.out.println(thread.getName() +": "+ thread.getState());
     }
-}
 
-/*allows achieve waiting state*/
-class ThreadBlocker implements Runnable {
-    @Override
-    public void run() {
-        synchronized (this) {
+    static class ThreadStateSwitcher implements Runnable {
+        @Override
+        public void run() {
+            synchronized (FLAG) {
+                try {
+                    FLAG.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             try {
-                this.wait();
+                Thread.sleep( 5000 );
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
+
+
 }
