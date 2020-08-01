@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class OrderRepository implements IOrderRepository {
+public class OrderInMemoryRepository implements IOrderRepository {
     private final List <Order> orders = new ArrayList <>();
 
     @Override

@@ -1,7 +1,5 @@
 package com.senla.carservice.view.action.place;
 
-import java.io.IOException;
-
 public class AddPlacesAction extends AbstractPlaceAction {
     private int var = 0;
 
@@ -15,7 +13,7 @@ public class AddPlacesAction extends AbstractPlaceAction {
             this.controller.addPlaces( var );
             System.out.println( var + " places were added to Garage!" );
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
         }
 

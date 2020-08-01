@@ -2,6 +2,7 @@ package com.senla.carservice.domain.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
+import dependency.injection.annotations.Qualifier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,11 +10,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class MasterRepository implements IMasterRepository {
-    private final List <IMaster> masters;
+@Qualifier
+public class MasterInMemoryRepository implements IMasterRepository {
+    private final List <IMaster> masters = new ArrayList <>();
+    ;
 
-    public MasterRepository() {
-        this.masters = new ArrayList <>();
+    public MasterInMemoryRepository() {
     }
 
     @Override
@@ -43,7 +45,6 @@ public class MasterRepository implements IMasterRepository {
     public void save(IMaster master) {
         if (!this.masters.contains( master )) {
             this.masters.add( master );
-            System.out.println( master.getCalendar() );
         } else {
             this.masters.set( this.masters.indexOf( master ), master );
         }

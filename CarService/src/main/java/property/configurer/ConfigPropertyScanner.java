@@ -10,7 +10,8 @@ import property.configurer.annotations.ConfigProperty;
 import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.stream.Collectors;
- @Component
+
+@Component
 public class ConfigPropertyScanner {
 
 

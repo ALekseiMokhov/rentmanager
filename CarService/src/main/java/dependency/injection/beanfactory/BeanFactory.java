@@ -10,23 +10,37 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class BeanFactory {
+    private static final BeanFactory INSTANCE = new BeanFactory();
+    private static final Logger LOGGER = LoggerFactory.getLogger( BeanFactory.class.getClass() );
     private final HashMap <Class, List <Class>> metaData = new HashMap <>();
     private final HashMap <String, Object> singletons = new HashMap <>();
     private final HashSet <String> prototypeNames = new HashSet <>();
 
+    private BeanFactory() {
+
+    }
+
+    public static BeanFactory getInstance() {
+        return INSTANCE;
+    }
+
     /*loading Class type of singletons and fields to inject*/
     public void loadMetadata(String pakcage) throws NoSuchMethodException, InstantiationException, IllegalAccessException {
-        Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner(), new SubTypesScanner(), new FieldAnnotationsScanner() );
+        Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner()
+                , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
         Set <Class <?>> allBeanTypes = reflections.getTypesAnnotatedWith( Component.class );
+        LOGGER.info( "Beans found: " + allBeanTypes.size() );
 
         /*finding implementation for interface*/
         for (Class <?> clazz : List.copyOf( allBeanTypes )) {
@@ -40,9 +54,6 @@ public class BeanFactory {
             List <Class> fieldsToInject = new ArrayList <>();
             Field[] fields = beanType.getDeclaredFields();
 
-            /*store accessability of each field*/
-            Map <Field, Boolean> accessModeMap = Stream.of( fields )
-                    .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
 
             Arrays.stream( fields )
                     .forEach( f -> f.setAccessible( true ) );
@@ -51,9 +62,7 @@ public class BeanFactory {
                     .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                     .map( f -> f.getType() )
                     .collect( Collectors.toList() ) );
-            /*restore accessability of each field*/
-            Arrays.stream( fields )
-                    .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
+
             metaData.put( beanType, fieldsToInject );
         }
 
@@ -65,6 +74,8 @@ public class BeanFactory {
             singletons.put( formatBeanName( clazz.getSimpleName() ), clazz.newInstance() );
 
         }
+
+        LOGGER.info( "Beans loaded: " + metaData.keySet() );
     }
 
     /*inject bean dependencies*/
@@ -77,9 +88,6 @@ public class BeanFactory {
                         .filter( f -> f.isAnnotationPresent( Autowired.class ) )
                         .collect( Collectors.toList() );
 
-                /*store accessability of each field*/
-                Map <Field, Boolean> accessModeMap = fieldsToInject.stream()
-                        .collect( Collectors.toMap( f -> f, f -> f.isAccessible() ) );
 
                 for (Field field : fieldsToInject) {
                     field.setAccessible( true );
@@ -92,9 +100,7 @@ public class BeanFactory {
 
 
                     field.set( bean, injectedBean );
-                    /*restore accessability of each field*/
-                    fieldsToInject.stream()
-                            .forEach( f -> f.setAccessible( accessModeMap.get( f ) ) );
+
                 }
 
                 singletons.put( formatBeanName( clazz.getSimpleName() ), bean );
@@ -116,6 +122,11 @@ public class BeanFactory {
         return null;
     }
 
+    public ArrayList <Object> getSingletons() {
+        ArrayList <Object> copyBeans = new ArrayList <>();
+        copyBeans.addAll( singletons.values() );
+        return copyBeans;
+    }
 
     private Class findImplementationClass(Class clazz) throws IllegalAccessException, InstantiationException {
         Reflections reflections = new Reflections( clazz.getPackageName(), new TypeAnnotationsScanner(), new SubTypesScanner() );
@@ -136,7 +147,6 @@ public class BeanFactory {
     private String formatBeanName(String input) {
         return input.toLowerCase();
     }
-
 
 
 }

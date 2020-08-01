@@ -1,12 +1,14 @@
 package com.senla.carservice.view.menu;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.ConsoleScanner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Navigator {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger( Navigator.class.getClass() );
     private int currentIndex;
     private BufferedReader reader;
     private boolean isExit;
@@ -75,7 +77,7 @@ public class Navigator {
 
 
             } catch (Exception e) {
-
+                LOGGER.error( "There is some error in Navigator: " + e );
                 navigate( rootMenu );
             }
 

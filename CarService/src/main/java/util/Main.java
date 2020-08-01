@@ -3,9 +3,7 @@ package util;
 
 import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.controller.MenuController;
-import com.senla.carservice.view.menu.Builder;
 import dependency.injection.beanfactory.BeanFactory;
-import property.configurer.PropertyInjector;
 import property.configurer.PropertyLoader;
 import util.warning.Supressor;
 
@@ -16,21 +14,20 @@ public class Main {
         Supressor.disableWarning();
 
 
-        BeanFactory beanFactory = new BeanFactory();
+        BeanFactory beanFactory = BeanFactory.getInstance();
         beanFactory.loadMetadata( "com.senla.carservice" );
         beanFactory.instantiate( "com.senla.carservice" );
         beanFactory.injectDependencies();
 
-        JsonController jsonController = (JsonController) beanFactory.getSingleton( "jsoncontroller" );
+        PropertyLoader.loadDefaultProperties();
+
+        JsonController jsonController =
+                (JsonController) beanFactory.getSingleton( "jsoncontroller" );
         jsonController.loadFromJson();
 
-        MenuController menuController = new MenuController();
+
+        MenuController menuController = (MenuController) beanFactory.getSingleton( "menucontroller" );
         menuController.run();
-
-        jsonController.exportToJson();
-
-
-
 
 
     }

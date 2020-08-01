@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class PlaceRepository implements IPlaceRepository {
-    private final List <Place> places;
+public class PlaceInMemoryRepository implements IPlaceRepository {
+    private final List <Place> places = new ArrayList <>();
+    ;
 
-    public PlaceRepository() {
-        this.places = new ArrayList <>();
+    public PlaceInMemoryRepository() {
+
     }
 
     @Override
@@ -44,7 +45,6 @@ public class PlaceRepository implements IPlaceRepository {
     public void save(Place place) {
         if (!this.places.contains( place )) {
             this.places.add( place );
-            System.out.println( place.getCalendar() );
         } else {
             this.places.set( this.places.indexOf( place ), place );
         }

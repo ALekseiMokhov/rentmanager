@@ -10,16 +10,16 @@ public class JsonController {
     @Autowired
     private MasterController masterController;
     @Autowired
-    private  PlaceController placeController;
+    private PlaceController placeController;
 
 
-    public void loadFromJson(){
-      this.placeController.loadFromJson();
-      this.masterController.loadFromJson();
-      this.orderController.loadFromJson();
+    public void loadFromJson() {
+        this.placeController.loadFromJson();
+        this.masterController.loadFromJson();
+        this.orderController.loadFromJson();
     }
 
-    public void exportToJson(){
+    public void exportToJson() {
         this.placeController.exportToJson();
         this.masterController.exportToJson();
         this.orderController.exportToJson();

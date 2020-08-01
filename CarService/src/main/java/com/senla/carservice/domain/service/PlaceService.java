@@ -36,6 +36,8 @@ public class PlaceService implements IPlaceService {
     public void addPlaces(int i) {
         for (int j = 0; j < i; j++) {
             this.repository.save( new Place( new Calendar() ) );
+
+
         }
     }
 
