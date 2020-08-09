@@ -1,4 +1,4 @@
-package com.senla.carservice.domain.repository;
+package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-@Qualifier
+
 public class MasterInMemoryRepository implements IMasterRepository {
     private final List <IMaster> masters = new ArrayList <>();
     ;

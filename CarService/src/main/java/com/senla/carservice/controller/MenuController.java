@@ -22,7 +22,7 @@ public class MenuController {
         builder = new Builder();
         propertyInjector = new PropertyInjector();
         propertyInjector.injectProperty( builder );
-        LOGGER.info( "properties injected: " + String.valueOf( builder.getGarageModificationPermitted() == null ) );
+
 
 
         navigator = new Navigator(

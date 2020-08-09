@@ -1,13 +1,23 @@
 package com.senla.carservice.domain.entities.garage;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
-import java.util.Objects;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
+@Data
+@NoArgsConstructor
 public class Place {
-
+    @Id
+    @GeneratedValue
     private UUID id;
+    @Embedded
     private Calendar calendar;
 
     public Place(Calendar calendar) {
@@ -15,37 +25,7 @@ public class Place {
         this.calendar = calendar;
 
     }
+    
 
-    public UUID getId() {
-        return this.id;
-    }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Place)) return false;
-        Place place = (Place) o;
-        return getId().equals( place.getId() );
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash( getId() );
-    }
-
-    @Override
-    public String toString() {
-        return "Place{" +
-                "id=" + id +
-                ", calendar=" + calendar +
-                '}';
-    }
 }

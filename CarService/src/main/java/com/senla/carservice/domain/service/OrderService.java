@@ -5,7 +5,7 @@ import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
-import com.senla.carservice.domain.repository.IOrderRepository;
+import com.senla.carservice.repository.IOrderRepository;
 import dependency.injection.annotations.Autowired;
 import util.csv.CsvOrderParser;
 import util.csv.CsvOrderWriter;

@@ -1,4 +1,4 @@
-package com.senla.carservice.domain.repository;
+package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;

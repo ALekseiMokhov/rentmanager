@@ -1,15 +1,25 @@
 package com.senla.carservice.domain.entities.master;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
-
+@Entity
+@Data
+@NoArgsConstructor
+@DiscriminatorColumn(name = "Speciality")
 public abstract class AbstractMaster implements IMaster {
+    @Id
+    @GeneratedValue
     private UUID id;
+    @Embedded
     private Calendar calendar;
     private String fullName;
     private double dailyPayment;
+    @Enumerated
     private Speciality speciality;
 
     public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
@@ -30,44 +40,4 @@ public abstract class AbstractMaster implements IMaster {
     }
 
 
-    public double getDailyPayment() {
-        return this.dailyPayment;
-    }
-
-    public void setDailyPayment(double dailyPayment) {
-        this.dailyPayment = dailyPayment;
-    }
-
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public String getFullName() {
-        return this.fullName;
-    }
-
-    public Calendar getCalendar() {
-        return this.calendar;
-    }
-
-    @Override
-    public Speciality getSpeciality() {
-        return speciality;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash( getId(), getFullName(), dailyPayment );
-    }
-
-    @Override
-    public String toString() {
-        return "Master { " + speciality +
-                ", fullName='" + fullName + '\'' +
-                ", id = ' " + id + '\'' +
-                ", salary = ' " + dailyPayment + '\'' +
-                ", booked dates= " + calendar.getBookedDates() +
-                '}';
-    }
 }

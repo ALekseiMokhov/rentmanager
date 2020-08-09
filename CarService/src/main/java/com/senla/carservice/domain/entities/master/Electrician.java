@@ -2,8 +2,9 @@ package com.senla.carservice.domain.entities.master;
 
 import util.calendar.Calendar;
 
+import javax.persistence.Entity;
 import java.util.UUID;
-
+@Entity
 public class Electrician extends AbstractMaster {
 
 
