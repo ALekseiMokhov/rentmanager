@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@DiscriminatorColumn(name = "Speciality")
+
 public abstract class AbstractMaster implements IMaster {
     @Id
     @GeneratedValue
