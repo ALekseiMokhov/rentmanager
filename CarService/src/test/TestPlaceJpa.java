@@ -23,35 +23,37 @@ public class TestPlaceJpa {
         BeanFactory.getInstance().injectDependencies();
         repo = (PlaceRepositoryJpa) BeanFactory.getInstance().getSingleton( "placerepositoryjpa" );
         for (int i = 0; i < 10; i++) {
-          repo.save( new Place( new Calendar() ) );
+            repo.save( new Place( new Calendar() ) );
         }
 
     }
 
     @Test
     public void testPlaceSave() {
-        Place place = new Place( );
+        Place place = new Place();
         place.setCalendar( new Calendar() );
         LOGGER.info( "TEST PERSISTING PLACE " );
         repo.save( place );
         List <Place> places = repo.findAll();
         LOGGER.info( places.size() + " " + "OBJ WERE FOUND" );
-        Assertions.assertEquals( places.size(),11 );
+        Assertions.assertEquals( places.size(), 11 );
     }
+
     @Test
-    public void testPlaceDelete(){
+    public void testPlaceDelete() {
         LOGGER.info( "TEST DELETING PLACE " );
         List <Place> places = repo.findAll();
         for (Place place1 : places) {
-                repo.delete( place1.getId() );
+            repo.delete( place1.getId() );
         }
-        Assertions.assertEquals( repo.findAll().size(),0);
+        Assertions.assertEquals( repo.findAll().size(), 0 );
     }
+
     @Test
-    public void testPlaceUpdate(){
+    public void testPlaceUpdate() {
         LOGGER.info( "TEST UPDATING PLACE " );
         List <Place> places = repo.findAll();
-        Place place = places.get( 0 ) ;
+        Place place = places.get( 0 );
         UUID idOld = place.getId();
         place.setId( UUID.randomUUID() );
         repo.save( place );

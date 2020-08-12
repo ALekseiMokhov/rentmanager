@@ -1,4 +1,4 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import property.configurer.PropertyLoader;
 import property.configurer.PropertyStorage;

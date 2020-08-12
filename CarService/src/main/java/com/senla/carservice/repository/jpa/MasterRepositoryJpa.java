@@ -1,6 +1,5 @@
 package com.senla.carservice.repository.jpa;
 
-import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.master.AbstractMaster;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
@@ -17,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+
 @Qualifier
 public class MasterRepositoryJpa implements IMasterRepository {
-    private final static Logger LOGGER = LoggerFactory.getLogger(MasterRepositoryJpa.class  )   ;
+    private final static Logger LOGGER = LoggerFactory.getLogger( MasterRepositoryJpa.class );
     private EntityManager em;
+
     @Override
     @Transactional
     public IMaster findById(UUID id) {
@@ -28,8 +29,8 @@ public class MasterRepositoryJpa implements IMasterRepository {
         em.getTransaction().begin();
         IMaster master = null;
         try {
-            master = em.find( AbstractMaster.class, id ); /*todo check if Abstract master downcasts to speciality*/
-            LOGGER.info( "FOUND SPECIALITY: " + master.getSpeciality() +" ,MASTER'S CLASS IS : "+ master.getClass() );
+            master = em.find( AbstractMaster.class, id );
+            LOGGER.info( "FOUND SPECIALITY: " + master.getSpeciality() + " ,MASTER'S CLASS IS : " + master.getClass() );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -37,7 +38,6 @@ public class MasterRepositoryJpa implements IMasterRepository {
         }
         return master;
     }
-
 
 
     @Override
@@ -80,7 +80,7 @@ public class MasterRepositoryJpa implements IMasterRepository {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() );
+            LOGGER.error( e.getMessage() + " FROM SAVE METHOD" );
         }
 
     }
@@ -92,8 +92,8 @@ public class MasterRepositoryJpa implements IMasterRepository {
         IMaster master = null;
         try {
             Query query = em.createQuery( "select m from AbstractMaster m where m.speciality=:s" );
-            query.setParameter( "s", speciality ).executeUpdate();
-            master = (IMaster) query.getResultList().get( 0 );
+            query.setParameter( "s", speciality );
+            master = (IMaster) query.getSingleResult();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -109,14 +109,14 @@ public class MasterRepositoryJpa implements IMasterRepository {
         IMaster master = null;
         try {
             Query query = em.createQuery( "select m from AbstractMaster m where m.speciality=:s" );
-            query.setParameter( "s", speciality ).executeUpdate();
-            master = (IMaster) query.getResultList().get( 0 );
+            query.setParameter( "s", speciality );
+            master = (IMaster) query.getSingleResult();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() );
         }
-        if(!master.getCalendar().isDateBooked( date ))  {
+        if (!master.getCalendar().isDateBooked( date )) {
             return master;
         }
         throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
@@ -127,21 +127,19 @@ public class MasterRepositoryJpa implements IMasterRepository {
 
         em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
-        List<IMaster>masters = null;
+        IMaster master = null;
         try {
-            Query query = em.createQuery( "select m from AbstractMaster m where m.speciality=:s" );
-            query.setParameter( "s", speciality ).executeUpdate();
-            masters =  query.getResultList();
+            Query query = em.createQuery( "select m from AbstractMaster m where m.speciality=:s and m.fullName=:n" );
+            query.setParameter( "s", speciality );
+            query.setParameter( "n", name );
+            master = (IMaster) query.getSingleResult();
             em.getTransaction().commit();
+            return master;
         } catch (Exception e) {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() );
         }
-        for (IMaster master : masters) {
-           if(master.getFullName()==name)  {
-               return master;
-           }
-        }
+
         throw new NoSuchElementException( "There is no masters of required speciality or chosen name!" );
     }
 }

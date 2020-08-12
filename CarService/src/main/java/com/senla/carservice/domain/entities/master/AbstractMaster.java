@@ -5,12 +5,11 @@ import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.UUID;
+
 @Entity
 @Data
 @NoArgsConstructor
-
 public abstract class AbstractMaster implements IMaster {
     @Id
     @GeneratedValue

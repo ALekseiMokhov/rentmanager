@@ -2,7 +2,6 @@ package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
-import dependency.injection.annotations.Qualifier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

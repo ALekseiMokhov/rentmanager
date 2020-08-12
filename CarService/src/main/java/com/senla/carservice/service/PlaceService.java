@@ -1,4 +1,4 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.repository.IPlaceRepository;

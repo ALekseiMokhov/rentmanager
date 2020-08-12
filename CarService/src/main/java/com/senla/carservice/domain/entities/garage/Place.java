@@ -25,7 +25,6 @@ public class Place {
         this.calendar = calendar;
 
     }
-    
 
 
 }

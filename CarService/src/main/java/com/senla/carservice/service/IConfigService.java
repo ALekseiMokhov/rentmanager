@@ -1,4 +1,4 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import dependency.injection.annotations.components.Component;
 

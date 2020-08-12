@@ -33,7 +33,7 @@ public class AddOrderAction extends AbstractOrderAction {
 
 
         try {
-            System.out.println( "Enter the date of execution: " );
+            System.out.println( "Enter the date of execution(in format like 'YYYY-MM-DD'): " );
             startOfExecution = LocalDate.parse( reader.readLine() );
             controller.addOrder( LocalDate.now(), startOfExecution, required );
             System.out.println( "Order was created, the date is: " + startOfExecution );

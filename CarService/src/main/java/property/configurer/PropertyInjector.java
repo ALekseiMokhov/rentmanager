@@ -38,7 +38,7 @@ public class PropertyInjector {
 
     private void inject(Object object, Field field, String propertyName) throws IllegalAccessException {
         String propValue = properties.getProperty( propertyName );
-        LOGGER.info( field + " " + propertyName + " " +"were injected");
+        LOGGER.info( field + " " + propertyName + " " + "were injected" );
         if (field.getType().isAssignableFrom( Boolean.class ) || field.getType().isAssignableFrom( boolean.class )) {
             field.set( object, Boolean.valueOf( propValue ) );
         }

@@ -40,18 +40,18 @@ public class BeanFactory {
                 , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
         Set <Class <?>> allBeanTypes = reflections.getTypesAnnotatedWith( Component.class );
-        LOGGER.info( "Beans found: " + allBeanTypes.size() +" : "+allBeanTypes.stream().collect( Collectors.toList() ));
+        LOGGER.info( "Beans found: " + allBeanTypes.size() + " : " + allBeanTypes.stream().collect( Collectors.toList() ) );
 
         /*finding implementation for interface*/
         for (Class <?> clazz : List.copyOf( allBeanTypes )) {
             if (clazz.isInterface()) {
                 Class impl = findImplementationClass( clazz );
-                allBeanTypes.add(impl);
+                allBeanTypes.add( impl );
                 allBeanTypes.remove( clazz );
                 for (Class <?> aClass : allBeanTypes) {
-                      if (aClass.isAssignableFrom( clazz ) && aClass!=impl) {
-                          allBeanTypes.remove( aClass ); /*deleting unused duplicates*/
-                      }
+                    if (aClass.isAssignableFrom( clazz ) && aClass != impl) {
+                        allBeanTypes.remove( aClass ); /*deleting unused duplicates*/
+                    }
                 }
             }
         }
@@ -144,7 +144,7 @@ public class BeanFactory {
         for (Class implementation : implementations) {
 
             if (implementation.isAnnotationPresent( Qualifier.class )) {
-                
+
 
                 return implementation;
             }

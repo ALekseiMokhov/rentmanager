@@ -1,8 +1,7 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.repository.IMasterRepository;
-import com.senla.carservice.repository.MasterInMemoryRepository;
 import dependency.injection.annotations.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -180,7 +179,7 @@ public class MasterService implements IMasterService {
                 this.repository.save( master );
             }
         } catch (IOException e) {
-           LOGGER.error( "CHECK csv FILE!" );
+            LOGGER.error( "CHECK csv FILE!" );
         }
     }
 

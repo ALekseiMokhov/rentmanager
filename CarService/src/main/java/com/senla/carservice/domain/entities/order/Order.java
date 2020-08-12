@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "orderz")     /*TODO delete after migrating from H2*/
 public class Order {
     @Id
     @GeneratedValue
@@ -50,7 +49,6 @@ public class Order {
     public void setMaster(IMaster old, IMaster current) {
         this.masters.set( masters.indexOf( old ), current );
     }
-
 
 
     public double getTotalPrice() {
