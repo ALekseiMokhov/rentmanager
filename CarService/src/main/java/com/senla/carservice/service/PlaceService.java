@@ -81,13 +81,13 @@ public class PlaceService implements IPlaceService {
         return place.getId();
     }
 
-    @Override
+
     public boolean isPresent(UUID id) {
-        return this.repository.isPresent( id );
+        return this.repository.findById( id ) != null;
     }
 
     public void savePlace(UUID id) {
-        if (!this.repository.isPresent( id )) {
+        if (!this.isPresent( id )) {
             Place place = new Place( new Calendar() );
             place.setId( id );
             this.repository.save( place );
@@ -95,7 +95,7 @@ public class PlaceService implements IPlaceService {
 
     }
 
-    @Override
+
     public void loadPlace(Place place) {
         this.repository.save( place );
     }

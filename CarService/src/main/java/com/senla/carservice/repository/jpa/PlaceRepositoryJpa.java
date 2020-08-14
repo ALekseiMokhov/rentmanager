@@ -32,23 +32,6 @@ public class PlaceRepositoryJpa implements IPlaceRepository {
         return place;
     }
 
-    @Override
-    public boolean isPresent(UUID id) {
-        em = JpaUtil.getEntityManager();
-        em.getTransaction().begin();
-        Boolean res = false;
-        try {
-            Query query = em.createQuery( "select p from Place p where p.id=:p" );
-            int countOfPresent = query.setParameter( "p", id ).executeUpdate();
-            res = (countOfPresent == 1);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() );
-        }
-        return res;
-    }
-
 
     @Override
     public List <Place> findAll() {

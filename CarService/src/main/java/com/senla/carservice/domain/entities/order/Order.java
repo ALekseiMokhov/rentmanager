@@ -14,11 +14,13 @@ import java.util.UUID;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "orderz")     /*TODO delete after migrating from H2*/
+@Table(name = "orderz")
 public class Order {
     @Id
     @GeneratedValue
     private UUID id;
+    @Version
+    private Long version;
     @Enumerated
     private OrderStatus status;
     private LocalDate dateBooked;

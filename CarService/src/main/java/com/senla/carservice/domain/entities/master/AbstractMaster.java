@@ -14,6 +14,8 @@ public abstract class AbstractMaster implements IMaster {
     @Id
     @GeneratedValue
     private UUID id;
+    @Version
+    private Long version;
     @Embedded
     private Calendar calendar;
     private String fullName;

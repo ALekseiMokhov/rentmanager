@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +14,8 @@ public class Place {
     @Id
     @GeneratedValue
     private UUID id;
+    @Version
+    private Long version;
     @Embedded
     private Calendar calendar;
 

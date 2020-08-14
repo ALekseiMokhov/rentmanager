@@ -25,7 +25,7 @@ public class PlaceInMemoryRepository implements IPlaceRepository {
         throw new NoSuchElementException( "There is no place with provided id!" );
     }
 
-    @Override
+
     public boolean isPresent(UUID id) {
         for (Place place : places) {
             if (place.getId().equals( id )) {

@@ -34,19 +34,19 @@ public interface IMasterService {
 
     IMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
 
-    public Set <Speciality> getAvailableSpecialities();
+    Set <Speciality> getAvailableSpecialities();
 
     List <IMaster> getMastersByAlphabet();
 
-    public List <IMaster> getFreeMasters(LocalDate date);
+    List <IMaster> getFreeMasters(LocalDate date);
 
-    public List <IMaster> getMastersBySpeciality(Speciality speciality);
+    List <IMaster> getMastersBySpeciality(Speciality speciality);
 
-    public void loadMastersFromCsv();
+    void loadMastersFromCsv();
 
-    public void exportMastersToCsv();
+    void exportMastersToCsv();
 
-    public void loadMastersFromJson();
+    void loadMastersFromJson();
 
-    public void exportMastersToJson();
+    void exportMastersToJson();
 }

@@ -115,7 +115,12 @@ public class MasterService implements IMasterService {
 
     public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
         try {
-            return this.repository.getByNameAndSpeciality( name, speciality );
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getFullName().equals( name ) )
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .findFirst()
+                    .get();
         } catch (NoSuchElementException e) {
 
         }
@@ -125,8 +130,11 @@ public class MasterService implements IMasterService {
     public IMaster getBySpeciality(Speciality speciality) {
 
         try {
-            IMaster master = this.repository.getBySpeciality( speciality );
-            return master;
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .findFirst()
+                    .get();
         } catch (IllegalStateException e) {
 
         }
@@ -139,7 +147,12 @@ public class MasterService implements IMasterService {
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
         try {
-            return this.repository.getFreeBySpeciality( date, speciality );
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .filter( m -> m.getCalendar().isDateBooked( date ) == false )
+                    .findFirst()
+                    .get();
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
