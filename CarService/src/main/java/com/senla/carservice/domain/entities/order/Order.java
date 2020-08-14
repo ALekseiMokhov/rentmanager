@@ -1,21 +1,32 @@
 package com.senla.carservice.domain.entities.order;
 
 import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.AbstractMaster;
 import com.senla.carservice.domain.entities.master.IMaster;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
+@Data
+@Entity
+@NoArgsConstructor
+@Table(name = "orderz")     /*TODO delete after migrating from H2*/
 public class Order {
+    @Id
+    @GeneratedValue
     private UUID id;
+    @Enumerated
     private OrderStatus status;
     private LocalDate dateBooked;
     private LocalDate startOfExecution;
     private LocalDate finishOfExecution;
+    @OneToMany(targetEntity = AbstractMaster.class)
     private List <IMaster> masters;
+    @OneToOne
     private Place place;
 
     public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
@@ -35,62 +46,10 @@ public class Order {
         this.id = id;
     }
 
-    public UUID getId() {
-        return this.id;
-    }
-
-    public OrderStatus getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
     public void setMaster(IMaster old, IMaster current) {
         this.masters.set( masters.indexOf( old ), current );
     }
 
-    public Place getPlace() {
-        return this.place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-
-
-    public LocalDate getDateBooked() {
-        return this.dateBooked;
-    }
-
-    public void setDateBooked(LocalDate dateBooked) {
-        this.dateBooked = dateBooked;
-    }
-
-    public List <IMaster> getMasters() {
-        return this.masters;
-    }
-
-    public void setMasters(List <IMaster> masters) {
-        this.masters = masters;
-    }
-
-    public LocalDate getStartOfExecution() {
-        return this.startOfExecution;
-    }
-
-    public void setStartOfExecution(LocalDate startOfExecution) {
-        this.startOfExecution = startOfExecution;
-    }
-
-    public LocalDate getFinishOfExecution() {
-        return finishOfExecution;
-    }
-
-    public void setFinishOfExecution(LocalDate finishOfExecution) {
-        this.finishOfExecution = finishOfExecution;
-    }
 
     public double getTotalPrice() {
         return this.masters
@@ -99,35 +58,5 @@ public class Order {
                 .sum();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return getStatus() == order.getStatus() &&
-                Objects.equals( getId(), order.getId() ) &&
-                Objects.equals( getDateBooked(), order.getDateBooked() ) &&
-                Objects.equals( getStartOfExecution(), order.getStartOfExecution() ) &&
-                Objects.equals( getFinishOfExecution(), order.getFinishOfExecution() ) &&
-                Objects.equals( getMasters(), order.getMasters() ) &&
-                Objects.equals( getPlace(), order.getPlace() );
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash( getStatus(), getId(), getDateBooked(), getStartOfExecution(), getFinishOfExecution(), getMasters(), getPlace() );
-    }
-
-    @Override
-    public String toString() {
-        return "Order {" +
-                "status=" + status +
-                ", id=" + id +
-                ", dateBooked=" + dateBooked +
-                ", startOfExecution=" + startOfExecution +
-                ", finishOfExecution=" + finishOfExecution +
-                ", masters=" + masters.stream().map( m -> m.toString() ).collect( Collectors.toList() ) +
-                ", place=" + place +
-                '}';
-    }
 }

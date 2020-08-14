@@ -13,7 +13,6 @@ public class Main {
     public static void main(String[] args) throws IOException, NoSuchMethodException, IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchFieldException {
         Supressor.disableWarning();
 
-
         BeanFactory beanFactory = BeanFactory.getInstance();
         beanFactory.loadMetadata( "com.senla.carservice" );
         beanFactory.instantiate( "com.senla.carservice" );
@@ -25,9 +24,13 @@ public class Main {
                 (JsonController) beanFactory.getSingleton( "jsoncontroller" );
         jsonController.loadFromJson();
 
-
         MenuController menuController = (MenuController) beanFactory.getSingleton( "menucontroller" );
         menuController.run();
+
+        if (menuController.getBuilder().getIsJsonPersistenceAllowed()) {
+
+            jsonController.exportToJson();
+        }
 
 
     }

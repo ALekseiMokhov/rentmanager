@@ -6,6 +6,7 @@ import com.senla.carservice.view.action.basic.*;
 import com.senla.carservice.view.action.master.*;
 import com.senla.carservice.view.action.order.*;
 import com.senla.carservice.view.action.place.*;
+import lombok.Getter;
 import property.configurer.annotations.ConfigProperty;
 
 public class Builder {
@@ -15,7 +16,9 @@ public class Builder {
     private Boolean isMasterModificationPermitted;
     @ConfigProperty(propertyName = "order.admin.mode", type = Boolean.class)
     private Boolean isOrderModificationPermitted;
-
+    @ConfigProperty(propertyName = "json.persistence.mode", type = Boolean.class)
+    @Getter
+    private Boolean isJsonPersistenceAllowed;
 
     public Menu buildRootMenu() {
         Menu menu = new Menu();
@@ -71,6 +74,8 @@ public class Builder {
         addItem( masterMenu, new ImportMastersAction(), "load masters from csv file", isMasterModificationPermitted );
         addItem( masterMenu, new RootMenuItem(), "Root menu", true );
         addItem( masterMenu, new ExitItem(), "Exit", true );
+
+
         return masterMenu;
     }
 
@@ -106,9 +111,6 @@ public class Builder {
         return accessMenu;
     }
 
-    public Boolean getGarageModificationPermitted() {
-        return isGarageModificationPermitted;
-    }
 
     private void addItem(Menu menu, IAction action, String title, Boolean isAccessPermitted) {
         menu.getMenuItems()

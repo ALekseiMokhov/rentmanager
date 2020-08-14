@@ -4,6 +4,7 @@ import dependency.injection.annotations.Autowired;
 import dependency.injection.annotations.components.Component;
 
 @Component
+
 public class JsonController {
     @Autowired
     private OrderController orderController;
@@ -11,7 +12,6 @@ public class JsonController {
     private MasterController masterController;
     @Autowired
     private PlaceController placeController;
-
 
     public void loadFromJson() {
         this.placeController.loadFromJson();

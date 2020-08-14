@@ -1,9 +1,13 @@
 package com.senla.carservice.domain.entities.master;
 
+import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
+import javax.persistence.Entity;
 import java.util.UUID;
 
+@Entity
+@NoArgsConstructor
 public class Electrician extends AbstractMaster {
 
 

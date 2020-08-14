@@ -1,7 +1,7 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
-import com.senla.carservice.domain.repository.IPlaceRepository;
+import com.senla.carservice.repository.IPlaceRepository;
 import dependency.injection.annotations.Autowired;
 import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;

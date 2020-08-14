@@ -39,11 +39,13 @@ public class GsonMasterParser {
 
     private static Class <? extends IMaster> parseClassType(String s) {
         Class clazz = null;
-        switch (s) {
+        String parsed = s.substring( s.lastIndexOf( ":" ) + 2, s.lastIndexOf( "\"" ) );
+        switch (parsed) {
             case ("RESHAPER") -> clazz = Reshaper.class;
             case ("PAINTER") -> clazz = Painter.class;
             case ("ELECTRICIAN") -> clazz = Electrician.class;
-            default -> clazz = Mechanic.class;
+            case ("MECHANIC") -> clazz = Mechanic.class;
+            default -> throw new IllegalStateException( "Wrong type of master in json!!" );
         }
         return clazz;
     }

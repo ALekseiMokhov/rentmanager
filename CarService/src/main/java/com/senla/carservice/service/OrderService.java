@@ -1,11 +1,11 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
-import com.senla.carservice.domain.repository.IOrderRepository;
+import com.senla.carservice.repository.IOrderRepository;
 import dependency.injection.annotations.Autowired;
 import util.csv.CsvOrderParser;
 import util.csv.CsvOrderWriter;
@@ -46,7 +46,6 @@ public class OrderService implements IOrderService {
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
         this.placeService.setPlaceForDate( place.getId(), startOfExecution );
-        this.placeService.savePlace( place.getId() );
         Order order = new Order( date, startOfExecution, place, availableMasters );
         order.setStatus( OrderStatus.MANAGED );
         this.orderRepository.save( order );

@@ -1,5 +1,5 @@
 import com.senla.carservice.controller.OrderController;
-import com.senla.carservice.domain.service.IOrderService;
+import com.senla.carservice.service.IOrderService;
 import dependency.injection.beanfactory.BeanFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

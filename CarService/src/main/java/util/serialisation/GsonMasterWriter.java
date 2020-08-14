@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class GsonMasterWriter {
@@ -27,7 +26,7 @@ public class GsonMasterWriter {
 
 
     public static void serializeMaster(IMaster master) throws IOException {
-        removeOldMaster( master.getId() );
+        removeOldMaster( master.getFullName() );
 
         String jsonFromEntity = GSON.toJson( master );
         try (BufferedWriter writer =
@@ -40,11 +39,11 @@ public class GsonMasterWriter {
     }
 
 
-    private static void removeOldMaster(UUID id) throws IOException {
-        String existingId = "{\"id\":\"" + id;
-        ;
+    private static void removeOldMaster(String fullname) throws IOException {
+        String jsonFullname = "{\"fullname\":\"" + fullname;
+
         List <String> out = Files.lines( FILE.toPath() )
-                .filter( line -> !line.startsWith( existingId ) )
+                .filter( line -> !line.startsWith( fullname ) )
                 .collect( Collectors.toList() );
         Files.write( FILE.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
     }

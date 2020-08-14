@@ -1,9 +1,10 @@
-package com.senla.carservice.domain.service;
+package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.master.*;
-import com.senla.carservice.domain.repository.IMasterRepository;
-import com.senla.carservice.domain.repository.MasterInMemoryRepository;
+import com.senla.carservice.repository.IMasterRepository;
 import dependency.injection.annotations.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
 import util.csv.CsvMasterWriter;
@@ -16,11 +17,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class MasterService implements IMasterService {
+    private final static Logger LOGGER = LoggerFactory.getLogger( MasterService.class );
     @Autowired
     private IMasterRepository repository;
 
     public MasterService() {
-        this.repository = new MasterInMemoryRepository();
     }
 
     public void saveMaster(IMaster master) {
@@ -53,7 +54,7 @@ public class MasterService implements IMasterService {
             }
             this.repository.save( master );
         } catch (Exception e) {
-            System.err.println( "Failed to save master!" );
+            LOGGER.error( "Failed to save master!" );
         }
 
 
@@ -86,7 +87,7 @@ public class MasterService implements IMasterService {
         try {
             this.repository.delete( id );
         } catch (NoSuchElementException e) {
-            System.out.println( "The Master with provided id was probably already deleted!" );
+            LOGGER.error( "The Master with provided id was probably already deleted!" );
         }
     }
 
@@ -178,7 +179,7 @@ public class MasterService implements IMasterService {
                 this.repository.save( master );
             }
         } catch (IOException e) {
-            System.err.println( "Check a path of the file!" );
+            LOGGER.error( "CHECK csv FILE!" );
         }
     }
 
@@ -188,7 +189,7 @@ public class MasterService implements IMasterService {
             CsvMasterWriter.writeMasters( getMastersByAlphabet() );
             System.out.println( getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
         } catch (IOException e) {
-            System.err.println( "Check a path to the file!" );
+            LOGGER.error( "CHECK csv FILE!" );
 
         }
     }
@@ -201,7 +202,7 @@ public class MasterService implements IMasterService {
                 this.repository.save( master );
             }
         } catch (IOException e) {
-            System.err.println( "Check a path to the file!" );
+            LOGGER.error( "CHECK json FILE!" );
         }
 
 
@@ -213,7 +214,7 @@ public class MasterService implements IMasterService {
             GsonMasterWriter.serializeMasters( getMastersByAlphabet() );
 
         } catch (IOException e) {
-            System.err.println( "Check a path to the file!" );
+            LOGGER.error( "CHECK json FILE!" );
 
         }
     }
