@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Qualifier
+
 public class OrderRepositoryJpa implements IOrderRepository {
     private final static Logger LOGGER = LoggerFactory.getLogger( OrderRepositoryJpa.class );
     private EntityManager em;

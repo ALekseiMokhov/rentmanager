@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Qualifier
+
 public class PlaceRepositoryJpa implements IPlaceRepository {
     private final static Logger LOGGER = LoggerFactory.getLogger( PlaceRepositoryJpa.class );
     private EntityManager em;

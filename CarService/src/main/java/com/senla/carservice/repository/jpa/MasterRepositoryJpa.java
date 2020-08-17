@@ -3,7 +3,6 @@ package com.senla.carservice.repository.jpa;
 import com.senla.carservice.domain.entities.master.AbstractMaster;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.repository.IMasterRepository;
-import dependency.injection.annotations.Qualifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Qualifier
+
 public class MasterRepositoryJpa implements IMasterRepository {
     private final static Logger LOGGER = LoggerFactory.getLogger( MasterRepositoryJpa.class );
     private EntityManager em;
