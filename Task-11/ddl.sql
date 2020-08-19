@@ -1,0 +1,7 @@
+DROP SCHEMA IF EXISTS senla;
+CREATE SCHEMA senla;
+USE senla;
+CREATE TABLE place (
+id UUID NOT NULL PRIMARY KEY,
+calendar ARRAY);
+

@@ -67,6 +67,7 @@ public class PlaceService implements IPlaceService {
         Place place = this.repository.findById( id );
         place.setId( newId );
         this.repository.save( place );
+        this.repository.delete( id );       /**/
     }
 
     public void setPlaceFree(UUID id, LocalDate date) {

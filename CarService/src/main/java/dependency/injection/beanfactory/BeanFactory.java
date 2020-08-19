@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 
@@ -39,7 +40,15 @@ public class BeanFactory {
         Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner()
                 , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
-        Set <Class <?>> allBeanTypes = reflections.getTypesAnnotatedWith( Component.class );
+        Set <Class <?>> allBeanTypes =new CopyOnWriteArraySet <>();
+        allBeanTypes.addAll( reflections.getTypesAnnotatedWith( Component.class ) );
+        
+        for (Class <?> allBeanType : allBeanTypes) {
+          if(allBeanType.isAnnotationPresent( Deprecated.class ))  {
+              allBeanTypes.remove( allBeanType ) ;/**/
+          }
+        }
+
         LOGGER.info( "Beans found: " + allBeanTypes.size() + " : " + allBeanTypes.stream().collect( Collectors.toList() ) );
 
         /*finding implementation for interface*/
@@ -48,13 +57,9 @@ public class BeanFactory {
                 Class impl = findImplementationClass( clazz );
                 allBeanTypes.add( impl );
                 allBeanTypes.remove( clazz );
-                for (Class <?> aClass : allBeanTypes) {
-                    if (aClass.isAssignableFrom( clazz ) && aClass != impl) {
-                        allBeanTypes.remove( aClass ); /*deleting unused duplicates*/
-                    }
-                }
             }
         }
+
 
         for (Class <?> beanType : allBeanTypes) {
             List <Class> fieldsToInject = new ArrayList <>();
@@ -137,10 +142,7 @@ public class BeanFactory {
     private Class findImplementationClass(Class clazz) throws IllegalAccessException, InstantiationException {
         Reflections reflections = new Reflections( clazz.getPackageName(), new TypeAnnotationsScanner(), new SubTypesScanner() );
         List <Class <?>> implementations = new ArrayList <>( reflections.getSubTypesOf( clazz ) );
-        if (implementations.size() == 1) {
 
-            return implementations.get( 0 );
-        }
         for (Class implementation : implementations) {
 
             if (implementation.isAnnotationPresent( Qualifier.class )) {
@@ -148,6 +150,10 @@ public class BeanFactory {
 
                 return implementation;
             }
+        }
+        if (implementations.size() == 1) {
+
+            return implementations.get( 0 );
         }
         throw new BeanCollisionException();
     }

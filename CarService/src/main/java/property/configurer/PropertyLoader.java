@@ -2,6 +2,7 @@ package property.configurer;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class PropertyLoader {
     static String rootPath = "";
@@ -15,10 +16,11 @@ public class PropertyLoader {
         }
     }
 
-    public static void loadCustomProperties(String propsName) {
-        rootPath = Thread.currentThread().getContextClassLoader().getResource( "" ).getPath() + propsName;
+    public static void loadCustomProperties(String file) {
+
         try {
-            PropertyStorage.getCachedProperties().load( new FileInputStream( rootPath ) );
+            InputStream inputStream = PropertyLoader.class.getResourceAsStream( file )  ;
+            PropertyStorage.getCachedProperties().load( inputStream );
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,27 +1,21 @@
 package com.senla.carservice.repository.jpa;
 
-import com.senla.carservice.domain.entities.master.AbstractMaster;
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.repository.IMasterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 
-public class MasterRepositoryJpa implements IMasterRepository {
+public class MasterRepositoryJpa /*implements IMasterRepository*/ {
     private final static Logger LOGGER = LoggerFactory.getLogger( MasterRepositoryJpa.class );
-    private EntityManager em;
+   /* private EntityManager em;*/
 
-    @Override
-    @Transactional
+
     public IMaster findById(UUID id) {
-        em = JpaUtil.getEntityManager();
+     /*   em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         IMaster master = null;
         try {
@@ -32,13 +26,14 @@ public class MasterRepositoryJpa implements IMasterRepository {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() );
         }
-        return master;
+        return master;*/
+        return null;
     }
 
 
-    @Override
+
     public List <IMaster> findAll() {
-        em = JpaUtil.getEntityManager();
+       /* em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <IMaster> res = new ArrayList <>();
         try {
@@ -49,12 +44,13 @@ public class MasterRepositoryJpa implements IMasterRepository {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + "FROM METHOD FIND ALL()" );
         }
-        return res;
+        return res;*/
+        return null;
     }
 
-    @Override
+
     public void delete(UUID id) {
-        em = JpaUtil.getEntityManager();
+       /* em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             Query query = em.createQuery( "delete from AbstractMaster m where m.id=:p" );
@@ -63,13 +59,12 @@ public class MasterRepositoryJpa implements IMasterRepository {
         } catch (Exception e) {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() );
-        }
+        }*/
 
     }
 
-    @Override
     public void save(IMaster master) {
-        em = JpaUtil.getEntityManager();
+        /*em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( master );
@@ -77,7 +72,7 @@ public class MasterRepositoryJpa implements IMasterRepository {
         } catch (Exception e) {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + " FROM SAVE METHOD" );
-        }
+        }*/
 
     }
 

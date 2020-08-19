@@ -4,19 +4,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
-import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+/*@Entity*/
 @Data
 @NoArgsConstructor
 public class Place {
-    @Id
-    @GeneratedValue
+    /*@Id
+    @GeneratedValue*/
     private UUID id;
-    @Version
-    private Long version;
-    @Embedded
+   /* @Version
+    private Long version;*/
+  /*  @Embedded*/
     private Calendar calendar;
 
     public Place(Calendar calendar) {

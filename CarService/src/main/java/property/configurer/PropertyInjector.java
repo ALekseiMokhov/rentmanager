@@ -13,10 +13,10 @@ import java.util.Properties;
 public class PropertyInjector {
     private static final Logger LOGGER = LoggerFactory.getLogger( PropertyInjector.class );
 
-    private Properties properties = PropertyStorage.getCachedProperties();
+    private static Properties properties = PropertyStorage.getCachedProperties();
 
 
-    public void injectProperty(Object object) {
+    public static void injectProperty(Object object) {
         Field[] fields = object.getClass().getDeclaredFields();
 
 
@@ -36,7 +36,7 @@ public class PropertyInjector {
 
     }
 
-    private void inject(Object object, Field field, String propertyName) throws IllegalAccessException {
+    private static void inject(Object object, Field field, String propertyName) throws IllegalAccessException {
         String propValue = properties.getProperty( propertyName );
         LOGGER.info( field + " " + propertyName + " " + "were injected" );
         if (field.getType().isAssignableFrom( Boolean.class ) || field.getType().isAssignableFrom( boolean.class )) {

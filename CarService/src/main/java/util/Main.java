@@ -4,6 +4,8 @@ package util;
 import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.controller.MenuController;
 import dependency.injection.beanfactory.BeanFactory;
+import property.configurer.ConfigPropertyScanner;
+import property.configurer.PropertyInjector;
 import property.configurer.PropertyLoader;
 import util.warning.Supressor;
 
@@ -19,6 +21,10 @@ public class Main {
         beanFactory.injectDependencies();
 
         PropertyLoader.loadDefaultProperties();
+        beanFactory.getSingletons()
+                .stream()
+                .filter( s-> ConfigPropertyScanner.hasPropertiesToInject( s ) )
+                .forEach( PropertyInjector::injectProperty );
 
         JsonController jsonController =
                 (JsonController) beanFactory.getSingleton( "jsoncontroller" );
