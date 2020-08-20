@@ -150,17 +150,14 @@ public class MasterService implements IMasterService {
     }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
-        try {
+
             return this.repository.findAll()
                     .stream()
                     .filter( m -> m.getSpeciality() == speciality )
                     .filter( m -> m.getCalendar().isDateBooked( date ) == false )
                     .findFirst()
                     .get();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
-        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
+       
     }
 
 

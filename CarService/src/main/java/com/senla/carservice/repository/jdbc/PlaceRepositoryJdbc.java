@@ -58,7 +58,6 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
              PreparedStatement statement = connection.prepareStatement( FIND_ALL_SQL );
              ResultSet resultSet = statement.executeQuery();
         ) {
-            System.out.println( resultSet.getFetchSize() );
             List <Place> placeList = new ArrayList <>();
             while (resultSet.next()) {
                 Place place = new Place();

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Qualifier
-public class MasterJdbcRepo implements IMasterRepository {
+public class MasterRepositoryJdbc implements IMasterRepository {
     private final static String FIND_SQL = "SELECT * FROM SENLA.MASTER WHERE ID = ?";
     private final static String FIND_ALL_SQL = "SELECT * FROM SENLA.MASTER";
     private final static String SAVE_SQL = "MERGE INTO SENLA.MASTER (id,calendar,fullname,dailypayment,speciality) VALUES (?,?,?,?,?)";
@@ -124,7 +124,6 @@ public class MasterJdbcRepo implements IMasterRepository {
         try (Connection connection = factory.getDatasource().getConnection();
              PreparedStatement statement = connection.prepareStatement( SAVE_SQL );
 
-
         ) {
             statement.setString( 1, String.valueOf( master.getId() ) );
 
@@ -140,6 +139,8 @@ public class MasterJdbcRepo implements IMasterRepository {
             statement.setDouble( 4,master.getDailyPayment() );
 
             statement.setString( 5, String.valueOf( master.getSpeciality() ) );
+
+
             statement.executeUpdate();
 
         }
