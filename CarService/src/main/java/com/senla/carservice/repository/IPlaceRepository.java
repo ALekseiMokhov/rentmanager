@@ -15,4 +15,5 @@ public interface IPlaceRepository {
     void delete(UUID id);
 
     void save(Place place);
+
 }

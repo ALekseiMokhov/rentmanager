@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-@Qualifier
+   @Deprecated
 public class MasterInMemoryRepository implements IMasterRepository {
     private final List <IMaster> masters = new ArrayList <>();
 

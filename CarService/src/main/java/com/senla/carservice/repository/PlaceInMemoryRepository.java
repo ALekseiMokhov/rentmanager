@@ -46,12 +46,16 @@ public class PlaceInMemoryRepository implements IPlaceRepository {
         if (!this.places.contains( place )) {
             this.places.add( place );
         } else {
-            this.places.set( this.places.indexOf( place ), place );
+             update( place );
         }
 
     }
 
-    @Override
+        public void update(Place place) {
+            this.places.set( this.places.indexOf( place ), place );
+        }
+
+        @Override
     public List <Place> findAll() {
         return this.places;
     }

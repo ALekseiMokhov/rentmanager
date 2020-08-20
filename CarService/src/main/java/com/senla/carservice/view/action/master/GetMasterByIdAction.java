@@ -20,7 +20,7 @@ public class GetMasterByIdAction extends AbstractMasterAction {
             System.out.println( "Your master is: " + master );
 
         } catch (IOException | IllegalArgumentException e) {
-            System.err.println( "UUID should have proper format!" );
+            Logger.error( "COULD NOT FIND MASTER BY ID! CAUSE: " + e.getStackTrace());
         }
 
     }

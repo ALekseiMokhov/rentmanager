@@ -77,8 +77,9 @@ public class Navigator {
 
 
             } catch (Exception e) {
-                e.printStackTrace();   /*todo del*/
-                LOGGER.error( "There is some error in Navigator: " + e.getStackTrace() );
+
+                LOGGER.error( "There is some error in Navigator: " );
+                e.printStackTrace();
                 navigate( rootMenu );
 
             }

@@ -20,7 +20,7 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
 
     private final static String FIND_SQL = "SELECT * FROM SENLA.PLACE WHERE ID = ?";
     private final static String FIND_ALL_SQL = "SELECT * FROM SENLA.PLACE";
-    private final static String SAVE_SQL = "INSERT INTO SENLA.PLACE (id,calendar) VALUES (?,?)";
+    private final static String SAVE_SQL = "MERGE INTO SENLA.PLACE (id,calendar) VALUES (?,?)";
     private final static String DELETE_SQL = "DELETE FROM SENLA.PLACE WHERE ID = ?";
 
     private DataSourceFactory factory = DataSourceFactory.getInstance();
@@ -98,17 +98,19 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
 
 
         ) {
-            
-                statement.setString( 1, String.valueOf( place.getId() ) );
-                if (place.getCalendar() == null) {
-                    statement.setArray( 2, connection.createArrayOf( "TIMESTAMP", new Object[ 0 ] ) );
-                } else {
-                    Object[] localDates = place.getCalendar().getBookedDates().keySet().toArray();
-                    statement.setArray( 2, connection.createArrayOf( "TIMESTAMP", localDates ) );
-                }
-                statement.executeUpdate();
+
+            statement.setString( 1, String.valueOf( place.getId() ) );
+            if (place.getCalendar() == null) {
+                statement.setArray( 2, connection.createArrayOf( "TIMESTAMP", new Object[ 0 ] ) );
+            } else {
+                Object[] localDates = place.getCalendar().getBookedDates().keySet().toArray();
+                statement.setArray( 2, connection.createArrayOf( "TIMESTAMP", localDates ) );
+            }
+            statement.executeUpdate();
 
         }
 
     }
+
+
 }

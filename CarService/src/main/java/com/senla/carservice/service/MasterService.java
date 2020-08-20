@@ -99,11 +99,15 @@ public class MasterService implements IMasterService {
 
     public boolean isBookedForDate(UUID id, LocalDate date) {
         IMaster master = this.repository.findById( id );
+
         return master.getCalendar().isDateBooked( date );
     }
 
     public void setMasterForDate(UUID id, LocalDate date) {
         IMaster master = this.repository.findById( id );
+        if(master.getCalendar()==null){
+            master.setCalendar(new Calendar());
+        }
         master.getCalendar().setDateForBooking( date );
         this.repository.save( master );
     }

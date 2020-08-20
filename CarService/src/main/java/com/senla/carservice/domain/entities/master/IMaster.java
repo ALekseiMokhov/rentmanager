@@ -13,6 +13,8 @@ public interface IMaster {
 
     Calendar getCalendar();
 
+    void setCalendar(Calendar calendar);
+
     Speciality getSpeciality();
 
     String toString();

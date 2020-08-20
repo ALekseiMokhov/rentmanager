@@ -1,5 +1,6 @@
 package com.senla.carservice.repository;
 
+import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.master.IMaster;
 import dependency.injection.annotations.components.Component;
 
@@ -15,6 +16,5 @@ public interface IMasterRepository {
     void delete(UUID id);
 
     void save(IMaster master);
-
 
 }
