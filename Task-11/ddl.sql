@@ -13,16 +13,15 @@ id UUID NOT NULL PRIMARY KEY,
 calendar ARRAY NOT NULL,
 fullname VARCHAR(255) NOT NULL,
 dailypayment DOUBLE NOT NULL,
-speciality ENUM('MECHANIC','RESHAPER','ELECTRICIAN',
-'PAINTER') NOT NULL);
+speciality VARCHAR(255) NOT NULL);
 
 CREATE TABLE orders(
 id UUID NOT NULL PRIMARY KEY,
-date_of_booking TIMESTAMP  NOT NULL,
-beginning_date TIMESTAMP,
-finish_date TIMESTAMP,
-orderstatus ENUM('CANCELLED','COMPLETED','MANAGED') NOT NULL,
-id_place NOT NULL,
+date_of_booking VARCHAR(255) NOT NULL,
+beginning_date VARCHAR(255),
+finish_date VARCHAR(255),
+order_status VARCHAR(255) NOT NULL,
+id_place UUID NOT NULL,
 FOREIGN KEY(id_place) REFERENCES place(id));
 
 

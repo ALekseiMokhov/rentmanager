@@ -25,7 +25,7 @@ public interface IPlaceService {
 
     void savePlace(UUID id);
 
-    void loadPlace(Place place);
+    void mergePlace(Place place);
 
     boolean isPresent(UUID id);
 

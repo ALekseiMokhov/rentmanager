@@ -6,7 +6,7 @@ import dependency.injection.annotations.Qualifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-@Qualifier
+@Deprecated
 public class OrderInMemoryRepository implements IOrderRepository {
     private final List <Order> orders = new ArrayList <>();
 

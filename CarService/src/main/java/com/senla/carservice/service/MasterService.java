@@ -151,13 +151,17 @@ public class MasterService implements IMasterService {
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
 
+        try {
             return this.repository.findAll()
                     .stream()
                     .filter( m -> m.getSpeciality() == speciality )
                     .filter( m -> m.getCalendar().isDateBooked( date ) == false )
                     .findFirst()
                     .get();
-       
+        } catch (Exception e) {
+            LOGGER.error( e.getMessage() +" ERROR DURING MASTER SEARCHING" );
+        }
+       throw new RuntimeException();
     }
 
 

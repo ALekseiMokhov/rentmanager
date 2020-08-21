@@ -59,6 +59,9 @@ public class PlaceService implements IPlaceService {
 
     public void setPlaceForDate(UUID id, LocalDate date) {
         Place place = this.repository.findById( id );
+        if(place.getCalendar()==null){
+            place.setCalendar( new Calendar() );
+        }
         place.getCalendar().setDateForBooking( date );
         this.repository.save( place );
     }
@@ -97,7 +100,7 @@ public class PlaceService implements IPlaceService {
     }
 
 
-    public void loadPlace(Place place) {
+    public void mergePlace(Place place) {
         this.repository.save( place );
     }
 
@@ -126,7 +129,7 @@ public class PlaceService implements IPlaceService {
         try {
             List <Place> list = CsvPlaceParser.load();
             for (Place place : list) {
-                loadPlace( place );
+                mergePlace( place );
             }
             System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {
@@ -154,7 +157,7 @@ public class PlaceService implements IPlaceService {
         try {
             List <Place> list = GsonPlaceParser.load();
             for (Place place : list) {
-                loadPlace( place );
+                mergePlace( place );
             }
 
         } catch (IOException e) {

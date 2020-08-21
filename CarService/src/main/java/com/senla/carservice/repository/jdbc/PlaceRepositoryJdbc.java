@@ -41,6 +41,9 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
                 Object[] array = (Object[]) resultSet.getArray( "calendar" ).getArray();
 
                 for (Object o : array) {
+                    if(place.getCalendar()==null){
+                        place.setCalendar( new Calendar() );
+                    }
                     place.getCalendar().setDateForBooking( LocalDate.parse( o.toString() ) );
                 }
             }

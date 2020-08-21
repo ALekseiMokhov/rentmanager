@@ -45,7 +45,7 @@ public class OrderService implements IOrderService {
 
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
-      /*  this.placeService.setPlaceForDate( place.getId(), startOfExecution );*/
+        this.placeService.setPlaceForDate( place.getId(), startOfExecution );
         Order order = new Order( date, startOfExecution, place, availableMasters );
         order.setStatus( OrderStatus.MANAGED );
         this.orderRepository.save( order );
@@ -64,6 +64,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public void saveOrder(Order order) {
+
         this.orderRepository.save( order );
     }
 
