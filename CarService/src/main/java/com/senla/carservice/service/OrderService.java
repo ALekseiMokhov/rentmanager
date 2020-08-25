@@ -73,6 +73,10 @@ public class OrderService implements IOrderService {
 
     }
 
+    @Override
+    public void deleteOrder(UUID id) {
+        this.orderRepository.delete( id );
+    }
 
     public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
         Order order = this.orderRepository.findById( id );

@@ -30,6 +30,8 @@ public interface IOrderService {
 
     void completeOrder(UUID id);
 
+    void deleteOrder(UUID id);
+
     List <Order> getOrders();
 
     List <Order> getOrdersByBookedDate(OrderStatus status);

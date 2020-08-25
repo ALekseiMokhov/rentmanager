@@ -95,6 +95,7 @@ public class Builder {
         addItem( orderMenu, new ShiftDateAction(), "move on date of execution of the chosen order", isOrderModificationPermitted );
         addItem( orderMenu, new ExportOrdersAction(), "load orders to csv file", isOrderModificationPermitted );
         addItem( orderMenu, new ImportOrdersAction(), "load orders from csv file", isOrderModificationPermitted );
+        addItem( orderMenu, new DeleteOrderAction(), "delete order from database", isOrderModificationPermitted );
         addItem( orderMenu, new RootMenuItem(), "Root menu", true );
         addItem( orderMenu, new ExitItem(), "Exit", true );
 
