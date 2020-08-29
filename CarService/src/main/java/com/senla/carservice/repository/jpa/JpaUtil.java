@@ -1,7 +1,11 @@
 package com.senla.carservice.repository.jpa;
 
-public class JpaUtil {/*
-   *//* private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory( "hibernate" );
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class JpaUtil {
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory( "hibernate" );
 
     public static EntityManagerFactory getEntityManagerFactory() {
         return FACTORY;
@@ -9,6 +13,6 @@ public class JpaUtil {/*
 
     public static EntityManager getEntityManager() {
 
-        return FACTORY.createEntityManager();*//*
-    }*/
+        return FACTORY.createEntityManager();
+    }
 }

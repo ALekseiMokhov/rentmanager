@@ -1,10 +1,10 @@
 package com.senla.carservice.controller;
 
-import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
 
-@Component
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class JsonController {
     @Autowired
     private OrderController orderController;

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class GsonOrderParser {
 
-    private final static Gson GSON = new GsonBuilder()
+    private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter( Calendar.class, new CalendarDeserializer() )
             .create();
 

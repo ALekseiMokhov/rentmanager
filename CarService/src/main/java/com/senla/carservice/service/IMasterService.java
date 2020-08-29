@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.master.IMaster;
 import com.senla.carservice.domain.entities.master.Speciality;
-import dependency.injection.annotations.components.Component;
+import org.springframework.stereotype.Service;
 import util.calendar.Calendar;
 
 import java.time.LocalDate;
@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-@Component
+@Service
+
 public interface IMasterService {
     void saveMaster(IMaster master);
 

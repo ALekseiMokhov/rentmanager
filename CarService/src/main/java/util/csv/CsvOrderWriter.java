@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 public class CsvOrderWriter {
 
-    private static File file = new File( "./files/order.csv" );
+    private static final File FILE = new File( "./files/order.csv" );
 
     public static void writeOrder(Order order) throws IOException {
         removeOldMaster( order.getId() );
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( file, true ) )) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( FILE, true ) )) {
             bufferedWriter.append( "\n" );
             bufferedWriter.append( order.getId().toString() + "," );
             bufferedWriter.append( order.getDateBooked() + "," );
@@ -47,9 +47,9 @@ public class CsvOrderWriter {
 
     private static void removeOldMaster(UUID id) throws IOException {
         String existingId = String.valueOf( id );
-        List <String> out = Files.lines( file.toPath() )
+        List <String> out = Files.lines( FILE.toPath() )
                 .filter( line -> !line.startsWith( existingId ) )
                 .collect( Collectors.toList() );
-        Files.write( file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
+        Files.write( FILE.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
     }
 }

@@ -2,7 +2,6 @@ package com.senla.carservice.repository.jdbc;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.repository.IPlaceRepository;
-import dependency.injection.annotations.Qualifier;
 import lombok.SneakyThrows;
 import util.calendar.Calendar;
 
@@ -18,9 +17,7 @@ import java.util.UUID;
 import static com.senla.carservice.repository.jdbc.SqlHolder.*;
 
 
-@Qualifier
 public class PlaceRepositoryJdbc implements IPlaceRepository {
-
 
 
     private DataSourceFactory factory = DataSourceFactory.getInstance();
@@ -87,7 +84,7 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
             }
             connection.commit();
             connection.close();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             connection.rollback();
             connection.setAutoCommit( true );
             throw e;
@@ -100,7 +97,7 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
     @Override
     @SneakyThrows
     public void delete(UUID id) {
-        try  {
+        try {
             connection = factory.getDatasource().getConnection();
             statement = connection.prepareStatement( DELETE_PLACE_SQL );
             statement.setString( 1, String.valueOf( id ) );
@@ -131,8 +128,7 @@ public class PlaceRepositoryJdbc implements IPlaceRepository {
             connection.commit();
             connection.close();
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             connection.rollback();
             connection.close();
             throw e;

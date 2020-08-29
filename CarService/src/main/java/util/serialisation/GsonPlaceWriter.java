@@ -16,8 +16,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class GsonPlaceWriter {
-    private final static Gson GSON = new Gson();
-    private final static File FILE = new File( "./files/Json/PlacesJson.json" );
+    private static final Gson GSON = new Gson();
+    private static final File FILE = new File( "./files/Json/PlacesJson.json" );
 
     public static void serializePlaces(List <Place> places) throws IOException {
         for (Place place : places) {

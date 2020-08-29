@@ -1,13 +1,14 @@
 package com.senla.carservice.repository;
 
-import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.order.Order;
-import dependency.injection.annotations.components.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
-@Component
+@Repository
+@Qualifier("orderRepositoryJpa")
 public interface IOrderRepository {
     Order findById(UUID id);
 

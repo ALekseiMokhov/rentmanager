@@ -1,17 +1,16 @@
 package property.configurer;
 
-import dependency.injection.annotations.components.Component;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
+import org.springframework.stereotype.Component;
 import property.configurer.annotations.ConfigProperty;
 
 import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
 public class ConfigPropertyScanner {
 
 

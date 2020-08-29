@@ -31,7 +31,7 @@ public class AddMasterAction extends AbstractMasterAction {
         try {
             speciality = Speciality.valueOf( reader.readLine() );
             controller.addMaster( fullName, salary, new Calendar(), speciality );
-            System.out.println("Master "+fullName +" was successfully added!");
+            System.out.println( "Master " + fullName + " was successfully added!" );
 
         } catch (IOException | IllegalArgumentException e) {
             System.err.println( "Speciality you required for doesn't exist!" );

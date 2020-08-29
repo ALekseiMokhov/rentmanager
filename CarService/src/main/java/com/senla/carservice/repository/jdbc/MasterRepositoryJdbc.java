@@ -2,7 +2,6 @@ package com.senla.carservice.repository.jdbc;
 
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.repository.IMasterRepository;
-import dependency.injection.annotations.Qualifier;
 import lombok.SneakyThrows;
 import util.calendar.Calendar;
 
@@ -17,7 +16,7 @@ import java.util.UUID;
 
 import static com.senla.carservice.repository.jdbc.SqlHolder.*;
 
-@Qualifier
+
 public class MasterRepositoryJdbc implements IMasterRepository {
 
     private DataSourceFactory factory = DataSourceFactory.getInstance();
@@ -165,8 +164,7 @@ public class MasterRepositoryJdbc implements IMasterRepository {
 
             statement.executeUpdate();
 
-        }
-        catch (
+        } catch (
                 SQLException e) {
             connection.rollback();
             connection.close();

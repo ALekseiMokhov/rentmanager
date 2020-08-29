@@ -2,7 +2,9 @@ package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.repository.IPlaceRepository;
-import dependency.injection.annotations.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import util.calendar.Calendar;
 import util.csv.CsvPlaceParser;
 import util.csv.CsvPlaceWriter;
@@ -16,9 +18,10 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-
+@Service
 public class PlaceService implements IPlaceService {
     @Autowired
+    @Qualifier("placeRepositoryJpa")
     private IPlaceRepository repository;
 
     public PlaceService() {
@@ -59,7 +62,7 @@ public class PlaceService implements IPlaceService {
 
     public void setPlaceForDate(UUID id, LocalDate date) {
         Place place = this.repository.findById( id );
-        if(place.getCalendar()==null){
+        if (place.getCalendar() == null) {
             place.setCalendar( new Calendar() );
         }
         place.getCalendar().setDateForBooking( date );

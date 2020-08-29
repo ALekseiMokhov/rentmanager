@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 public class GsonOrderWriter {
 
-    private final static Gson GSON = new Gson();
-    private final static File FILE = new File( "./files/Json/OrdersJson.json" );
+    private static final Gson GSON = new Gson();
+    private static final File FILE = new File( "./files/Json/OrdersJson.json" );
 
     public static void serializeOrders(List <Order> list) throws IOException {
         for (Order order : list) {

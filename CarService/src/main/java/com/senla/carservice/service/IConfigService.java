@@ -1,8 +1,10 @@
 package com.senla.carservice.service;
 
-import dependency.injection.annotations.components.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
+@Qualifier("configService")
 public interface IConfigService {
     void loadDefaultProps();
 

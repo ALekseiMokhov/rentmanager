@@ -11,8 +11,8 @@ public class GetPlacesAction extends AbstractPlaceAction {
                 "All places in Garage: "
         );
 
-        List <Place> list =this.controller.getPlaces();
-                list.stream()
+        List <Place> list = this.controller.getPlaces();
+        list.stream()
                 .forEach( System.out::println );
 
     }

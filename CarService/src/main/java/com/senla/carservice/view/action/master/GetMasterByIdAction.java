@@ -1,10 +1,11 @@
 package com.senla.carservice.view.action.master;
 
 import com.senla.carservice.domain.entities.master.IMaster;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.UUID;
-
+      @Slf4j
 public class GetMasterByIdAction extends AbstractMasterAction {
     private IMaster master;
     private UUID id;
@@ -20,7 +21,7 @@ public class GetMasterByIdAction extends AbstractMasterAction {
             System.out.println( "Your master is: " + master );
 
         } catch (IOException | IllegalArgumentException e) {
-            Logger.error( "COULD NOT FIND MASTER BY ID! CAUSE: " + e.getStackTrace());
+            log.error( "COULD NOT FIND MASTER BY ID! CAUSE: " + e.getStackTrace() );
         }
 
     }

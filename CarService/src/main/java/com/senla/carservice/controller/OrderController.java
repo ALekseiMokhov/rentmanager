@@ -6,8 +6,9 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.service.IOrderService;
-import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.components.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Component
 public class OrderController {
     @Autowired
+    @Qualifier("orderService")
     private IOrderService orderService;
 
     public OrderController() {

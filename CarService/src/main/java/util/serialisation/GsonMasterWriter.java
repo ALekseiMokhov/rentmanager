@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GsonMasterWriter {
-    private final static Gson GSON = new Gson();
-    private final static File FILE = new File( "./files/Json/MastersJson.json" );
+    private static final Gson GSON = new Gson();
+    private static final File FILE = new File( "./files/Json/MastersJson.json" );
 
     public static void serializeMasters(List <IMaster> list) throws IOException {
         for (IMaster master : list) {

@@ -2,19 +2,23 @@ package com.senla.carservice.repository.jpa;
 
 import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.repository.IPlaceRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PlaceRepositoryJpa /*implements IPlaceRepository */{
-    private final static Logger LOGGER = LoggerFactory.getLogger( PlaceRepositoryJpa.class );
-  /*  private EntityManager em;*/
+@Slf4j
+@Service
+public class PlaceRepositoryJpa implements IPlaceRepository {
+    private EntityManager em;
 
 
     public Place findById(UUID id) {
-     /*   em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         Place place = null;
         try {
@@ -22,16 +26,15 @@ public class PlaceRepositoryJpa /*implements IPlaceRepository */{
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() );
+            log.error( e.getMessage() );
         }
-        return place;*/
-        return null;
+        return place;
+
     }
 
 
-
     public List <Place> findAll() {
-       /* em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <Place> res = new ArrayList <>();
         try {
@@ -40,16 +43,16 @@ public class PlaceRepositoryJpa /*implements IPlaceRepository */{
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() + "FROM METHOD FIND ALL()" );
+            log.error( e.getMessage() + "FROM METHOD FIND ALL()" );
         }
-        return res;*/
-        return null;
+        return res;
+
 
     }
 
 
     public void delete(UUID id) {
-     /*   em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             Query query = em.createQuery( "delete from Place p where p.id=:p" );
@@ -57,23 +60,22 @@ public class PlaceRepositoryJpa /*implements IPlaceRepository */{
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() );
-        }*/
+            log.error( e.getMessage() );
+        }
 
     }
 
 
     public void save(Place place) {
-   /*     em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( place );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() );
+            log.error( e.getMessage() );
         }
-*/
     }
 
 }

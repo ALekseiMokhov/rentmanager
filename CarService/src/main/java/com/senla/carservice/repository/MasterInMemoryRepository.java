@@ -1,14 +1,13 @@
 package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
-import dependency.injection.annotations.Qualifier;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-   @Deprecated
+@Deprecated
 public class MasterInMemoryRepository implements IMasterRepository {
     private final List <IMaster> masters = new ArrayList <>();
 

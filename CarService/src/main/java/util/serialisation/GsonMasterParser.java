@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class GsonMasterParser {
-    private final static Gson GSON = new GsonBuilder()
+    private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter( Calendar.class, new CalendarDeserializer() )
             .create();
     private final static File FILE = new File( "./files/Json/MastersJson.json" );

@@ -13,10 +13,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class GsonPlaceParser {
-    private final static Gson GSON = new GsonBuilder()
+    private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter( Calendar.class, new CalendarDeserializer() )
             .create();
-    private final static File FILE = new File( "./files/Json/PlacesJson.json" );
+    private static final File FILE = new File( "./files/Json/PlacesJson.json" );
 
     public static List <Place> load() throws IOException {
 

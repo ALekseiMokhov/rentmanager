@@ -1,11 +1,11 @@
-package dependency.injection.beanfactory;
+package injection.beanfactory;
 
 
-import dependency.injection.annotations.Autowired;
-import dependency.injection.annotations.Qualifier;
-import dependency.injection.annotations.components.Component;
-import dependency.injection.beanfactory.exceptions.BeanCollisionException;
-import dependency.injection.beanfactory.exceptions.BeanInitException;
+import injection.annotations.Autowired;
+import injection.annotations.Qualifier;
+import injection.annotations.components.Component;
+import injection.beanfactory.exceptions.BeanCollisionException;
+import injection.beanfactory.exceptions.BeanInitException;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -40,13 +40,13 @@ public class BeanFactory {
         Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner()
                 , new SubTypesScanner(), new FieldAnnotationsScanner() );
 
-        Set <Class <?>> allBeanTypes =new CopyOnWriteArraySet <>();
+        Set <Class <?>> allBeanTypes = new CopyOnWriteArraySet <>();
         allBeanTypes.addAll( reflections.getTypesAnnotatedWith( Component.class ) );
-        
+
         for (Class <?> allBeanType : allBeanTypes) {
-          if(allBeanType.isAnnotationPresent( Deprecated.class ))  {
-              allBeanTypes.remove( allBeanType ) ;/**/
-          }
+            if (allBeanType.isAnnotationPresent( Deprecated.class )) {
+                allBeanTypes.remove( allBeanType );/**/
+            }
         }
 
         LOGGER.info( "Beans found: " + allBeanTypes.size() + " : " + allBeanTypes.stream().collect( Collectors.toList() ) );

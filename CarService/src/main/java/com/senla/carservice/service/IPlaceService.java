@@ -1,13 +1,14 @@
 package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.garage.Place;
-import dependency.injection.annotations.components.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Component
+@Service
+
 public interface IPlaceService {
     List <Place> getPlaces();
 

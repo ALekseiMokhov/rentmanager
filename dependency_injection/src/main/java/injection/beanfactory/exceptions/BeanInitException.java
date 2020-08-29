@@ -1,4 +1,4 @@
-package dependency.injection.beanfactory.exceptions;
+package injection.beanfactory.exceptions;
 
 public class BeanInitException extends IllegalArgumentException {
     @Override

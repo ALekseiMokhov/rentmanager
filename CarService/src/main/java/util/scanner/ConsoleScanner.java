@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class ConsoleScanner {
-    private static BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+    private static final BufferedReader READER = new BufferedReader( new InputStreamReader( System.in ) );
     private static ConsoleScanner INSTANCE;
 
     private ConsoleScanner() {
@@ -19,6 +19,6 @@ public class ConsoleScanner {
     }
 
     public BufferedReader getReader() {
-        return reader;
+        return READER;
     }
 }

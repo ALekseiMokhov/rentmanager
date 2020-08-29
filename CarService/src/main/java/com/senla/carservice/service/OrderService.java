@@ -6,7 +6,9 @@ import com.senla.carservice.domain.entities.master.Speciality;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.repository.IOrderRepository;
-import dependency.injection.annotations.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import util.csv.CsvOrderParser;
 import util.csv.CsvOrderWriter;
 import util.serialisation.GsonOrderParser;
@@ -17,12 +19,17 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
+
 public class OrderService implements IOrderService {
     @Autowired
+    @Qualifier("orderRepositoryJpa")
     private IOrderRepository orderRepository;
     @Autowired
+    @Qualifier("masterService")
     private IMasterService masterService;
     @Autowired
+    @Qualifier("placeService")
     private IPlaceService placeService;
 
 

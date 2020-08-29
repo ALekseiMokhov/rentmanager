@@ -18,6 +18,7 @@ import java.util.Properties;
 public class DataSourceFactory {
 
     private final static Logger LOGGER = LoggerFactory.getLogger( DataSourceFactory.class );
+    public static DataSourceFactory instance;
     @ConfigProperty(propertyName = "db.name")
     private String DB_NAME;
     @ConfigProperty(propertyName = "h2.url")
@@ -26,8 +27,6 @@ public class DataSourceFactory {
     private String USER;
     @ConfigProperty(propertyName = "h2.password")
     private String PASSWORD;
-
-    public static DataSourceFactory instance;
 
     private DataSourceFactory() {
 
@@ -55,7 +54,7 @@ public class DataSourceFactory {
         return dataSource;
     }
 
-    private  DataSource getMySQLDataSource() {
+    private DataSource getMySQLDataSource() {
         Properties props = new Properties();
         FileInputStream fis = null;
         MysqlDataSource mySqlDataSource = null;
@@ -72,7 +71,7 @@ public class DataSourceFactory {
         return mySqlDataSource;
     }
 
-    private  DataSource getPostgresDataSource() {
+    private DataSource getPostgresDataSource() {
         Properties props = new Properties();
         FileInputStream fis = null;
         PGSimpleDataSource pgDataSource = null;
@@ -89,11 +88,11 @@ public class DataSourceFactory {
         return pgDataSource;
     }
 
-    private  DataSource getH2DataSource() {
+    private DataSource getH2DataSource() {
         JdbcDataSource h2DataSource = new JdbcDataSource();
         h2DataSource.setURL( this.URL );
-        h2DataSource.setUser( this.USER);
-        h2DataSource.setPassword( this.PASSWORD);
+        h2DataSource.setUser( this.USER );
+        h2DataSource.setPassword( this.PASSWORD );
         return h2DataSource;
     }
 

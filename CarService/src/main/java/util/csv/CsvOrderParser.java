@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 public class CsvOrderParser {
 
-    private static File file = new File( "./files/order.csv" );
+    private static final File FILE = new File( "./files/order.csv" );
 
     public static List <Order> load() throws IOException {
-        List <Order> res = parseOrdersFromString( intermediateList( parse( file ) ) );
+        List <Order> res = parseOrdersFromString( intermediateList( parse( FILE ) ) );
         return res;
 
     }

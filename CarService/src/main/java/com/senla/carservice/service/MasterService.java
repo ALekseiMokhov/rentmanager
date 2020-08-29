@@ -2,9 +2,11 @@ package com.senla.carservice.service;
 
 import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.repository.IMasterRepository;
-import dependency.injection.annotations.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import util.calendar.Calendar;
 import util.csv.CsvMasterParser;
 import util.csv.CsvMasterWriter;
@@ -16,9 +18,11 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class MasterService implements IMasterService {
     private final static Logger LOGGER = LoggerFactory.getLogger( MasterService.class );
     @Autowired
+    @Qualifier("masterRepositoryJpa")
     private IMasterRepository repository;
 
     public MasterService() {
@@ -105,8 +109,8 @@ public class MasterService implements IMasterService {
 
     public void setMasterForDate(UUID id, LocalDate date) {
         IMaster master = this.repository.findById( id );
-        if(master.getCalendar()==null){
-            master.setCalendar(new Calendar());
+        if (master.getCalendar() == null) {
+            master.setCalendar( new Calendar() );
         }
         master.getCalendar().setDateForBooking( date );
         this.repository.save( master );
@@ -159,9 +163,9 @@ public class MasterService implements IMasterService {
                     .findFirst()
                     .get();
         } catch (Exception e) {
-            LOGGER.error( e.getMessage() +" ERROR DURING MASTER SEARCHING" );
+            LOGGER.error( e.getMessage() + " ERROR DURING MASTER SEARCHING" );
         }
-       throw new RuntimeException();
+        throw new RuntimeException();
     }
 
 

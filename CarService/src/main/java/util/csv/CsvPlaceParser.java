@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 
 public class CsvPlaceParser {
-    private static File file = new File( "./files/place.csv" );
+    private static final File FILE = new File( "./files/place.csv" );
 
     public static Optional <Place> loadById(UUID id) throws IOException {
         return load().stream()
@@ -21,7 +21,7 @@ public class CsvPlaceParser {
 
     public static List <Place> load() throws IOException {
 
-        List <Place> list = listOfStrings( parse( file ) );
+        List <Place> list = listOfStrings( parse( FILE ) );
 
 
         return list;

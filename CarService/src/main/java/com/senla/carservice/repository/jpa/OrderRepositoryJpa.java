@@ -2,20 +2,23 @@ package com.senla.carservice.repository.jpa;
 
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.repository.IOrderRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
-public class OrderRepositoryJpa /*implements IOrderRepository*/ {
-    private final static Logger LOGGER = LoggerFactory.getLogger( OrderRepositoryJpa.class );
-    /*private EntityManager em;*/
+@Slf4j
+@Service
+public class OrderRepositoryJpa implements IOrderRepository {
+    private EntityManager em;
 
 
     public Order findById(UUID id) {
-       /* em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         Order order = null;
         try {
@@ -23,15 +26,15 @@ public class OrderRepositoryJpa /*implements IOrderRepository*/ {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() + "FROM FIND BY ID METHOD" );
+            log.error( e.getMessage() + "FROM FIND BY ID METHOD" );
         }
-        return order;*/
-        return null;
+        return order;
+
     }
 
 
     public List <Order> findAll() {
-        /*em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <Order> res = new ArrayList <>();
         try {
@@ -40,38 +43,38 @@ public class OrderRepositoryJpa /*implements IOrderRepository*/ {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() + "FROM METHOD FIND ALL()" );
+            log.error( e.getMessage() + "FROM METHOD FIND ALL()" );
         }
-        return res;*/
-        return null;
+        return res;
+
     }
 
 
     public void delete(UUID id) {
-      /*  em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             Query query = em.createQuery( "delete from Order o where o.id=:id" );
             int countOfDeleted = query.setParameter( "id", id ).executeUpdate();
+            log.info( countOfDeleted + "order were deleted" );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() + "FROM DELETE METHOD" );
+            log.error( e.getMessage() + "FROM DELETE METHOD" );
         }
-*/
 
     }
 
 
     public void save(Order order) {
-        /*em = JpaUtil.getEntityManager();
+        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( order );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            LOGGER.error( e.getMessage() + " FROM SAVE METHOD" );
-        }*/
+            log.error( e.getMessage() + " FROM SAVE METHOD" );
+        }
     }
 }

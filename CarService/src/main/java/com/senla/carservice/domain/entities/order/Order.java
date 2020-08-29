@@ -1,32 +1,34 @@
 package com.senla.carservice.domain.entities.order;
 
 import com.senla.carservice.domain.entities.garage.Place;
+import com.senla.carservice.domain.entities.master.AbstractMaster;
 import com.senla.carservice.domain.entities.master.IMaster;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Data
-/*@Entity*/
+@Entity
 @NoArgsConstructor
-/*@Table(name = "orderz")*/
+@Table(name = "orders")
 public class Order {
-/*    @Id
-    @GeneratedValue*/
+    @Id
+    @GeneratedValue
     private UUID id;
-   /* @Version
+    @Version
     private Long version;
-    @Enumerated*/
+    @Enumerated
     private OrderStatus status;
     private LocalDate dateBooked;
     private LocalDate startOfExecution;
     private LocalDate finishOfExecution;
-/*    @OneToMany(targetEntity = AbstractMaster.class)*/
+    @OneToMany(targetEntity = AbstractMaster.class)
     private List <IMaster> masters;
-   /* @OneToOne*/
+    @OneToOne
     private Place place;
 
     public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {

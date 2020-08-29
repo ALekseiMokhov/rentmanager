@@ -14,12 +14,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class CsvPlaceWriter {
-    private static File file = new File( "./files/place.csv" );
+    private static final File FILE = new File( "./files/place.csv" );
 
     public static void writePlace(Place place) throws IOException {
         removeOldPlace( place.getId() );     /* Updating place if its already written*/
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( file, true ) )) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( FILE, true ) )) {
 
             bufferedWriter.append( "\n" );
             bufferedWriter.append( (place.getId()) + "," );
@@ -44,10 +44,10 @@ public class CsvPlaceWriter {
 
     private static void removeOldPlace(UUID id) throws IOException {
         String existingId = String.valueOf( id );
-        List <String> out = Files.lines( file.toPath() )
+        List <String> out = Files.lines( FILE.toPath() )
                 .filter( line -> !line.startsWith( existingId ) )
                 .collect( Collectors.toList() );
-        Files.write( file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
+        Files.write( FILE.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
     }
 
 

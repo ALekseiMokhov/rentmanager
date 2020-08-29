@@ -5,7 +5,6 @@ import com.senla.carservice.domain.entities.master.*;
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.domain.entities.order.OrderStatus;
 import com.senla.carservice.repository.IOrderRepository;
-import dependency.injection.annotations.Qualifier;
 import lombok.SneakyThrows;
 import util.calendar.Calendar;
 
@@ -20,7 +19,7 @@ import java.util.UUID;
 
 import static com.senla.carservice.repository.jdbc.SqlHolder.*;
 
-@Qualifier
+
 public class OrderRepositoryJdbc implements IOrderRepository {
 
 
@@ -198,7 +197,7 @@ public class OrderRepositoryJdbc implements IOrderRepository {
     public void delete(UUID id) {
         try {
             connection = factory.getDatasource().getConnection();
-            statement = connection.prepareStatement( DELETE_ORDER_SQL);
+            statement = connection.prepareStatement( DELETE_ORDER_SQL );
             mastersMapStatement = connection.prepareStatement( DELETE_ORDERS_MASTERS_ID_SQL );
 
             statement.setString( 1, String.valueOf( id ) );

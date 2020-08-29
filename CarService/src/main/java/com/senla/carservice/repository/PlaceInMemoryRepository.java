@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-    @Deprecated
+
+@Deprecated
 public class PlaceInMemoryRepository implements IPlaceRepository {
     private final List <Place> places = new ArrayList <>();
     ;
@@ -46,16 +47,16 @@ public class PlaceInMemoryRepository implements IPlaceRepository {
         if (!this.places.contains( place )) {
             this.places.add( place );
         } else {
-             update( place );
+            update( place );
         }
 
     }
 
-        public void update(Place place) {
-            this.places.set( this.places.indexOf( place ), place );
-        }
+    public void update(Place place) {
+        this.places.set( this.places.indexOf( place ), place );
+    }
 
-        @Override
+    @Override
     public List <Place> findAll() {
         return this.places;
     }
