@@ -4,21 +4,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
-import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+/*@Entity*/
 @Data
 @NoArgsConstructor
 public abstract class AbstractMaster implements IMaster {
-    @Id
-    @GeneratedValue
+  /*  @Id
+    @GeneratedValue*/
     private UUID id;
-    @Embedded
+  /*  @Version
+    private Long version;
+    @Embedded*/
     private Calendar calendar;
     private String fullName;
     private double dailyPayment;
-    @Enumerated
+    /*@Enumerated*/
     private Speciality speciality;
 
     public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {

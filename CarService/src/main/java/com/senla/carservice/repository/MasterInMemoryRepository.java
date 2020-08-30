@@ -1,18 +1,16 @@
 package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.master.IMaster;
-import com.senla.carservice.domain.entities.master.Speciality;
+import dependency.injection.annotations.Qualifier;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-
+   @Deprecated
 public class MasterInMemoryRepository implements IMasterRepository {
     private final List <IMaster> masters = new ArrayList <>();
-    ;
 
     public MasterInMemoryRepository() {
     }
@@ -48,35 +46,6 @@ public class MasterInMemoryRepository implements IMasterRepository {
             this.masters.set( this.masters.indexOf( master ), master );
         }
     }
-
-    public IMaster getBySpeciality(Speciality speciality) {
-        for (IMaster master : masters) {
-            if (master.getSpeciality() == speciality) {
-                return master;
-            }
-        }
-        throw new NoSuchElementException( "There is no masters of required speciality" );
-    }
-
-    public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
-        for (IMaster master : masters) {
-            if (master.getSpeciality() == speciality
-                    && !master.getCalendar().isDateBooked( date )) {
-                return master;
-            }
-        }
-        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
-    }
-
-    public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
-        for (IMaster master : masters) {
-            if (master.getFullName() == name
-                    && master.getSpeciality() == speciality) return master;
-
-        }
-        throw new NoSuchElementException( "There is no Master with required name & skills!" );
-    }
-
 
 }
 

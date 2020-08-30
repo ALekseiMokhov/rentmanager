@@ -2,24 +2,20 @@ package com.senla.carservice.repository.jpa;
 
 import com.senla.carservice.domain.entities.order.Order;
 import com.senla.carservice.repository.IOrderRepository;
-import dependency.injection.annotations.Qualifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Qualifier
-public class OrderRepositoryJpa implements IOrderRepository {
-    private final static Logger LOGGER = LoggerFactory.getLogger( OrderRepositoryJpa.class );
-    private EntityManager em;
 
-    @Override
+public class OrderRepositoryJpa /*implements IOrderRepository*/ {
+    private final static Logger LOGGER = LoggerFactory.getLogger( OrderRepositoryJpa.class );
+    /*private EntityManager em;*/
+
+
     public Order findById(UUID id) {
-        em = JpaUtil.getEntityManager();
+       /* em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         Order order = null;
         try {
@@ -29,12 +25,13 @@ public class OrderRepositoryJpa implements IOrderRepository {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + "FROM FIND BY ID METHOD" );
         }
-        return order;
+        return order;*/
+        return null;
     }
 
-    @Override
+
     public List <Order> findAll() {
-        em = JpaUtil.getEntityManager();
+        /*em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <Order> res = new ArrayList <>();
         try {
@@ -45,12 +42,13 @@ public class OrderRepositoryJpa implements IOrderRepository {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + "FROM METHOD FIND ALL()" );
         }
-        return res;
+        return res;*/
+        return null;
     }
 
-    @Override
+
     public void delete(UUID id) {
-        em = JpaUtil.getEntityManager();
+      /*  em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             Query query = em.createQuery( "delete from Order o where o.id=:id" );
@@ -60,13 +58,13 @@ public class OrderRepositoryJpa implements IOrderRepository {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + "FROM DELETE METHOD" );
         }
-
+*/
 
     }
 
-    @Override
+
     public void save(Order order) {
-        em = JpaUtil.getEntityManager();
+        /*em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( order );
@@ -74,6 +72,6 @@ public class OrderRepositoryJpa implements IOrderRepository {
         } catch (Exception e) {
             em.getTransaction().rollback();
             LOGGER.error( e.getMessage() + " FROM SAVE METHOD" );
-        }
+        }*/
     }
 }

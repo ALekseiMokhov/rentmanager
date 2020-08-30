@@ -25,7 +25,7 @@ public interface IPlaceService {
 
     void savePlace(UUID id);
 
-    void loadPlace(Place place);
+    void mergePlace(Place place);
 
     boolean isPresent(UUID id);
 
@@ -39,8 +39,8 @@ public interface IPlaceService {
 
     void exportToCsv();
 
-    public void loadPlacesFromJson();
+    void loadPlacesFromJson();
 
-    public void exportPlacesToJson();
+    void exportPlacesToJson();
 
 }

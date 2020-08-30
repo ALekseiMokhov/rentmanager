@@ -3,10 +3,9 @@ package com.senla.carservice.domain.entities.master;
 import lombok.NoArgsConstructor;
 import util.calendar.Calendar;
 
-import javax.persistence.Entity;
 import java.util.UUID;
 
-@Entity
+/*@Entity*/
 @NoArgsConstructor
 public class Reshaper extends AbstractMaster {
     public Reshaper(String fullName, double dailiPayment, Calendar calendar, Speciality speciality) {

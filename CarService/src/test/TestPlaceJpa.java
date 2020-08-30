@@ -57,6 +57,6 @@ public class TestPlaceJpa {
         UUID idOld = place.getId();
         place.setId( UUID.randomUUID() );
         repo.save( place );
-        Assertions.assertNotEquals( true, repo.isPresent( idOld ) );
+        Assertions.assertNotEquals( true, repo.findById( idOld ) != null );
     }
 }

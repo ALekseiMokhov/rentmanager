@@ -1,5 +1,6 @@
 package com.senla.carservice.repository;
 
+import com.senla.carservice.domain.entities.garage.Place;
 import com.senla.carservice.domain.entities.order.Order;
 import dependency.injection.annotations.components.Component;
 
@@ -15,4 +16,6 @@ public interface IOrderRepository {
     void delete(UUID id);
 
     void save(Order order);
+
+
 }

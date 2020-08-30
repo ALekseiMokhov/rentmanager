@@ -1,11 +1,12 @@
 package com.senla.carservice.repository;
 
 import com.senla.carservice.domain.entities.order.Order;
+import dependency.injection.annotations.Qualifier;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Deprecated
 public class OrderInMemoryRepository implements IOrderRepository {
     private final List <Order> orders = new ArrayList <>();
 

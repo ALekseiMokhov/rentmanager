@@ -30,6 +30,8 @@ public interface IOrderService {
 
     void completeOrder(UUID id);
 
+    void deleteOrder(UUID id);
+
     List <Order> getOrders();
 
     List <Order> getOrdersByBookedDate(OrderStatus status);
@@ -42,7 +44,7 @@ public interface IOrderService {
 
     void exportToCsv();
 
-    public void loadOrdersFromJson();
+    void loadOrdersFromJson();
 
-    public void exportOrdersToJson();
+    void exportOrdersToJson();
 }

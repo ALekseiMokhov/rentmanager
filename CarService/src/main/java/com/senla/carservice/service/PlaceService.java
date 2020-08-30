@@ -59,6 +59,9 @@ public class PlaceService implements IPlaceService {
 
     public void setPlaceForDate(UUID id, LocalDate date) {
         Place place = this.repository.findById( id );
+        if(place.getCalendar()==null){
+            place.setCalendar( new Calendar() );
+        }
         place.getCalendar().setDateForBooking( date );
         this.repository.save( place );
     }
@@ -67,6 +70,7 @@ public class PlaceService implements IPlaceService {
         Place place = this.repository.findById( id );
         place.setId( newId );
         this.repository.save( place );
+        this.repository.delete( id );
     }
 
     public void setPlaceFree(UUID id, LocalDate date) {
@@ -81,13 +85,13 @@ public class PlaceService implements IPlaceService {
         return place.getId();
     }
 
-    @Override
+
     public boolean isPresent(UUID id) {
-        return this.repository.isPresent( id );
+        return this.repository.findById( id ) != null;
     }
 
     public void savePlace(UUID id) {
-        if (!this.repository.isPresent( id )) {
+        if (!this.isPresent( id )) {
             Place place = new Place( new Calendar() );
             place.setId( id );
             this.repository.save( place );
@@ -95,8 +99,8 @@ public class PlaceService implements IPlaceService {
 
     }
 
-    @Override
-    public void loadPlace(Place place) {
+
+    public void mergePlace(Place place) {
         this.repository.save( place );
     }
 
@@ -125,7 +129,7 @@ public class PlaceService implements IPlaceService {
         try {
             List <Place> list = CsvPlaceParser.load();
             for (Place place : list) {
-                loadPlace( place );
+                mergePlace( place );
             }
             System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {
@@ -153,7 +157,7 @@ public class PlaceService implements IPlaceService {
         try {
             List <Place> list = GsonPlaceParser.load();
             for (Place place : list) {
-                loadPlace( place );
+                mergePlace( place );
             }
 
         } catch (IOException e) {

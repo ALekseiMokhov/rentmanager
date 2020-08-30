@@ -99,11 +99,15 @@ public class MasterService implements IMasterService {
 
     public boolean isBookedForDate(UUID id, LocalDate date) {
         IMaster master = this.repository.findById( id );
+
         return master.getCalendar().isDateBooked( date );
     }
 
     public void setMasterForDate(UUID id, LocalDate date) {
         IMaster master = this.repository.findById( id );
+        if(master.getCalendar()==null){
+            master.setCalendar(new Calendar());
+        }
         master.getCalendar().setDateForBooking( date );
         this.repository.save( master );
     }
@@ -115,7 +119,12 @@ public class MasterService implements IMasterService {
 
     public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
         try {
-            return this.repository.getByNameAndSpeciality( name, speciality );
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getFullName().equals( name ) )
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .findFirst()
+                    .get();
         } catch (NoSuchElementException e) {
 
         }
@@ -125,8 +134,11 @@ public class MasterService implements IMasterService {
     public IMaster getBySpeciality(Speciality speciality) {
 
         try {
-            IMaster master = this.repository.getBySpeciality( speciality );
-            return master;
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .findFirst()
+                    .get();
         } catch (IllegalStateException e) {
 
         }
@@ -138,12 +150,18 @@ public class MasterService implements IMasterService {
     }
 
     public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
+
         try {
-            return this.repository.getFreeBySpeciality( date, speciality );
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
+            return this.repository.findAll()
+                    .stream()
+                    .filter( m -> m.getSpeciality() == speciality )
+                    .filter( m -> m.getCalendar().isDateBooked( date ) == false )
+                    .findFirst()
+                    .get();
+        } catch (Exception e) {
+            LOGGER.error( e.getMessage() +" ERROR DURING MASTER SEARCHING" );
         }
-        throw new NoSuchElementException( "There is no masters of required speciality for the chosen Date!" );
+       throw new RuntimeException();
     }
 
 

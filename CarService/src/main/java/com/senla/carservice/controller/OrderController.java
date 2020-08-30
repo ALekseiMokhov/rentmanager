@@ -53,6 +53,10 @@ public class OrderController {
         this.orderService.completeOrder( id );
     }
 
+    public void deleteOrder(UUID id) {
+        this.orderService.deleteOrder( id );
+    }
+
     public List <Order> getOrders() {
         return this.orderService.getOrders();
     }
