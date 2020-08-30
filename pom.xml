@@ -15,12 +15,13 @@
         <spring.version>5.2.7.RELEASE</spring.version>
     </properties>
     <modules>
-        <module>dependency_injection</module>
+        <module>dependencyInjection</module>
         <module>ui</module>
         <module>property_loader</module>
+        <!--<module>domain</module>-->
     </modules>
     <build>
-        <plugins>
+        <!--<plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -28,7 +29,7 @@
                 <configuration>
                     <configLocation>src/main/resources/checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
-                    <suppressionsLocation> src/main/resources/supressions.xml</suppressionsLocation>
+                    <suppressionsLocation> domain/src/main/resources/supressions.xml</suppressionsLocation>
                 </configuration>
                 <executions>
                     <execution>
@@ -39,7 +40,7 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+        </plugins>-->
     </build>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
@@ -60,6 +61,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
         </dependency>
 
         <dependency>
@@ -133,6 +140,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>5.2.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
 
