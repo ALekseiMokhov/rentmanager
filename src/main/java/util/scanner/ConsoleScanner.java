@@ -1,4 +1,4 @@
-package util;
+package util.scanner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
