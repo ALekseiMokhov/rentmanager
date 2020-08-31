@@ -2,7 +2,11 @@ package spring.config;
 
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,9 +21,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "com.senla.carservice")
+@ComponentScan(basePackages = { "com.senla.carservice", "view", "property_loader" })
 @PropertySource("application.properties")
 @EnableTransactionManagement
+@EnableSpringConfigured
 public class AppConfig {
     @Autowired
     private Environment env;
@@ -28,46 +33,45 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "src/main/java/com.senla.carservice" });
+        em.setDataSource( dataSource() );
+        em.setPackagesToScan( new String[]{ "com.senla.carservice" } );
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
+        em.setJpaVendorAdapter( vendorAdapter );
+        em.setJpaProperties( additionalProperties() );
 
         return em;
     }
 
     @Bean
     public DataSource dataSource() {
-       final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName( Preconditions.checkNotNull( env.getProperty("jdbc.driver") ));
-        dataSource.setUsername( Preconditions.checkNotNull( env.getProperty("jdbc.user")));
-        dataSource.setPassword( Preconditions.checkNotNull( env.getProperty("jdbc.password")));
+        dataSource.setDriverClassName( Preconditions.checkNotNull( env.getProperty( "jdbc.driver" ) ) );
+        dataSource.setUsername( Preconditions.checkNotNull( env.getProperty( "jdbc.user" ) ) );
+        dataSource.setPassword( Preconditions.checkNotNull( env.getProperty( "jdbc.password" ) ) );
         dataSource.setUrl(
-                Preconditions.checkNotNull( env.getProperty("jdbc.url")));
-
+                Preconditions.checkNotNull( env.getProperty( "jdbc.url" ) ) );
         return dataSource;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory( entityManagerFactory().getObject() );
 
         return transactionManager;
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-     Properties additionalProperties() {
+    Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
+        properties.setProperty( "hibernate.dialect", "org.hibernate.dialect.H2Dialect" );
 
         return properties;
     }

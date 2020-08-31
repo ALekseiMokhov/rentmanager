@@ -1,11 +1,11 @@
 package beanfactory;
 
 
+import beanfactory.exceptions.BeanCollisionException;
+import beanfactory.exceptions.BeanInitException;
 import injection.annotations.Autowired;
 import injection.annotations.Qualifier;
 import injection.annotations.components.Component;
-import beanfactory.exceptions.BeanCollisionException;
-import beanfactory.exceptions.BeanInitException;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;

@@ -1,8 +1,9 @@
 package com.senla.carservice.service;
 
 import org.springframework.stereotype.Service;
-import property.configurer.PropertyLoader;
-import property.configurer.PropertyStorage;
+import properties.configurer.PropertyLoader;
+import properties.configurer.PropertyStorage;
+
 
 @Service
 public class ConfigService implements IConfigService {

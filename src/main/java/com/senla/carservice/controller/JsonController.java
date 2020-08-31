@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class JsonController {
+public class JsonController implements IController {
     @Autowired
     private OrderController orderController;
     @Autowired

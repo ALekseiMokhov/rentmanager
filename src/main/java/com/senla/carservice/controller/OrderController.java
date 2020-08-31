@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Component
-public class OrderController {
+public class OrderController implements IController {
     @Autowired
     @Qualifier("orderService")
     private IOrderService orderService;

@@ -13,36 +13,69 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <spring.version>5.2.7.RELEASE</spring.version>
+        <aspectj.version>1.9.6</aspectj.version>
     </properties>
     <modules>
         <module>dependencyInjection</module>
         <module>ui</module>
         <module>property_loader</module>
-        <!--<module>domain</module>-->
+        <module>domain</module>
     </modules>
+
     <build>
-        <!--<plugins>
+        <plugins>
+            <!--      <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-checkstyle-plugin</artifactId>
+                      <version>2.6</version>
+                      <configuration>
+                          <configLocation>src/main/resources/checkstyle.xml</configLocation>
+                          <consoleOutput>true</consoleOutput>
+                          <suppressionsLocation> domain/src/main/resources/supressions.xml</suppressionsLocation>
+                      </configuration>
+                      <executions>
+                          <execution>
+                              <phase>package</phase>
+                              <goals>
+                                  <goal>check</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>-->
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.11</version>
+                <!-- configuration and executions -->
                 <configuration>
-                    <configLocation>src/main/resources/checkstyle.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <suppressionsLocation> domain/src/main/resources/supressions.xml</suppressionsLocation>
+                    <complianceLevel>14</complianceLevel>
+                    <Xlint>ignore</Xlint>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-        </plugins>-->
+        </plugins>
     </build>
     <dependencies>
+
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>ui</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
         <dependency>
             <groupId>org.reflections</groupId>
@@ -134,20 +167,47 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.2.8.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.2.8.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>groupId</groupId>
             <artifactId>domain</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>property_loader</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

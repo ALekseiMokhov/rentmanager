@@ -4,18 +4,17 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
 import org.postgresql.ds.PGSimpleDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import property.configurer.PropertyInjector;
-import property.configurer.PropertyLoader;
-import property.configurer.annotations.ConfigProperty;
+import properties.configurer.PropertyInjector;
+import properties.configurer.PropertyLoader;
+import properties.configurer.annotations.ConfigProperty;
+
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-  @Slf4j
+@Slf4j
 public class DataSourceFactory {
 
     public static DataSourceFactory instance;

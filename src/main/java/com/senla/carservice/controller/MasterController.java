@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Controller
-public class MasterController {
+public class MasterController implements IController {
     @Autowired
     @Qualifier("masterService")
     private IMasterService masterService;

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class PlaceController {
+public class PlaceController implements IController {
     @Autowired
     @Qualifier("placeService")
     private IPlaceService placeService;
