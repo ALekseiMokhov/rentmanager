@@ -2,7 +2,8 @@ package com.senla.carservice.view.master;
 
 
 import com.senla.carservice.controller.MasterController;
-import com.senla.carservice.master.IMaster;
+
+import com.senla.carservice.entity.master.IMaster;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class UnbookMasterAction extends AbstractMasterAction {
             System.out.println( "Enter the id of the master : " );
             id = UUID.fromString( reader.readLine() );
 
-            master = (IMaster) controller.getById( id );
+            master = controller.getById( id );
 
         } catch (IOException | IllegalArgumentException e) {
             System.err.println( "UUID should have proper format!" );

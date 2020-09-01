@@ -1,7 +1,8 @@
 package com.senla.carservice.view.order;
 
 import com.senla.carservice.controller.OrderController;
-import com.senla.carservice.master.Speciality;
+
+import com.senla.carservice.entity.master.Speciality;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;

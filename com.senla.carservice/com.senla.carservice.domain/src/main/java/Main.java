@@ -2,7 +2,8 @@ import com.senla.carservice.controller.IMenuController;
 import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.properties.configurer.PropertyLoader;
 import com.senla.carservice.spring.config.AppConfig;
-import com.senla.carservice.warning.Supressor;
+import com.senla.carservice.util.warning.Supressor;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

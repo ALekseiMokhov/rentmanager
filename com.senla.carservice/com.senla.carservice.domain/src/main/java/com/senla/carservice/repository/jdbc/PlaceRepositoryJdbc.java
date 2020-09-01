@@ -1,8 +1,9 @@
 package com.senla.carservice.repository.jdbc;
 
-import com.senla.carservice.calendar.Calendar;
+
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.repository.IPlaceRepository;
+import com.senla.carservice.util.calendar.Calendar;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;

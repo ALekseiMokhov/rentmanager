@@ -12,13 +12,13 @@
     <artifactId>com.senla.carservice.domain</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.senla</groupId>
+            <groupId>com.senla.carservice</groupId>
             <artifactId>com.senla.carservice.propertyloader</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.senla</groupId>
+            <groupId>com.senla.carservice</groupId>
             <artifactId>com.senla.carservice.dependencyinjection</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

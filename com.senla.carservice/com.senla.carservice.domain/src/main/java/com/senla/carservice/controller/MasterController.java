@@ -1,9 +1,10 @@
 package com.senla.carservice.controller;
 
-import com.senla.carservice.calendar.Calendar;
+
 import com.senla.carservice.entity.master.IMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.service.IMasterService;
+import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

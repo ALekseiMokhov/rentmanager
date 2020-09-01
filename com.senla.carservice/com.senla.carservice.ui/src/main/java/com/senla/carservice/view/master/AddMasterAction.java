@@ -2,6 +2,8 @@ package com.senla.carservice.view.master;
 
 
 import com.senla.carservice.controller.MasterController;
+import com.senla.carservice.entity.master.Speciality;
+import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -11,7 +13,7 @@ public class AddMasterAction extends AbstractMasterAction {
     MasterController controller;
     private String fullName;
     private double salary;
-    private com.senla.carservice.master.Speciality speciality;
+    private Speciality speciality;
 
     @Override
     public void execute() {
@@ -32,8 +34,8 @@ public class AddMasterAction extends AbstractMasterAction {
         System.out.print( controller.getAvailableSpecialities() + " ) :" );
 
         try {
-            speciality = com.senla.carservice.master.Speciality.valueOf( reader.readLine() );
-            controller.addMaster( fullName, salary, new com.senla.carservice.calendar.Calendar(), speciality );
+            speciality = Speciality.valueOf( reader.readLine() );
+            controller.addMaster( fullName, salary, new Calendar(), speciality );
             System.out.println( "Master " + fullName + " was successfully added!" );
 
         } catch (IOException | IllegalArgumentException e) {

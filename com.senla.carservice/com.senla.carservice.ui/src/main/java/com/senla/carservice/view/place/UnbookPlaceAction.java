@@ -1,7 +1,7 @@
 package com.senla.carservice.view.place;
 
 import com.senla.carservice.controller.PlaceController;
-import com.senla.carservice.scanner.ConsoleScanner;
+import com.senla.carservice.util.scanner.ConsoleScanner;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;

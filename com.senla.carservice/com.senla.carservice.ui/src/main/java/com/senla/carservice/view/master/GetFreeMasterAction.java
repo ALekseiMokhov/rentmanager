@@ -2,6 +2,8 @@ package com.senla.carservice.view.master;
 
 
 import com.senla.carservice.controller.MasterController;
+import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.Speciality;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -11,15 +13,15 @@ public class GetFreeMasterAction extends AbstractMasterAction {
     @Autowired
     MasterController controller;
     private LocalDate date;
-    private com.senla.carservice.master.IMaster master;
-    private com.senla.carservice.master.Speciality speciality;
+    private IMaster master;
+    private Speciality speciality;
 
     @Override
     public void execute() {
 
         System.out.println( "Enter speciality: " );
         try {
-            speciality = com.senla.carservice.master.Speciality.valueOf( reader.readLine() );
+            speciality = Speciality.valueOf( reader.readLine() );
         } catch (IOException | IllegalArgumentException e) {
             System.err.println( "There is no chosen speciality available!" );
         }

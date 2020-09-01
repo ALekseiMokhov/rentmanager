@@ -1,8 +1,9 @@
 package com.senla.carservice.view.master;
 
 import com.senla.carservice.controller.MasterController;
-import com.senla.carservice.master.IMaster;
-import com.senla.carservice.master.Speciality;
+
+import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.Speciality;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.io.IOException;
 public class GetByNameAndSpecialityAction extends AbstractMasterAction {
     @Autowired
     MasterController controller;
-    com.senla.carservice.master.Speciality speciality;
+    Speciality speciality;
     private String fullName;
     private IMaster master;
 

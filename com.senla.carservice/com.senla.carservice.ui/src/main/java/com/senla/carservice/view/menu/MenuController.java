@@ -23,7 +23,7 @@ public class MenuController implements  ApplicationContextAware, IMenuController
 
         builder = new Builder();
         PropertyInjector.injectProperty( builder );
-        /*builder.setApplicationContext( this.context );*/
+        builder.setApplicationContext( this.context );
 
 
         navigator = new Navigator(

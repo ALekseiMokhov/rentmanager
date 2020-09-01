@@ -61,6 +61,8 @@ public class OrderService implements IOrderService {
             this.orderRepository.save( order );
         } catch (Exception e) {
             log.error("failed to save order! "+e);
+            throw new RuntimeException();
+
         }
 
     }
@@ -74,6 +76,8 @@ public class OrderService implements IOrderService {
             this.orderRepository.save( new Order( id, date, startOfExecution, place, masters ) );
         } catch (Exception e) {
             log.error("failed to save order! " +e);
+            throw new RuntimeException();
+
         }
 
 
@@ -86,6 +90,8 @@ public class OrderService implements IOrderService {
             this.orderRepository.save( order );
         } catch (Exception e) {
             log.error("failed to save order! " +e);
+            throw new RuntimeException();
+
         }
     }
 
@@ -94,13 +100,20 @@ public class OrderService implements IOrderService {
             return this.orderRepository.findById( id );
         } catch (Exception e) {
             log.error("failed to save order! "+e);
-        }
+            throw new RuntimeException();
 
+        }
     }
 
     @Override
     public void deleteOrder(UUID id) {
-        this.orderRepository.delete( id );
+        try {
+            this.orderRepository.delete( id );
+        } catch (Exception e) {
+            log.error( "failed  to delete order! " +e);
+            throw new RuntimeException();
+
+        }
     }
 
     public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
@@ -132,7 +145,13 @@ public class OrderService implements IOrderService {
         order.setPlace( newPlace );
         order.setMasters( newMasters );
         order.setStartOfExecution( newDate );
-        this.orderRepository.save( order );
+        try {
+            this.orderRepository.save( order );
+        } catch (Exception e) {
+            log.error( "failed to save order!" +e);
+            throw new RuntimeException();
+
+        }
 
     }
 
@@ -151,7 +170,13 @@ public class OrderService implements IOrderService {
             this.masterService.saveMaster( master );
         }
         order.setMasters( newMasters );
-        this.orderRepository.save( order );
+        try {
+            this.orderRepository.save( order );
+        } catch (Exception e) {
+            log.error( "failed to save order! " +e);
+            throw new RuntimeException();
+
+        }
 
     }
 
@@ -169,7 +194,14 @@ public class OrderService implements IOrderService {
                 this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
                 this.placeService.savePlace( place.getId() );
 
-                this.orderRepository.save( order );
+                try {
+                    this.orderRepository.save( order );
+                } catch (Exception e) {
+                    log.error( "failed to save order! " +e);
+                    throw new RuntimeException();
+
+
+                }
             }
         }
 
@@ -188,7 +220,13 @@ public class OrderService implements IOrderService {
 
                 order.setStatus( OrderStatus.COMPLETED );
                 order.setFinishOfExecution( LocalDate.now() );
-                this.orderRepository.save( order );
+                try {
+                    this.orderRepository.save( order );
+                } catch (Exception e) {
+                    log.error( "failed to save order! " +e);
+                    throw new RuntimeException();
+
+                }
             }
         }
 
@@ -197,10 +235,17 @@ public class OrderService implements IOrderService {
     public List <Order> getOrders() {
         return this.orderRepository.findAll();
     }
-
+    /*TODO add to ui*/
     public List <Order> getOrdersByPrice(OrderStatus status) {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
-        List <Order> sortedList = this.orderRepository.findAll();
+        List <Order> sortedList = null;
+        try {
+            sortedList = this.orderRepository.findAll();
+        } catch (Exception e) {
+            log.error( "failed to find orders! " +e);
+            throw new RuntimeException();
+
+        }
         Collections.sort( sortedList, priceComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -209,7 +254,14 @@ public class OrderService implements IOrderService {
 
     public List <Order> getOrdersByBookedDate(OrderStatus status) {
         Comparator <Order> dateOfBookingComparator = Comparator.comparing( o -> o.getDateBooked() );
-        List <Order> sortedList = this.orderRepository.findAll();
+        List <Order> sortedList = null;
+        try {
+            sortedList = this.orderRepository.findAll();
+        } catch (Exception e) {
+            log.error( "failed to find orders! " +e);
+            throw new RuntimeException();
+
+        }
         Collections.sort( sortedList, dateOfBookingComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status ).collect( Collectors.toList() );
@@ -217,7 +269,14 @@ public class OrderService implements IOrderService {
 
     public List <Order> getOrdersByExecutionDate(OrderStatus status) {
         Comparator <Order> dateOfExecutionComparator = Comparator.comparing( o -> o.getStartOfExecution() );
-        List <Order> sortedList = this.orderRepository.findAll();
+        List <Order> sortedList = null;
+        try {
+            sortedList = this.orderRepository.findAll();
+        } catch (Exception e) {
+            log.error( "failed to find orders! " +e);
+            throw new RuntimeException();
+
+        }
         Collections.sort( sortedList, dateOfExecutionComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -225,7 +284,15 @@ public class OrderService implements IOrderService {
     }
 
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
-        return this.orderRepository.findAll().stream()
+        List<Order> res = null;
+        try {
+            res = this.orderRepository.findAll();
+        } catch (Exception e) {
+            log.error( "failed to find orders! " +e);
+            throw new RuntimeException();
+
+        }
+        return res.stream()
                 .filter( o -> o.getStartOfExecution()
                         .compareTo( start ) >= 0 && o.getFinishOfExecution().compareTo( end ) <= 0 )
                 .collect( Collectors.toList() );
@@ -240,6 +307,8 @@ public class OrderService implements IOrderService {
             }
         } catch (IOException e) {
             log.error( "Check a path to the file!" );
+            throw new RuntimeException();
+
         }
     }
 

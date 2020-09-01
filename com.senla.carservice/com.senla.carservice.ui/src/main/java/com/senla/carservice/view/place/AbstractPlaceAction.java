@@ -2,6 +2,7 @@ package com.senla.carservice.view.place;
 
 
 
+import com.senla.carservice.util.scanner.ConsoleScanner;
 import com.senla.carservice.view.action.IAction;
 
 import java.io.BufferedReader;
@@ -9,7 +10,7 @@ import java.io.BufferedReader;
 
 public abstract class AbstractPlaceAction implements IAction {
 
-    protected BufferedReader reader = com.senla.carservice.scanner.ConsoleScanner.getInstance().getReader();
+    protected BufferedReader reader = ConsoleScanner.getInstance().getReader();
 
 
 }
