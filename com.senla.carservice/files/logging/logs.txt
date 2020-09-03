@@ -12,3 +12,36 @@
 2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
 2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
 2020-09-03 09:43:31 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 15:57:14 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 18:31:57 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:32:02 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:32:19 ERROR Navigator:80 - Text '' could not be parsed at index 0
+java.time.format.DateTimeParseException: Text '' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2050)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1952)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:429)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:414)
+	at com.senla.carservice.view.master.BookMasterAction.execute(BookMasterAction.java:29)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:58)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)

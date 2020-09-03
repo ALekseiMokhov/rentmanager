@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import java.io.IOException;
 
 @Controller
-public class MenuController  {
+public class MenuController {
     @Autowired
     private ApplicationContext context;
     private Navigator navigator;

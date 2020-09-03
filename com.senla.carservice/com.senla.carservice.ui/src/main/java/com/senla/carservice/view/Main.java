@@ -25,7 +25,7 @@ public class Main {
                 context.getBean( JsonController.class );
         jsonController.loadFromJson();
 
-        MenuController menuController =  context.getBean( MenuController.class );
+        MenuController menuController = context.getBean( MenuController.class );
         menuController.run();
 
     }
