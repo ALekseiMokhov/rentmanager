@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
-
 public class BeanFactory {
     private static final BeanFactory INSTANCE = new BeanFactory();
     private static final Logger LOGGER = LoggerFactory.getLogger( BeanFactory.class.getClass() );

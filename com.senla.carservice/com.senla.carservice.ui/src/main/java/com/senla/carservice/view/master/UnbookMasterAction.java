@@ -2,7 +2,6 @@ package com.senla.carservice.view.master;
 
 
 import com.senla.carservice.controller.MasterController;
-
 import com.senla.carservice.entity.master.IMaster;
 import org.springframework.beans.factory.annotation.Autowired;
 

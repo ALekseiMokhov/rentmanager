@@ -44,7 +44,7 @@ public class PlaceService implements IPlaceService {
             try {
                 this.repository.save( new Place( new Calendar() ) );
             } catch (Exception e) {
-                log.error( "failed to add place! " +e);
+                log.error( "failed to add place! " + e );
             }
 
 
@@ -52,11 +52,11 @@ public class PlaceService implements IPlaceService {
     }
 
     public List <Place> getFreePlacesForDate(LocalDate date) {
-        List<Place>res = null;
+        List <Place> res = null;
         try {
             res = this.repository.findAll();
         } catch (Exception e) {
-            log.error( "failed to find all places! " +e);
+            log.error( "failed to find all places! " + e );
             throw new RuntimeException();
         }
         return res.stream()
@@ -69,7 +69,7 @@ public class PlaceService implements IPlaceService {
         try {
             place = this.repository.findById( id );
         } catch (Exception e) {
-            log.error( "failed to find place by id! " +e);
+            log.error( "failed to find place by id! " + e );
             throw new RuntimeException();
 
         }
@@ -87,7 +87,7 @@ public class PlaceService implements IPlaceService {
         try {
             this.repository.save( place );
         } catch (Exception e) {
-            log.error( "failed to save place! " +e);
+            log.error( "failed to save place! " + e );
             throw new RuntimeException();
         }
     }
@@ -99,7 +99,7 @@ public class PlaceService implements IPlaceService {
             this.repository.save( place );
             this.repository.delete( id );
         } catch (Exception e) {
-            log.error( "failed to update place! " +e);
+            log.error( "failed to update place! " + e );
             throw new RuntimeException();
         }
     }
@@ -110,7 +110,7 @@ public class PlaceService implements IPlaceService {
         try {
             this.repository.save( place );
         } catch (Exception e) {
-            log.error( "failed to update all place! " +e);
+            log.error( "failed to update all place! " + e );
             throw new RuntimeException();
         }
     }
@@ -120,7 +120,7 @@ public class PlaceService implements IPlaceService {
         try {
             this.repository.save( place );
         } catch (Exception e) {
-            log.error( "failed to add place! " +e);
+            log.error( "failed to add place! " + e );
             throw new RuntimeException();
         }
         return place.getId();
@@ -139,7 +139,7 @@ public class PlaceService implements IPlaceService {
                 this.repository.save( place );
             } else this.repository.save( this.repository.findById( id ) );
         } catch (Exception e) {
-            log.error( "failed to save place! " +e);
+            log.error( "failed to save place! " + e );
             throw new RuntimeException();
         }
 
@@ -150,17 +150,17 @@ public class PlaceService implements IPlaceService {
         try {
             this.repository.save( place );
         } catch (Exception e) {
-            log.error( "failed to merge place! " +e);
+            log.error( "failed to merge place! " + e );
             throw new RuntimeException();
         }
     }
 
     public Place getFreePlace(LocalDate date) {
-        List<Place>res  = null;
+        List <Place> res = null;
         try {
             res = this.repository.findAll();
         } catch (Exception e) {
-            log.error( "failed to find places! " +e);
+            log.error( "failed to find places! " + e );
             throw new RuntimeException();
         }
         for (Place place : res) {
@@ -177,7 +177,7 @@ public class PlaceService implements IPlaceService {
         try {
             return this.repository.findById( id );
         } catch (Exception e) {
-            log.error( "failed to get place! " +e);
+            log.error( "failed to get place! " + e );
             throw new RuntimeException();
         }
     }
@@ -191,7 +191,7 @@ public class PlaceService implements IPlaceService {
             }
             System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {
-            log.error( "failed to load places from csv! " +e);
+            log.error( "failed to load places from csv! " + e );
             throw new RuntimeException();
         }
 
@@ -206,7 +206,7 @@ public class PlaceService implements IPlaceService {
             System.out.println( this.repository.findAll().size() + " places were successfully written to csv file!" );
 
         } catch (IOException e) {
-            log.error( "There is a problem with export!Check path to the file! " +e);
+            log.error( "There is a problem with export!Check path to the file! " + e );
             throw new RuntimeException();
         }
 
@@ -221,7 +221,7 @@ public class PlaceService implements IPlaceService {
             }
 
         } catch (IOException e) {
-            log.error( "There is a problem with import!Check path to the file! " +e);
+            log.error( "There is a problem with import!Check path to the file! " + e );
             throw new RuntimeException();
         }
     }
@@ -231,7 +231,7 @@ public class PlaceService implements IPlaceService {
         try {
             GsonPlaceWriter.serializePlaces( this.repository.findAll() );
         } catch (IOException e) {
-            log.error( "There is a problem with export!Check path to the file! " +e);
+            log.error( "There is a problem with export!Check path to the file! " + e );
             throw new RuntimeException();
         }
     }

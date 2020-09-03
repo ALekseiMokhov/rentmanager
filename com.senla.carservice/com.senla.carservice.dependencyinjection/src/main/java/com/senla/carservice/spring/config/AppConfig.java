@@ -34,7 +34,7 @@ public class AppConfig {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource( dataSource() );
-        em.setPackagesToScan( new String[]{ "com.senla.carservice" } );
+        em.setPackagesToScan( "com.senla.carservice" );
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter( vendorAdapter );

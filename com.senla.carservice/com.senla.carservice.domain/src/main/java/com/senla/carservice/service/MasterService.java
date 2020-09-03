@@ -9,8 +9,6 @@ import com.senla.carservice.util.csv.CsvMasterWriter;
 import com.senla.carservice.util.serialisation.GsonMasterParser;
 import com.senla.carservice.util.serialisation.GsonMasterWriter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -34,7 +32,7 @@ public class MasterService implements IMasterService {
         try {
             this.repository.save( master );
         } catch (Exception e) {
-            log.error( " failed to save master! " +e);
+            log.error( " failed to save master! " + e );
         }
 
     }
@@ -108,7 +106,7 @@ public class MasterService implements IMasterService {
         try {
             return this.repository.findById( id );
         } catch (Exception e) {
-            log.error( "failed to find master by id! " +e);
+            log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
         }
     }
@@ -118,7 +116,7 @@ public class MasterService implements IMasterService {
         try {
             master = this.repository.findById( id );
         } catch (Exception e) {
-            log.error( "failed to find master by id! " +e);
+            log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
         }
 
@@ -130,7 +128,7 @@ public class MasterService implements IMasterService {
         try {
             master = this.repository.findById( id );
         } catch (Exception e) {
-            log.error( "failed to find master by id! " +e);
+            log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
         }
         if (master.getCalendar() == null) {
@@ -140,7 +138,7 @@ public class MasterService implements IMasterService {
         try {
             this.repository.save( master );
         } catch (Exception e) {
-            log.error( "failed to save master ! " +e);
+            log.error( "failed to save master ! " + e );
         }
     }
 
@@ -158,7 +156,7 @@ public class MasterService implements IMasterService {
                     .findFirst()
                     .get();
         } catch (NoSuchElementException e) {
-            log.error( "There is no required master ! " +e);
+            log.error( "There is no required master ! " + e );
             throw new RuntimeException();
         }
 
@@ -173,7 +171,7 @@ public class MasterService implements IMasterService {
                     .findFirst()
                     .get();
         } catch (IllegalStateException e) {
-            log.error( "failed to find master by speciality! " +e);
+            log.error( "failed to find master by speciality! " + e );
             throw new RuntimeException();
         }
 
@@ -193,7 +191,7 @@ public class MasterService implements IMasterService {
                     .findFirst()
                     .get();
         } catch (Exception e) {
-            log.error( "failed to find all masters of chosen specialities for the date" +e);
+            log.error( "failed to find all masters of chosen specialities for the date" + e );
             throw new RuntimeException();
         }
 
@@ -206,7 +204,7 @@ public class MasterService implements IMasterService {
         try {
             sortedList = this.repository.findAll();
         } catch (Exception e) {
-            log.error( "failed to find all masters " +e);
+            log.error( "failed to find all masters " + e );
             throw new RuntimeException();
         }
         Collections.sort( sortedList, comparator );
@@ -214,11 +212,11 @@ public class MasterService implements IMasterService {
     }
 
     public List <IMaster> getFreeMasters(LocalDate date) {
-        List<IMaster> res = null;
+        List <IMaster> res = null;
         try {
             res = this.repository.findAll();
         } catch (Exception e) {
-            log.error( "failed to find all masters " +e);
+            log.error( "failed to find all masters " + e );
             throw new RuntimeException();
         }
         return res.stream()
@@ -232,7 +230,7 @@ public class MasterService implements IMasterService {
                     .filter( ((m) -> m.getSpeciality() == speciality) )
                     .collect( Collectors.toList() );
         } catch (IllegalStateException e) {
-            log.error( "failed to find all masters " +e);
+            log.error( "failed to find all masters " + e );
             throw new RuntimeException();
         }
 
@@ -246,7 +244,7 @@ public class MasterService implements IMasterService {
                 this.repository.save( master );
             }
         } catch (IOException e) {
-            log.error( "failed to load masters to csv! " +e);
+            log.error( "failed to load masters to csv! " + e );
             throw new RuntimeException();
         }
     }
@@ -257,7 +255,7 @@ public class MasterService implements IMasterService {
             CsvMasterWriter.writeMasters( getMastersByAlphabet() );
             System.out.println( getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
         } catch (IOException e) {
-            log.error( "failed to  write masters to csv! " +e);
+            log.error( "failed to  write masters to csv! " + e );
             throw new RuntimeException();
 
         }
@@ -272,7 +270,7 @@ public class MasterService implements IMasterService {
             }
 
         } catch (IOException e) {
-            log.error( "failed to load masters from json! " +e);
+            log.error( "failed to load masters from json! " + e );
             throw new RuntimeException();
         }
 
@@ -285,7 +283,7 @@ public class MasterService implements IMasterService {
             GsonMasterWriter.serializeMasters( getMastersByAlphabet() );
 
         } catch (IOException e) {
-            log.error( "failed to export  masters to json! " +e);
+            log.error( "failed to export  masters to json! " + e );
             throw new RuntimeException();
 
         }

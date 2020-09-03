@@ -1,9 +1,10 @@
-import com.senla.carservice.controller.IMenuController;
+package com.senla.carservice.view;
+
 import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.properties.configurer.PropertyLoader;
 import com.senla.carservice.spring.config.AppConfig;
 import com.senla.carservice.util.warning.Supressor;
-
+import com.senla.carservice.view.menu.MenuController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -21,11 +22,10 @@ public class Main {
         }
 
         JsonController jsonController =
-                (JsonController) context.getBean( "jsonController" );
+                context.getBean( JsonController.class );
         jsonController.loadFromJson();
 
-        IMenuController menuController = (IMenuController) context.getBean( "menuController" );
-        menuController.setApplicationContext( context );
+        MenuController menuController =  context.getBean( MenuController.class );
         menuController.run();
 
     }

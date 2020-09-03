@@ -1,7 +1,6 @@
 package com.senla.carservice.view.order;
 
 
-
 import com.senla.carservice.util.scanner.ConsoleScanner;
 import com.senla.carservice.view.action.IAction;
 

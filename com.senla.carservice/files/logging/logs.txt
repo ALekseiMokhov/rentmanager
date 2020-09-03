@@ -1,0 +1,14 @@
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:34:38 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:43:31 INFO  AddPlacesAction:18 - Is controller null : false

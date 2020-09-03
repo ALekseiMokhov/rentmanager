@@ -127,7 +127,7 @@ public class Builder {
     }
 
     public Menu buildAccessMenu() {
-       Menu accessMenu = new Menu();
+        Menu accessMenu = new Menu();
         accessMenu.setName( "Access menu" );
         addItem( accessMenu, new AccessMenuItem(), "Permission to data modification", true );
         addItem( accessMenu, new RootMenuItem(), "Root menu", true );
