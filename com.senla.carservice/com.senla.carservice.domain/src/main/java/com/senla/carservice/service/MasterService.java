@@ -289,6 +289,9 @@ public class MasterService implements IMasterService {
         }
     }
 
-
+    @Override
+    public void deleteMaster(UUID id) {
+        this.repository.delete( id );
+    }
 }
 

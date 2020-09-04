@@ -51,4 +51,6 @@ public interface IMasterService {
     void loadMastersFromJson();
 
     void exportMastersToJson();
+
+    void deleteMaster(UUID id) ;
 }

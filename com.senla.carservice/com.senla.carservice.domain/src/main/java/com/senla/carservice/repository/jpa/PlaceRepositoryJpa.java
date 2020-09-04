@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,14 +17,18 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class PlaceRepositoryJpa implements IPlaceRepository {
-    private EntityManager em;
-
+    private final EntityManager em = JpaUtil.getEntityManager();;
+    private final CriteriaBuilder builder = em.getCriteriaBuilder();
+    private final CriteriaQuery <Place> criteriaQuery = builder.createQuery(Place.class);
+    private final Root <Place> root = criteriaQuery.from( Place.class );
+    private final CriteriaDelete <Place> criteriaDeleteQuery = this.builder.createCriteriaDelete( Place.class ) ;
+    private final Root<Place>deleteRoot = criteriaDeleteQuery.from( Place.class )  ;
 
     public Place findById(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         Place place = null;
         try {
+
             place = em.find( Place.class, id );
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -34,12 +41,11 @@ public class PlaceRepositoryJpa implements IPlaceRepository {
 
 
     public List <Place> findAll() {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <Place> res = new ArrayList <>();
         try {
-            Query query = em.createQuery( "select p from Place p" );
-            res = query.getResultList();
+
+            res =  em.createQuery( this.criteriaQuery ) .getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -52,22 +58,22 @@ public class PlaceRepositoryJpa implements IPlaceRepository {
 
 
     public void delete(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery( "delete from Place p where p.id=:p" );
-            int countOfDeleted = query.setParameter( "p", id ).executeUpdate();
+            this.criteriaDeleteQuery.where( this.builder.equal( this.deleteRoot.get( "id" ),id));
+            int result = em.createQuery( this.criteriaDeleteQuery ).executeUpdate();
+            System.out.println("entities deleted: " + result);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            log.error( e.getMessage() );
+            log.error( e.getMessage()  );
+            e.printStackTrace();
         }
 
     }
 
 
     public void save(Place place) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( place );

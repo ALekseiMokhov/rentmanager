@@ -236,5 +236,8 @@ public class PlaceService implements IPlaceService {
         }
     }
 
-
+    @Override
+    public void deletePlace(UUID id) {
+        this.repository.delete( id );
+    }
 }

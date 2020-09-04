@@ -1,6 +1,7 @@
 package com.senla.carservice.repository.jpa;
 
 
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.repository.IOrderRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -15,11 +20,14 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class OrderRepositoryJpa implements IOrderRepository {
-    private EntityManager em;
-
+    private final EntityManager em = JpaUtil.getEntityManager();;
+    private final CriteriaBuilder builder = em.getCriteriaBuilder();
+    private final CriteriaQuery <Order> criteriaQuery = builder.createQuery(Order.class);
+    private final Root <Order> root = criteriaQuery.from( Order.class );
+    private final CriteriaDelete <Order> criteriaDeleteQuery = this.builder.createCriteriaDelete( Order.class ) ;
+    private final Root<Order>deleteRoot = criteriaDeleteQuery.from( Order.class )  ;
 
     public Order findById(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         Order order = null;
         try {
@@ -35,12 +43,10 @@ public class OrderRepositoryJpa implements IOrderRepository {
 
 
     public List <Order> findAll() {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <Order> res = new ArrayList <>();
         try {
-            Query query = em.createQuery( "select o from Order o" );
-            res = query.getResultList();
+            res.addAll( em.createQuery(this.criteriaQuery  ).getResultList() );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -52,12 +58,11 @@ public class OrderRepositoryJpa implements IOrderRepository {
 
 
     public void delete(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery( "delete from Order o where o.id=:id" );
-            int countOfDeleted = query.setParameter( "id", id ).executeUpdate();
-            log.info( countOfDeleted + "order were deleted" );
+            this.criteriaDeleteQuery.where( this.builder.equal( this.deleteRoot.get( "id" ),id ) );
+            int result = em.createQuery( this.criteriaDeleteQuery ).executeUpdate();
+            System.out.println("entities deleted: " + result);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -68,7 +73,6 @@ public class OrderRepositoryJpa implements IOrderRepository {
 
 
     public void save(Order order) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( order );

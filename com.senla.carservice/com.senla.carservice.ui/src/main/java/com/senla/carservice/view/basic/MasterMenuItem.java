@@ -21,7 +21,8 @@ public class MasterMenuItem implements IAction {
         System.out.println( " |-print '12' to find all available specialities" );
         System.out.println( " |-print '13' to write all masters to csv file" );
         System.out.println( " |-print '14' to load all masters from csv file" );
-        System.out.println( " |-print '15' to go back to the RootMenu" );
-        System.out.println( " |-print '16' if you want to exit Application" );
+        System.out.println( " |-print '15' to delete Master by id" );
+        System.out.println( " |-print '16' to go back to the RootMenu" );
+        System.out.println( " |-print '17' if you want to exit Application" );
     }
 }

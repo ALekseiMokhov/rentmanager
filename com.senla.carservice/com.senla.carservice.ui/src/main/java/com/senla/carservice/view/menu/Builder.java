@@ -55,6 +55,7 @@ public class Builder {
         addItem( placeMenu, new SetPlaceIdAction(), "set custom id for the Place", isGarageModificationPermitted );
         addItem( placeMenu, new ImportPlacesAction(), "load places to csv file", isGarageModificationPermitted );
         addItem( placeMenu, new ExportPlacesAction(), "load places from csv file", isGarageModificationPermitted );
+        addItem( placeMenu, new DeletePlaceAction(), "delete place by id", isGarageModificationPermitted );
         addItem( placeMenu, new RootMenuItem(), "Root menu", true );
         addItem( placeMenu, new ExitItem(), "Exit", true );
 
@@ -88,6 +89,7 @@ public class Builder {
         addItem( masterMenu, new GetSpecialitiesAction(), "find all available specialities", true );
         addItem( masterMenu, new ExportMastersAction(), "load masters to csv file", isMasterModificationPermitted );
         addItem( masterMenu, new ImportMastersAction(), "load masters from csv file", isMasterModificationPermitted );
+        addItem( masterMenu, new DeleteMasterAction(), "delete master by id", isGarageModificationPermitted );
         addItem( masterMenu, new RootMenuItem(), "Root menu", true );
         addItem( masterMenu, new ExitItem(), "Exit", true );
         for (MenuItem menuItem : masterMenu.getMenuItems()) {

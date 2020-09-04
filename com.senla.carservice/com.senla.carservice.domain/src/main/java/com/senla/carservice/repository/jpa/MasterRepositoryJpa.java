@@ -8,7 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,11 +19,14 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class MasterRepositoryJpa implements IMasterRepository {
-    private EntityManager em;
-
+    private final EntityManager em = JpaUtil.getEntityManager();;
+    private final CriteriaBuilder builder = em.getCriteriaBuilder();
+    private final CriteriaQuery <AbstractMaster> criteriaQuery = builder.createQuery(AbstractMaster.class);
+    private final Root <AbstractMaster> root = criteriaQuery.from( AbstractMaster.class );
+    private final CriteriaDelete <AbstractMaster> criteriaDeleteQuery = this.builder.createCriteriaDelete( AbstractMaster.class ) ;
+    private final Root<AbstractMaster>deleteRoot = criteriaDeleteQuery.from( AbstractMaster.class )  ;
 
     public IMaster findById(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         IMaster master = null;
         try {
@@ -37,12 +43,11 @@ public class MasterRepositoryJpa implements IMasterRepository {
 
 
     public List <IMaster> findAll() {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         List <IMaster> res = new ArrayList <>();
         try {
-            Query query = em.createQuery( "select m from AbstractMaster m" );
-            res = query.getResultList();
+
+             res.addAll( em.createQuery( this.criteriaQuery ).getResultList()  );
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -54,21 +59,21 @@ public class MasterRepositoryJpa implements IMasterRepository {
 
 
     public void delete(UUID id) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery( "delete from AbstractMaster m where m.id=:p" );
-            int countOfDeleted = query.setParameter( "p", id ).executeUpdate();
+            this.criteriaDeleteQuery.where( this.builder.equal( this.deleteRoot.get( "id" ),id ) );
+            int result = em.createQuery( this.criteriaDeleteQuery ).executeUpdate();
+            System.out.println("entities deleted: " + result);
+
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            log.error( e.getMessage() );
+            log.error( e.getMessage() +"FROM DELETE METHOD");
         }
 
     }
 
     public void save(IMaster master) {
-        em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         try {
             em.merge( master );

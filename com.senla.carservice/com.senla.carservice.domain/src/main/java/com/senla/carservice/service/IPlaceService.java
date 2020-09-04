@@ -45,4 +45,6 @@ public interface IPlaceService {
 
     void exportPlacesToJson();
 
+    void deletePlace(UUID id);
+
 }

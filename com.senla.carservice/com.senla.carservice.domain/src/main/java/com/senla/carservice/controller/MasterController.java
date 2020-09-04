@@ -104,4 +104,6 @@ public class MasterController implements IController {
     public void exportToJson() {
         this.masterService.exportMastersToJson();
     }
+
+    public void deleteMaster(UUID id){this.masterService.deleteMaster(id);}
 }
