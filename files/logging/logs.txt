@@ -1170,3 +1170,244 @@
 2020-08-25 09:24:55 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
 2020-08-25 09:24:55 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
 2020-08-25 09:24:55 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 15:55:13 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 15:55:13 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 15:55:13 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 15:55:13 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 15:55:21 ERROR Class:81 - There is some error in Navigator: 
+2020-08-26 16:21:54 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 16:21:54 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 16:21:54 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 16:21:54 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 16:21:58 ERROR Class:81 - There is some error in Navigator: 
+2020-08-26 16:22:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 16:22:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 16:22:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 16:22:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 16:22:53 ERROR Class:81 - There is some error in Navigator: 
+2020-08-26 16:23:52 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 16:23:52 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 16:23:52 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 16:23:52 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 16:23:57 ERROR Class:81 - There is some error in Navigator: 
+2020-08-26 16:24:02 ERROR Class:81 - There is some error in Navigator: 
+2020-08-26 16:39:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 16:39:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 16:39:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 16:39:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 16:40:04 ERROR Navigator:81 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:75)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:63)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:35)
+	at Main.main(Main.java:34)
+2020-08-26 16:40:11 ERROR Navigator:81 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:75)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:63)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:82)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:63)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:35)
+	at Main.main(Main.java:34)
+2020-08-26 16:45:26 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 16:45:26 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 16:45:26 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 16:45:26 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 16:45:39 ERROR Navigator:81 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.order.GetOrdersAction.execute(GetOrdersAction.java:7)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:75)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:67)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:55)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:63)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:35)
+	at Main.main(Main.java:34)
+2020-08-26 17:17:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 17:17:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 17:17:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 17:17:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 17:31:40 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 17:31:40 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 17:31:40 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 17:31:40 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 17:33:38 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 17:33:38 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 17:33:38 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 17:33:38 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 17:35:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 17:35:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 17:35:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 17:35:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:07:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:07:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:07:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:07:58 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:12:41 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:12:41 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:12:41 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:12:41 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:48:59 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:48:59 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:48:59 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:48:59 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:49:23 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:49:23 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:49:23 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:49:23 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:49:39 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:49:39 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:49:39 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:49:39 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 18:49:54 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-26 18:51:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 18:51:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 18:51:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 18:51:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:03:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:03:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:03:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:03:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:08:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:08:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:08:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:08:37 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:09:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:09:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:09:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:09:50 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:13:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:13:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:13:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:13:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:14:45 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:14:45 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:14:45 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:14:45 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:22:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 19:22:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 19:22:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 19:22:15 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 19:22:35 ERROR Navigator:80 - Index 13 out of bounds for length 5
+java.lang.IndexOutOfBoundsException: Index 13 out of bounds for length 5
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:373)
+	at java.base/java.util.ArrayList.get(ArrayList.java:426)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:41)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-26 20:43:13 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 20:43:14 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 20:43:14 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 20:43:14 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 20:44:44 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-26 21:14:20 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 21:14:20 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 21:14:20 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 21:14:20 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 23:15:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 23:15:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 23:15:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 23:15:28 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 23:15:58 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-26 23:16:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 23:16:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 23:16:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 23:16:53 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 23:17:55 ERROR Navigator:80 - Text '1' could not be parsed at index 0
+java.time.format.DateTimeParseException: Text '1' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2050)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1952)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:429)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:414)
+	at com.senla.carservice.view.action.place.GetFreePlacesAction.execute(GetFreePlacesAction.java:17)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-26 23:21:46 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 23:21:46 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 23:21:46 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 23:21:46 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 23:22:14 ERROR AddPlacesAction:20 - [Ljava.lang.StackTraceElement;@5763a655
+2020-08-26 23:23:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-26 23:23:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-26 23:23:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-26 23:23:00 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-26 23:23:49 INFO  AddPlacesAction:13 - Is controller null : true
+2020-08-26 23:23:49 ERROR AddPlacesAction:20 - [Ljava.lang.StackTraceElement;@5763a655
+2020-08-28 14:09:10 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-28 14:09:10 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-28 14:09:10 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-28 14:09:10 INFO  PropertyInjector:41 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-28 14:23:55 INFO  AddPlacesAction:13 - Is controller null : true
+2020-08-28 14:23:56 ERROR AddPlacesAction:20 - [Ljava.lang.StackTraceElement;@5763a655
+2020-08-28 14:23:57 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.place.GetPlacesAction.execute(GetPlacesAction.java:14)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-28 14:24:02 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.action.order.GetOrdersAction.execute(GetOrdersAction.java:7)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:42)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:66)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.controller.MenuController.run(MenuController.java:32)
+	at Main.main(Main.java:29)
+2020-08-30 09:09:46 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 09:52:02 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 09:53:03 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 09:53:39 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 09:57:43 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:18:14 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:19:32 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:48:34 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:52:15 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:52:46 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 10:54:48 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 11:10:14 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 11:10:19 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-30 11:10:19 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-30 11:10:19 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-30 11:10:19 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-08-30 11:11:05 ERROR PropertyLoader:20 - java.io.FileNotFoundException: application.properties (Не удается найти указанный файл)application.properties (Не удается найти указанный файл)
+2020-08-30 11:11:09 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-08-30 11:11:09 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-08-30 11:11:09 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-08-30 11:11:09 INFO  PropertyInjector:40 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
