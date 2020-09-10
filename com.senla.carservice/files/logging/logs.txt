@@ -1175,3 +1175,14 @@ java.lang.NumberFormatException: For input string: ""
 	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:58)
 	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
 	at com.senla.carservice.view.Main.main(Main.java:29)
+2020-09-10 19:24:42 ERROR Navigator:80 - 
+java.lang.NullPointerException
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:48)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:27)
+2020-09-10 19:27:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-10 19:27:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-10 19:27:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-10 19:27:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-10 19:27:30 INFO  AddPlacesAction:18 - Is controller null : false
