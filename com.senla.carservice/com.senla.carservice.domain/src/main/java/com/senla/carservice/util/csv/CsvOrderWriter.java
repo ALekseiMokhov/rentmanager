@@ -1,7 +1,7 @@
 package com.senla.carservice.util.csv;
 
 
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.order.Order;
 
 import java.io.BufferedWriter;
@@ -27,7 +27,7 @@ public class CsvOrderWriter {
             bufferedWriter.append( order.getDateBooked() + "," );
             bufferedWriter.append( order.getStartOfExecution() + "," );
             bufferedWriter.append( order.getPlace().getId() + "," );
-            for (IMaster master : order.getMasters()) {
+            for (AbstractMaster master : order.getMasters()) {
                 bufferedWriter.append( master.getId() + "," );
             }
         } catch (IOException e) {

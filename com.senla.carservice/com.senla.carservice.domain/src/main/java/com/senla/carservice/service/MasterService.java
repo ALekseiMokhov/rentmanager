@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.master.*;
-import com.senla.carservice.repository.IMasterRepository;
+import com.senla.carservice.repository.IGenericRepository;
 import com.senla.carservice.util.calendar.Calendar;
 import com.senla.carservice.util.csv.CsvMasterParser;
 import com.senla.carservice.util.csv.CsvMasterWriter;
@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,19 +21,26 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class MasterService implements IMasterService {
-    @Autowired
-    @Qualifier("masterRepositoryJpa")
-    private IMasterRepository repository;
+
+    private IGenericRepository <AbstractMaster> repository;
 
     public MasterService() {
     }
 
-    public void saveMaster(IMaster master) {
+    @Autowired
+    @Qualifier("genericJpaRepository")
+    public void setRepository(IGenericRepository <AbstractMaster> repository) {
+        this.repository = repository;
+        this.repository.setClass( AbstractMaster.class );
+    }
+
+    public void saveMaster(AbstractMaster master) {
         try {
             this.repository.save( master );
         } catch (Exception e) {
-            log.error( " failed to save master! " + e );
+            log.error( "Failed to save master! " + e );
         }
 
     }
@@ -41,7 +49,7 @@ public class MasterService implements IMasterService {
     @Override
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
 
-        IMaster master;
+        AbstractMaster master;
         try {
             switch (speciality) {
                 case RESHAPER -> {
@@ -71,7 +79,7 @@ public class MasterService implements IMasterService {
 
     @Override
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
-        IMaster master;
+        AbstractMaster master;
         switch (speciality) {
             case RESHAPER -> {
                 master = new Reshaper( fullName, dailyPayment, calendar, speciality, id );
@@ -101,10 +109,10 @@ public class MasterService implements IMasterService {
     }
 
     @Override
-    public IMaster getById(UUID id) {
+    public AbstractMaster getById(UUID id) {
 
         try {
-            return this.repository.findById( id );
+            return (AbstractMaster) this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
@@ -112,9 +120,9 @@ public class MasterService implements IMasterService {
     }
 
     public boolean isBookedForDate(UUID id, LocalDate date) {
-        IMaster master = null;
+        AbstractMaster master = null;
         try {
-            master = this.repository.findById( id );
+            master = (AbstractMaster) this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
@@ -124,9 +132,10 @@ public class MasterService implements IMasterService {
     }
 
     public void setMasterForDate(UUID id, LocalDate date) {
-        IMaster master = null;
+        AbstractMaster master = null;
         try {
-            master = this.repository.findById( id );
+            log.debug( "Is repo null: " + (repository == null) );
+            master = (AbstractMaster) this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
@@ -143,16 +152,17 @@ public class MasterService implements IMasterService {
     }
 
     public void setBookedDateFree(UUID id, LocalDate date) {
-        IMaster master = this.repository.findById( id );
+        AbstractMaster master = (AbstractMaster) this.repository.getById( id );
         master.getCalendar().deleteBookedDate( date );
     }
 
-    public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
+    public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
         try {
-            return this.repository.findAll()
+            return (AbstractMaster) this.repository.findAll()
                     .stream()
-                    .filter( m -> m.getFullName().equals( name ) )
-                    .filter( m -> m.getSpeciality() == speciality )
+                    .map( m -> ((AbstractMaster) m) )
+                    .filter( m -> ((AbstractMaster) m).getFullName().equals( name ) )
+                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
                     .findFirst()
                     .get();
         } catch (NoSuchElementException e) {
@@ -162,12 +172,13 @@ public class MasterService implements IMasterService {
 
     }
 
-    public IMaster getBySpeciality(Speciality speciality) {
+    public AbstractMaster getBySpeciality(Speciality speciality) {
 
         try {
-            return this.repository.findAll()
+            return (AbstractMaster) this.repository.findAll()
                     .stream()
-                    .filter( m -> m.getSpeciality() == speciality )
+                    .map( m -> ((AbstractMaster) m) )
+                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
                     .findFirst()
                     .get();
         } catch (IllegalStateException e) {
@@ -181,13 +192,14 @@ public class MasterService implements IMasterService {
         return Set.of( Speciality.values() );
     }
 
-    public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
+    public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
 
         try {
-            return this.repository.findAll()
+            return (AbstractMaster) this.repository.findAll()
                     .stream()
-                    .filter( m -> m.getSpeciality() == speciality )
-                    .filter( m -> m.getCalendar().isDateBooked( date ) == false )
+                    .map( m -> ((AbstractMaster) m) )
+                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
+                    .filter( m -> ((AbstractMaster) m).getCalendar().isDateBooked( date ) == false )
                     .findFirst()
                     .get();
         } catch (Exception e) {
@@ -198,9 +210,9 @@ public class MasterService implements IMasterService {
     }
 
 
-    public List <IMaster> getMastersByAlphabet() {
-        Comparator <IMaster> comparator = Comparator.comparing( m -> m.getFullName() );
-        List <IMaster> sortedList = null;
+    public List <AbstractMaster> getMastersByAlphabet() {
+        Comparator <AbstractMaster> comparator = Comparator.comparing( m -> m.getFullName() );
+        List <AbstractMaster> sortedList = null;
         try {
             sortedList = this.repository.findAll();
         } catch (Exception e) {
@@ -211,8 +223,8 @@ public class MasterService implements IMasterService {
         return sortedList;
     }
 
-    public List <IMaster> getFreeMasters(LocalDate date) {
-        List <IMaster> res = null;
+    public List <AbstractMaster> getFreeMasters(LocalDate date) {
+        List <AbstractMaster> res = null;
         try {
             res = this.repository.findAll();
         } catch (Exception e) {
@@ -224,10 +236,11 @@ public class MasterService implements IMasterService {
                 .collect( Collectors.toList() );
     }
 
-    public List <IMaster> getMastersBySpeciality(Speciality speciality) {
+    public List <AbstractMaster> getMastersBySpeciality(Speciality speciality) {
         try {
-            return this.repository.findAll().stream()
-                    .filter( ((m) -> m.getSpeciality() == speciality) )
+            return (List <AbstractMaster>) this.repository.findAll().stream()
+                    .map( m -> (AbstractMaster) m )
+                    .filter( ((m) -> ((AbstractMaster) m).getSpeciality() == speciality) )
                     .collect( Collectors.toList() );
         } catch (IllegalStateException e) {
             log.error( "failed to find all masters " + e );
@@ -239,8 +252,8 @@ public class MasterService implements IMasterService {
     @Override
     public void loadMastersFromCsv() {
         try {
-            List <IMaster> list = CsvMasterParser.load();
-            for (IMaster master : list) {
+            List <AbstractMaster> list = CsvMasterParser.load();
+            for (AbstractMaster master : list) {
                 this.repository.save( master );
             }
         } catch (IOException e) {
@@ -264,8 +277,8 @@ public class MasterService implements IMasterService {
     @Override
     public void loadMastersFromJson() {
         try {
-            List <IMaster> list = GsonMasterParser.load();
-            for (IMaster master : list) {
+            List <AbstractMaster> list = GsonMasterParser.load();
+            for (AbstractMaster master : list) {
                 this.repository.save( master );
             }
 
@@ -293,5 +306,7 @@ public class MasterService implements IMasterService {
     public void deleteMaster(UUID id) {
         this.repository.delete( id );
     }
+
+
 }
 

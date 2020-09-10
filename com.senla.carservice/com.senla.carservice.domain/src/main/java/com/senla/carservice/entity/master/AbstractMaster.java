@@ -11,7 +11,8 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-public abstract class AbstractMaster implements IMaster {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class AbstractMaster {
     @Id
     @GeneratedValue
     private UUID id;
@@ -21,7 +22,7 @@ public abstract class AbstractMaster implements IMaster {
     private Calendar calendar;
     private String fullName;
     private double dailyPayment;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Speciality speciality;
 
     public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {

@@ -19,16 +19,16 @@ public class GsonMasterParser {
     private final static File FILE = new File( "./files/Json/MastersJson.json" );
 
 
-    public static List <IMaster> load() throws IOException {
+    public static List <AbstractMaster> load() throws IOException {
 
         return parse( FILE ).stream()
                 .map( s -> GSON.fromJson( s, parseClassType( s ) ) )
                 .collect( Collectors.toList() );
     }
 
-    public static List <IMaster> loadById(List <UUID> idList) throws IOException {
+    public static List <AbstractMaster> loadById(List <UUID> idList) throws IOException {
 
-        List <IMaster> res = parse( FILE ).stream()
+        List <AbstractMaster> res = parse( FILE ).stream()
                 .map( s -> GSON.fromJson( s, parseClassType( s ) ) )
                 .collect( Collectors.toList() );
         return res.stream()
@@ -37,7 +37,7 @@ public class GsonMasterParser {
     }
 
 
-    private static Class <? extends IMaster> parseClassType(String s) {
+    private static Class <? extends AbstractMaster> parseClassType(String s) {
         Class clazz = null;
         String parsed = s.substring( s.lastIndexOf( ":" ) + 2, s.lastIndexOf( "\"" ) );
         switch (parsed) {

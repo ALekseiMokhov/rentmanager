@@ -1,7 +1,7 @@
 package com.senla.carservice.service;
 
 
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 
 public interface IMasterService {
-    void saveMaster(IMaster master);
+    void saveMaster(AbstractMaster master);
 
     void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality);
 
@@ -22,7 +22,7 @@ public interface IMasterService {
 
     void removeMaster(UUID id);
 
-    IMaster getById(UUID id);
+    AbstractMaster getById(UUID id);
 
     boolean isBookedForDate(UUID id, LocalDate date);
 
@@ -30,19 +30,19 @@ public interface IMasterService {
 
     void setBookedDateFree(UUID id, LocalDate date);
 
-    IMaster getByNameAndSpeciality(String name, Speciality speciality);
+    AbstractMaster getByNameAndSpeciality(String name, Speciality speciality);
 
-    IMaster getBySpeciality(Speciality speciality);
+    AbstractMaster getBySpeciality(Speciality speciality);
 
-    IMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
+    AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
 
     Set <Speciality> getAvailableSpecialities();
 
-    List <IMaster> getMastersByAlphabet();
+    List <AbstractMaster> getMastersByAlphabet();
 
-    List <IMaster> getFreeMasters(LocalDate date);
+    List <AbstractMaster> getFreeMasters(LocalDate date);
 
-    List <IMaster> getMastersBySpeciality(Speciality speciality);
+    List <AbstractMaster> getMastersBySpeciality(Speciality speciality);
 
     void loadMastersFromCsv();
 
@@ -52,5 +52,5 @@ public interface IMasterService {
 
     void exportMastersToJson();
 
-    void deleteMaster(UUID id) ;
+    void deleteMaster(UUID id);
 }

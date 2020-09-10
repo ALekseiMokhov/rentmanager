@@ -16,6 +16,6 @@ public class DeletePlaceAction implements IAction {
     public void execute() {
         System.out.println( " Enter the old id of place: " );
         UUID id = UUID.fromString( reader.readLine() );
-        this.controller.deletePlace(  id);
+        this.controller.deletePlace( id );
     }
 }

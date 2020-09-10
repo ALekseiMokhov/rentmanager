@@ -82,6 +82,8 @@ public class PlaceController implements IController {
         this.placeService.exportPlacesToJson();
     }
 
-    public void deletePlace(UUID id){this.placeService.deletePlace( id );}
+    public void deletePlace(UUID id) {
+        this.placeService.deletePlace( id );
+    }
 
 }

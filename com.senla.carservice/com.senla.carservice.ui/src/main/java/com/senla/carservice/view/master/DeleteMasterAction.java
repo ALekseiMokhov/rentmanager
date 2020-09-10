@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
-public class DeleteMasterAction extends AbstractMasterAction{
+public class DeleteMasterAction extends AbstractMasterAction {
 
     @Autowired
     MasterController controller;
+
     @Override
     @SneakyThrows
     public void execute() {

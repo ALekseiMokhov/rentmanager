@@ -1,7 +1,7 @@
 package com.senla.carservice.view.master;
 
 import com.senla.carservice.controller.MasterController;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class GetMasterByIdAction extends AbstractMasterAction {
     @Autowired
     MasterController controller;
-    private IMaster master;
+    private AbstractMaster master;
     private UUID id;
 
     @Override

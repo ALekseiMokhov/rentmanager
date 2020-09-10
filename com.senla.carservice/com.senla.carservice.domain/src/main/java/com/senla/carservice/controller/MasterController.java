@@ -1,7 +1,7 @@
 package com.senla.carservice.controller;
 
 
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.service.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
@@ -24,12 +24,11 @@ public class MasterController implements IController {
 
     }
 
-    public void saveMasterById(UUID id) {
-        IMaster master = this.masterService.getById( id );
+    public void saveMaster(AbstractMaster master) {
         this.masterService.saveMaster( master );
     }
 
-    public void loadMaster(IMaster master) {
+    public void loadMaster(AbstractMaster master) {
         this.masterService.saveMaster( master );
     }
 
@@ -45,7 +44,7 @@ public class MasterController implements IController {
         this.masterService.removeMaster( id );
     }
 
-    public IMaster getById(UUID id) {
+    public AbstractMaster getById(UUID id) {
         return this.masterService.getById( id );
     }
 
@@ -61,15 +60,15 @@ public class MasterController implements IController {
         this.masterService.isBookedForDate( id, date );
     }
 
-    public IMaster getByNameAndSpeciality(String name, Speciality speciality) {
+    public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
         return this.masterService.getByNameAndSpeciality( name, speciality );
     }
 
-    public IMaster getBySpeciality(Speciality speciality) {
+    public AbstractMaster getBySpeciality(Speciality speciality) {
         return this.masterService.getBySpeciality( speciality );
     }
 
-    public IMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
+    public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
         return this.masterService.getFreeBySpeciality( date, speciality );
     }
 
@@ -77,15 +76,15 @@ public class MasterController implements IController {
         return this.masterService.getAvailableSpecialities();
     }
 
-    public List <IMaster> getMastersByAlphabet() {
+    public List <AbstractMaster> getMastersByAlphabet() {
         return this.masterService.getMastersByAlphabet();
     }
 
-    public List <IMaster> getFreeMasters(LocalDate date) {
+    public List <AbstractMaster> getFreeMasters(LocalDate date) {
         return this.masterService.getFreeMasters( date );
     }
 
-    public List <IMaster> getMastersBySpeciality(Speciality speciality) {
+    public List <AbstractMaster> getMastersBySpeciality(Speciality speciality) {
         return this.masterService.getMastersBySpeciality( speciality );
     }
 
@@ -105,5 +104,7 @@ public class MasterController implements IController {
         this.masterService.exportMastersToJson();
     }
 
-    public void deleteMaster(UUID id){this.masterService.deleteMaster(id);}
+    public void deleteMaster(UUID id) {
+        this.masterService.deleteMaster( id );
+    }
 }

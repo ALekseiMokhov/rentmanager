@@ -1,7 +1,7 @@
 package com.senla.carservice.util.serialisation;
 
 import com.google.gson.Gson;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedWriter;
@@ -18,14 +18,14 @@ public class GsonMasterWriter {
     private static final Gson GSON = new Gson();
     private static final File FILE = new File( "./files/Json/MastersJson.json" );
 
-    public static void serializeMasters(List <IMaster> list) throws IOException {
-        for (IMaster master : list) {
+    public static void serializeMasters(List <AbstractMaster> list) throws IOException {
+        for (AbstractMaster master : list) {
             serializeMaster( master );
         }
     }
 
 
-    public static void serializeMaster(IMaster master) throws IOException {
+    public static void serializeMaster(AbstractMaster master) throws IOException {
         removeOldMaster( master.getFullName() );
 
         String jsonFromEntity = GSON.toJson( master );

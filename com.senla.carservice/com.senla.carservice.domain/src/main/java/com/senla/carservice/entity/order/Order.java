@@ -3,7 +3,6 @@ package com.senla.carservice.entity.order;
 
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.entity.master.AbstractMaster;
-import com.senla.carservice.entity.master.IMaster;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,11 +27,11 @@ public class Order {
     private LocalDate startOfExecution;
     private LocalDate finishOfExecution;
     @OneToMany(targetEntity = AbstractMaster.class)
-    private List <IMaster> masters;
+    private List <AbstractMaster> masters;
     @OneToOne
     private Place place;
 
-    public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
+    public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
@@ -41,7 +40,7 @@ public class Order {
     }
 
     /* overloaded to inject id from remote sources*/
-    public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <IMaster> masters) {
+    public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
@@ -49,7 +48,7 @@ public class Order {
         this.id = id;
     }
 
-    public void setMaster(IMaster old, IMaster current) {
+    public void setMaster(AbstractMaster old, AbstractMaster current) {
         this.masters.set( masters.indexOf( old ), current );
     }
 

@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.repository.IPlaceRepository;
+import com.senla.carservice.repository.IGenericRepository;
 import com.senla.carservice.util.calendar.Calendar;
 import com.senla.carservice.util.csv.CsvPlaceParser;
 import com.senla.carservice.util.csv.CsvPlaceWriter;
@@ -12,9 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -22,17 +24,21 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class PlaceService implements IPlaceService {
-    @Autowired
-    @Qualifier("placeRepositoryJpa")
-    private IPlaceRepository repository;
+
+    private IGenericRepository <Place> repository;
+
 
     public PlaceService() {
 
     }
 
-    public IPlaceRepository getRepository() {
-        return repository;
+    @Autowired
+    @Qualifier("genericJpaRepository")
+    public void setRepository(IGenericRepository <Place> repository) {
+        this.repository = repository;
+        this.repository.setClass( Place.class );
     }
 
     public List <Place> getPlaces() {
@@ -44,7 +50,7 @@ public class PlaceService implements IPlaceService {
             try {
                 this.repository.save( new Place( new Calendar() ) );
             } catch (Exception e) {
-                log.error( "failed to add place! " + e );
+                log.error( "Failed to add places! " + e );
             }
 
 
@@ -52,7 +58,7 @@ public class PlaceService implements IPlaceService {
     }
 
     public List <Place> getFreePlacesForDate(LocalDate date) {
-        List <Place> res = null;
+        List <Place> res = new ArrayList <>();
         try {
             res = this.repository.findAll();
         } catch (Exception e) {
@@ -67,7 +73,7 @@ public class PlaceService implements IPlaceService {
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
         Place place = null;
         try {
-            place = this.repository.findById( id );
+            place = this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find place by id! " + e );
             throw new RuntimeException();
@@ -79,7 +85,7 @@ public class PlaceService implements IPlaceService {
 
 
     public void setPlaceForDate(UUID id, LocalDate date) {
-        Place place = this.repository.findById( id );
+        Place place = this.repository.getById( id );
         if (place.getCalendar() == null) {
             place.setCalendar( new Calendar() );
         }
@@ -93,7 +99,7 @@ public class PlaceService implements IPlaceService {
     }
 
     public void setPlaceId(UUID id, UUID newId) {
-        Place place = this.repository.findById( id );
+        Place place = this.repository.getById( id );
         place.setId( newId );
         try {
             this.repository.save( place );
@@ -105,7 +111,7 @@ public class PlaceService implements IPlaceService {
     }
 
     public void setPlaceFree(UUID id, LocalDate date) {
-        Place place = this.repository.findById( id );
+        Place place = this.repository.getById( id );
         place.getCalendar().deleteBookedDate( date );
         try {
             this.repository.save( place );
@@ -128,7 +134,7 @@ public class PlaceService implements IPlaceService {
 
 
     public boolean isPresent(UUID id) {
-        return this.repository.findById( id ) != null;
+        return this.repository.getById( id ) != null;
     }
 
     public void savePlace(UUID id) {
@@ -137,7 +143,7 @@ public class PlaceService implements IPlaceService {
                 Place place = new Place( new Calendar() );
                 place.setId( id );
                 this.repository.save( place );
-            } else this.repository.save( this.repository.findById( id ) );
+            } else this.repository.save( this.repository.getById( id ) );
         } catch (Exception e) {
             log.error( "failed to save place! " + e );
             throw new RuntimeException();
@@ -175,7 +181,7 @@ public class PlaceService implements IPlaceService {
 
     public Place getPlaceById(UUID id) {
         try {
-            return this.repository.findById( id );
+            return this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to get place! " + e );
             throw new RuntimeException();

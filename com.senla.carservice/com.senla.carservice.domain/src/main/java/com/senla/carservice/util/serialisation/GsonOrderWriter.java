@@ -2,7 +2,7 @@ package com.senla.carservice.util.serialisation;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.order.Order;
 import org.apache.commons.io.FileUtils;
 
@@ -62,10 +62,10 @@ public class GsonOrderWriter {
         Files.write( FILE.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING );
     }
 
-    private static String iMasterIdAppend(List <IMaster> list) {
+    private static String iMasterIdAppend(List <AbstractMaster> list) {
         StringBuilder builder = new StringBuilder();
         builder.append( "{" );
-        for (IMaster master : list) {
+        for (AbstractMaster master : list) {
             builder.append( master.getId() + "," );
 
         }

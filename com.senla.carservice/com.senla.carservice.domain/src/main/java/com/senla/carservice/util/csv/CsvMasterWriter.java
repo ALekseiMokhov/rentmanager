@@ -1,7 +1,7 @@
 package com.senla.carservice.util.csv;
 
 
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class CsvMasterWriter {
     private static final File FILE = new File( "./files/master.csv" );
 
-    public static void writeMaster(IMaster master) throws IOException {
+    public static void writeMaster(AbstractMaster master) throws IOException {
         removeOldMaster( master.getId() );
 
         try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( FILE, true ) )) {
@@ -35,9 +35,9 @@ public class CsvMasterWriter {
 
     }
 
-    public static void writeMasters(List <IMaster> masters) throws IOException {
+    public static void writeMasters(List <AbstractMaster> masters) throws IOException {
 
-        for (IMaster master : masters) {
+        for (AbstractMaster master : masters) {
             writeMaster( master );
         }
 

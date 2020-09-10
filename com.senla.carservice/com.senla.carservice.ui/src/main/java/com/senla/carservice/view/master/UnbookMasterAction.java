@@ -2,7 +2,7 @@ package com.senla.carservice.view.master;
 
 
 import com.senla.carservice.controller.MasterController;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class UnbookMasterAction extends AbstractMasterAction {
     @Autowired
     MasterController controller;
     private LocalDate date;
-    private IMaster master;
+    private AbstractMaster master;
     private UUID id;
 
     @Override

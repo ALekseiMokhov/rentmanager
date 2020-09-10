@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 public class CsvMasterParser {
     private static final File FILE = new File( "./files/master.csv" );
 
-    public static List <IMaster> load() throws IOException {
+    public static List <AbstractMaster> load() throws IOException {
         return parseMastersFromString( intermediateList( parse( FILE ) ) );
 
     }
 
-    public static List <IMaster> loadMastersById(List <UUID> input) throws IOException {
+    public static List <AbstractMaster> loadMastersById(List <UUID> input) throws IOException {
         return load().stream()
                 .filter( m -> input.contains( m.getId() ) )
                 .collect( Collectors.toList() );
@@ -48,15 +48,15 @@ public class CsvMasterParser {
         return resultStringBuilder.toString();
     }
 
-    private static List <IMaster> parseMastersFromString(List <String> input) {
-        List <IMaster> res = new ArrayList <>();
+    private static List <AbstractMaster> parseMastersFromString(List <String> input) {
+        List <AbstractMaster> res = new ArrayList <>();
 
         List <List <String>> list = input.stream()
                 .map( s -> Arrays.asList( s.split( "," ) ) )
                 .collect( Collectors.toList() );
 
         for (List <String> var : list) {
-            IMaster master;
+            AbstractMaster master;
             Speciality speciality = Speciality.valueOf( var.get( 2 ) );
             switch (speciality) {
                 case RESHAPER -> {
@@ -86,7 +86,7 @@ public class CsvMasterParser {
             res.add( master );
         }
         System.out.println( res.size() + " masters were loaded from file!" );
-        for (IMaster master : res) {
+        for (AbstractMaster master : res) {
             System.out.println( master );
         }
 

@@ -23,7 +23,6 @@ public class Place {
     private Calendar calendar;
 
     public Place(Calendar calendar) {
-        this.id = UUID.randomUUID();
         this.calendar = calendar;
 
     }

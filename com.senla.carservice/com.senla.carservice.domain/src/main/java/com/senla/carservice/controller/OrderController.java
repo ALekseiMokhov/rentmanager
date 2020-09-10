@@ -1,7 +1,7 @@
 package com.senla.carservice.controller;
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -31,7 +31,7 @@ public class OrderController implements IController {
         this.orderService.addOrder( date, startOfExecution, required );
     }
 
-    public void addOrder(LocalDate date, LocalDate startOfExecution, List <IMaster> masters, Place place, UUID id) {
+    public void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id) {
         this.orderService.addOrder( date, startOfExecution, masters, place, id );
     }
 

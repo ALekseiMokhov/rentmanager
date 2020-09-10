@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.IMaster;
+import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -17,7 +17,7 @@ import java.util.UUID;
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
 
-    void addOrder(LocalDate date, LocalDate startOfExecution, List <IMaster> masters, Place place, UUID id);
+    void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id);
 
     void saveOrder(Order order);
 
