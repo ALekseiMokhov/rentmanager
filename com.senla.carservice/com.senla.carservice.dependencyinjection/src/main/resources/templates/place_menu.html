@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring MVC application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div><p><b>Search and modify garage data</b></p></div>
+<div>
+    <p>Available places are:</p>
+    <p th:text="${places}"></p>
+</div>
+<h3>Select option:</h3>
+<br>
+<p class="header">add extra places to garage:</p>
+<div>
+    <form method="post" >
+        <input type="text" name="numberOfPlaces" placeholder="add places">
+    </form>
+</div>
+<br>
+<p class="header">book chosen place for the specific date:</p>
+<div>
+    <form action="#" th:action="@{place_menu/setDate}" th:object="${place}" method="post">
+        <input type="text" th:field="*{id}"  placeholder="enter the id of Place you want to book:">
+        <input type="text" th:field="*{calendar}" placeholder="enter the date to book(YYYY-MM-DD):">
+        <input type="submit" placeholder="submit"></input>
+    </form>
+</div>
+<br>
+<div>
+    <button class="button" onclick="document.location='/'">Go to main menu </button>
+</div>
+</body>
+</html>

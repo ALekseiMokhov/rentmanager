@@ -26,7 +26,11 @@ public class Order {
     private LocalDate dateBooked;
     private LocalDate startOfExecution;
     private LocalDate finishOfExecution;
-    @OneToMany(targetEntity = AbstractMaster.class)
+    @OneToMany(
+            targetEntity = AbstractMaster.class,
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private List <AbstractMaster> masters;
     @OneToOne
     private Place place;
@@ -38,8 +42,7 @@ public class Order {
         this.place = place;
         this.id = UUID.randomUUID();
     }
-
-    /* overloaded to inject id from remote sources*/
+    
     public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;

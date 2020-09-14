@@ -1,0 +1,562 @@
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:29:36 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:34:38 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:35:20 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 09:42:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 09:43:31 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 11:31:48 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 11:38:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 15:56:50 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 15:57:14 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-03 18:25:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-03 18:31:57 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:32:02 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-03 18:32:19 ERROR Navigator:80 - Text '' could not be parsed at index 0
+java.time.format.DateTimeParseException: Text '' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2050)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1952)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:429)
+	at java.base/java.time.LocalDate.parse(LocalDate.java:414)
+	at com.senla.carservice.view.master.BookMasterAction.execute(BookMasterAction.java:29)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:58)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+2020-09-04 09:04:31 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 09:04:31 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 09:04:31 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 09:04:31 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 09:05:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 09:05:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 09:05:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 09:05:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 09:05:59 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 09:06:06 ERROR PlaceRepositoryJpa:55 - Error occurred validating the CriteriaFROM METHOD FIND ALL()
+2020-09-04 09:06:08 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 09:06:12 ERROR PlaceRepositoryJpa:55 - Error occurred validating the CriteriaFROM METHOD FIND ALL()
+2020-09-04 09:21:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 09:21:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 09:21:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 09:21:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 09:21:08 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 09:21:14 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:21:44 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:21:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:21:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:21:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:22:01 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:22:04 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:34:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:34:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:34:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:34:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:34:47 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:37:11 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:37:11 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:37:11 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:37:11 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:38:58 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:39:14 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 11 more
+2020-09-04 10:39:19 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 13 more
+2020-09-04 10:39:41 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 15 more
+2020-09-04 10:39:44 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.exportToCsv(PlaceService.java:204)
+	at com.senla.carservice.controller.PlaceController.exportPlacesToCsv(PlaceController.java:74)
+	at com.senla.carservice.view.place.ExportPlacesAction.execute(ExportPlacesAction.java:12)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 17 more
+2020-09-04 10:40:03 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:40:03 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:40:03 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:40:03 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:40:18 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:40:18 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:40:18 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:40:18 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:40:25 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:40:30 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:40:47 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 13 more
+2020-09-04 10:41:11 ERROR PlaceService:59 - failed to find all places! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:11 ERROR Navigator:80 - 
+java.lang.RuntimeException
+	at com.senla.carservice.service.PlaceService.getFreePlacesForDate(PlaceService.java:60)
+	at com.senla.carservice.controller.PlaceController.getFreePlacesForDate(PlaceController.java:29)
+	at com.senla.carservice.view.place.GetFreePlacesAction.execute(GetFreePlacesAction.java:30)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+2020-09-04 10:41:17 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:41:19 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:21 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:41:22 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:24 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:25 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:27 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 17 more
+2020-09-04 10:41:32 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:41:34 ERROR PlaceService:47 - failed to add place! org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+2020-09-04 10:41:35 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:81)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 19 more
+2020-09-04 10:48:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:48:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:48:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:48:28 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:48:37 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:48:40 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:48:42 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:48:57 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:49:21 ERROR Navigator:80 - Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+org.springframework.dao.InvalidDataAccessApiUsageException: Transaction already active; nested exception is java.lang.IllegalStateException: Transaction already active
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:528)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy50.findAll(Unknown Source)
+	at com.senla.carservice.service.PlaceService.getPlaces(PlaceService.java:39)
+	at com.senla.carservice.controller.PlaceController.getPlaces(PlaceController.java:25)
+	at com.senla.carservice.view.place.GetPlacesAction.execute(GetPlacesAction.java:19)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:54)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+Caused by: java.lang.IllegalStateException: Transaction already active
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:74)
+	at com.senla.carservice.repository.jpa.PlaceRepositoryJpa.findAll(PlaceRepositoryJpa.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 13 more
+2020-09-04 10:52:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:52:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:52:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:52:45 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:52:48 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:55:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 10:55:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 10:55:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 10:55:04 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 10:56:22 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 10:56:38 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 11:01:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 11:01:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 11:01:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 11:01:52 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 11:07:25 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 11:07:25 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 11:07:25 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 11:07:25 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 11:07:37 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 11:07:54 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 11:14:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 11:14:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 11:14:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 11:14:56 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 11:15:00 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 11:15:11 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 11:25:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 11:25:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 11:25:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 11:25:34 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 11:25:45 ERROR Navigator:80 - Invalid UUID string: 2
+java.lang.IllegalArgumentException: Invalid UUID string: 2
+	at java.base/java.util.UUID.fromString(UUID.java:216)
+	at com.senla.carservice.view.place.DeletePlaceAction.execute(DeletePlaceAction.java:18)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+2020-09-04 11:25:48 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 11:25:59 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria[Ljava.lang.StackTraceElement;@4b360972
+2020-09-04 11:26:54 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 11:26:54 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 11:26:54 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 11:26:54 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 11:27:01 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 11:27:12 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 12:22:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:22:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:22:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:22:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:22:37 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:22:53 ERROR PlaceRepositoryJpa:69 - Unable to locate Attribute  with the the given name [Id] on this ManagedType [com.senla.carservice.entity.garage.Place]
+2020-09-04 12:23:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:23:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:23:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:23:14 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:23:18 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:23:19 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:23:34 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 12:30:38 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:30:38 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:30:38 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:30:38 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:31:00 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:31:12 ERROR PlaceRepositoryJpa:69 - Error occurred validating the Criteria
+2020-09-04 12:32:58 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:32:58 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:32:58 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:32:58 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:33:02 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:33:14 ERROR PlaceRepositoryJpa:70 - Parameter value [db671f10-409b-4755-afc3-770219039c89] did not match expected type [java.util.UUID (n/a)]
+2020-09-04 12:33:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:33:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:33:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:33:59 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:34:03 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:49:17 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:49:17 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:49:17 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:49:17 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:49:21 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:49:24 ERROR PlaceRepositoryJpa:51 - Error occurred validating the CriteriaFROM METHOD FIND ALL()
+2020-09-04 12:49:27 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:49:31 ERROR PlaceRepositoryJpa:51 - Error occurred validating the CriteriaFROM METHOD FIND ALL()
+2020-09-04 12:49:35 ERROR Navigator:80 - Invalid UUID string: 2
+java.lang.IllegalArgumentException: Invalid UUID string: 2
+	at java.base/java.util.UUID.fromString(UUID.java:216)
+	at com.senla.carservice.view.place.DeletePlaceAction.execute(DeletePlaceAction.java:18)
+	at com.senla.carservice.view.menu.MenuItem.doAction(MenuItem.java:24)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:74)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:29)
+2020-09-04 12:50:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:50:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:50:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:50:27 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:50:32 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:50:35 ERROR PlaceRepositoryJpa:51 - Error occurred validating the CriteriaFROM METHOD FIND ALL()
+2020-09-04 12:51:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:51:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:51:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:51:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:51:10 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 12:51:57 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 12:51:57 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 12:51:57 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 12:51:57 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 12:52:00 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 13:00:10 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 13:00:10 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 13:00:10 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 13:00:10 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 13:01:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 13:01:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 13:01:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 13:01:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 13:03:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 13:03:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 13:03:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 13:03:51 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 13:17:26 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-04 13:17:26 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-04 13:17:26 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-04 13:17:26 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-04 13:18:10 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-04 13:18:49 INFO  MasterRepositoryJpa:34 - FOUND SPECIALITY: RESHAPER ,MASTER'S CLASS IS : class com.senla.carservice.entity.master.Reshaper
+2020-09-07 09:46:30 ERROR AddPlacesAction:25 - java.lang.NumberFormatException: For input string: "1a"
+2020-09-07 09:55:50 ERROR Navigator:80 - Index 33 out of bounds for length 5
+java.lang.IndexOutOfBoundsException: Index 33 out of bounds for length 5
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:373)
+	at java.base/java.util.ArrayList.get(ArrayList.java:426)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:41)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:30)
+2020-09-07 10:08:20 ERROR Navigator:80 - For input string: "ww"
+java.lang.NumberFormatException: For input string: "ww"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+	at java.base/java.lang.Integer.parseInt(Integer.java:770)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:38)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:30)
+2020-09-07 10:22:09 ERROR AddPlacesAction:25 - java.lang.NumberFormatException: For input string: "dd"
+2020-09-14 18:18:28 ERROR AddPlacesAction:25 - java.lang.NullPointerException

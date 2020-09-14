@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content="car service">
+</head>
+<body>
+<h1 th:text="${message}"></h1>
+<p th:text="'Hello, ' + ${name} + '!'"/>
+<p th:text="'Current time is: ' + ${time}"></p>
+
+
+<h3>
+    <div>
+        <p>Select data :</p>
+    </div>
+</h3>
+<main><div>
+    <nav>
+        <div>
+            <button class="button" onclick="document.location='place_menu'">
+                Garage menu</button>
+            <button class="button" onclick="document.location='master_menu'">
+                Master menu</button>
+            <button class="button" onclick="document.location='order_menu'"/>
+            Order menu</a>
+
+        </div>
+    </nav>
+</div>
+</main>
+
+</body>
+</html>
