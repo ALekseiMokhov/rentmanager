@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class PropertyInitializer {
+public class PropertyStorage {
 
     @Value("#{new Boolean('${garage.admin.mode}')}")
     private Boolean isGarageModificationPermitted;

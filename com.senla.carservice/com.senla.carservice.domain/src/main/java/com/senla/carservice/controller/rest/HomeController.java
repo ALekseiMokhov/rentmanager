@@ -27,7 +27,6 @@ public class HomeController implements IController {
     public String printHomePage(ModelMap model) {
 
         model.addAttribute( "name", "Visitor" );
-        model.addAttribute( "time",String.valueOf(  LocalDateTime.now().toLocalTime())  ) ;
         model.addAttribute( "message", "Car service dashboard" );
 
         return "home";

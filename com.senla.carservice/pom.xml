@@ -16,7 +16,7 @@
         <aspectj.version>1.9.6</aspectj.version>
     </properties>
     <modules>
-        <module>com.senla.carservice.propertyloader</module>
+        <module>com.senla.carservice.dependencyinjection</module>
         <module>com.senla.carservice.domain</module>
         <module>com.senla.carservice.ui</module>
         <module>com.senla.carservice.web</module>

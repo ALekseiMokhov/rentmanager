@@ -1,7 +1,7 @@
 package com.senla.carservice.view.menu;
 
 
-import com.senla.carservice.spring.config.PropertyInitializer;
+import com.senla.carservice.spring.config.PropertyStorage;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +24,7 @@ public class MenuController {
     public void run() throws IOException {
 
         builder = new Builder(this.context);
-        PropertyInitializer initializer = (PropertyInitializer)this.context.getBean( "propertyInitializer" );
+        PropertyStorage initializer = (PropertyStorage)this.context.getBean( "propertyInitializer" );
         builder.setIsGarageModificationPermitted( initializer.getIsGarageModificationPermitted());
         builder.setIsMasterModificationPermitted( initializer.getIsMasterModificationPermitted() );
         builder.setIsOrderModificationPermitted( initializer.getIsOrderModificationPermitted() );
