@@ -1,10 +1,11 @@
-package com.senla.carservice.custom_di.beanfactory;
+package com.senla.carservice.customdi.beanfactory;
 
 import com.senla.carservice.custom_di.Autowired;
 import com.senla.carservice.custom_di.Qualifier;
 import com.senla.carservice.custom_di.beanfactory.exceptions.BeanCollisionException;
 import com.senla.carservice.custom_di.beanfactory.exceptions.BeanInitException;
 import com.senla.carservice.custom_di.components.Component;
+import com.senla.carservice.customdi.Autowired;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;

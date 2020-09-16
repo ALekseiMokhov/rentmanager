@@ -196,10 +196,9 @@ public class PlaceService implements IPlaceService {
             for (Place place : list) {
                 mergePlace( place );
             }
-            System.out.println( list.size() + " places were loaded from file!" );
         } catch (IOException e) {
             log.error( "failed to load places from csv! " + e );
-            throw new RuntimeException();
+           /* throw new RuntimeException();*/
         }
 
     }
@@ -210,11 +209,9 @@ public class PlaceService implements IPlaceService {
         try {
             CsvPlaceWriter.writePlaces( this.repository.findAll() );
 
-            System.out.println( this.repository.findAll().size() + " places were successfully written to csv file!" );
-
         } catch (IOException e) {
             log.error( "There is a problem with export!Check path to the file! " + e );
-            throw new RuntimeException();
+            /*throw new RuntimeException();*/
         }
 
     }

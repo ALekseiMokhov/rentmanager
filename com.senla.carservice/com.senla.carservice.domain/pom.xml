@@ -13,15 +13,14 @@
     <dependencies>
         <dependency>
             <groupId>com.senla.carservice</groupId>
-            <artifactId>com.senla.carservice.propertyloader</artifactId>
+            <artifactId>com.senla.carservice.dependencyinjection</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.senla.carservice</groupId>
-            <artifactId>com.senla.carservice.dependencyinjection</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.5.10</version>
         </dependency>
     </dependencies>
 
