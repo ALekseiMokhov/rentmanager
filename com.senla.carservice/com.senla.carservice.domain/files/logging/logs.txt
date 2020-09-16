@@ -1,0 +1,12 @@
+2020-09-02 15:10:19 ERROR PlaceService:224 - There is a problem with import!Check path to the file! java.io.FileNotFoundException: .\files\Json\PlacesJson.json (Системе не удается найти указанный путь)
+2020-09-02 15:12:19 ERROR PlaceService:224 - There is a problem with import!Check path to the file! java.io.FileNotFoundException: .\files\Json\PlacesJson.json (Системе не удается найти указанный путь)
+2020-09-02 16:34:12 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:335 - Bean 'appConfig' of type [com.senla.carservice.spring.config.AppConfig$$EnhancerBySpringCGLIB$$23070a26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-02 16:34:12 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-09-02 16:34:12 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.15.Final
+2020-09-02 16:34:12 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-09-02 16:34:13 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-09-02 16:34:15 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-09-02 16:34:15 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-09-02 16:34:15 ERROR PlaceService:224 - There is a problem with import!Check path to the file! java.io.FileNotFoundException: .\files\Json\PlacesJson.json (Системе не удается найти указанный путь)
+2020-09-02 16:44:17 ERROR PlaceService:224 - There is a problem with import!Check path to the file! java.io.FileNotFoundException: .\files\Json\PlacesJson.json (Системе не удается найти указанный путь)
+2020-09-02 16:45:01 ERROR PlaceService:224 - There is a problem with import!Check path to the file! java.io.FileNotFoundException: .\files\Json\PlacesJson.json (Системе не удается найти указанный путь)
