@@ -25,7 +25,7 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableSpringConfigured
-public class JpaConfig {
+public class AppConfig {
     @Autowired
     private Environment env;
 
