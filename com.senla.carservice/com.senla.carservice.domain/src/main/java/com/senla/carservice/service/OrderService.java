@@ -6,8 +6,11 @@ import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
-import com.senla.carservice.repository.IGenericRepository;
-import com.senla.carservice.repository.IOrderRepository;
+import com.senla.carservice.repository.interfaces.IGenericRepository;
+import com.senla.carservice.repository.interfaces.IOrderRepository;
+import com.senla.carservice.service.interfaces.IMasterService;
+import com.senla.carservice.service.interfaces.IOrderService;
+import com.senla.carservice.service.interfaces.IPlaceService;
 import com.senla.carservice.util.csv.CsvOrderParser;
 import com.senla.carservice.util.csv.CsvOrderWriter;
 import com.senla.carservice.util.serialisation.GsonOrderParser;
@@ -27,6 +30,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Transactional
 public class OrderService implements IOrderService {
+    @Autowired
+    @Qualifier("orderJpaRepository")
     private IGenericRepository <Order> repository;
     @Autowired
     @Qualifier("masterService")
@@ -45,13 +50,8 @@ public class OrderService implements IOrderService {
         this.placeService = placeService;
     }
 
-    @Autowired
-    @Qualifier("genericJpaRepository")
-    public void setRepository(IGenericRepository <Order> repository) {
-        this.repository = repository;
-        this.repository.setClass( Order.class );
-    }
 
+    @Transactional
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
         List <AbstractMaster> availableMasters = new ArrayList <>();
         for (Speciality speciality : required) {
@@ -73,9 +73,9 @@ public class OrderService implements IOrderService {
         }
 
     }
-
+    @Transactional
     public void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id) {
-        this.placeService.savePlace( place.getId() );
+        this.placeService.savePlace( place );
         masters.stream()
                 .forEach( m -> this.masterService.saveMaster( m ) );
 
@@ -122,7 +122,7 @@ public class OrderService implements IOrderService {
 
         }
     }
-
+    @Transactional
     public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
         Order order = this.repository.getById( id );
         LocalDate oldDate = order.getStartOfExecution();
@@ -135,9 +135,9 @@ public class OrderService implements IOrderService {
         List <AbstractMaster> newMasters = new ArrayList <>();
 
         this.placeService.setPlaceFree( oldPlace.getId(), oldDate );
-        this.placeService.savePlace( oldPlace.getId() );
+        this.placeService.savePlace( oldPlace );
         newPlace.getCalendar().setDateForBooking( newDate );
-        this.placeService.savePlace( newPlace.getId() );
+        this.placeService.savePlace( newPlace );
 
         oldMasters.stream()
                 .forEach( master -> master.getCalendar()
@@ -161,7 +161,7 @@ public class OrderService implements IOrderService {
         }
 
     }
-
+    @Transactional
     public void setNewMasters(UUID id) {
         Order order = this.repository.getById( id );
         List <AbstractMaster> newMasters = new ArrayList <>();
@@ -186,7 +186,7 @@ public class OrderService implements IOrderService {
         }
 
     }
-
+    @Transactional
     public void cancelOrder(UUID id) {
         for (Order order : this.repository.findAll()) {
             if (order.getId().equals( id )) {
@@ -199,7 +199,7 @@ public class OrderService implements IOrderService {
 
                 Place place = order.getPlace();
                 this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
-                this.placeService.savePlace( place.getId() );
+                this.placeService.savePlace( place );
 
                 try {
                     this.repository.save( order );
@@ -213,12 +213,12 @@ public class OrderService implements IOrderService {
         }
 
     }
-
+    @Transactional
     public void completeOrder(UUID id) {
         for (Order order : this.repository.findAll()) {
             if (order.getId().equals( id )) {
                 order.getPlace().getCalendar().deleteBookedDate( LocalDate.now() );
-                this.placeService.savePlace( order.getPlace().getId() );
+                this.placeService.savePlace( order.getPlace());
 
                 order.getMasters().stream()
                         .forEach( master -> master.getCalendar().deleteBookedDate( LocalDate.now() ) );
@@ -243,7 +243,7 @@ public class OrderService implements IOrderService {
         return this.repository.findAll();
     }
 
-    /*TODO add to ui*/
+
     public List <Order> getOrdersByPrice(OrderStatus status) {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
         List <Order> sortedList = null;
@@ -307,6 +307,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public void loadFromCsv() {
         try {
             List <Order> orderList = CsvOrderParser.load();
@@ -321,6 +322,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public void exportToCsv() {
 
         try {
@@ -332,6 +334,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public void loadOrdersFromJson() {
         try {
             List <Order> orderList = GsonOrderParser.load();
@@ -344,6 +347,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public void exportOrdersToJson() {
         try {
             GsonOrderWriter.serializeOrders( getOrders() );

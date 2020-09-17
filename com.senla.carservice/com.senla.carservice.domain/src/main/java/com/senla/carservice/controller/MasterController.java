@@ -3,7 +3,7 @@ package com.senla.carservice.controller;
 
 import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
-import com.senla.carservice.service.IMasterService;
+import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

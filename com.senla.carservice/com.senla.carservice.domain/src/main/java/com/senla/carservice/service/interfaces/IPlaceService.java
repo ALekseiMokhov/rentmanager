@@ -1,4 +1,4 @@
-package com.senla.carservice.service;
+package com.senla.carservice.service.interfaces;
 
 
 import com.senla.carservice.entity.garage.Place;
@@ -25,8 +25,6 @@ public interface IPlaceService {
 
     void setPlaceId(UUID current, UUID newId);
 
-    void savePlace(UUID id);
-
     void mergePlace(Place place);
 
     boolean isPresent(UUID id);
@@ -47,4 +45,5 @@ public interface IPlaceService {
 
     void deletePlace(UUID id);
 
+    void savePlace(Place place);
 }

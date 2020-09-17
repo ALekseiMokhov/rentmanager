@@ -1,4 +1,4 @@
-package com.senla.carservice.service;
+package com.senla.carservice.service.interfaces;
 
 
 import com.senla.carservice.entity.master.AbstractMaster;

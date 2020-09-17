@@ -1,4 +1,4 @@
-package com.senla.carservice.repository;
+package com.senla.carservice.repository.interfaces;
 
 import java.util.List;
 import java.util.UUID;

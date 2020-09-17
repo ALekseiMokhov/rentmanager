@@ -1,4 +1,4 @@
-package com.senla.carservice.service;
+package com.senla.carservice.service.interfaces;
 
 
 import com.senla.carservice.entity.garage.Place;
@@ -41,6 +41,8 @@ public interface IOrderService {
 
     List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
 
+    List <Order> getOrdersByPrice(OrderStatus status);
+
     void loadFromCsv();
 
     void exportToCsv();
@@ -48,4 +50,6 @@ public interface IOrderService {
     void loadOrdersFromJson();
 
     void exportOrdersToJson();
+
+
 }

@@ -2,7 +2,8 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.repository.IGenericRepository;
+import com.senla.carservice.repository.interfaces.IGenericRepository;
+import com.senla.carservice.service.interfaces.IPlaceService;
 import com.senla.carservice.util.calendar.Calendar;
 import com.senla.carservice.util.csv.CsvPlaceParser;
 import com.senla.carservice.util.csv.CsvPlaceWriter;
@@ -24,9 +25,10 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@Transactional
-public class PlaceService implements IPlaceService {
 
+public class PlaceService implements IPlaceService {
+    @Autowired
+    @Qualifier("placeJpaRepository")
     private IGenericRepository <Place> repository;
 
 
@@ -34,17 +36,10 @@ public class PlaceService implements IPlaceService {
 
     }
 
-    @Autowired
-    @Qualifier("genericJpaRepository")
-    public void setRepository(IGenericRepository <Place> repository) {
-        this.repository = repository;
-        this.repository.setClass( Place.class );
-    }
-
     public List <Place> getPlaces() {
         return this.repository.findAll();
     }
-
+    @Transactional
     public void addPlaces(int i) {
         for (int j = 0; j < i; j++) {
             try {
@@ -56,7 +51,7 @@ public class PlaceService implements IPlaceService {
 
         }
     }
-
+    @Transactional
     public List <Place> getFreePlacesForDate(LocalDate date) {
         List <Place> res = new ArrayList <>();
         try {
@@ -69,21 +64,23 @@ public class PlaceService implements IPlaceService {
                 .filter( p -> p.getCalendar().isDateBooked( date ) == false )
                 .collect( Collectors.toList() );
     }
-
+    @Transactional
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
-        Place place = null;
+        Place place =new Place( new Calendar() );
+        Boolean res = false;
         try {
             place = this.repository.getById( id );
+            res = place.getCalendar()
+                    .isDateBooked( date );
         } catch (Exception e) {
             log.error( "failed to find place by id! " + e );
             throw new RuntimeException();
 
         }
-        return place.getCalendar()
-                .isDateBooked( date );
+        return res;
     }
 
-
+    @Transactional
     public void setPlaceForDate(UUID id, LocalDate date) {
         Place place = this.repository.getById( id );
         if (place.getCalendar() == null) {
@@ -97,19 +94,18 @@ public class PlaceService implements IPlaceService {
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public void setPlaceId(UUID id, UUID newId) {
         Place place = this.repository.getById( id );
         place.setId( newId );
         try {
             this.repository.save( place );
-            this.repository.delete( id );
         } catch (Exception e) {
             log.error( "failed to update place! " + e );
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public void setPlaceFree(UUID id, LocalDate date) {
         Place place = this.repository.getById( id );
         place.getCalendar().deleteBookedDate( date );
@@ -120,7 +116,7 @@ public class PlaceService implements IPlaceService {
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public UUID addPlace() {
         Place place = new Place( new Calendar() );
         try {
@@ -137,20 +133,6 @@ public class PlaceService implements IPlaceService {
         return this.repository.getById( id ) != null;
     }
 
-    public void savePlace(UUID id) {
-        try {
-            if (!this.isPresent( id )) {
-                Place place = new Place( new Calendar() );
-                place.setId( id );
-                this.repository.save( place );
-            } else this.repository.save( this.repository.getById( id ) );
-        } catch (Exception e) {
-            log.error( "failed to save place! " + e );
-            throw new RuntimeException();
-        }
-
-    }
-
 
     public void mergePlace(Place place) {
         try {
@@ -160,7 +142,7 @@ public class PlaceService implements IPlaceService {
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public Place getFreePlace(LocalDate date) {
         List <Place> res = null;
         try {
@@ -183,13 +165,12 @@ public class PlaceService implements IPlaceService {
         try {
             return this.repository.getById( id );
         } catch (Exception e) {
-            System.out.println(e);
             log.error( "failed to get place! " + e );
             throw new RuntimeException();
         }
     }
 
-    @Override
+    @Override  @Transactional
     public void loadFromCsv() {
         try {
             List <Place> list = CsvPlaceParser.load();
@@ -198,12 +179,12 @@ public class PlaceService implements IPlaceService {
             }
         } catch (IOException e) {
             log.error( "failed to load places from csv! " + e );
-           /* throw new RuntimeException();*/
+            throw new RuntimeException();
         }
 
     }
 
-    @Override
+    @Override    @Transactional
     public void exportToCsv() {
 
         try {
@@ -243,5 +224,10 @@ public class PlaceService implements IPlaceService {
     @Override
     public void deletePlace(UUID id) {
         this.repository.delete( id );
+    }
+
+    @Override
+    public void savePlace(Place place) {
+          this.repository.save( place );
     }
 }

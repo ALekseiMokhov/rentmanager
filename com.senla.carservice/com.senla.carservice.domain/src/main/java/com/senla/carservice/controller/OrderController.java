@@ -5,10 +5,9 @@ import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
-import com.senla.carservice.service.IOrderService;
+import com.senla.carservice.service.interfaces.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -75,7 +74,9 @@ public class OrderController implements IController {
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
         return this.orderService.getOrdersForPeriod( start, end );
     }
-
+    public List <Order> getOrdersByPrice(OrderStatus status){
+        return this.orderService.getOrdersByPrice(status);
+    }
 
     public void loadFromCsv() {
         this.orderService.loadFromCsv();

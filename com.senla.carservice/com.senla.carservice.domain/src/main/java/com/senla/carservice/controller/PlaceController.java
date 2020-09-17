@@ -2,10 +2,9 @@ package com.senla.carservice.controller;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.service.IPlaceService;
+import com.senla.carservice.service.interfaces.IPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -55,8 +54,8 @@ public class PlaceController implements IController {
         this.placeService.setPlaceFree( id, date );
     }
 
-    public void savePlace(UUID id) {
-        this.placeService.savePlace( id );
+    public void savePlace(Place place) {
+        this.placeService.savePlace( place );
     }
 
     public Place getFreePlace(LocalDate date) {

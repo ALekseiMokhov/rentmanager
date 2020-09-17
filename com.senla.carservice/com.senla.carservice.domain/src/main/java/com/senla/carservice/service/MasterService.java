@@ -2,7 +2,8 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.master.*;
-import com.senla.carservice.repository.IGenericRepository;
+import com.senla.carservice.repository.interfaces.IGenericRepository;
+import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
 import com.senla.carservice.util.csv.CsvMasterParser;
 import com.senla.carservice.util.csv.CsvMasterWriter;
@@ -21,19 +22,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@Transactional
-public class MasterService implements IMasterService {
 
+public class MasterService implements IMasterService {
+    @Autowired
+    @Qualifier("masterJpaRepository")
     private IGenericRepository <AbstractMaster> repository;
 
     public MasterService() {
-    }
-
-    @Autowired
-    @Qualifier("genericJpaRepository")
-    public void setRepository(IGenericRepository <AbstractMaster> repository) {
-        this.repository = repository;
-        this.repository.setClass( AbstractMaster.class );
     }
 
     public void saveMaster(AbstractMaster master) {
@@ -112,17 +107,17 @@ public class MasterService implements IMasterService {
     public AbstractMaster getById(UUID id) {
 
         try {
-            return (AbstractMaster) this.repository.getById( id );
+            return this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public boolean isBookedForDate(UUID id, LocalDate date) {
         AbstractMaster master = null;
         try {
-            master = (AbstractMaster) this.repository.getById( id );
+            master =  this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
@@ -130,12 +125,12 @@ public class MasterService implements IMasterService {
 
         return master.getCalendar().isDateBooked( date );
     }
-
+    @Transactional
     public void setMasterForDate(UUID id, LocalDate date) {
         AbstractMaster master = null;
         try {
             log.debug( "Is repo null: " + (repository == null) );
-            master = (AbstractMaster) this.repository.getById( id );
+            master = this.repository.getById( id );
         } catch (Exception e) {
             log.error( "failed to find master by id! " + e );
             throw new RuntimeException();
@@ -150,19 +145,18 @@ public class MasterService implements IMasterService {
             log.error( "failed to save master ! " + e );
         }
     }
-
+    @Transactional
     public void setBookedDateFree(UUID id, LocalDate date) {
-        AbstractMaster master = (AbstractMaster) this.repository.getById( id );
+        AbstractMaster master = this.repository.getById( id );
         master.getCalendar().deleteBookedDate( date );
     }
 
     public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
         try {
-            return (AbstractMaster) this.repository.findAll()
+            return  this.repository.findAll()
                     .stream()
-                    .map( m -> ((AbstractMaster) m) )
-                    .filter( m -> ((AbstractMaster) m).getFullName().equals( name ) )
-                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
+                    .filter( m -> ( m).getFullName().equals( name ) )
+                    .filter( m -> (m).getSpeciality() == speciality )
                     .findFirst()
                     .get();
         } catch (NoSuchElementException e) {
@@ -175,10 +169,9 @@ public class MasterService implements IMasterService {
     public AbstractMaster getBySpeciality(Speciality speciality) {
 
         try {
-            return (AbstractMaster) this.repository.findAll()
+            return  this.repository.findAll()
                     .stream()
-                    .map( m -> ((AbstractMaster) m) )
-                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
+                    .filter( m -> (m).getSpeciality() == speciality )
                     .findFirst()
                     .get();
         } catch (IllegalStateException e) {
@@ -195,11 +188,10 @@ public class MasterService implements IMasterService {
     public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
 
         try {
-            return (AbstractMaster) this.repository.findAll()
+            return this.repository.findAll()
                     .stream()
-                    .map( m -> ((AbstractMaster) m) )
-                    .filter( m -> ((AbstractMaster) m).getSpeciality() == speciality )
-                    .filter( m -> ((AbstractMaster) m).getCalendar().isDateBooked( date ) == false )
+                    .filter( m -> (m).getSpeciality() == speciality )
+                    .filter( m -> ( m).getCalendar().isDateBooked( date ) == false )
                     .findFirst()
                     .get();
         } catch (Exception e) {
@@ -238,9 +230,8 @@ public class MasterService implements IMasterService {
 
     public List <AbstractMaster> getMastersBySpeciality(Speciality speciality) {
         try {
-            return (List <AbstractMaster>) this.repository.findAll().stream()
-                    .map( m -> (AbstractMaster) m )
-                    .filter( ((m) -> ((AbstractMaster) m).getSpeciality() == speciality) )
+            return this.repository.findAll().stream()
+                    .filter( ((m) -> ( m).getSpeciality() == speciality) )
                     .collect( Collectors.toList() );
         } catch (IllegalStateException e) {
             log.error( "failed to find all masters " + e );
@@ -250,6 +241,7 @@ public class MasterService implements IMasterService {
     }
 
     @Override
+    @Transactional
     public void loadMastersFromCsv() {
         try {
             List <AbstractMaster> list = CsvMasterParser.load();
@@ -263,6 +255,7 @@ public class MasterService implements IMasterService {
     }
 
     @Override
+    @Transactional
     public void exportMastersToCsv() {
         try {
             CsvMasterWriter.writeMasters( getMastersByAlphabet() );
@@ -275,6 +268,7 @@ public class MasterService implements IMasterService {
     }
 
     @Override
+    @Transactional
     public void loadMastersFromJson() {
         try {
             List <AbstractMaster> list = GsonMasterParser.load();
@@ -291,6 +285,7 @@ public class MasterService implements IMasterService {
     }
 
     @Override
+    @Transactional
     public void exportMastersToJson() {
         try {
             GsonMasterWriter.serializeMasters( getMastersByAlphabet() );
