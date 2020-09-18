@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-public class PlaceController implements IController {
+public class PlaceController  {
     @Autowired
     @Qualifier("placeService")
     private IPlaceService placeService;

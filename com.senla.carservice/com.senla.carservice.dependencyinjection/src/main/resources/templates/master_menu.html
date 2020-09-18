@@ -31,12 +31,23 @@
 </nav>
 <main>
     <h3>Search and modify masters data</h3>
-    <br>
     <p th:text="${message} ?:'Select data'"/>
     <br>
-    <p>Masters available:</p>
     <div>
+        <p>Masters available:</p>
+
         <p th:text="${masters}"/>
+    </div>
+    <br>
+    <p >add new master:</p>
+    <h6>available specialities are: MECHANIC, RESHAPER, ELECTRICIAN, PAINTER</h6>
+    <div >
+        <form method="post" th:action="@{/master_menu/addMaster}" >
+            <input type="text" name="name" placeholder="enter full name:">
+            <input type="text" name="salary" placeholder="enter daily payment:">
+            <input type="text" name="speciality" placeholder="enter speciality:">
+            <input type="submit" value="submit" placeholder="submit">
+        </form>
     </div>
 </main>
 <!-- Optional JavaScript -->

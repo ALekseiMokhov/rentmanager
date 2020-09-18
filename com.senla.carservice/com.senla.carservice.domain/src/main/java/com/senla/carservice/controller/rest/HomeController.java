@@ -1,6 +1,5 @@
 package com.senla.carservice.controller.rest;
 
-import com.senla.carservice.controller.IController;
 import com.senla.carservice.controller.MasterController;
 import com.senla.carservice.controller.OrderController;
 import com.senla.carservice.controller.PlaceController;
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/")
-public class HomeController implements IController {
+public class HomeController  {
     @Autowired
     private PlaceController placeController;
     @Autowired

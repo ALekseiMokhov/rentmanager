@@ -66,8 +66,8 @@ public class PlaceService implements IPlaceService {
     }
     @Transactional
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
-        Place place =new Place( new Calendar() );
-        Boolean res = false;
+        Place place;
+        Boolean res;
         try {
             place = this.repository.getById( id );
             res = place.getCalendar()

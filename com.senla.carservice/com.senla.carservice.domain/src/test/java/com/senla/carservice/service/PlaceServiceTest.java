@@ -51,17 +51,14 @@ class PlaceServiceTest {
 
     @Test
     void isPlaceSetForDate() {
-           /* try {*/
-                when(  placeService.isPlaceSetForDate( UUID.randomUUID(), LocalDate.now())).thenReturn(true  );
-           /*   catch (RuntimeException e){
-                
-              }  ;*/
+
 
         
     }
 
     @Test
     void setPlaceForDate() {
+        
     }
 
     @Test
@@ -94,6 +91,7 @@ class PlaceServiceTest {
 
     @Test
     void getPlaceById() {
+        this.placeService.getPlaceById( UUID.randomUUID() ) ;
     }
 
     @Test
