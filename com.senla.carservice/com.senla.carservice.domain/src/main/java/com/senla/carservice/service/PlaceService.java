@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-
+@Transactional
 public class PlaceService implements IPlaceService {
     @Autowired
     @Qualifier("placeJpaRepository")
@@ -39,45 +38,27 @@ public class PlaceService implements IPlaceService {
     public List <Place> getPlaces() {
         return this.repository.findAll();
     }
-    @Transactional
+
+
     public void addPlaces(int i) {
         for (int j = 0; j < i; j++) {
-            try {
-                this.repository.save( new Place( new Calendar() ) );
-            } catch (Exception e) {
-                log.error( "Failed to add places! " + e );
-            }
-
-
+            this.repository.save( new Place( new Calendar() ) );
         }
     }
+
     @Transactional
     public List <Place> getFreePlacesForDate(LocalDate date) {
-        List <Place> res = new ArrayList <>();
-        try {
-            res = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find all places! " + e );
-            throw new RuntimeException();
-        }
-        return res.stream()
+
+        return this.repository.findAll().stream()
                 .filter( p -> p.getCalendar().isDateBooked( date ) == false )
                 .collect( Collectors.toList() );
     }
+
     @Transactional
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
-        Place place;
-        Boolean res;
-        try {
-            place = this.repository.getById( id );
-            res = place.getCalendar()
-                    .isDateBooked( date );
-        } catch (Exception e) {
-            log.error( "failed to find place by id! " + e );
-            throw new RuntimeException();
-
-        }
-        return res;
+        Place place = this.repository.getById( id );
+        return place.getCalendar()
+                .isDateBooked( date );
     }
 
     @Transactional
@@ -87,44 +68,28 @@ public class PlaceService implements IPlaceService {
             place.setCalendar( new Calendar() );
         }
         place.getCalendar().setDateForBooking( date );
-        try {
-            this.repository.save( place );
-        } catch (Exception e) {
-            log.error( "failed to save place! " + e );
-            throw new RuntimeException();
-        }
+
     }
+
     @Transactional
     public void setPlaceId(UUID id, UUID newId) {
         Place place = this.repository.getById( id );
         place.setId( newId );
-        try {
-            this.repository.save( place );
-        } catch (Exception e) {
-            log.error( "failed to update place! " + e );
-            throw new RuntimeException();
-        }
+
     }
+
     @Transactional
     public void setPlaceFree(UUID id, LocalDate date) {
         Place place = this.repository.getById( id );
         place.getCalendar().deleteBookedDate( date );
-        try {
-            this.repository.save( place );
-        } catch (Exception e) {
-            log.error( "failed to update all place! " + e );
-            throw new RuntimeException();
-        }
+
     }
+
     @Transactional
     public UUID addPlace() {
         Place place = new Place( new Calendar() );
-        try {
-            this.repository.save( place );
-        } catch (Exception e) {
-            log.error( "failed to add place! " + e );
-            throw new RuntimeException();
-        }
+        this.repository.save( place );
+
         return place.getId();
     }
 
@@ -135,22 +100,13 @@ public class PlaceService implements IPlaceService {
 
 
     public void mergePlace(Place place) {
-        try {
             this.repository.save( place );
-        } catch (Exception e) {
-            log.error( "failed to merge place! " + e );
-            throw new RuntimeException();
-        }
+
     }
+
     @Transactional
     public Place getFreePlace(LocalDate date) {
-        List <Place> res = null;
-        try {
-            res = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find places! " + e );
-            throw new RuntimeException();
-        }
+        List <Place> res = this.repository.findAll();
         for (Place place : res) {
             if (!place.getCalendar()
                     .isDateBooked( date )) {
@@ -158,68 +114,15 @@ public class PlaceService implements IPlaceService {
             }
 
         }
-        throw new NoSuchElementException( "There are no free places for this Date!" );          /*unreachable*/
+         throw new NoSuchElementException( "There is no free place for chosen date!" ) ;
     }
 
     public Place getPlaceById(UUID id) {
-        try {
             return this.repository.getById( id );
-        } catch (Exception e) {
-            log.error( "failed to get place! " + e );
-            throw new RuntimeException();
-        }
-    }
-
-    @Override  @Transactional
-    public void loadFromCsv() {
-        try {
-            List <Place> list = CsvPlaceParser.load();
-            for (Place place : list) {
-                mergePlace( place );
-            }
-        } catch (IOException e) {
-            log.error( "failed to load places from csv! " + e );
-            throw new RuntimeException();
-        }
 
     }
 
-    @Override    @Transactional
-    public void exportToCsv() {
 
-        try {
-            CsvPlaceWriter.writePlaces( this.repository.findAll() );
-
-        } catch (IOException e) {
-            log.error( "There is a problem with export!Check path to the file! " + e );
-            /*throw new RuntimeException();*/
-        }
-
-    }
-
-    @Override
-    public void loadPlacesFromJson() {
-        try {
-            List <Place> list = GsonPlaceParser.load();
-            for (Place place : list) {
-                mergePlace( place );
-            }
-
-        } catch (IOException e) {
-            log.error( "There is a problem with import!Check path to the file! " + e );
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public void exportPlacesToJson() {
-        try {
-            GsonPlaceWriter.serializePlaces( this.repository.findAll() );
-        } catch (IOException e) {
-            log.error( "There is a problem with export!Check path to the file! " + e );
-            throw new RuntimeException();
-        }
-    }
 
     @Override
     public void deletePlace(UUID id) {
@@ -228,6 +131,6 @@ public class PlaceService implements IPlaceService {
 
     @Override
     public void savePlace(Place place) {
-          this.repository.save( place );
+        this.repository.save( place );
     }
 }

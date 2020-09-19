@@ -1,7 +1,6 @@
 package com.senla.carservice.view;
 
 
-import com.senla.carservice.controller.JsonController;
 import com.senla.carservice.spring.config.AppConfig;
 import com.senla.carservice.util.warning.Supressor;
 import com.senla.carservice.view.menu.MenuController;
@@ -20,10 +19,7 @@ public class Main {
         for (String beanName : context.getBeanDefinitionNames()) {
             System.out.println( beanName );
         }
-
-        JsonController jsonController =
-                context.getBean( JsonController.class );
-        jsonController.loadFromJson();
+        
 
         MenuController menuController = context.getBean( MenuController.class );
         menuController.run();

@@ -11,23 +11,19 @@ import com.senla.carservice.repository.interfaces.IOrderRepository;
 import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.service.interfaces.IOrderService;
 import com.senla.carservice.service.interfaces.IPlaceService;
-import com.senla.carservice.util.csv.CsvOrderParser;
-import com.senla.carservice.util.csv.CsvOrderWriter;
-import com.senla.carservice.util.serialisation.GsonOrderParser;
-import com.senla.carservice.util.serialisation.GsonOrderWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+
 @Transactional
 public class OrderService implements IOrderService {
     @Autowired
@@ -64,28 +60,8 @@ public class OrderService implements IOrderService {
         this.placeService.setPlaceForDate( place.getId(), startOfExecution );
         Order order = new Order( date, startOfExecution, place, availableMasters );
         order.setStatus( OrderStatus.MANAGED );
-        try {
-            this.repository.save( order );
-        } catch (Exception e) {
-            log.error( "failed to save order! " + e );
-            throw new RuntimeException();
 
-        }
-
-    }
-    @Transactional
-    public void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id) {
-        this.placeService.savePlace( place );
-        masters.stream()
-                .forEach( m -> this.masterService.saveMaster( m ) );
-
-        try {
-            this.repository.save( new Order( id, date, startOfExecution, place, masters ) );
-        } catch (Exception e) {
-            log.error( "failed to save order! " + e );
-            throw new RuntimeException();
-
-        }
+        this.repository.save( order );
 
 
     }
@@ -93,41 +69,30 @@ public class OrderService implements IOrderService {
     @Override
     public void saveOrder(Order order) {
 
-        try {
-            this.repository.save( order );
-        } catch (Exception e) {
-            log.error( "failed to save order! " + e );
-            throw new RuntimeException();
+        this.repository.save( order );
 
-        }
     }
 
     public Order findOrderById(UUID id) {
-        try {
-            return this.repository.getById( id );
-        } catch (Exception e) {
-            log.error( "failed to save order! " + e );
-            throw new RuntimeException();
 
-        }
+        return this.repository.getById( id );
+
     }
 
     @Override
     public void deleteOrder(UUID id) {
-        try {
-            this.repository.delete( id );
-        } catch (Exception e) {
-            log.error( "failed  to delete order! " + e );
-            throw new RuntimeException();
 
-        }
+        this.repository.delete( id );
+
     }
-    @Transactional
+
     public void shiftOrderExecutionDate(UUID id, LocalDate newDate) {
         Order order = this.repository.getById( id );
         LocalDate oldDate = order.getStartOfExecution();
+
         Place oldPlace = order.getPlace();
         Place newPlace = this.placeService.getFreePlace( newDate );
+
         List <AbstractMaster> oldMasters = order.getMasters();
         Set <Speciality> required = oldMasters.stream()
                 .map( m -> m.getSpeciality() )
@@ -135,9 +100,9 @@ public class OrderService implements IOrderService {
         List <AbstractMaster> newMasters = new ArrayList <>();
 
         this.placeService.setPlaceFree( oldPlace.getId(), oldDate );
-        this.placeService.savePlace( oldPlace );
+
         newPlace.getCalendar().setDateForBooking( newDate );
-        this.placeService.savePlace( newPlace );
+
 
         oldMasters.stream()
                 .forEach( master -> master.getCalendar()
@@ -147,21 +112,14 @@ public class OrderService implements IOrderService {
             AbstractMaster master = masterService.getFreeBySpeciality( newDate, speciality );
             newMasters.add( master );
             masterService.setMasterForDate( master.getId(), newDate );
-            masterService.saveMaster( master );
+
         }
         order.setPlace( newPlace );
         order.setMasters( newMasters );
         order.setStartOfExecution( newDate );
-        try {
-            this.repository.save( order );
-        } catch (Exception e) {
-            log.error( "failed to save order!" + e );
-            throw new RuntimeException();
-
-        }
 
     }
-    @Transactional
+
     public void setNewMasters(UUID id) {
         Order order = this.repository.getById( id );
         List <AbstractMaster> newMasters = new ArrayList <>();
@@ -170,23 +128,14 @@ public class OrderService implements IOrderService {
             AbstractMaster master1 = this.masterService
                     .getFreeBySpeciality( order.getStartOfExecution(), master.getSpeciality() );
             this.masterService.setMasterForDate( master1.getId(), order.getStartOfExecution() );
-            this.masterService.saveMaster( master1 );
             newMasters.add( master1 );
 
             this.masterService.setBookedDateFree( master.getId(), order.getStartOfExecution() );
-            this.masterService.saveMaster( master );
         }
         order.setMasters( newMasters );
-        try {
-            this.repository.save( order );
-        } catch (Exception e) {
-            log.error( "failed to save order! " + e );
-            throw new RuntimeException();
-
-        }
 
     }
-    @Transactional
+
     public void cancelOrder(UUID id) {
         for (Order order : this.repository.findAll()) {
             if (order.getId().equals( id )) {
@@ -201,39 +150,25 @@ public class OrderService implements IOrderService {
                 this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
                 this.placeService.savePlace( place );
 
-                try {
-                    this.repository.save( order );
-                } catch (Exception e) {
-                    log.error( "failed to save order! " + e );
-                    throw new RuntimeException();
 
-
-                }
             }
         }
 
     }
+
     @Transactional
     public void completeOrder(UUID id) {
         for (Order order : this.repository.findAll()) {
             if (order.getId().equals( id )) {
                 order.getPlace().getCalendar().deleteBookedDate( LocalDate.now() );
-                this.placeService.savePlace( order.getPlace());
 
                 order.getMasters().stream()
                         .forEach( master -> master.getCalendar().deleteBookedDate( LocalDate.now() ) );
-                order.getMasters().stream()
-                        .forEach( master -> this.masterService.saveMaster( master ) );
+
 
                 order.setStatus( OrderStatus.COMPLETED );
                 order.setFinishOfExecution( LocalDate.now() );
-                try {
-                    this.repository.save( order );
-                } catch (Exception e) {
-                    log.error( "failed to save order! " + e );
-                    throw new RuntimeException();
 
-                }
             }
         }
 
@@ -247,13 +182,6 @@ public class OrderService implements IOrderService {
     public List <Order> getOrdersByPrice(OrderStatus status) {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
         List <Order> sortedList = null;
-        try {
-            sortedList = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find orders! " + e );
-            throw new RuntimeException();
-
-        }
         Collections.sort( sortedList, priceComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -263,13 +191,8 @@ public class OrderService implements IOrderService {
     public List <Order> getOrdersByBookedDate(OrderStatus status) {
         Comparator <Order> dateOfBookingComparator = Comparator.comparing( o -> o.getDateBooked() );
         List <Order> sortedList = null;
-        try {
-            sortedList = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find orders! " + e );
-            throw new RuntimeException();
 
-        }
+        sortedList = this.repository.findAll();
         Collections.sort( sortedList, dateOfBookingComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status ).collect( Collectors.toList() );
@@ -278,13 +201,10 @@ public class OrderService implements IOrderService {
     public List <Order> getOrdersByExecutionDate(OrderStatus status) {
         Comparator <Order> dateOfExecutionComparator = Comparator.comparing( o -> o.getStartOfExecution() );
         List <Order> sortedList = null;
-        try {
-            sortedList = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find orders! " + e );
-            throw new RuntimeException();
 
-        }
+        sortedList = this.repository.findAll();
+
+
         Collections.sort( sortedList, dateOfExecutionComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -293,67 +213,14 @@ public class OrderService implements IOrderService {
 
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
         List <Order> res = new ArrayList <>();
-        try {
-            res.addAll( this.repository.findAll() );
-        } catch (Exception e) {
-            log.error( "failed to find orders! " + e );
-            throw new RuntimeException();
 
-        }
+        res.addAll( this.repository.findAll() );
+
         return res.stream()
                 .filter( o -> o.getStartOfExecution()
                         .compareTo( start ) >= 0 && o.getFinishOfExecution().compareTo( end ) <= 0 )
                 .collect( Collectors.toList() );
     }
 
-    @Override
-    @Transactional
-    public void loadFromCsv() {
-        try {
-            List <Order> orderList = CsvOrderParser.load();
-            for (Order order : orderList) {
-                saveOrder( order );
-            }
-        } catch (IOException e) {
-            log.error( "Check a path to the file!" );
-            throw new RuntimeException();
-
-        }
-    }
-
-    @Override
-    @Transactional
-    public void exportToCsv() {
-
-        try {
-            CsvOrderWriter.writeOrders( getOrders() );
-            System.out.println( getOrders().size() + " orders were successfully written to csv file!" );
-        } catch (IOException e) {
-            log.error( "Check a path to the file!" );
-        }
-    }
-
-    @Override
-    @Transactional
-    public void loadOrdersFromJson() {
-        try {
-            List <Order> orderList = GsonOrderParser.load();
-            for (Order order : orderList) {
-                saveOrder( order );
-            }
-        } catch (IOException e) {
-            log.error( "Check a path to the file!" );
-        }
-    }
-
-    @Override
-    @Transactional
-    public void exportOrdersToJson() {
-        try {
-            GsonOrderWriter.serializeOrders( getOrders() );
-        } catch (IOException e) {
-            log.error( "Check a path to the file!" );
-        }
-    }
 
 }

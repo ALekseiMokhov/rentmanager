@@ -5,15 +5,13 @@ import com.senla.carservice.util.calendar.Calendar;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "places")
 public class Place {
     @Id
     @GeneratedValue

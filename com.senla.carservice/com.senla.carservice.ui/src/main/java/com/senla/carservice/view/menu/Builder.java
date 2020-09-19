@@ -49,8 +49,6 @@ public class Builder {
         addItem( placeMenu, new BookPlaceForDateAction(), "book the Place for the Date", true );
         addItem( placeMenu, new UnbookPlaceAction(), "unbook the Place for the Date", true );
         addItem( placeMenu, new SetPlaceIdAction(), "set custom id for the Place", isGarageModificationPermitted );
-        addItem( placeMenu, new ImportPlacesAction(), "load places to csv file", isGarageModificationPermitted );
-        addItem( placeMenu, new ExportPlacesAction(), "load places from csv file", isGarageModificationPermitted );
         addItem( placeMenu, new DeletePlaceAction(), "delete place by id", isGarageModificationPermitted );
         addItem( placeMenu, new RootMenuItem(), "Root menu", true );
         addItem( placeMenu, new ExitItem(), "Exit", true );
@@ -83,8 +81,6 @@ public class Builder {
         addItem( masterMenu, new GetMastersByAlphabetAction(), "find all Master sorted by alphabet", true );
         addItem( masterMenu, new GetMastersBySpecialityAction(), "find all Master of chosen speciality", true );
         addItem( masterMenu, new GetSpecialitiesAction(), "find all available specialities", true );
-        addItem( masterMenu, new ExportMastersAction(), "load masters to csv file", isMasterModificationPermitted );
-        addItem( masterMenu, new ImportMastersAction(), "load masters from csv file", isMasterModificationPermitted );
         addItem( masterMenu, new DeleteMasterAction(), "delete master by id", isGarageModificationPermitted );
         addItem( masterMenu, new RootMenuItem(), "Root menu", true );
         addItem( masterMenu, new ExitItem(), "Exit", true );
@@ -110,8 +106,6 @@ public class Builder {
         addItem( orderMenu, new GetOrdersForPeriodAction(), "find all orders for specific period", true );
         addItem( orderMenu, new SetNewMastersAction(), "set new masters for the order", true );
         addItem( orderMenu, new ShiftDateAction(), "move on date of execution of the chosen order", isOrderModificationPermitted );
-        addItem( orderMenu, new ExportOrdersAction(), "load orders to csv file", isOrderModificationPermitted );
-        addItem( orderMenu, new ImportOrdersAction(), "load orders from csv file", isOrderModificationPermitted );
         addItem( orderMenu, new DeleteOrderAction(), "delete order from database", isOrderModificationPermitted );
         addItem( orderMenu, new RootMenuItem(), "Root menu", true );
         addItem( orderMenu, new ExitItem(), "Exit", true );

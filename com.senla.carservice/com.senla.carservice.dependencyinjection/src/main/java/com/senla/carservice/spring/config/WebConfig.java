@@ -12,11 +12,11 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-@Configuration
+/*@Configuration
 @EnableWebMvc
-@ComponentScan( "com.senla.carservice")
-public class WebConfig implements WebMvcConfigurer {
-    private final ApplicationContext applicationContext;
+@ComponentScan( "com.senla.carservice")*/
+public class WebConfig /*implements WebMvcConfigurer*/ {
+   /* private final ApplicationContext applicationContext;
     @Autowired
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
@@ -47,4 +47,4 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setTemplateEngine( templateEngine() );
         registry.viewResolver( resolver );
     }
-}
+*/}

@@ -27,21 +27,11 @@ public interface IPlaceService {
 
     void mergePlace(Place place);
 
-    boolean isPresent(UUID id);
-
     UUID addPlace();
 
     Place getFreePlace(LocalDate date);
 
     Place getPlaceById(UUID id);
-
-    void loadFromCsv();
-
-    void exportToCsv();
-
-    void loadPlacesFromJson();
-
-    void exportPlacesToJson();
 
     void deletePlace(UUID id);
 

@@ -5,17 +5,12 @@ import com.senla.carservice.entity.master.*;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
-import com.senla.carservice.util.csv.CsvMasterParser;
-import com.senla.carservice.util.csv.CsvMasterWriter;
-import com.senla.carservice.util.serialisation.GsonMasterParser;
-import com.senla.carservice.util.serialisation.GsonMasterWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 
+@Transactional
 public class MasterService implements IMasterService {
     @Autowired
     @Qualifier("masterJpaRepository")
@@ -32,11 +28,8 @@ public class MasterService implements IMasterService {
     }
 
     public void saveMaster(AbstractMaster master) {
-        try {
-            this.repository.save( master );
-        } catch (Exception e) {
-            log.error( "Failed to save master! " + e );
-        }
+
+        this.repository.save( master );
 
     }
 
@@ -45,30 +38,26 @@ public class MasterService implements IMasterService {
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
 
         AbstractMaster master;
-        try {
-            switch (speciality) {
-                case RESHAPER -> {
-                    master = new Reshaper( fullName, dailyPayment, calendar, speciality );
-                }
-                case ELECTRICIAN -> {
-                    master = new Electrician( fullName, dailyPayment, calendar, speciality );
-                }
-                case PAINTER -> {
-                    master = new Painter( fullName, dailyPayment, calendar, speciality );
-                }
-                case MECHANIC -> {
-                    master = new Mechanic( fullName, dailyPayment, calendar, speciality );
-                }
-                default -> {
-                    throw new NoSuchElementException( "there is no suitable speciality!" );
-                }
 
+        switch (speciality) {
+            case RESHAPER -> {
+                master = new Reshaper( fullName, dailyPayment, calendar, speciality );
             }
-            this.repository.save( master );
-        } catch (Exception e) {
-            log.error( "Failed to save master!" );
-        }
+            case ELECTRICIAN -> {
+                master = new Electrician( fullName, dailyPayment, calendar, speciality );
+            }
+            case PAINTER -> {
+                master = new Painter( fullName, dailyPayment, calendar, speciality );
+            }
+            case MECHANIC -> {
+                master = new Mechanic( fullName, dailyPayment, calendar, speciality );
+            }
+            default -> {
+                throw new NoSuchElementException( "there is no suitable speciality!" );
+            }
 
+        }
+        this.repository.save( master );
 
     }
 
@@ -96,88 +85,57 @@ public class MasterService implements IMasterService {
     }
 
     public void removeMaster(UUID id) {
-        try {
-            this.repository.delete( id );
-        } catch (NoSuchElementException e) {
-            log.error( "The Master with provided id was probably already deleted!" );
-        }
+        this.repository.delete( id );
+
     }
 
     @Override
     public AbstractMaster getById(UUID id) {
-
-        try {
-            return this.repository.getById( id );
-        } catch (Exception e) {
-            log.error( "failed to find master by id! " + e );
-            throw new RuntimeException();
-        }
+        return this.repository.getById( id );
     }
-    @Transactional
+
+
     public boolean isBookedForDate(UUID id, LocalDate date) {
-        AbstractMaster master = null;
-        try {
-            master =  this.repository.getById( id );
-        } catch (Exception e) {
-            log.error( "failed to find master by id! " + e );
-            throw new RuntimeException();
-        }
+        AbstractMaster master = this.repository.getById( id );
+
 
         return master.getCalendar().isDateBooked( date );
     }
-    @Transactional
+
+
     public void setMasterForDate(UUID id, LocalDate date) {
-        AbstractMaster master = null;
-        try {
-            log.debug( "Is repo null: " + (repository == null) );
-            master = this.repository.getById( id );
-        } catch (Exception e) {
-            log.error( "failed to find master by id! " + e );
-            throw new RuntimeException();
-        }
+        AbstractMaster master = this.repository.getById( id );
         if (master.getCalendar() == null) {
             master.setCalendar( new Calendar() );
         }
         master.getCalendar().setDateForBooking( date );
-        try {
-            this.repository.save( master );
-        } catch (Exception e) {
-            log.error( "failed to save master ! " + e );
-        }
+
     }
-    @Transactional
+
     public void setBookedDateFree(UUID id, LocalDate date) {
         AbstractMaster master = this.repository.getById( id );
         master.getCalendar().deleteBookedDate( date );
     }
 
     public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
-        try {
-            return  this.repository.findAll()
-                    .stream()
-                    .filter( m -> ( m).getFullName().equals( name ) )
-                    .filter( m -> (m).getSpeciality() == speciality )
-                    .findFirst()
-                    .get();
-        } catch (NoSuchElementException e) {
-            log.error( "There is no required master ! " + e );
-            throw new RuntimeException();
-        }
+
+        return this.repository.findAll()
+                .stream()
+                .filter( m -> (m).getFullName().equals( name ) )
+                .filter( m -> (m).getSpeciality() == speciality )
+                .findFirst()
+                .get();
+
 
     }
 
     public AbstractMaster getBySpeciality(Speciality speciality) {
 
-        try {
-            return  this.repository.findAll()
-                    .stream()
-                    .filter( m -> (m).getSpeciality() == speciality )
-                    .findFirst()
-                    .get();
-        } catch (IllegalStateException e) {
-            log.error( "failed to find master by speciality! " + e );
-            throw new RuntimeException();
-        }
+        return this.repository.findAll()
+                .stream()
+                .filter( m -> (m).getSpeciality() == speciality )
+                .findFirst()
+                .get();
 
     }
 
@@ -187,115 +145,41 @@ public class MasterService implements IMasterService {
 
     public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
 
-        try {
-            return this.repository.findAll()
-                    .stream()
-                    .filter( m -> (m).getSpeciality() == speciality )
-                    .filter( m -> ( m).getCalendar().isDateBooked( date ) == false )
-                    .findFirst()
-                    .get();
-        } catch (Exception e) {
-            log.error( "failed to find all masters of chosen specialities for the date" + e );
-            throw new RuntimeException();
-        }
+        return this.repository.findAll()
+                .stream()
+                .filter( m -> (m).getSpeciality() == speciality )
+                .filter( m -> (m).getCalendar().isDateBooked( date ) == false )
+                .findFirst()
+                .get();
+
 
     }
 
 
     public List <AbstractMaster> getMastersByAlphabet() {
         Comparator <AbstractMaster> comparator = Comparator.comparing( m -> m.getFullName() );
-        List <AbstractMaster> sortedList = null;
-        try {
-            sortedList = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find all masters " + e );
-            throw new RuntimeException();
-        }
+        List <AbstractMaster>
+                sortedList = this.repository.findAll();
         Collections.sort( sortedList, comparator );
         return sortedList;
     }
 
     public List <AbstractMaster> getFreeMasters(LocalDate date) {
-        List <AbstractMaster> res = null;
-        try {
-            res = this.repository.findAll();
-        } catch (Exception e) {
-            log.error( "failed to find all masters " + e );
-            throw new RuntimeException();
-        }
+        List <AbstractMaster> res = this.repository.findAll();
         return res.stream()
                 .filter( (m) -> m.getCalendar().isDateBooked( date ) == false )
                 .collect( Collectors.toList() );
     }
 
     public List <AbstractMaster> getMastersBySpeciality(Speciality speciality) {
-        try {
-            return this.repository.findAll().stream()
-                    .filter( ((m) -> ( m).getSpeciality() == speciality) )
-                    .collect( Collectors.toList() );
-        } catch (IllegalStateException e) {
-            log.error( "failed to find all masters " + e );
-            throw new RuntimeException();
-        }
 
-    }
-
-    @Override
-    @Transactional
-    public void loadMastersFromCsv() {
-        try {
-            List <AbstractMaster> list = CsvMasterParser.load();
-            for (AbstractMaster master : list) {
-                this.repository.save( master );
-            }
-        } catch (IOException e) {
-            log.error( "failed to load masters to csv! " + e );
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    @Transactional
-    public void exportMastersToCsv() {
-        try {
-            CsvMasterWriter.writeMasters( getMastersByAlphabet() );
-            System.out.println( getMastersByAlphabet().size() + " masters were successfully written to csv file!" );
-        } catch (IOException e) {
-            log.error( "failed to  write masters to csv! " + e );
-            throw new RuntimeException();
-
-        }
-    }
-
-    @Override
-    @Transactional
-    public void loadMastersFromJson() {
-        try {
-            List <AbstractMaster> list = GsonMasterParser.load();
-            for (AbstractMaster master : list) {
-                this.repository.save( master );
-            }
-
-        } catch (IOException e) {
-            log.error( "failed to load masters from json! " + e );
-            throw new RuntimeException();
-        }
+        return this.repository.findAll().stream()
+                .filter( ((m) -> (m).getSpeciality() == speciality) )
+                .collect( Collectors.toList() );
 
 
     }
 
-    @Override
-    @Transactional
-    public void exportMastersToJson() {
-        try {
-            GsonMasterWriter.serializeMasters( getMastersByAlphabet() );
-
-        } catch (IOException e) {
-            log.error( "failed to export  masters to json! " + e );
-            throw new RuntimeException();
-
-        }
-    }
 
     @Override
     public void deleteMaster(UUID id) {

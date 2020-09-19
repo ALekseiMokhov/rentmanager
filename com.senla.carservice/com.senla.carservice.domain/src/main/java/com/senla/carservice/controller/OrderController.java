@@ -31,10 +31,6 @@ public class OrderController   {
         this.orderService.addOrder( date, startOfExecution, required );
     }
 
-    public void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id) {
-        this.orderService.addOrder( date, startOfExecution, masters, place, id );
-    }
-
     public Order findOrderById(UUID id) {
         return this.orderService.findOrderById( id );
     }
@@ -78,19 +74,5 @@ public class OrderController   {
         return this.orderService.getOrdersByPrice(status);
     }
 
-    public void loadFromCsv() {
-        this.orderService.loadFromCsv();
-    }
 
-    public void exportToCsv() {
-        this.orderService.exportToCsv();
-    }
-
-    public void loadFromJson() {
-        this.orderService.loadOrdersFromJson();
-    }
-
-    public void exportToJson() {
-        this.orderService.exportOrdersToJson();
-    }
 }

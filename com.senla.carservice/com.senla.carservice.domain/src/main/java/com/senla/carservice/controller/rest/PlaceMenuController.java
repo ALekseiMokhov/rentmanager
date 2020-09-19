@@ -46,18 +46,6 @@ public class PlaceMenuController {
         return "place_menu";
     }
 
-    @GetMapping("/export")
-    public String exportToCsv(ModelMap model){
-        this.placeService.exportToCsv();
-        model.addAttribute( "message", "Places were exported to Csv! " );
-        return "place_menu";
-    }
-    @GetMapping("/import")
-    public String importToCsv(ModelMap model){
-        this.placeService.loadFromCsv();
-        model.addAttribute( "message", "Places were imported from Csv! " );
-        return "place_menu";
-    }
 
     @PostMapping("/addPlaces")
     public String addPlaces(@RequestParam(required = false) Integer numberOfPlaces, ModelMap model) {

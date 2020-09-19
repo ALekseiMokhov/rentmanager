@@ -88,22 +88,6 @@ public class MasterController  {
         return this.masterService.getMastersBySpeciality( speciality );
     }
 
-    public void loadMastersFromCsv() {
-        this.masterService.loadMastersFromCsv();
-    }
-
-    public void exportMastersToCsv() {
-        this.masterService.exportMastersToCsv();
-    }
-
-    public void loadFromJson() {
-        this.masterService.loadMastersFromJson();
-    }
-
-    public void exportToJson() {
-        this.masterService.exportMastersToJson();
-    }
-
     public void deleteMaster(UUID id) {
         this.masterService.deleteMaster( id );
     }

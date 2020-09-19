@@ -25,11 +25,6 @@ class PlaceServiceTest {
     @InjectMocks
     private PlaceService placeService;
 
-    @Test
-    void testRepoMock() {
-        assertNotNull( repository );
-        assertTrue( repository instanceof PlaceJpaRepository );
-    }
 
     @Test()
     void getPlaces() {
@@ -58,7 +53,9 @@ class PlaceServiceTest {
 
     @Test
     void setPlaceForDate() {
-        
+        Place place = new Place( new Calendar() );
+        placeService.setPlaceForDate( place.getId(),LocalDate.of( 2020,12,31 ) );
+        verify( repository, times( 1 )).getById( place.getId() );
     }
 
     @Test

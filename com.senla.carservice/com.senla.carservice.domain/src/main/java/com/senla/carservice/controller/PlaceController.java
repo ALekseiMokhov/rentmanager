@@ -66,22 +66,6 @@ public class PlaceController  {
         return this.placeService.getPlaceById( id );
     }
 
-    public void loadPlacesFromCsv() {
-        this.placeService.loadFromCsv();
-    }
-
-    public void exportPlacesToCsv() {
-        this.placeService.exportToCsv();
-    }
-
-    public void loadFromJson() {
-        this.placeService.loadPlacesFromJson();
-    }
-
-    public void exportToJson() {
-        this.placeService.exportPlacesToJson();
-    }
-
     public void deletePlace(UUID id) {
         this.placeService.deletePlace( id );
     }

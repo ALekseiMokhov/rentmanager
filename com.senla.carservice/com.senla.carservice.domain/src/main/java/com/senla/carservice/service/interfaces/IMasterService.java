@@ -44,13 +44,5 @@ public interface IMasterService {
 
     List <AbstractMaster> getMastersBySpeciality(Speciality speciality);
 
-    void loadMastersFromCsv();
-
-    void exportMastersToCsv();
-
-    void loadMastersFromJson();
-
-    void exportMastersToJson();
-
     void deleteMaster(UUID id);
 }
