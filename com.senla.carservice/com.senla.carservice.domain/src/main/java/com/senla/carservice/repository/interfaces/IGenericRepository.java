@@ -16,4 +16,6 @@ public interface IGenericRepository<T> {
     T update(T entity);
 
     void delete(UUID id);
+
+
 }

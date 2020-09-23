@@ -23,7 +23,7 @@ public class PlaceMenuController {
     private IPlaceService placeService;
 
 
-    @GetMapping()
+    @GetMapping("")
     public String showAll(ModelMap model) {
         model.addAttribute( "places", this.placeService.getPlaces() );
         return "place_menu";
@@ -45,7 +45,7 @@ public class PlaceMenuController {
 
         return "place_menu";
     }
-
+   
 
     @PostMapping("/addPlaces")
     public String addPlaces(@RequestParam(required = false) Integer numberOfPlaces, ModelMap model) {

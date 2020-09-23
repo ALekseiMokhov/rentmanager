@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 
 @Transactional
-public class OrderService implements IOrderService {
+    public class OrderService implements IOrderService {
     @Autowired
     @Qualifier("orderJpaRepository")
     private IGenericRepository <Order> repository;

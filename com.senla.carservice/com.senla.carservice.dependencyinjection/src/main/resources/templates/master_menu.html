@@ -35,20 +35,82 @@
     <br>
     <div>
         <p>Masters available:</p>
-
-        <p th:text="${masters}"/>
+        <th:block th:each="master : ${masters}">
+            <li th:utext="${master}"/>
+        </th:block>
     </div>
     <br>
-    <p >add new master:</p>
+    <p>add new master:</p>
     <h6>available specialities are: MECHANIC, RESHAPER, ELECTRICIAN, PAINTER</h6>
-    <div >
-        <form method="post" th:action="@{/master_menu/addMaster}" >
+    <div>
+        <form method="post" th:action="@{/master_menu/addMaster}">
             <input type="text" name="name" placeholder="enter full name:">
             <input type="text" name="salary" placeholder="enter daily payment:">
             <input type="text" name="speciality" placeholder="enter speciality:">
             <input type="submit" value="submit" placeholder="submit">
         </form>
     </div>
+    <br>
+    <p>book master for the Date:</p>
+    <div>
+    <form method="post" th:action="@{/master_menu/setDate}">
+        <input type="text" name="id" placeholder="enter Master's id:">
+        <input type="text" name="date" placeholder="enter date to book:">
+        <input type="submit" value="submit" placeholder="submit">
+    </form>
+    </div>
+    <br>
+    <p>delete master:</p>
+    <div>
+    <form method="post" th:action="@{/master_menu/deleteMaster}">
+        <input type="text" name="id" placeholder="enter Master's id:">
+        <input type="submit" value="submit" placeholder="submit">
+    </form>
+    </div>
+    <br>
+    <p>unbook master:</p>
+    <div>
+    <form method="post" th:action="@{/master_menu/unbookMaster}">
+        <input type="text" name="id" placeholder="enter Master's id:">
+        <input type="text" name="date" placeholder="enter date to unbook:">
+        <input type="submit" value="submit" placeholder="submit">
+    </form>
+    </div>
+    <br>
+    <div>
+        <p>find master:</p>
+        <form method="get" th:action="@{/master_menu/getByNameAndSpeciality}">
+            <input type="text" name="name" placeholder="enter Master's name:">
+            <input type="text" name="speciality" placeholder="enter speciality :">
+            <input type="submit" value="submit" placeholder="submit">
+        </form>
+    </div>
+  <br>
+    <div>
+        <p>find free master:</p>
+        <form method="get" th:action="@{/master_menu/getFreeMaster}">
+            <input type="text" name="date" placeholder="enter date:">
+            <input type="text" name="speciality" placeholder="enter speciality:">
+            <input type="submit" value="submit" placeholder="submit">
+        </form>
+    </div>
+  <br>
+    <div>
+        <p>find free masters for the Date:</p>
+        <form method="get" th:action="@{/master_menu/getFreeMasters}">
+            <input type="text" name="date" placeholder="enter date:">
+            <input type="submit" value="submit" placeholder="submit">
+        </form>
+    </div>
+  <br>
+    <div>
+        <p>find all masters of the Speciality:</p>
+        <form method="get" th:action="@{/master_menu/getMastersBySpeciality}">
+            <input type="text" name="speciality" placeholder="enter Speciality:">
+            <input type="submit" value="submit" placeholder="submit">
+        </form>
+    </div>
+
 </main>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

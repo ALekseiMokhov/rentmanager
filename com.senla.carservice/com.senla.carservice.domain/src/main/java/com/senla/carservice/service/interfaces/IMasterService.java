@@ -18,8 +18,6 @@ public interface IMasterService {
 
     void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality);
 
-    void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id);
-
     void removeMaster(UUID id);
 
     AbstractMaster getById(UUID id);

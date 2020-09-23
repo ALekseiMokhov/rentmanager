@@ -10,56 +10,61 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 class PlaceServiceTest {
-    private IGenericRepository repository = Mockito.mock( PlaceJpaRepository.class);
+    private IGenericRepository mockRepo
+            = Mockito.mock( PlaceJpaRepository.class );
     @InjectMocks
     private PlaceService placeService;
-
+    private Place place = new Place( new Calendar() );
+    private UUID id = place.getId();
 
     @Test()
     void getPlaces() {
         List <Place> list = new ArrayList <>();
         when( placeService.getPlaces() ).thenReturn( list );
+        Assertions.assertEquals( list,placeService.getPlaces() );
     }
 
     @Test
     void addPlaces() {
         placeService.addPlaces( 22 );
-        verify( repository,times( 22 ) ).save( any(Place.class) );
+        verify( mockRepo, times( 22 ) ).save( any( Place.class ) );
     }
 
     @Test
     void getFreePlacesForDate() {
-        List<Place>list = new ArrayList <>();
-        when(placeService.getFreePlacesForDate( LocalDate.now() )).thenReturn(list) ;
+        List <Place> list = new ArrayList <>();
+        when( placeService.getFreePlacesForDate( LocalDate.now() ) ).thenReturn( list );
     }
 
     @Test
     void isPlaceSetForDate() {
-
-
-        
+        when( mockRepo.getById( id ) ).thenReturn( place );
+        Boolean res = placeService.isPlaceSetForDate( id, LocalDate.now() );
+        Assertions.assertEquals( false,res );
     }
 
     @Test
     void setPlaceForDate() {
-        Place place = new Place( new Calendar() );
-        placeService.setPlaceForDate( place.getId(),LocalDate.of( 2020,12,31 ) );
-        verify( repository, times( 1 )).getById( place.getId() );
+        when( mockRepo.getById( id ) ).thenReturn( place );
+        placeService.setPlaceForDate( id, LocalDate.now() );
+        Assertions.assertEquals(true,
+                placeService.getPlaceById( id ).getCalendar().isDateBooked( LocalDate.now() )  );
+
     }
 
     @Test
     void setPlaceId() {
+
     }
 
     @Test
@@ -88,23 +93,7 @@ class PlaceServiceTest {
 
     @Test
     void getPlaceById() {
-        this.placeService.getPlaceById( UUID.randomUUID() ) ;
-    }
-
-    @Test
-    void loadFromCsv() {
-    }
-
-    @Test
-    void exportToCsv() {
-    }
-
-    @Test
-    void loadPlacesFromJson() {
-    }
-
-    @Test
-    void exportPlacesToJson() {
+        this.placeService.getPlaceById( UUID.randomUUID() );
     }
 
     @Test
