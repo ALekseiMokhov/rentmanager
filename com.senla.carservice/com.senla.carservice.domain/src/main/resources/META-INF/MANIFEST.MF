@@ -1,3 +1,2 @@
 Manifest-Version: 1.0
-com.senla.carservice.view.Main-Class: Domain
 

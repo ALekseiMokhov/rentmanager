@@ -6,8 +6,6 @@ import com.senla.carservice.view.master.*;
 import com.senla.carservice.view.order.*;
 import com.senla.carservice.view.place.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;

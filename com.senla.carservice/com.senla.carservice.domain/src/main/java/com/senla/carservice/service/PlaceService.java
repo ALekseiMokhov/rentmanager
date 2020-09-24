@@ -5,17 +5,12 @@ import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.service.interfaces.IPlaceService;
 import com.senla.carservice.util.calendar.Calendar;
-import com.senla.carservice.util.csv.CsvPlaceParser;
-import com.senla.carservice.util.csv.CsvPlaceWriter;
-import com.senla.carservice.util.serialisation.GsonPlaceParser;
-import com.senla.carservice.util.serialisation.GsonPlaceWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -99,11 +94,6 @@ public class PlaceService implements IPlaceService {
     }
 
 
-    public void mergePlace(Place place) {
-            this.repository.save( place );
-
-    }
-
     @Transactional
     public Place getFreePlace(LocalDate date) {
         List <Place> res = this.repository.findAll();
@@ -114,14 +104,13 @@ public class PlaceService implements IPlaceService {
             }
 
         }
-         throw new NoSuchElementException( "There is no free place for chosen date!" ) ;
+        throw new NoSuchElementException( "There is no free place for chosen date!" );
     }
 
     public Place getPlaceById(UUID id) {
-            return this.repository.getById( id );
+        return this.repository.getById( id );
 
     }
-
 
 
     @Override

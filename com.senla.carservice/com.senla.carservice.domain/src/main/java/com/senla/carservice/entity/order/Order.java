@@ -41,15 +41,17 @@ public class Order {
         this.startOfExecution = startOfExecution;
         this.masters = masters;
         this.place = place;
+        this.status = OrderStatus.MANAGED;
         this.id = UUID.randomUUID();
     }
-    
+
     public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
         this.place = place;
         this.id = id;
+        this.status = OrderStatus.MANAGED;
     }
 
     public void setMaster(AbstractMaster old, AbstractMaster current) {

@@ -23,9 +23,9 @@ public class MenuController {
 
     public void run() throws IOException {
 
-        builder = new Builder(this.context);
-        PropertyStorage initializer = (PropertyStorage)this.context.getBean( "propertyStorage" );
-        builder.setIsGarageModificationPermitted( initializer.getIsGarageModificationPermitted());
+        builder = new Builder( this.context );
+        PropertyStorage initializer = (PropertyStorage) this.context.getBean( "propertyStorage" );
+        builder.setIsGarageModificationPermitted( initializer.getIsGarageModificationPermitted() );
         builder.setIsMasterModificationPermitted( initializer.getIsMasterModificationPermitted() );
         builder.setIsOrderModificationPermitted( initializer.getIsOrderModificationPermitted() );
         builder.setIsJsonPersistenceAllowed( initializer.getIsJsonPersistenceAllowed() );

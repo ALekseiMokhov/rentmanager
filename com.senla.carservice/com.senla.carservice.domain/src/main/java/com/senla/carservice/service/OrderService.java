@@ -7,7 +7,6 @@ import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
-import com.senla.carservice.repository.interfaces.IOrderRepository;
 import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.service.interfaces.IOrderService;
 import com.senla.carservice.service.interfaces.IPlaceService;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 
 @Transactional
-    public class OrderService implements IOrderService {
+public class OrderService implements IOrderService {
     @Autowired
     @Qualifier("orderJpaRepository")
     private IGenericRepository <Order> repository;
@@ -37,14 +36,11 @@ import java.util.stream.Collectors;
     private IPlaceService placeService;
 
 
-    public OrderService() {
-    }
-
-    public OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
+   /* public OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
         this.repository = orderRepository;
         this.masterService = masterService;
         this.placeService = placeService;
-    }
+    }*/
 
 
     @Transactional
@@ -53,14 +49,15 @@ import java.util.stream.Collectors;
         for (Speciality speciality : required) {
             AbstractMaster master = masterService.getFreeBySpeciality( startOfExecution, speciality );
             availableMasters.add( master );
-            masterService.setMasterForDate( master.getId(), startOfExecution );
+            masterService.setMasterForDate(
+                    master.getId(),
+                    startOfExecution );
 
         }
         Place place = this.placeService.getFreePlace( startOfExecution );
         this.placeService.setPlaceForDate( place.getId(), startOfExecution );
         Order order = new Order( date, startOfExecution, place, availableMasters );
         order.setStatus( OrderStatus.MANAGED );
-
         this.repository.save( order );
 
 
@@ -100,8 +97,7 @@ import java.util.stream.Collectors;
         List <AbstractMaster> newMasters = new ArrayList <>();
 
         this.placeService.setPlaceFree( oldPlace.getId(), oldDate );
-
-        newPlace.getCalendar().setDateForBooking( newDate );
+        this.placeService.setPlaceForDate( newPlace.getId(), newDate );
 
 
         oldMasters.stream()
@@ -137,40 +133,33 @@ import java.util.stream.Collectors;
     }
 
     public void cancelOrder(UUID id) {
-        for (Order order : this.repository.findAll()) {
-            if (order.getId().equals( id )) {
-                order.setStatus( OrderStatus.CANCELLED );
-                order.getMasters().stream()
-                        .forEach( master -> master.getCalendar().deleteBookedDate( order.getStartOfExecution() ) );
-                order.getMasters()
-                        .stream()
-                        .forEach( master -> this.masterService.saveMaster( master ) );
 
-                Place place = order.getPlace();
-                this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
-                this.placeService.savePlace( place );
+        Order order = this.repository.getById( id );
+        order.setStatus( OrderStatus.CANCELLED );
+        order.getMasters().stream()
+                .forEach( master -> master.getCalendar().deleteBookedDate( order.getStartOfExecution() ) );
+        order.getMasters()
+                .stream()
+                .forEach( master -> this.masterService.saveMaster( master ) );
 
+        Place place = order.getPlace();
+        this.placeService.setPlaceFree( place.getId(), order.getStartOfExecution() );
+        this.placeService.savePlace( place );
 
-            }
-        }
 
     }
 
     @Transactional
     public void completeOrder(UUID id) {
-        for (Order order : this.repository.findAll()) {
-            if (order.getId().equals( id )) {
-                order.getPlace().getCalendar().deleteBookedDate( LocalDate.now() );
+        Order order = this.repository.getById( id );
 
-                order.getMasters().stream()
-                        .forEach( master -> master.getCalendar().deleteBookedDate( LocalDate.now() ) );
+        order.getMasters().stream()
+                .forEach( master -> master.getCalendar().deleteBookedDate( LocalDate.now() ) );
 
 
-                order.setStatus( OrderStatus.COMPLETED );
-                order.setFinishOfExecution( LocalDate.now() );
+        order.setStatus( OrderStatus.COMPLETED );
+        order.setFinishOfExecution( LocalDate.now() );
 
-            }
-        }
 
     }
 
@@ -181,7 +170,7 @@ import java.util.stream.Collectors;
 
     public List <Order> getOrdersByPrice(OrderStatus status) {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
-        List <Order> sortedList = null;
+        List <Order> sortedList = this.repository.findAll();
         Collections.sort( sortedList, priceComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -189,10 +178,8 @@ import java.util.stream.Collectors;
     }
 
     public List <Order> getOrdersByBookedDate(OrderStatus status) {
-        Comparator <Order> dateOfBookingComparator = Comparator.comparing( o -> o.getDateBooked() );
-        List <Order> sortedList = null;
-
-        sortedList = this.repository.findAll();
+        Comparator <Order> dateOfBookingComparator = Comparator.comparing( Order::getDateBooked );
+        List <Order> sortedList = this.repository.findAll();
         Collections.sort( sortedList, dateOfBookingComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status ).collect( Collectors.toList() );
@@ -200,10 +187,7 @@ import java.util.stream.Collectors;
 
     public List <Order> getOrdersByExecutionDate(OrderStatus status) {
         Comparator <Order> dateOfExecutionComparator = Comparator.comparing( o -> o.getStartOfExecution() );
-        List <Order> sortedList = null;
-
-        sortedList = this.repository.findAll();
-
+        List <Order> sortedList = this.repository.findAll();
 
         Collections.sort( sortedList, dateOfExecutionComparator );
         return sortedList.stream()

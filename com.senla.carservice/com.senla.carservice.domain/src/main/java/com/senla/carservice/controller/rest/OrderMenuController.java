@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -18,15 +18,17 @@ public class OrderMenuController {
     private IOrderService orderService;
 
     @GetMapping("")
-    public String showAll(ModelMap model){
-        model.addAttribute( "message", this.orderService.getOrders());
+    public String showAll(ModelMap model) {
+        model.addAttribute( "orders", this.orderService.getOrders() );
         return "order_menu";
     }
-    @GetMapping("/addOrder")
-    public String addOrder(@RequestParam(required = false)String startOfExecution,
+
+    @PostMapping("/addOrder")
+    public String addOrder(@RequestParam(required = false) String startOfExecution,
                            @RequestParam(required = false) Set <String> specialities,
-                            ModelMap model){
-        model.addAttribute( "message", this.orderService.getOrders());
+                           ModelMap model) {
+        model.addAttribute( "orders", this.orderService.getOrders() );
+        model.addAttribute( "message", "order has been created!" );
         return "order_menu";
     }
 }

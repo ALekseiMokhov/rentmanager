@@ -37,18 +37,19 @@ public class PlaceMenuController {
 
         return "place_menu";
     }
+
     @GetMapping("/getFreePlace")
     public String getFreePlace(@RequestParam(required = false) String date, ModelMap model) {
         Place place = this.placeService.getFreePlace( LocalDate.parse( date ) );
         model.addAttribute( "free_place", place );
-        model.addAttribute( "message", "Place was found! ");
+        model.addAttribute( "message", "Place was found! " );
 
         return "place_menu";
     }
-   
+
 
     @PostMapping("/addPlaces")
-    public String addPlaces(@RequestParam(required = false) Integer numberOfPlaces, ModelMap model) {
+    public String addPlaces(@RequestParam(required = false,defaultValue = "1") Integer numberOfPlaces, ModelMap model) {
         this.placeService.addPlaces( numberOfPlaces );
         model.addAttribute( "places", this.placeService.getPlaces() );
         model.addAttribute( "message", "Places were added: " + numberOfPlaces );
@@ -69,16 +70,17 @@ public class PlaceMenuController {
 
     @PostMapping("/unbookPlace")
     public String setId(@RequestParam(required = false) UUID id,
-                          @RequestParam(required = false) String date,
-                          ModelMap model) {
+                        @RequestParam(required = false) String date,
+                        ModelMap model) {
 
         this.placeService.setPlaceFree( id, LocalDate.parse( date ) );
-        model.addAttribute( "message", "Place is free for the date: " + date);
+        model.addAttribute( "message", "Place is free for the date: " + date );
         return "place_menu";
     }
+
     @PostMapping("/delete")
     public String deletePlace(@RequestParam(required = false) UUID id, ModelMap model) {
-        this.placeService.deletePlace(  id  );
+        this.placeService.deletePlace( id );
         model.addAttribute( "places", this.placeService.getPlaces() );
         model.addAttribute( "message", "Place with id " + id + " was deleted!" );
         return "place_menu";

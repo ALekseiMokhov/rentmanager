@@ -18,6 +18,7 @@ public abstract class AbstractMaster {
     @GeneratedValue
     private UUID id;
     @Version
+
     private Long version;
     @Embedded
     private Calendar calendar;

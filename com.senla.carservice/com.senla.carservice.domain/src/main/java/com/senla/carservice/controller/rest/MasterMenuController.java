@@ -38,23 +38,26 @@ public class MasterMenuController {
 
         return "master_menu";
     }
+
     @GetMapping("/getFreeMaster")
     public String getFreeMaster(@RequestParam(required = false) String date,
                                 @RequestParam(required = false, defaultValue = "MECHANIC") String speciality,
                                 ModelMap model) {
-        model.addAttribute( "message","Free master is: "+ this.masterService.getFreeBySpeciality( LocalDate.parse(date), Speciality.valueOf( speciality ) )) ;
+        model.addAttribute( "message", "Free master is: " + this.masterService.getFreeBySpeciality( LocalDate.parse( date ), Speciality.valueOf( speciality ) ) );
         return "master_menu";
     }
+
     @GetMapping("/getFreeMasters")
     public String getFreeMasters(@RequestParam(required = false) String date,
-                                ModelMap model) {
-        model.addAttribute( "message","Free masters are: "+ this.masterService.getFreeMasters( LocalDate.parse(date) )) ;
+                                 ModelMap model) {
+        model.addAttribute( "message", "Free masters are: " + this.masterService.getFreeMasters( LocalDate.parse( date ) ) );
         return "master_menu";
     }
+
     @GetMapping("/getMastersBySpeciality")
     public String getMastersBySpeciality(@RequestParam(required = false) String speciality,
-                                ModelMap model) {
-        model.addAttribute( "message","" + speciality+"'s available: "+ this.masterService.getBySpeciality( Speciality.valueOf(speciality) )) ;
+                                         ModelMap model) {
+        model.addAttribute( "message", "" + speciality + "'s available: " + this.masterService.getBySpeciality( Speciality.valueOf( speciality ) ) );
         return "master_menu";
     }
 

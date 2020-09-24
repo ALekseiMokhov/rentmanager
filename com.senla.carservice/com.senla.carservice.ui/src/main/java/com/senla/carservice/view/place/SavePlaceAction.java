@@ -25,7 +25,7 @@ public class SavePlaceAction extends AbstractPlaceAction {
         }
         if (this.controller.getPlaceById( id ) != null) {
             place = this.controller.getPlaceById( id );
-            this.controller.savePlace( place);
+            this.controller.savePlace( place );
             System.out.println( "Place has been saved with id= " + id );
         } else {
             UUID newId = controller.addPlace();

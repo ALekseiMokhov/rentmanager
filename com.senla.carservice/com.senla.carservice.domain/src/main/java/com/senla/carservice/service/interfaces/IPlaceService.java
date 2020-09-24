@@ -25,8 +25,6 @@ public interface IPlaceService {
 
     void setPlaceId(UUID current, UUID newId);
 
-    void mergePlace(Place place);
-
     UUID addPlace();
 
     Place getFreePlace(LocalDate date);

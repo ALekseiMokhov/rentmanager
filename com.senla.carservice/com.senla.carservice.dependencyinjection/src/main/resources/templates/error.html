@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring MVC</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
 <body class="container p-3 mb-2 bg-info text-white">
 <h1 style="color:purple"> Error Page</h1>
@@ -23,7 +23,7 @@
     <b>Page:</b> <span th:text="${url}">Page URL</span>
 </p>
 
-<p th:if="${timestamp}" id='created'>
+<p id='created' th:if="${timestamp}">
     <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
 </p>
 
@@ -41,14 +41,14 @@
   // Hidden Exception Details  - this is not a recommendation, but here is
   // how you hide an exception in the page using Thymeleaf
   -->
-<div th:utext="'&lt;!--'" th:remove="tag"></div>
-<div th:utext="'Failed URL: ' +  ${url}" th:remove="tag">${url}</div>
-<div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
+<div th:remove="tag" th:utext="'&lt;!--'"></div>
+<div th:remove="tag" th:utext="'Failed URL: ' +  ${url}">${url}</div>
+<div th:remove="tag" th:utext="'Exception: ' + ${exception.message}">${exception.message}</div>
 <ul th:remove="tag">
     <li th:each="ste : ${exception.stackTrace}" th:remove="tag"><span
-            th:utext="${ste}" th:remove="tag">${ste}</span></li>
+            th:remove="tag" th:utext="${ste}">${ste}</span></li>
 </ul>
-<div th:utext="'--&gt;'" th:remove="tag"></div>
+<div th:remove="tag" th:utext="'--&gt;'"></div>
 
 
 <div th:substituteby="footer :: copy"></div>

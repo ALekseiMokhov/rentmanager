@@ -24,25 +24,25 @@
 
     <build>
         <plugins>
-           <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <configLocation>src/main/resources/checkstyle.xml</configLocation>
-                    <failOnViolation>false</failOnViolation>
-                    <consoleOutput>true</consoleOutput>
-                    <suppressionsLocation>src/main/resources/supressions.xml</suppressionsLocation>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            <!-- <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-checkstyle-plugin</artifactId>
+                 <version>2.6</version>
+                 <configuration>
+                     <configLocation>src/main/resources/checkstyle.xml</configLocation>
+                     <failOnViolation>false</failOnViolation>
+                     <consoleOutput>true</consoleOutput>
+                     <suppressionsLocation>src/main/resources/supressions.xml</suppressionsLocation>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>check</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>-->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>

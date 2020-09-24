@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class OrderJpaRepository extends GenericJpaRepository{
+public class OrderJpaRepository extends GenericJpaRepository {
     public OrderJpaRepository() {
         super.setClass( Order.class );
     }

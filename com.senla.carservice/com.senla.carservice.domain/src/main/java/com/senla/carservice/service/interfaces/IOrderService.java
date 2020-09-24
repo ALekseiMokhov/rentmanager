@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
-    
+
     void saveOrder(Order order);
 
     Order findOrderById(UUID id);
@@ -38,7 +38,6 @@ public interface IOrderService {
     List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
 
     List <Order> getOrdersByPrice(OrderStatus status);
-
 
 
 }

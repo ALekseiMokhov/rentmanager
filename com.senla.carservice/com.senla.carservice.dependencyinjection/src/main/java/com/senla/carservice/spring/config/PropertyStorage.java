@@ -19,5 +19,4 @@ public class PropertyStorage {
     private Boolean isJsonPersistenceAllowed;
 
 
-
 }

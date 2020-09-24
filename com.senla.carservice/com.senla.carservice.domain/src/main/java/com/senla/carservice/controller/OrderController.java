@@ -1,7 +1,5 @@
 package com.senla.carservice.controller;
 
-import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -16,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Controller
-public class OrderController   {
+public class OrderController {
     @Autowired
     @Qualifier("orderService")
     private IOrderService orderService;
@@ -70,8 +68,9 @@ public class OrderController   {
     public List <Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
         return this.orderService.getOrdersForPeriod( start, end );
     }
-    public List <Order> getOrdersByPrice(OrderStatus status){
-        return this.orderService.getOrdersByPrice(status);
+
+    public List <Order> getOrdersByPrice(OrderStatus status) {
+        return this.orderService.getOrdersByPrice( status );
     }
 
 
