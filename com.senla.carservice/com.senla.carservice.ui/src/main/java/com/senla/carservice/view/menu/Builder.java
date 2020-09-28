@@ -1,6 +1,5 @@
 package com.senla.carservice.view.menu;
 
-import com.senla.carservice.properties.configurer.annotations.ConfigProperty;
 import com.senla.carservice.view.action.IAction;
 import com.senla.carservice.view.basic.*;
 import com.senla.carservice.view.master.*;
@@ -16,18 +15,15 @@ import org.springframework.context.ApplicationContext;
 @Slf4j
 @Data
 public class Builder {
-    @ConfigProperty(propertyName = "garage.admin.mode", type = Boolean.class)
     private Boolean isGarageModificationPermitted;
-    @ConfigProperty(propertyName = "master.admin.mode", type = Boolean.class)
     private Boolean isMasterModificationPermitted;
-    @ConfigProperty(propertyName = "order.admin.mode", type = Boolean.class)
     private Boolean isOrderModificationPermitted;
-    @ConfigProperty(propertyName = "json.persistence.mode", type = Boolean.class)
-    @Getter
     private Boolean isJsonPersistenceAllowed;
-    @Getter
-    @Setter
     private ApplicationContext applicationContext;
+
+    public Builder(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     public Menu buildRootMenu() {
         Menu menu = new Menu();
@@ -96,7 +92,6 @@ public class Builder {
             this.applicationContext.getAutowireCapableBeanFactory().
                     autowireBeanProperties( menuItem.getAction(), AutowireCapableBeanFactory.AUTOWIRE_AUTODETECT, true );
         }
-
 
         return masterMenu;
     }

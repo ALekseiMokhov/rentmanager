@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = { "com.senla.carservice" })
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableSpringConfigured
 public class AppConfig {

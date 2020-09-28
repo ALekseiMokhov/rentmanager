@@ -183,6 +183,7 @@ public class PlaceService implements IPlaceService {
         try {
             return this.repository.getById( id );
         } catch (Exception e) {
+            System.out.println(e);
             log.error( "failed to get place! " + e );
             throw new RuntimeException();
         }

@@ -1,0 +1,236 @@
+2020-09-07 10:08:09 INFO  Main:20 - Beans in context are: 
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 10:08:09 INFO  Main:22 - appConfig
+2020-09-07 10:08:09 INFO  Main:22 - menuController
+2020-09-07 10:08:09 INFO  Main:22 - jsonController
+2020-09-07 10:08:09 INFO  Main:22 - masterController
+2020-09-07 10:08:09 INFO  Main:22 - orderController
+2020-09-07 10:08:09 INFO  Main:22 - placeController
+2020-09-07 10:08:09 INFO  Main:22 - masterRepositoryJpa
+2020-09-07 10:08:09 INFO  Main:22 - orderRepositoryJpa
+2020-09-07 10:08:09 INFO  Main:22 - placeRepositoryJpa
+2020-09-07 10:08:09 INFO  Main:22 - configService
+2020-09-07 10:08:09 INFO  Main:22 - masterService
+2020-09-07 10:08:09 INFO  Main:22 - orderService
+2020-09-07 10:08:09 INFO  Main:22 - placeService
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 10:08:09 INFO  Main:22 - transactionAttributeSource
+2020-09-07 10:08:09 INFO  Main:22 - transactionInterceptor
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 10:08:09 INFO  Main:22 - entityManagerFactory
+2020-09-07 10:08:09 INFO  Main:22 - dataSource
+2020-09-07 10:08:09 INFO  Main:22 - transactionManager
+2020-09-07 10:08:09 INFO  Main:22 - exceptionTranslation
+2020-09-07 10:08:09 INFO  Main:22 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 10:08:09 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 10:08:09 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 10:08:09 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 10:08:09 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-07 10:08:20 ERROR Navigator:80 - For input string: "ww"
+java.lang.NumberFormatException: For input string: "ww"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+	at java.base/java.lang.Integer.parseInt(Integer.java:770)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:38)
+	at com.senla.carservice.view.menu.Navigator.navigate(Navigator.java:62)
+	at com.senla.carservice.view.menu.MenuController.run(MenuController.java:33)
+	at com.senla.carservice.view.Main.main(Main.java:30)
+2020-09-07 10:14:33 INFO  Main:20 - Beans in context are: 
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 10:14:33 INFO  Main:22 - appConfig
+2020-09-07 10:14:33 INFO  Main:22 - menuController
+2020-09-07 10:14:33 INFO  Main:22 - jsonController
+2020-09-07 10:14:33 INFO  Main:22 - masterController
+2020-09-07 10:14:33 INFO  Main:22 - orderController
+2020-09-07 10:14:33 INFO  Main:22 - placeController
+2020-09-07 10:14:33 INFO  Main:22 - masterRepositoryJpa
+2020-09-07 10:14:33 INFO  Main:22 - orderRepositoryJpa
+2020-09-07 10:14:33 INFO  Main:22 - placeRepositoryJpa
+2020-09-07 10:14:33 INFO  Main:22 - configService
+2020-09-07 10:14:33 INFO  Main:22 - masterService
+2020-09-07 10:14:33 INFO  Main:22 - orderService
+2020-09-07 10:14:33 INFO  Main:22 - placeService
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 10:14:33 INFO  Main:22 - transactionAttributeSource
+2020-09-07 10:14:33 INFO  Main:22 - transactionInterceptor
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 10:14:33 INFO  Main:22 - entityManagerFactory
+2020-09-07 10:14:33 INFO  Main:22 - dataSource
+2020-09-07 10:14:33 INFO  Main:22 - transactionManager
+2020-09-07 10:14:33 INFO  Main:22 - exceptionTranslation
+2020-09-07 10:14:33 INFO  Main:22 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 10:14:33 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 10:14:33 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 10:14:33 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 10:14:33 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-07 10:21:37 INFO  Main:20 - Beans in context are: 
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 10:21:37 INFO  Main:22 - appConfig
+2020-09-07 10:21:37 INFO  Main:22 - menuController
+2020-09-07 10:21:37 INFO  Main:22 - jsonController
+2020-09-07 10:21:37 INFO  Main:22 - masterController
+2020-09-07 10:21:37 INFO  Main:22 - orderController
+2020-09-07 10:21:37 INFO  Main:22 - placeController
+2020-09-07 10:21:37 INFO  Main:22 - masterRepositoryJpa
+2020-09-07 10:21:37 INFO  Main:22 - orderRepositoryJpa
+2020-09-07 10:21:37 INFO  Main:22 - placeRepositoryJpa
+2020-09-07 10:21:37 INFO  Main:22 - configService
+2020-09-07 10:21:37 INFO  Main:22 - masterService
+2020-09-07 10:21:37 INFO  Main:22 - orderService
+2020-09-07 10:21:37 INFO  Main:22 - placeService
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 10:21:37 INFO  Main:22 - transactionAttributeSource
+2020-09-07 10:21:37 INFO  Main:22 - transactionInterceptor
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 10:21:37 INFO  Main:22 - entityManagerFactory
+2020-09-07 10:21:37 INFO  Main:22 - dataSource
+2020-09-07 10:21:37 INFO  Main:22 - transactionManager
+2020-09-07 10:21:37 INFO  Main:22 - exceptionTranslation
+2020-09-07 10:21:37 INFO  Main:22 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 10:21:37 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 10:21:37 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 10:21:37 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 10:21:37 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-07 10:22:08 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-07 10:22:09 ERROR AddPlacesAction:25 - java.lang.NumberFormatException: For input string: "dd"
+2020-09-07 18:30:13 INFO  Main:21 - Beans in context are: 
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.annotation.internalCommonAnnotationProcessor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 18:30:13 INFO  Main:23 - appConfig
+2020-09-07 18:30:13 INFO  Main:23 - menuController
+2020-09-07 18:30:13 INFO  Main:23 - jsonController
+2020-09-07 18:30:13 INFO  Main:23 - masterController
+2020-09-07 18:30:13 INFO  Main:23 - orderController
+2020-09-07 18:30:13 INFO  Main:23 - placeController
+2020-09-07 18:30:13 INFO  Main:23 - masterRepositoryJpa
+2020-09-07 18:30:13 INFO  Main:23 - orderRepositoryJpa
+2020-09-07 18:30:13 INFO  Main:23 - placeRepositoryJpa
+2020-09-07 18:30:13 INFO  Main:23 - configService
+2020-09-07 18:30:13 INFO  Main:23 - masterService
+2020-09-07 18:30:13 INFO  Main:23 - orderService
+2020-09-07 18:30:13 INFO  Main:23 - placeService
+2020-09-07 18:30:13 INFO  Main:23 - webAppInitializer
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 18:30:13 INFO  Main:23 - transactionAttributeSource
+2020-09-07 18:30:13 INFO  Main:23 - transactionInterceptor
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 18:30:13 INFO  Main:23 - com.senla.carservice.spring.config.WebConfig
+2020-09-07 18:30:13 INFO  Main:23 - entityManagerFactory
+2020-09-07 18:30:13 INFO  Main:23 - dataSource
+2020-09-07 18:30:13 INFO  Main:23 - transactionManager
+2020-09-07 18:30:13 INFO  Main:23 - exceptionTranslation
+2020-09-07 18:30:13 INFO  Main:23 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 18:30:13 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 18:30:13 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 18:30:13 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 18:30:13 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-07 18:30:22 INFO  AddPlacesAction:18 - Is controller null : false
+2020-09-07 18:31:21 INFO  Main:21 - Beans in context are: 
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.annotation.internalCommonAnnotationProcessor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 18:31:21 INFO  Main:23 - appConfig
+2020-09-07 18:31:21 INFO  Main:23 - menuController
+2020-09-07 18:31:21 INFO  Main:23 - jsonController
+2020-09-07 18:31:21 INFO  Main:23 - masterController
+2020-09-07 18:31:21 INFO  Main:23 - orderController
+2020-09-07 18:31:21 INFO  Main:23 - placeController
+2020-09-07 18:31:21 INFO  Main:23 - masterRepositoryJpa
+2020-09-07 18:31:21 INFO  Main:23 - orderRepositoryJpa
+2020-09-07 18:31:21 INFO  Main:23 - placeRepositoryJpa
+2020-09-07 18:31:21 INFO  Main:23 - configService
+2020-09-07 18:31:21 INFO  Main:23 - masterService
+2020-09-07 18:31:21 INFO  Main:23 - orderService
+2020-09-07 18:31:21 INFO  Main:23 - placeService
+2020-09-07 18:31:21 INFO  Main:23 - webAppInitializer
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 18:31:21 INFO  Main:23 - transactionAttributeSource
+2020-09-07 18:31:21 INFO  Main:23 - transactionInterceptor
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 18:31:21 INFO  Main:23 - com.senla.carservice.spring.config.WebConfig
+2020-09-07 18:31:21 INFO  Main:23 - entityManagerFactory
+2020-09-07 18:31:21 INFO  Main:23 - dataSource
+2020-09-07 18:31:21 INFO  Main:23 - transactionManager
+2020-09-07 18:31:21 INFO  Main:23 - exceptionTranslation
+2020-09-07 18:31:21 INFO  Main:23 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 18:31:21 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 18:31:21 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 18:31:21 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 18:31:21 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-07 18:47:07 INFO  Main:21 - Beans in context are: 
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.annotation.internalCommonAnnotationProcessor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.event.internalEventListenerProcessor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.event.internalEventListenerFactory
+2020-09-07 18:47:07 INFO  Main:23 - appConfig
+2020-09-07 18:47:07 INFO  Main:23 - menuController
+2020-09-07 18:47:07 INFO  Main:23 - jsonController
+2020-09-07 18:47:07 INFO  Main:23 - masterController
+2020-09-07 18:47:07 INFO  Main:23 - orderController
+2020-09-07 18:47:07 INFO  Main:23 - placeController
+2020-09-07 18:47:07 INFO  Main:23 - homeController
+2020-09-07 18:47:07 INFO  Main:23 - masterRepositoryJpa
+2020-09-07 18:47:07 INFO  Main:23 - orderRepositoryJpa
+2020-09-07 18:47:07 INFO  Main:23 - placeRepositoryJpa
+2020-09-07 18:47:07 INFO  Main:23 - configService
+2020-09-07 18:47:07 INFO  Main:23 - masterService
+2020-09-07 18:47:07 INFO  Main:23 - orderService
+2020-09-07 18:47:07 INFO  Main:23 - placeService
+2020-09-07 18:47:07 INFO  Main:23 - webAppInitializer
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.transaction.config.internalTransactionAdvisor
+2020-09-07 18:47:07 INFO  Main:23 - transactionAttributeSource
+2020-09-07 18:47:07 INFO  Main:23 - transactionInterceptor
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.annotation.aspectj.SpringConfiguredConfiguration
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.context.config.internalBeanConfigurerAspect
+2020-09-07 18:47:07 INFO  Main:23 - com.senla.carservice.spring.config.WebConfig
+2020-09-07 18:47:07 INFO  Main:23 - setupViewResolver
+2020-09-07 18:47:07 INFO  Main:23 - entityManagerFactory
+2020-09-07 18:47:07 INFO  Main:23 - dataSource
+2020-09-07 18:47:07 INFO  Main:23 - transactionManager
+2020-09-07 18:47:07 INFO  Main:23 - exceptionTranslation
+2020-09-07 18:47:07 INFO  Main:23 - org.springframework.aop.config.internalAutoProxyCreator
+2020-09-07 18:47:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isGarageModificationPermitted garage.admin.mode were injected
+2020-09-07 18:47:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isMasterModificationPermitted master.admin.mode were injected
+2020-09-07 18:47:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isOrderModificationPermitted order.admin.mode were injected
+2020-09-07 18:47:07 INFO  PropertyInjector:38 - private java.lang.Boolean com.senla.carservice.view.menu.Builder.isJsonPersistenceAllowed json.persistence.mode were injected
+2020-09-14 18:18:25 INFO  AddPlacesAction:18 - Is controller null : true
+2020-09-14 18:18:28 ERROR AddPlacesAction:25 - java.lang.NullPointerException
+2020-09-14 18:21:26 INFO  AddPlacesAction:18 - Is controller null : false
