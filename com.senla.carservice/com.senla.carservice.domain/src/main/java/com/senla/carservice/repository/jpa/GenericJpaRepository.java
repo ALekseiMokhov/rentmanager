@@ -1,18 +1,18 @@
 package com.senla.carservice.repository.jpa;
 
-import com.senla.carservice.repository.IGenericRepository;
+import com.senla.carservice.repository.interfaces.IGenericRepository;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class GenericJpaRepository<T> implements IGenericRepository {
+
+public abstract class GenericJpaRepository<T> implements IGenericRepository {
     @PersistenceContext
     EntityManager entityManager;
     private Class <T> clazz;

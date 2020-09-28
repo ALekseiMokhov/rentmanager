@@ -1,8 +1,7 @@
 package com.senla.carservice.view;
 
 
-import com.senla.carservice.controller.JsonController;
-import com.senla.carservice.spring.config.JpaConfig;
+import com.senla.carservice.spring.config.AppConfig;
 import com.senla.carservice.util.warning.Supressor;
 import com.senla.carservice.view.menu.MenuController;
 import org.springframework.context.ApplicationContext;
@@ -15,15 +14,12 @@ public class Main {
         Supressor.disableWarning();
 
 
-        ApplicationContext context = new AnnotationConfigApplicationContext( JpaConfig.class );
+        ApplicationContext context = new AnnotationConfigApplicationContext( AppConfig.class );
         System.out.println( "Beans in context are: " );
         for (String beanName : context.getBeanDefinitionNames()) {
             System.out.println( beanName );
         }
-
-        JsonController jsonController =
-                context.getBean( JsonController.class );
-        jsonController.loadFromJson();
+        
 
         MenuController menuController = context.getBean( MenuController.class );
         menuController.run();

@@ -1,4 +1,4 @@
-package com.senla.carservice.custom_di.components;
+package com.senla.carservice.customdi.components;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

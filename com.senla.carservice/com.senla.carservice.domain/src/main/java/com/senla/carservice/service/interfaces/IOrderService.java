@@ -1,8 +1,6 @@
-package com.senla.carservice.service;
+package com.senla.carservice.service.interfaces;
 
 
-import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -16,9 +14,7 @@ import java.util.UUID;
 @Service
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
-
-    void addOrder(LocalDate date, LocalDate startOfExecution, List <AbstractMaster> masters, Place place, UUID id);
-
+    
     void saveOrder(Order order);
 
     Order findOrderById(UUID id);
@@ -41,11 +37,8 @@ public interface IOrderService {
 
     List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
 
-    void loadFromCsv();
+    List <Order> getOrdersByPrice(OrderStatus status);
 
-    void exportToCsv();
 
-    void loadOrdersFromJson();
 
-    void exportOrdersToJson();
 }

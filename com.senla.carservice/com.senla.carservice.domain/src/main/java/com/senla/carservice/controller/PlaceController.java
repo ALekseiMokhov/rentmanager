@@ -2,10 +2,9 @@ package com.senla.carservice.controller;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.service.IPlaceService;
+import com.senla.carservice.service.interfaces.IPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-public class PlaceController implements IController {
+public class PlaceController  {
     @Autowired
     @Qualifier("placeService")
     private IPlaceService placeService;
@@ -55,8 +54,8 @@ public class PlaceController implements IController {
         this.placeService.setPlaceFree( id, date );
     }
 
-    public void savePlace(UUID id) {
-        this.placeService.savePlace( id );
+    public void savePlace(Place place) {
+        this.placeService.savePlace( place );
     }
 
     public Place getFreePlace(LocalDate date) {
@@ -65,22 +64,6 @@ public class PlaceController implements IController {
 
     public Place getPlaceById(UUID id) {
         return this.placeService.getPlaceById( id );
-    }
-
-    public void loadPlacesFromCsv() {
-        this.placeService.loadFromCsv();
-    }
-
-    public void exportPlacesToCsv() {
-        this.placeService.exportToCsv();
-    }
-
-    public void loadFromJson() {
-        this.placeService.loadPlacesFromJson();
-    }
-
-    public void exportToJson() {
-        this.placeService.exportPlacesToJson();
     }
 
     public void deletePlace(UUID id) {

@@ -1,4 +1,4 @@
-package com.senla.carservice.service;
+package com.senla.carservice.service.interfaces;
 
 
 import com.senla.carservice.entity.master.AbstractMaster;
@@ -17,8 +17,6 @@ public interface IMasterService {
     void saveMaster(AbstractMaster master);
 
     void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality);
-
-    void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id);
 
     void removeMaster(UUID id);
 
@@ -43,14 +41,6 @@ public interface IMasterService {
     List <AbstractMaster> getFreeMasters(LocalDate date);
 
     List <AbstractMaster> getMastersBySpeciality(Speciality speciality);
-
-    void loadMastersFromCsv();
-
-    void exportMastersToCsv();
-
-    void loadMastersFromJson();
-
-    void exportMastersToJson();
 
     void deleteMaster(UUID id);
 }

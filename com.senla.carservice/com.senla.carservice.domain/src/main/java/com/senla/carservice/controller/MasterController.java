@@ -3,7 +3,7 @@ package com.senla.carservice.controller;
 
 import com.senla.carservice.entity.master.AbstractMaster;
 import com.senla.carservice.entity.master.Speciality;
-import com.senla.carservice.service.IMasterService;
+import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Controller
-public class MasterController implements IController {
+public class MasterController  {
     @Autowired
     @Qualifier("masterService")
     private IMasterService masterService;
@@ -34,10 +34,6 @@ public class MasterController implements IController {
 
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
         this.masterService.addMaster( fullName, dailyPayment, calendar, speciality );
-    }
-
-    public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality, UUID id) {
-        this.masterService.addMaster( fullName, dailyPayment, calendar, speciality, id );
     }
 
     public void removeMaster(UUID id) {
@@ -86,22 +82,6 @@ public class MasterController implements IController {
 
     public List <AbstractMaster> getMastersBySpeciality(Speciality speciality) {
         return this.masterService.getMastersBySpeciality( speciality );
-    }
-
-    public void loadMastersFromCsv() {
-        this.masterService.loadMastersFromCsv();
-    }
-
-    public void exportMastersToCsv() {
-        this.masterService.exportMastersToCsv();
-    }
-
-    public void loadFromJson() {
-        this.masterService.loadMastersFromJson();
-    }
-
-    public void exportToJson() {
-        this.masterService.exportMastersToJson();
     }
 
     public void deleteMaster(UUID id) {

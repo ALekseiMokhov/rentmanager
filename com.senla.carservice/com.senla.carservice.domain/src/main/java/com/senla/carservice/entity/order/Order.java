@@ -31,6 +31,7 @@ public class Order {
             cascade = CascadeType.MERGE,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private List <AbstractMaster> masters;
     @OneToOne
     private Place place;

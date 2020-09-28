@@ -1,4 +1,4 @@
-package com.senla.carservice.custom_di.scope;
+package com.senla.carservice.customdi.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

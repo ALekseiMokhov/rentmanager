@@ -1,4 +1,4 @@
-package com.senla.carservice.repository;
+package com.senla.carservice.repository.interfaces;
 
 
 import com.senla.carservice.entity.order.Order;

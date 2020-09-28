@@ -1,4 +1,4 @@
-package com.senla.carservice.custom_di.beanfactory.exceptions;
+package com.senla.carservice.customdi.beanfactory.exceptions;
 
 public class BeanCollisionException extends IllegalArgumentException {
 }
