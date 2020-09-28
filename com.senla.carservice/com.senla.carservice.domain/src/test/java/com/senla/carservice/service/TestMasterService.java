@@ -23,7 +23,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(MockitoExtension.class)
 class TestMasterService {
-    private IGenericRepository mockRepo
+    private final IGenericRepository mockRepo
             = Mockito.mock( MasterJpaRepository.class );
     @InjectMocks
     private MasterService masterService;
@@ -32,7 +32,7 @@ class TestMasterService {
     private AbstractMaster testReshaper;
     private AbstractMaster testElectrician;
     private AbstractMaster testPainter;
-    private List<AbstractMaster> masterList = new ArrayList<>();
+    private final List<AbstractMaster> masterList = new ArrayList<>();
     private UUID id;
 
     @BeforeEach
@@ -57,26 +57,30 @@ class TestMasterService {
     @Test
     void verifyRepositorySaveMaster() {
         this.masterService.saveMaster( this.testMechanic );
+
         verify( mockRepo, times( 1 ) ).save( testMechanic );
     }
 
     @Test
     void verifyRepositoryRemoveMaster() {
         this.masterService.deleteMaster( id );
+
         verify( mockRepo, times( 1 ) ).delete( id );
     }
 
     @Test
     void givenIdANdDateShouldReturnIsMasterBooked() {
         this.masterService.setMasterForDate( id, LocalDate.now() );
-        Assertions.assertEquals( true,
-                this.masterService.getById( id ).getCalendar().isDateBooked( LocalDate.now() ) );
+
+        Boolean result = this.masterService.getById( id ).getCalendar().isDateBooked( LocalDate.now() );
+
+        Assertions.assertEquals( true,result);
     }
 
     @Test
     void givenDateShouldSetMasterForTheDate() {
-        Assertions.assertEquals( 0, testMechanic.getCalendar().getBookedDates().size() );
         this.masterService.setMasterForDate( id, LocalDate.now() );
+
         verify( mockRepo, times( 1 ) ).getById( id );
         Assertions.assertEquals( 1, testMechanic.getCalendar().getBookedDates().size() );
     }
@@ -85,17 +89,21 @@ class TestMasterService {
     void givenDateShouldSetMasterFree() {
         this.masterService.setMasterForDate( id, LocalDate.now() );
         this.masterService.setBookedDateFree( id, LocalDate.now() );
+
         Assertions.assertEquals( 0, testMechanic.getCalendar().getBookedDates().size() );
     }
 
     @Test
     void givenNameAndSpecialityShouldFIndMaster() {
-        Assertions.assertEquals( testPainter, this.masterService.getByNameAndSpeciality( "Evgeny", Speciality.PAINTER ) );
+        AbstractMaster master = this.masterService.getByNameAndSpeciality( "Evgeny", Speciality.PAINTER );
+
+        Assertions.assertEquals( this.testPainter, master );
     }
 
     @Test
     void givenSpecialityShouldFIndAllMasters() {
         Assertions.assertEquals( testElectrician, this.masterService.getBySpeciality( Speciality.ELECTRICIAN ) );
+
         verify( mockRepo, times( 1 ) ).findAll();
     }
 
@@ -107,7 +115,7 @@ class TestMasterService {
     @Test
     void givenIdAndDateShouldBookMaster() {
         this.masterService.setMasterForDate( id, LocalDate.now() );
-        Assertions.assertThrows( RuntimeException.class, () -> this.masterService.getFreeBySpeciality( LocalDate.now(), Speciality.MECHANIC ) );
+
         Assertions.assertDoesNotThrow( () -> this.masterService.getFreeBySpeciality( LocalDate.now(), Speciality.ELECTRICIAN ) );
     }
 
@@ -120,7 +128,9 @@ class TestMasterService {
     @Test
     void shouldGetAllFreeMasters() {
         testMechanic.getCalendar().setDateForBooking( LocalDate.now() );
+
         List <AbstractMaster> masters = this.masterService.getFreeMasters( LocalDate.now() );
+
         Assertions.assertEquals( 4, masters.size() );
 
     }
@@ -128,6 +138,7 @@ class TestMasterService {
     @Test
     void givenSpecialityShouldGetChosenMasters() {
         List <AbstractMaster> masters = this.masterService.getMastersBySpeciality( Speciality.RESHAPER );
+
         Assertions.assertEquals( 2, masters.size() );
 
 
@@ -136,6 +147,7 @@ class TestMasterService {
     @Test
     void verifyRepositoryDeleteMaster() {
         this.masterService.deleteMaster( id );
+
         verify( mockRepo, times( 1 ) ).delete( id );
     }
 

@@ -28,11 +28,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TestOrderService {
 
-    private IGenericRepository mockRepo =
+    private final IGenericRepository mockRepo =
             Mockito.mock( OrderJpaRepository.class );
-
     @Mock
-    private MasterService mockMasterService;
+    private  MasterService mockMasterService;
     @Mock
     private PlaceService mockPlaceService;
 
@@ -41,16 +40,7 @@ class TestOrderService {
 
     private Place place;
     private AbstractMaster reshaper;
-    private AbstractMaster painter;
-    private List <AbstractMaster> masterList;
-    private List <AbstractMaster> expensiveMasters;
-    private List <Order> orderList;
     private Set <Speciality> required;
-    private Set <Speciality> requiredExpensive;
-
-
-    private Order testOrder;
-    private Order expensiveOrder;
     private UUID id;
     private UUID idExp;
 
@@ -59,36 +49,31 @@ class TestOrderService {
 
         place = new Place( new Calendar() );
         reshaper = new Reshaper( "Sergei", 3.6, new Calendar(), Speciality.RESHAPER );
-        painter = new Painter( "Andrew", 22, new Calendar(), Speciality.PAINTER );
-        masterList = new ArrayList <>();
+        AbstractMaster painter = new Painter("Andrew", 22, new Calendar(), Speciality.PAINTER);
+        List<AbstractMaster> masterList = new ArrayList<>();
         masterList.add( reshaper );
 
-        orderList = new ArrayList <>();
+        List<Order> orderList = new ArrayList<>();
         required = new HashSet <>();
         required.add( Speciality.RESHAPER );
 
-        testOrder = new Order( LocalDate.now(), LocalDate.of( 2020, 9, 23 ), place, masterList );
+        Order testOrder = new Order(LocalDate.now(), LocalDate.of(2020, 9, 23), place, masterList);
         id = testOrder.getId();
 
-        expensiveMasters = new ArrayList <>();
+        List<AbstractMaster> expensiveMasters = new ArrayList<>();
         expensiveMasters.add( reshaper );
-        expensiveMasters.add( painter );
+        expensiveMasters.add(painter);
 
-        requiredExpensive = new HashSet <>();
-        requiredExpensive.add( Speciality.RESHAPER );
-        requiredExpensive.add( Speciality.PAINTER );
-
-        expensiveOrder = new Order( LocalDate.now(), LocalDate.of( 2040, 4, 21 ), place, expensiveMasters );
+        Order expensiveOrder = new Order(LocalDate.now(), LocalDate.of(2040, 4, 21), place, expensiveMasters);
         idExp = expensiveOrder.getId();
 
-        orderList.add( expensiveOrder );
-        orderList.add( testOrder );
+        orderList.add(expensiveOrder);
+        orderList.add(testOrder);
 
         doNothing().when( mockRepo ).save( any( Order.class ) );
-        when( mockRepo.getById( id ) ).thenReturn( testOrder );
-        when( mockRepo.getById( idExp ) ).thenReturn( expensiveOrder );
-        when( mockRepo.findAll() ).thenReturn( orderList );
-
+        when( mockRepo.getById( id ) ).thenReturn(testOrder);
+        when( mockRepo.getById( idExp ) ).thenReturn(expensiveOrder);
+        when( mockRepo.findAll() ).thenReturn(orderList);
 
     }
 
@@ -96,7 +81,9 @@ class TestOrderService {
     void verifyRepositoryAddOrderAndServicesSetData() {
         when( mockPlaceService.getFreePlace( any( LocalDate.class ) ) ).thenReturn( place );
         when( mockMasterService.getFreeBySpeciality( any( LocalDate.class ), any( Speciality.class ) ) ).thenReturn( reshaper );
+
         this.orderService.addOrder( LocalDate.now(), LocalDate.of( 2020, 9, 24 ), required );
+
         verify( mockRepo, times( 1 ) ).save( any( Order.class ) );
         verify( mockPlaceService, times( 1 ) ).getFreePlace( LocalDate.of( 2020, 9, 24 ) );
         verify( mockMasterService, times( required.size() ) ).getFreeBySpeciality( any( LocalDate.class ), any( Speciality.class ) );
@@ -106,6 +93,7 @@ class TestOrderService {
     @Test
     void verifyRepositoryDeleteOrder() {
         this.orderService.deleteOrder( id );
+
         verify( mockRepo, times( 1 ) ).delete( id );
     }
 
@@ -114,6 +102,7 @@ class TestOrderService {
         when( mockPlaceService.getFreePlace( any( LocalDate.class ) ) ).thenReturn( place );
         when( mockMasterService.getFreeBySpeciality( any( LocalDate.class ), any( Speciality.class ) ) ).thenReturn( reshaper );
         doNothing().when( mockMasterService ).setMasterForDate( any( UUID.class ), any( LocalDate.class ) );
+        InOrder inOrder = inOrder( mockPlaceService, mockMasterService, mockRepo );
 
         LocalDate newDate = LocalDate.of( 2030, 12, 31 );
         this.orderService.shiftOrderExecutionDate( id, newDate );
@@ -121,12 +110,10 @@ class TestOrderService {
         verify( mockPlaceService, times( 1 ) ).getFreePlace( newDate );
         verify( mockMasterService, times( required.size() ) ).getFreeBySpeciality( newDate, Speciality.RESHAPER );
 
-        InOrder inOrder = inOrder( mockPlaceService, mockMasterService, mockRepo );
         inOrder.verify( mockRepo ).getById( id );
         inOrder.verify( mockPlaceService ).getFreePlace( newDate );
         inOrder.verify( mockMasterService ).getFreeBySpeciality( newDate, Speciality.RESHAPER );
         inOrder.verify( mockMasterService ).setMasterForDate( any( UUID.class ), any( LocalDate.class ) );
-
 
         Assertions.assertEquals( this.orderService.findOrderById( id ).getStartOfExecution(), newDate );
     }
@@ -134,8 +121,10 @@ class TestOrderService {
     @Test
     void shouldSetNewMasters() {
         when( mockMasterService.getFreeBySpeciality( any( LocalDate.class ), any( Speciality.class ) ) ).thenReturn( reshaper );
-        this.orderService.setNewMasters( id );
         InOrder inOrder = inOrder( mockMasterService, mockRepo );
+
+        this.orderService.setNewMasters( id );
+
         inOrder.verify( mockRepo ).getById( id );
         inOrder.verify( mockMasterService, times( required.size() ) ).getFreeBySpeciality( any( LocalDate.class ), any( Speciality.class ) );
     }
@@ -143,12 +132,14 @@ class TestOrderService {
     @Test
     void shouldChangeStatusToCancelled() {
         this.orderService.cancelOrder( id );
+
         Assertions.assertEquals( this.orderService.findOrderById( id ).getStatus(), OrderStatus.CANCELLED );
     }
 
     @Test
     void shouldChangeStatusToCompleted() {
         this.orderService.completeOrder( id );
+
         Assertions.assertNotEquals( this.orderService.findOrderById( id ).getStatus(), OrderStatus.CANCELLED );
     }
 
@@ -164,6 +155,7 @@ class TestOrderService {
     @Test
     void shouldGetOrdersSortedByBookedDate() {
         List <Order> result = this.orderService.getOrdersByBookedDate( OrderStatus.MANAGED );
+
         Assertions.assertEquals( LocalDate.of( 2040, 4, 21 ), result.get( 0 ).getStartOfExecution() );
     }
 
@@ -173,6 +165,7 @@ class TestOrderService {
         this.orderService.completeOrder( id );
         this.orderService.completeOrder( idExp );
         List <Order> result = this.orderService.getOrdersForPeriod( LocalDate.of( 2020, 1, 1 ), LocalDate.of( 2100, 1, 1 ) );
+
         Assertions.assertEquals( 2, result.size() );
     }
 }
