@@ -192,7 +192,7 @@
 2020-09-18 09:07:34 ERROR PlaceService:76 - failed to find place by id! java.lang.NullPointerException
 2020-09-18 09:25:42 ERROR PlaceService:76 - failed to find place by id! org.mockito.exceptions.misusing.UnfinishedStubbingException: 
 Unfinished stubbing detected here:
--> at com.senla.carservice.service.PlaceServiceTest.isPlaceSetForDate(PlaceServiceTest.java:54)
+-> at com.senla.carservice.service.TestPlaceService.isPlaceSetForDate(PlaceServiceTest.java:54)
 
 E.g. thenReturn() may be missing.
 Examples of correct stubbing:
