@@ -1,4 +1,4 @@
-package com.senla.carservice.controller.rest;
+package com.senla.carservice.controller.template;
 
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.service.interfaces.IMasterService;
