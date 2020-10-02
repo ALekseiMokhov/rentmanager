@@ -1,10 +1,8 @@
 package com.senla.carservice.dto;
 
-import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.util.calendar.Calendar;
 import lombok.Data;
 
-import java.util.UUID;
 @Data
 public class ElectricianDto {
     private String id;

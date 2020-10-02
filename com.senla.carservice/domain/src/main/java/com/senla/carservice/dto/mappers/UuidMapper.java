@@ -13,8 +13,8 @@ public class UuidMapper {
 
     public UUID asId(String id) {
         try {
-            return id != null ?  UUID.fromString(id)
-                   : null;
+            return id != null ? UUID.fromString(id)
+                    : null;
         } catch (ParseException e) {
             /*TODO check handling*/
             throw new RuntimeException(e);
