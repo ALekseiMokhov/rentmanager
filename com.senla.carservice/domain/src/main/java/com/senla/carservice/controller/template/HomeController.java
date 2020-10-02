@@ -4,6 +4,7 @@ import com.senla.carservice.controller.MasterController;
 import com.senla.carservice.controller.OrderController;
 import com.senla.carservice.controller.PlaceController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
+@Profile("ui")
 public class HomeController  {
     @Autowired
     private PlaceController placeController;

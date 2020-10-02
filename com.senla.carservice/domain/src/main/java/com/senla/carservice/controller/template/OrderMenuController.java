@@ -2,6 +2,7 @@ package com.senla.carservice.controller.template;
 
 import com.senla.carservice.service.interfaces.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/order_menu")
+@Profile("ui")
 public class OrderMenuController {
     @Autowired
     private IOrderService orderService;

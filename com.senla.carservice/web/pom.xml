@@ -22,13 +22,7 @@
         </dependency>
         <dependency>
             <groupId>com.senla.carservice</groupId>
-            <artifactId>com.senla.carservice.ui</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.senla.carservice</groupId>
-            <artifactId>com.senla.carservice.dependencyinjection</artifactId>
+            <artifactId>dependencyinjection</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

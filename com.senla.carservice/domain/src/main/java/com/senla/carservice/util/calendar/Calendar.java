@@ -33,8 +33,8 @@ public class Calendar {
 
     @Override
     public String toString() {
-        return "Calendar{" +
-                "bookedDates=" + bookedDates.keySet() +
+        return '{' +" "+
+               bookedDates.keySet() +
                 '}';
     }
 }

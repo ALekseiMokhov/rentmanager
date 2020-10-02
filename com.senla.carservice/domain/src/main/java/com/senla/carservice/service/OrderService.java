@@ -22,8 +22,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
-
 @Transactional
     public class OrderService implements IOrderService {
     @Autowired
