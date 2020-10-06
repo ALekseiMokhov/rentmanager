@@ -11,9 +11,9 @@ import java.util.UUID;
 @Service
 
 public interface IPlaceService {
-    List <Place> getPlaces();
+    List<Place> getPlaces();
 
-    List <Place> getFreePlacesForDate(LocalDate date);
+    List<Place> getFreePlacesForDate(LocalDate date);
 
     void addPlaces(int i);
 
@@ -22,10 +22,6 @@ public interface IPlaceService {
     void setPlaceForDate(UUID id, LocalDate date);
 
     void setPlaceFree(UUID id, LocalDate date);
-
-    void setPlaceId(UUID current, UUID newId);
-
-    void mergePlace(Place place);
 
     UUID addPlace();
 

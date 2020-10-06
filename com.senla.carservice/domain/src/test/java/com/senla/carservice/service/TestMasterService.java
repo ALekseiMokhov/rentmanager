@@ -24,7 +24,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 @ExtendWith(MockitoExtension.class)
 class TestMasterService {
     private final IGenericRepository mockRepo
-            = Mockito.mock( MasterJpaRepository.class );
+            = Mockito.mock(MasterJpaRepository.class);
     @InjectMocks
     private MasterService masterService;
     private AbstractMaster testMechanic;
@@ -37,118 +37,118 @@ class TestMasterService {
 
     @BeforeEach
     void init() {
-        testMechanic = new Mechanic( "Vasili", 3.4, new Calendar(), Speciality.MECHANIC );
-        secondReshaper = new Mechanic( "Yakov", 5.9, new Calendar(), Speciality.RESHAPER );
-        testReshaper = new Reshaper( "Sergei", 3.6, new Calendar(), Speciality.RESHAPER );
-        testElectrician = new Electrician( "Ivan", 2.5, new Calendar(), Speciality.ELECTRICIAN );
-        testPainter = new Painter( "Evgeny", 2.9, new Calendar(), Speciality.PAINTER );
+        testMechanic = new Mechanic("Vasili", 3.4, new Calendar(), Speciality.MECHANIC);
+        secondReshaper = new Mechanic("Yakov", 5.9, new Calendar(), Speciality.RESHAPER);
+        testReshaper = new Reshaper("Sergei", 3.6, new Calendar(), Speciality.RESHAPER);
+        testElectrician = new Electrician("Ivan", 2.5, new Calendar(), Speciality.ELECTRICIAN);
+        testPainter = new Painter("Evgeny", 2.9, new Calendar(), Speciality.PAINTER);
         id = testMechanic.getId();
 
-        masterList.add( testMechanic );
-        masterList.add( secondReshaper );
-        masterList.add( testElectrician );
-        masterList.add( testPainter );
-        masterList.add( testReshaper );
+        masterList.add(testMechanic);
+        masterList.add(secondReshaper);
+        masterList.add(testElectrician);
+        masterList.add(testPainter);
+        masterList.add(testReshaper);
 
-        when( mockRepo.getById( id ) ).thenReturn( testMechanic );
-        when( mockRepo.findAll() ).thenReturn( masterList );
+        when(mockRepo.getById(id)).thenReturn(testMechanic);
+        when(mockRepo.findAll()).thenReturn(masterList);
     }
 
     @Test
     void verifyRepositorySaveMaster() {
-        this.masterService.saveMaster( this.testMechanic );
+        this.masterService.saveMaster(this.testMechanic);
 
-        verify( mockRepo, times( 1 ) ).save( testMechanic );
+        verify(mockRepo, times(1)).save(testMechanic);
     }
 
     @Test
     void verifyRepositoryRemoveMaster() {
-        this.masterService.deleteMaster( id );
+        this.masterService.deleteMaster(id);
 
-        verify( mockRepo, times( 1 ) ).delete( id );
+        verify(mockRepo, times(1)).delete(id);
     }
 
     @Test
     void givenIdANdDateShouldReturnIsMasterBooked() {
-        this.masterService.setMasterForDate( id, LocalDate.now() );
+        this.masterService.setMasterForDate(id, LocalDate.now());
 
-        Boolean result = this.masterService.getById( id ).getCalendar().isDateBooked( LocalDate.now() );
+        Boolean result = this.masterService.getById(id).getCalendar().isDateBooked(LocalDate.now());
 
-        Assertions.assertEquals( true,result);
+        Assertions.assertEquals(true, result);
     }
 
     @Test
     void givenDateShouldSetMasterForTheDate() {
-        this.masterService.setMasterForDate( id, LocalDate.now() );
+        this.masterService.setMasterForDate(id, LocalDate.now());
 
-        verify( mockRepo, times( 1 ) ).getById( id );
-        Assertions.assertEquals( 1, testMechanic.getCalendar().getBookedDates().size() );
+        verify(mockRepo, times(1)).getById(id);
+        Assertions.assertEquals(1, testMechanic.getCalendar().getBookedDates().size());
     }
 
     @Test
     void givenDateShouldSetMasterFree() {
-        this.masterService.setMasterForDate( id, LocalDate.now() );
-        this.masterService.setBookedDateFree( id, LocalDate.now() );
+        this.masterService.setMasterForDate(id, LocalDate.now());
+        this.masterService.setBookedDateFree(id, LocalDate.now());
 
-        Assertions.assertEquals( 0, testMechanic.getCalendar().getBookedDates().size() );
+        Assertions.assertEquals(0, testMechanic.getCalendar().getBookedDates().size());
     }
 
     @Test
     void givenNameAndSpecialityShouldFIndMaster() {
-        AbstractMaster master = this.masterService.getByNameAndSpeciality( "Evgeny", Speciality.PAINTER );
+        AbstractMaster master = this.masterService.getByNameAndSpeciality("Evgeny", Speciality.PAINTER);
 
-        Assertions.assertEquals( this.testPainter, master );
+        Assertions.assertEquals(this.testPainter, master);
     }
 
     @Test
     void givenSpecialityShouldFIndAllMasters() {
-        Assertions.assertEquals( testElectrician, this.masterService.getBySpeciality( Speciality.ELECTRICIAN ) );
+        Assertions.assertEquals(testElectrician, this.masterService.getBySpeciality(Speciality.ELECTRICIAN));
 
-        verify( mockRepo, times( 1 ) ).findAll();
+        verify(mockRepo, times(1)).findAll();
     }
 
     @Test
     void shouldReturnAvailableSpecialities() {
-        Assertions.assertEquals( 4, this.masterService.getAvailableSpecialities().size() );
+        Assertions.assertEquals(4, this.masterService.getAvailableSpecialities().size());
     }
 
     @Test
     void givenIdAndDateShouldBookMaster() {
-        this.masterService.setMasterForDate( id, LocalDate.now() );
+        this.masterService.setMasterForDate(id, LocalDate.now());
 
-        Assertions.assertDoesNotThrow( () -> this.masterService.getFreeBySpeciality( LocalDate.now(), Speciality.ELECTRICIAN ) );
+        Assertions.assertDoesNotThrow(() -> this.masterService.getFreeBySpeciality(LocalDate.now(), Speciality.ELECTRICIAN));
     }
 
     @Test
     void shouldGetMastersSortedByAlphabet() {
-        List <AbstractMaster> masters = this.masterService.getMastersByAlphabet();
-        Assertions.assertEquals( "Sergei", masters.get( 2 ).getFullName() );
+        List<AbstractMaster> masters = this.masterService.getMastersByAlphabet();
+        Assertions.assertEquals("Sergei", masters.get(2).getFullName());
     }
 
     @Test
     void shouldGetAllFreeMasters() {
-        testMechanic.getCalendar().setDateForBooking( LocalDate.now() );
+        testMechanic.getCalendar().setDateForBooking(LocalDate.now());
 
-        List <AbstractMaster> masters = this.masterService.getFreeMasters( LocalDate.now() );
+        List<AbstractMaster> masters = this.masterService.getFreeMasters(LocalDate.now());
 
-        Assertions.assertEquals( 4, masters.size() );
+        Assertions.assertEquals(4, masters.size());
 
     }
 
     @Test
     void givenSpecialityShouldGetChosenMasters() {
-        List <AbstractMaster> masters = this.masterService.getMastersBySpeciality( Speciality.RESHAPER );
+        List<AbstractMaster> masters = this.masterService.getMastersBySpeciality(Speciality.RESHAPER);
 
-        Assertions.assertEquals( 2, masters.size() );
+        Assertions.assertEquals(2, masters.size());
 
 
     }
 
     @Test
     void verifyRepositoryDeleteMaster() {
-        this.masterService.deleteMaster( id );
+        this.masterService.deleteMaster(id);
 
-        verify( mockRepo, times( 1 ) ).delete( id );
+        verify(mockRepo, times(1)).delete(id);
     }
 
 

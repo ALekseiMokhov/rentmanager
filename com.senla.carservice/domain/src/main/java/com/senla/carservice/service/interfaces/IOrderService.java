@@ -13,8 +13,8 @@ import java.util.UUID;
 
 @Service
 public interface IOrderService {
-    void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required);
-    
+    void addOrder(LocalDate date, LocalDate startOfExecution, Set<Speciality> required);
+
     void saveOrder(Order order);
 
     Order findOrderById(UUID id);
@@ -29,16 +29,15 @@ public interface IOrderService {
 
     void deleteOrder(UUID id);
 
-    List <Order> getOrders();
+    List<Order> getOrders();
 
-    List <Order> getOrdersByBookedDate(OrderStatus status);
+    List<Order> getOrdersByBookedDate(OrderStatus status);
 
-    List <Order> getOrdersByExecutionDate(OrderStatus status);
+    List<Order> getOrdersByExecutionDate(OrderStatus status);
 
-    List <Order> getOrdersForPeriod(LocalDate start, LocalDate end);
+    List<Order> getOrdersForPeriod(LocalDate start, LocalDate end);
 
-    List <Order> getOrdersByPrice(OrderStatus status);
-
+    List<Order> getOrdersByPrice(OrderStatus status);
 
 
 }

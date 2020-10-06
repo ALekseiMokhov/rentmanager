@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface IPlaceRepository extends IGenericRepository {
     Place getById(UUID id);
 
-    List <Place> findAll();
+    List<Place> findAll();
 
     void delete(UUID id);
 

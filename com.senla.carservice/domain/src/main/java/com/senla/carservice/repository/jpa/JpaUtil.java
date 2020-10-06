@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JpaUtil {
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory( "hibernate" );
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("hibernate");
 
     public static EntityManagerFactory getEntityManagerFactory() {
         return FACTORY;

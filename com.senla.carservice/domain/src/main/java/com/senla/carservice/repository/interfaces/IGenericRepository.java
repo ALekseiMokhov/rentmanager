@@ -5,11 +5,11 @@ import java.util.UUID;
 
 public interface IGenericRepository<T> {
 
-    void setClass(Class <T> clazzToSet);
+    void setClass(Class<T> clazzToSet);
 
     T getById(UUID id);
 
-    List <T> findAll();
+    List<T> findAll();
 
     void save(T entity);
 

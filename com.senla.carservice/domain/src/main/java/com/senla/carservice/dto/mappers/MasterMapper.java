@@ -15,7 +15,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(uses = {UuidMapper.class, SpecialityMapper.class})
 
 public interface MasterMapper {
-   MasterMapper INSTANCE = Mappers.getMapper(MasterMapper.class);
+    MasterMapper INSTANCE = Mappers.getMapper(MasterMapper.class);
 
     MechanicDto mechanicToDto(Mechanic mechanic);
 

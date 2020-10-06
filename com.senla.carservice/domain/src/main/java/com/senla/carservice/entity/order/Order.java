@@ -32,11 +32,11 @@ public class Order {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private List <AbstractMaster> masters;
+    private List<AbstractMaster> masters;
     @OneToOne
     private Place place;
 
-    public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
+    public Order(LocalDate dateBooked, LocalDate startOfExecution, Place place, List<AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
@@ -44,8 +44,8 @@ public class Order {
         this.id = UUID.randomUUID();
         this.status = OrderStatus.MANAGED;
     }
-    
-    public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {
+
+    public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List<AbstractMaster> masters) {
         this.dateBooked = dateBooked;
         this.startOfExecution = startOfExecution;
         this.masters = masters;
@@ -54,14 +54,14 @@ public class Order {
     }
 
     public void setMaster(AbstractMaster old, AbstractMaster current) {
-        this.masters.set( masters.indexOf( old ), current );
+        this.masters.set(masters.indexOf(old), current);
     }
 
 
     public double getTotalPrice() {
         return this.masters
                 .stream()
-                .mapToDouble( master -> master.getDailyPayment() )
+                .mapToDouble(master -> master.getDailyPayment())
                 .sum();
     }
 

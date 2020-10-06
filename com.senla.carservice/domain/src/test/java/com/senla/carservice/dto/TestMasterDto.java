@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class TestMasterDto {
     @Test
-    void shouldMapMechanicToDto(){
+    void shouldMapMechanicToDto() {
         /*given*/
         AbstractMaster master = new Mechanic();
         master.setId(UUID.randomUUID());
@@ -23,12 +23,13 @@ public class TestMasterDto {
         MechanicDto masterDto = MasterMapper.INSTANCE.mechanicToDto((Mechanic) master);
         /*then*/
         Assertions.assertNotNull(masterDto);
-        Assertions.assertEquals("MECHANIC",masterDto.getSpeciality());
-        Assertions.assertEquals(master.getId().toString(),masterDto.getId());
-        Assertions.assertEquals(master.getFullName(),masterDto.getFullName());
+        Assertions.assertEquals("MECHANIC", masterDto.getSpeciality());
+        Assertions.assertEquals(master.getId().toString(), masterDto.getId());
+        Assertions.assertEquals(master.getFullName(), masterDto.getFullName());
     }
+
     @Test
-    void shouldMapElectricianToDto(){
+    void shouldMapElectricianToDto() {
         /*given*/
         AbstractMaster master = new Electrician();
         master.setId(UUID.randomUUID());
@@ -46,9 +47,9 @@ public class TestMasterDto {
     }
 
     @Test
-    void shouldMapPainterDtoToPainter(){
+    void shouldMapPainterDtoToPainter() {
         /*given*/
-        PainterDto painterDto= new PainterDto();
+        PainterDto painterDto = new PainterDto();
         painterDto.setId(UUID.randomUUID().toString());
         painterDto.setCalendar(new Calendar());
         painterDto.setFullName("Basiliy");
@@ -57,7 +58,7 @@ public class TestMasterDto {
         /*when*/
         Painter painter = MasterMapper.INSTANCE.painterFromDto(painterDto);
         /*then*/
-        Assertions.assertEquals(painter.getFullName(),painterDto.getFullName());
-        Assertions.assertEquals(painter.getId().toString(),painterDto.getId());
+        Assertions.assertEquals(painter.getFullName(), painterDto.getFullName());
+        Assertions.assertEquals(painter.getId().toString(), painterDto.getId());
     }
 }

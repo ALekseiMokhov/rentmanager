@@ -1,27 +1,11 @@
 package com.senla.carservice.controller.template;
 
-import com.senla.carservice.entity.master.Speciality;
-import com.senla.carservice.service.interfaces.IMasterService;
-import com.senla.carservice.util.calendar.Calendar;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.util.UUID;
-
-@Slf4j
+/*@Slf4j
 @Controller
 @RequestMapping("/master_menu")
-@Profile("ui")
+@Profile("ui")*/
 public class MasterMenuController {
-    @Autowired
+    /*@Autowired
     private IMasterService masterService;
 
     @GetMapping("")
@@ -104,6 +88,6 @@ public class MasterMenuController {
         model.addAttribute( "message", "Master with id " + id + " was set free for " + date );
         model.addAttribute( "masters", this.masterService.getMastersByAlphabet() );
         return "master_menu";
-    }
+    }*/
 
 }

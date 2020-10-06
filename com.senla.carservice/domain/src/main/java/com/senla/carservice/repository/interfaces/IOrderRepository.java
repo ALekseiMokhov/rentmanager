@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface IOrderRepository extends IGenericRepository {
     Order getById(UUID id);
 
-    List <Order> findAll();
+    List<Order> findAll();
 
     void delete(UUID id);
 

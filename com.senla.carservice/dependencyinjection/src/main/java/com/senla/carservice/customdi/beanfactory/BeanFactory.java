@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 public class BeanFactory {
     private static final BeanFactory INSTANCE = new BeanFactory();
-    private static final Logger LOGGER = LoggerFactory.getLogger( BeanFactory.class.getClass() );
-    private final HashMap <Class, List <Class>> metaData = new HashMap <>();
-    private final HashMap <String, Object> singletons = new HashMap <>();
-    private final HashSet <String> prototypeNames = new HashSet <>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanFactory.class.getClass());
+    private final HashMap<Class, List<Class>> metaData = new HashMap<>();
+    private final HashMap<String, Object> singletons = new HashMap<>();
+    private final HashSet<String> prototypeNames = new HashSet<>();
 
     private BeanFactory() {
 
@@ -35,44 +35,44 @@ public class BeanFactory {
 
     /*loading Class type of singletons and fields to inject*/
     public void loadMetadata(String pakcage) throws NoSuchMethodException, InstantiationException, IllegalAccessException {
-        Reflections reflections = new Reflections( pakcage, new TypeAnnotationsScanner()
-                , new SubTypesScanner(), new FieldAnnotationsScanner() );
+        Reflections reflections = new Reflections(pakcage, new TypeAnnotationsScanner()
+                , new SubTypesScanner(), new FieldAnnotationsScanner());
 
-        Set <Class <?>> allBeanTypes = new CopyOnWriteArraySet <>();
-        allBeanTypes.addAll( reflections.getTypesAnnotatedWith( Component.class ) );
+        Set<Class<?>> allBeanTypes = new CopyOnWriteArraySet<>();
+        allBeanTypes.addAll(reflections.getTypesAnnotatedWith(Component.class));
 
-        for (Class <?> allBeanType : allBeanTypes) {
-            if (allBeanType.isAnnotationPresent( Deprecated.class )) {
-                allBeanTypes.remove( allBeanType );/**/
+        for (Class<?> allBeanType : allBeanTypes) {
+            if (allBeanType.isAnnotationPresent(Deprecated.class)) {
+                allBeanTypes.remove(allBeanType);/**/
             }
         }
 
-        LOGGER.info( "Beans found: " + allBeanTypes.size() + " : " + allBeanTypes.stream().collect( Collectors.toList() ) );
+        LOGGER.info("Beans found: " + allBeanTypes.size() + " : " + allBeanTypes.stream().collect(Collectors.toList()));
 
         /*finding implementation for interface*/
-        for (Class <?> clazz : List.copyOf( allBeanTypes )) {
+        for (Class<?> clazz : List.copyOf(allBeanTypes)) {
             if (clazz.isInterface()) {
-                Class impl = findImplementationClass( clazz );
-                allBeanTypes.add( impl );
-                allBeanTypes.remove( clazz );
+                Class impl = findImplementationClass(clazz);
+                allBeanTypes.add(impl);
+                allBeanTypes.remove(clazz);
             }
         }
 
 
-        for (Class <?> beanType : allBeanTypes) {
-            List <Class> fieldsToInject = new ArrayList <>();
+        for (Class<?> beanType : allBeanTypes) {
+            List<Class> fieldsToInject = new ArrayList<>();
             Field[] fields = beanType.getDeclaredFields();
 
 
-            Arrays.stream( fields )
-                    .forEach( f -> f.setAccessible( true ) );
+            Arrays.stream(fields)
+                    .forEach(f -> f.setAccessible(true));
 
-            fieldsToInject.addAll( Arrays.stream( fields )
-                    .filter( f -> f.isAnnotationPresent( Autowired.class ) )
-                    .map( f -> f.getType() )
-                    .collect( Collectors.toList() ) );
+            fieldsToInject.addAll(Arrays.stream(fields)
+                    .filter(f -> f.isAnnotationPresent(Autowired.class))
+                    .map(f -> f.getType())
+                    .collect(Collectors.toList()));
 
-            metaData.put( beanType, fieldsToInject );
+            metaData.put(beanType, fieldsToInject);
         }
 
     }
@@ -80,39 +80,39 @@ public class BeanFactory {
     /*create beans with null autowired fields*/
     public void instantiate(String pakcage) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         for (Class clazz : metaData.keySet()) {
-            singletons.put( formatBeanName( clazz.getSimpleName() ), clazz.newInstance() );
+            singletons.put(formatBeanName(clazz.getSimpleName()), clazz.newInstance());
 
         }
 
-        LOGGER.info( "Beans loaded: " + metaData.keySet().size() + ":" + metaData.keySet() );
+        LOGGER.info("Beans loaded: " + metaData.keySet().size() + ":" + metaData.keySet());
     }
 
     /*inject bean dependencies*/
     public void injectDependencies() throws IllegalAccessException {
         for (Class clazz : metaData.keySet()) {
-            for (Class injecting : metaData.get( clazz )) {
-                Object bean = singletons.get( formatBeanName( clazz.getSimpleName() ) );
+            for (Class injecting : metaData.get(clazz)) {
+                Object bean = singletons.get(formatBeanName(clazz.getSimpleName()));
 
-                List <Field> fieldsToInject = Arrays.asList( bean.getClass().getDeclaredFields() ).stream()
-                        .filter( f -> f.isAnnotationPresent( Autowired.class ) )
-                        .collect( Collectors.toList() );
+                List<Field> fieldsToInject = Arrays.asList(bean.getClass().getDeclaredFields()).stream()
+                        .filter(f -> f.isAnnotationPresent(Autowired.class))
+                        .collect(Collectors.toList());
 
 
                 for (Field field : fieldsToInject) {
-                    field.setAccessible( true );
-                    Class <?> type = field.getType();
+                    field.setAccessible(true);
+                    Class<?> type = field.getType();
 
 
                     Object injectedBean = singletons.values().stream()
-                            .filter( v -> type.isAssignableFrom( v.getClass() ) )
+                            .filter(v -> type.isAssignableFrom(v.getClass()))
                             .findFirst().get();
 
 
-                    field.set( bean, injectedBean );
+                    field.set(bean, injectedBean);
 
                 }
 
-                singletons.put( formatBeanName( clazz.getSimpleName() ), bean );
+                singletons.put(formatBeanName(clazz.getSimpleName()), bean);
 
             }
 
@@ -121,29 +121,29 @@ public class BeanFactory {
     }
 
     public Object getSingleton(String beanName) {
-        return singletons.get( beanName );
+        return singletons.get(beanName);
     }
 
     public Object getPrototype(String beanName) {    /**/
-        if (!prototypeNames.contains( beanName )) {
+        if (!prototypeNames.contains(beanName)) {
             throw new BeanInitException();
         }
         return null;
     }
 
-    public ArrayList <Object> getSingletons() {
-        ArrayList <Object> copyBeans = new ArrayList <>();
-        copyBeans.addAll( singletons.values() );
+    public ArrayList<Object> getSingletons() {
+        ArrayList<Object> copyBeans = new ArrayList<>();
+        copyBeans.addAll(singletons.values());
         return copyBeans;
     }
 
     private Class findImplementationClass(Class clazz) throws IllegalAccessException, InstantiationException {
-        Reflections reflections = new Reflections( clazz.getPackageName(), new TypeAnnotationsScanner(), new SubTypesScanner() );
-        List <Class <?>> implementations = new ArrayList <>( reflections.getSubTypesOf( clazz ) );
+        Reflections reflections = new Reflections(clazz.getPackageName(), new TypeAnnotationsScanner(), new SubTypesScanner());
+        List<Class<?>> implementations = new ArrayList<>(reflections.getSubTypesOf(clazz));
 
         for (Class implementation : implementations) {
 
-            if (implementation.isAnnotationPresent( Qualifier.class )) {
+            if (implementation.isAnnotationPresent(Qualifier.class)) {
 
 
                 return implementation;
@@ -151,7 +151,7 @@ public class BeanFactory {
         }
         if (implementations.size() == 1) {
 
-            return implementations.get( 0 );
+            return implementations.get(0);
         }
         throw new BeanCollisionException();
     }

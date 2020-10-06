@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface IMasterRepository extends IGenericRepository {
     AbstractMaster getById(UUID id);
 
-    List <AbstractMaster> findAll();
+    List<AbstractMaster> findAll();
 
     void delete(UUID id);
 

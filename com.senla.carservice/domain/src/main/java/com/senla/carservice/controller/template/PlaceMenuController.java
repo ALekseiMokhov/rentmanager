@@ -1,25 +1,11 @@
 package com.senla.carservice.controller.template;
 
-import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.service.interfaces.IPlaceService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.util.UUID;
-
-@Slf4j
+/*@Slf4j
 @Controller
 @RequestMapping("/place_menu")
-@Profile("ui")
+@Profile("ui")*/
 public class PlaceMenuController {
+/*
 
     @Autowired
     private IPlaceService placeService;
@@ -85,6 +71,7 @@ public class PlaceMenuController {
         model.addAttribute( "message", "Place with id " + id + " was deleted!" );
         return "place_menu";
     }
+*/
 
 
 }

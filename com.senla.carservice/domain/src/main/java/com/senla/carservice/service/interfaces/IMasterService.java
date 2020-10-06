@@ -34,13 +34,13 @@ public interface IMasterService {
 
     AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
 
-    Set <Speciality> getAvailableSpecialities();
+    Set<Speciality> getAvailableSpecialities();
 
-    List <AbstractMaster> getMastersByAlphabet();
+    List<AbstractMaster> getMastersByAlphabet();
 
-    List <AbstractMaster> getFreeMasters(LocalDate date);
+    List<AbstractMaster> getFreeMasters(LocalDate date);
 
-    List <AbstractMaster> getMastersBySpeciality(Speciality speciality);
+    List<AbstractMaster> getMastersBySpeciality(Speciality speciality);
 
     void deleteMaster(UUID id);
 }

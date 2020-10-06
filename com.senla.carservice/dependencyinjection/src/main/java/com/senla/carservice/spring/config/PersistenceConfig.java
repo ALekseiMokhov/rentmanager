@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
-import org.springframework.core.env.Environment;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,24 +21,24 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = { "com.senla.carservice" })
+@ComponentScan(basePackages = {"com.senla.carservice"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableSpringConfigured
-public class AppConfig {
+public class PersistenceConfig {
     @Autowired
-    private Environment env;
+    private ConfigurableEnvironment env;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource( dataSource() );
-        em.setPackagesToScan( "com.senla.carservice" );
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("com.senla.carservice");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter( vendorAdapter );
-        em.setJpaProperties( additionalProperties() );
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
 
         return em;
     }
@@ -47,18 +47,18 @@ public class AppConfig {
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName( Preconditions.checkNotNull( env.getProperty( "jdbc.driver" ) ) );
-        dataSource.setUsername( Preconditions.checkNotNull( env.getProperty( "jdbc.user" ) ) );
-        dataSource.setPassword( Preconditions.checkNotNull( env.getProperty( "jdbc.password" ) ) );
+        dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driver")));
+        dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
+        dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("jdbc.password")));
         dataSource.setUrl(
-                Preconditions.checkNotNull( env.getProperty( "jdbc.url" ) ) );
+                Preconditions.checkNotNull(env.getProperty("jdbc.url")));
         return dataSource;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory( entityManagerFactory().getObject() );
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
     }
@@ -67,11 +67,12 @@ public class AppConfig {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-        @Bean
+
+    @Bean
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty( "hibernate.hbm2ddl.auto", "create" );
-        properties.setProperty( "hibernate.dialect", "org.hibernate.dialect.H2Dialect" );
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 
         return properties;
     }

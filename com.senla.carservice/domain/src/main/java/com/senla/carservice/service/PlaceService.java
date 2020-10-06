@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,109 +23,97 @@ import java.util.stream.Collectors;
 public class PlaceService implements IPlaceService {
     @Autowired
     @Qualifier("placeJpaRepository")
-    private IGenericRepository <Place> repository;
+    private IGenericRepository<Place> repository;
 
 
     public PlaceService() {
 
     }
 
-    public List <Place> getPlaces() {
+    public List<Place> getPlaces() {
         return this.repository.findAll();
     }
 
 
     public void addPlaces(int i) {
         for (int j = 0; j < i; j++) {
-            this.repository.save( new Place( new Calendar() ) );
+            this.repository.save(new Place(new Calendar()));
         }
     }
 
     @Transactional
-    public List <Place> getFreePlacesForDate(LocalDate date) {
+    public List<Place> getFreePlacesForDate(LocalDate date) {
 
         return this.repository.findAll().stream()
-                .filter( p -> p.getCalendar().isDateBooked( date ) == false )
-                .collect( Collectors.toList() );
+                .filter(p -> p.getCalendar().isDateBooked(date) == false)
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public boolean isPlaceSetForDate(UUID id, LocalDate date) {
-        Place place = this.repository.getById( id );
+        Place place = this.repository.getById(id);
         return place.getCalendar()
-                .isDateBooked( date );
+                .isDateBooked(date);
     }
 
     @Transactional
     public void setPlaceForDate(UUID id, LocalDate date) {
-        Place place = this.repository.getById( id );
+        Place place = this.repository.getById(id);
         if (place.getCalendar() == null) {
-            place.setCalendar( new Calendar() );
+            place.setCalendar(new Calendar());
         }
-        place.getCalendar().setDateForBooking( date );
-
-    }
-
-    @Transactional
-    public void setPlaceId(UUID id, UUID newId) {
-        Place place = this.repository.getById( id );
-        place.setId( newId );
+        place.getCalendar().setDateForBooking(date);
 
     }
 
     @Transactional
     public void setPlaceFree(UUID id, LocalDate date) {
-        Place place = this.repository.getById( id );
-        place.getCalendar().deleteBookedDate( date );
+        Place place = this.repository.getById(id);
+        place.getCalendar().deleteBookedDate(date);
 
     }
 
     @Transactional
     public UUID addPlace() {
-        Place place = new Place( new Calendar() );
-        this.repository.save( place );
+        Place place = new Place(new Calendar());
+        this.repository.save(place);
 
         return place.getId();
     }
 
 
     public boolean isPresent(UUID id) {
-        return this.repository.getById( id ) != null;
-    }
-
-
-    public void mergePlace(Place place) {
-            this.repository.save( place );
-
+        return this.repository.getById(id) != null;
     }
 
     @Transactional
     public Place getFreePlace(LocalDate date) {
-        List <Place> res = this.repository.findAll();
+        List<Place> res = this.repository.findAll();
         for (Place place : res) {
             if (!place.getCalendar()
-                    .isDateBooked( date )) {
+                    .isDateBooked(date)) {
                 return place;
             }
 
         }
-         throw new NoSuchElementException( "There is no free place for chosen date!" ) ;
+        throw new NoSuchElementException("There is no free place for chosen date!");
     }
 
     public Place getPlaceById(UUID id) {
-            return this.repository.getById( id );
+        return this.repository.getById(id);
 
     }
-
 
 
     @Override
     public void deletePlace(UUID id) {
-        this.repository.delete( id );
+        this.repository.delete(id);
     }
 
     @Override
     public void savePlace(Place place) {
-        this.repository.save( place );
+        if (this.repository.getById(place.getId()) != null) {
+            this.repository.update(place);
+        } else this.repository.save(place);
     }
 }

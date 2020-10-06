@@ -22,102 +22,102 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TestPlaceService {
     private final IGenericRepository mockRepo
-            = Mockito.mock( PlaceJpaRepository.class );
+            = Mockito.mock(PlaceJpaRepository.class);
     @InjectMocks
     private PlaceService placeService;
-    private Place place = new Place( new Calendar() );
+    private Place place = new Place(new Calendar());
     private UUID id = place.getId();
 
     @BeforeEach
     public void init() {
-        place = new Place( new Calendar() );
+        place = new Place(new Calendar());
         id = place.getId();
-        when( mockRepo.getById( id ) ).thenReturn( place );
+        when(mockRepo.getById(id)).thenReturn(place);
     }
 
 
     @Test()
     void shouldGetAllPlaces() {
-        List <Place> list = new ArrayList <>();
-        when( placeService.getPlaces() ).thenReturn( list );
+        List<Place> list = new ArrayList<>();
+        when(placeService.getPlaces()).thenReturn(list);
 
-        Assertions.assertEquals( list,placeService.getPlaces() );
+        Assertions.assertEquals(list, placeService.getPlaces());
     }
 
     @Test
     void givenNumberOfPlacesShouldBeAdded() {
-        placeService.addPlaces( 22 );
+        placeService.addPlaces(22);
 
-        verify( mockRepo, times( 22 ) ).save( any( Place.class ) );
+        verify(mockRepo, times(22)).save(any(Place.class));
     }
 
     @Test
     void givenDateShouldReturnFreePlaces() {
-        List <Place> list = new ArrayList <>();
-        when( mockRepo.findAll()).thenReturn( list );
+        List<Place> list = new ArrayList<>();
+        when(mockRepo.findAll()).thenReturn(list);
 
         placeService.getFreePlacesForDate(LocalDate.now());
 
-        verify(mockRepo,times(1)).findAll();
+        verify(mockRepo, times(1)).findAll();
     }
 
     @Test
     void givenIdANdDateShouldReturnIsPlaceBooked() {
-        when( mockRepo.getById( id ) ).thenReturn( place );
-        Boolean res = placeService.isPlaceSetForDate( id, LocalDate.now() );
+        when(mockRepo.getById(id)).thenReturn(place);
+        Boolean res = placeService.isPlaceSetForDate(id, LocalDate.now());
 
-        Assertions.assertEquals( false,res );
+        Assertions.assertEquals(false, res);
     }
 
     @Test
     void givenDateShouldSetPlaceForTheDate() {
-        when( mockRepo.getById( id ) ).thenReturn( place );
-        placeService.setPlaceForDate( id, LocalDate.now() );
+        when(mockRepo.getById(id)).thenReturn(place);
+        placeService.setPlaceForDate(id, LocalDate.now());
 
         Assertions.assertEquals(
-                true, placeService.getPlaceById( id ).getCalendar().isDateBooked(LocalDate.now()));
+                true, placeService.getPlaceById(id).getCalendar().isDateBooked(LocalDate.now()));
 
     }
 
     @Test
     void givenDateShouldSetPlaceFree() {
         LocalDate date = LocalDate.now();
-        this.placeService.setPlaceForDate( id, date );
+        this.placeService.setPlaceForDate(id, date);
 
-        Assertions.assertEquals( true, placeService.getPlaceById( id ).getCalendar().isDateBooked(LocalDate.now()));
+        Assertions.assertEquals(true, placeService.getPlaceById(id).getCalendar().isDateBooked(LocalDate.now()));
 
     }
 
     @Test
     void shouldReturnTrueIfPlaceIsPresent() {
-        Boolean result = this.placeService.isPresent( id );
+        Boolean result = this.placeService.isPresent(id);
 
-        Assertions.assertEquals(true,result);
+        Assertions.assertEquals(true, result);
 
     }
 
     @Test
     void verifyRepositorySavePlace() {
-        this.placeService.savePlace( place );
+        this.placeService.savePlace(place);
 
-        verify( mockRepo, times( 1 ) ).save( place );
+        verify(mockRepo, times(1)).save(place);
     }
 
 
     @Test
     void shouldThrowExceptionIfNoFreePlacesForTheDate() {
-        this.placeService.setPlaceForDate( id, LocalDate.now() );
+        this.placeService.setPlaceForDate(id, LocalDate.now());
 
-        Assertions.assertThrows( RuntimeException.class, () -> this.placeService.getFreePlace( LocalDate.now() ) );
+        Assertions.assertThrows(RuntimeException.class, () -> this.placeService.getFreePlace(LocalDate.now()));
 
     }
 
 
     @Test
     void verifyRepositoryDeletePlace() {
-        this.placeService.deletePlace( id );
+        this.placeService.deletePlace(id);
 
-        verify( mockRepo, times( 1 ) ).delete( id );
+        verify(mockRepo, times(1)).delete(id);
     }
 
 
