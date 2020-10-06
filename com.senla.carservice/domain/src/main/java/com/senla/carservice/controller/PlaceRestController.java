@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/places")
 /*@Profile({"rest","test"})*/
-public class PlaceController {
+public class PlaceRestController {
     @Autowired
     @Qualifier("placeService")
     private IPlaceService placeService;
 
-    public PlaceController() {
+    public PlaceRestController() {
 
     }
 

@@ -5,7 +5,7 @@ package com.senla.carservice.controller.template;
 @Profile("ui")*/
 public class HomeController {
    /* @Autowired
-    private PlaceController placeController;
+    private PlaceRestController placeController;
     @Autowired
     private MasterController masterController;
     @Autowired
