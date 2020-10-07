@@ -71,43 +71,40 @@ public class MasterController {
     public boolean isBookedForDate(@PathVariable UUID id,@PathVariable("date") @DateTimeFormat(pattern = "yyyy-mm-dd")LocalDate date) {
         return this.masterService.isBookedForDate(id, date);
     }
-
-    public void setMasterForDate(UUID id, LocalDate date) {
+    @PatchMapping("/book/{id}/{date}")
+    public void setMasterForDate(@PathVariable UUID id,@PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
         this.masterService.setMasterForDate(id, date);
     }
-
-    public void setBookedDateFree(UUID id, LocalDate date) {
+    @PatchMapping("/unbook/{id}/{date}")
+    public void setBookedDateFree(@PathVariable UUID id,@PathVariable("date") @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
         this.masterService.isBookedForDate(id, date);
     }
-
-    public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
+    @GetMapping("/master/{name}/{speciality}")
+    public AbstractMaster getByNameAndSpeciality(@PathVariable String name,@PathVariable Speciality speciality) {
         return this.masterService.getByNameAndSpeciality(name, speciality);
     }
-
-    public AbstractMaster getBySpeciality(Speciality speciality) {
-        return this.masterService.getBySpeciality(speciality);
-    }
-
-    public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
+    @GetMapping("/free/{name}/{speciality}")
+    public AbstractMaster getFreeBySpeciality(@PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd")LocalDate date,@PathVariable Speciality speciality) {
         return this.masterService.getFreeBySpeciality(date, speciality);
     }
+    @GetMapping("/specialities")
 
     public Set<Speciality> getAvailableSpecialities() {
         return this.masterService.getAvailableSpecialities();
     }
-
+    @GetMapping("/")
     public List<AbstractMaster> getMastersByAlphabet() {
         return this.masterService.getMastersByAlphabet();
     }
-
-    public List<AbstractMaster> getFreeMasters(LocalDate date) {
+    @GetMapping("/free")
+    public List<AbstractMaster> getFreeMasters(@PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
         return this.masterService.getFreeMasters(date);
     }
-
-    public List<AbstractMaster> getMastersBySpeciality(Speciality speciality) {
+    @GetMapping("/specialities/{speciality}")
+    public List<AbstractMaster> getMastersBySpeciality(@PathVariable Speciality speciality) {
         return this.masterService.getMastersBySpeciality(speciality);
     }
-
+    @DeleteMapping("{id}")
     public void deleteMaster(UUID id) {
         this.masterService.deleteMaster(id);
     }
