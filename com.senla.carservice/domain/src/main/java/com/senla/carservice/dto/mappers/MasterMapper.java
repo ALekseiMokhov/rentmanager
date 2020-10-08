@@ -1,14 +1,10 @@
 package com.senla.carservice.dto.mappers;
 
 
-import com.senla.carservice.dto.ElectricianDto;
-import com.senla.carservice.dto.MechanicDto;
-import com.senla.carservice.dto.PainterDto;
-import com.senla.carservice.dto.ReshaperDto;
-import com.senla.carservice.entity.master.Electrician;
-import com.senla.carservice.entity.master.Mechanic;
-import com.senla.carservice.entity.master.Painter;
-import com.senla.carservice.entity.master.Reshaper;
+import com.senla.carservice.dto.*;
+import com.senla.carservice.dto.ElectricianMasterDto;
+import com.senla.carservice.dto.ReshaperMasterDto;
+import com.senla.carservice.entity.master.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -17,21 +13,23 @@ import org.mapstruct.factory.Mappers;
 public interface MasterMapper {
     MasterMapper INSTANCE = Mappers.getMapper(MasterMapper.class);
 
-    MechanicDto mechanicToDto(Mechanic mechanic);
+    MechanicMasterDto mechanicToDto(Mechanic mechanic);
 
-    ElectricianDto electricianToDto(Electrician electrician);
+    ElectricianMasterDto electricianToDto(Electrician electrician);
 
-    ReshaperDto reshaperToDto(Reshaper reshaper);
+    ReshaperMasterDto reshaperToDto(Reshaper reshaper);
 
-    PainterDto painterToDto(Painter painter);
+    PainterMasterDto painterToDto(Painter painter);
 
     /*reverse mapping*/
-    Mechanic mechanicFromDto(MechanicDto mechanicDto);
+    Mechanic mechanicFromDto(MechanicMasterDto mechanicDto);
 
-    Electrician electricianFromDto(ElectricianDto electricianDto);
+    Electrician electricianFromDto(ElectricianMasterDto electricianDto);
 
-    Reshaper reshaperFromDto(ReshaperDto reshaperDto);
+    Reshaper reshaperFromDto(ReshaperMasterDto reshaperDto);
 
-    Painter painterFromDto(PainterDto painterDto);
+    Painter painterFromDto(PainterMasterDto painterDto);
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.senla.carservice.entity.master;
 
 
+import com.google.gson.annotations.Expose;
 import com.senla.carservice.util.calendar.Calendar;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public abstract class AbstractMaster {
     @GeneratedValue
     private UUID id;
     @Version
+    @Expose
     private Long version;
     @Embedded
     private Calendar calendar;
@@ -27,7 +29,6 @@ public abstract class AbstractMaster {
     private Speciality speciality;
 
     public AbstractMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
-        this.id = UUID.randomUUID();
         this.fullName = fullName;
         this.dailyPayment = dailyPayment;
         this.calendar = calendar;

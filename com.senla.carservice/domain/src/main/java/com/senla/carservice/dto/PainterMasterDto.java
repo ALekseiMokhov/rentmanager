@@ -4,7 +4,7 @@ import com.senla.carservice.util.calendar.Calendar;
 import lombok.Data;
 
 @Data
-public class ElectricianDto {
+public class PainterMasterDto implements GenericMasterDto {
     private String id;
     private Calendar calendar;
     private String fullName;

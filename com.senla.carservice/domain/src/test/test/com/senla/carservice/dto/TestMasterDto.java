@@ -20,7 +20,7 @@ public class TestMasterDto {
         master.setDailyPayment(21.5);
         master.setSpeciality(Speciality.MECHANIC);
         /*when*/
-        MechanicDto masterDto = MasterMapper.INSTANCE.mechanicToDto((Mechanic) master);
+        MechanicMasterDto masterDto = MasterMapper.INSTANCE.mechanicToDto((Mechanic) master);
         /*then*/
         Assertions.assertNotNull(masterDto);
         Assertions.assertEquals("MECHANIC", masterDto.getSpeciality());
@@ -38,7 +38,7 @@ public class TestMasterDto {
         master.setDailyPayment(19.5);
         master.setSpeciality(Speciality.ELECTRICIAN);
         /*when*/
-        ElectricianDto electricianDto = MasterMapper.INSTANCE.electricianToDto((Electrician) master);
+        ElectricianMasterDto electricianDto = MasterMapper.INSTANCE.electricianToDto((Electrician) master);
         /*then*/
         Assertions.assertNotNull(electricianDto);
         Assertions.assertEquals("ELECTRICIAN", electricianDto.getSpeciality());
@@ -49,7 +49,7 @@ public class TestMasterDto {
     @Test
     void shouldMapPainterDtoToPainter() {
         /*given*/
-        PainterDto painterDto = new PainterDto();
+        PainterMasterDto painterDto = new PainterMasterDto();
         painterDto.setId(UUID.randomUUID().toString());
         painterDto.setCalendar(new Calendar());
         painterDto.setFullName("Basiliy");

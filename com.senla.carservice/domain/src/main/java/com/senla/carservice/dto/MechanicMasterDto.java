@@ -4,10 +4,12 @@ import com.senla.carservice.util.calendar.Calendar;
 import lombok.Data;
 
 @Data
-public class ReshaperDto {
+public class MechanicMasterDto implements GenericMasterDto {
     private String id;
     private Calendar calendar;
     private String fullName;
     private double dailyPayment;
     private String speciality;
+
+
 }

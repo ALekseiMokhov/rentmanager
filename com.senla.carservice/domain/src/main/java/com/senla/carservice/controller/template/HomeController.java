@@ -7,7 +7,7 @@ public class HomeController {
    /* @Autowired
     private PlaceRestController placeController;
     @Autowired
-    private MasterController masterController;
+    private MasterRestController masterController;
     @Autowired
     private OrderController orderController;
 

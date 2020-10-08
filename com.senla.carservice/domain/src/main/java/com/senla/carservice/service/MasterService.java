@@ -27,7 +27,8 @@ public class MasterService implements IMasterService {
     public void saveMaster(AbstractMaster master) {
         if (this.repository.getById(master.getId()) != null) {
             this.repository.update(master);
-        } else this.repository.save(master);
+        } else {this.repository.save(master);
+        }
 
     }
 

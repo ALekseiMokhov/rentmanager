@@ -37,7 +37,7 @@ public class PlaceRestController {
     }
 
     @GetMapping("/date/{date}")
-    public List<PlaceDto> getFreePlacesForDate(@PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
+    public List<PlaceDto> getFreePlacesForDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return this.placeService.getFreePlacesForDate(date).stream()
                 .map(p -> PlaceMapper.INSTANCE.placeToDto(p))
                 .collect(Collectors.toList());
@@ -55,17 +55,17 @@ public class PlaceRestController {
     }
 
     @GetMapping("/isSet/{id}/{date}")
-    public boolean isPlaceSetForDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
+    public boolean isPlaceSetForDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return this.placeService.isPlaceSetForDate(id, date);
     }
 
     @PatchMapping("/book/{id}/{date}")
-    public void setPlaceForDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
+    public void setPlaceForDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         this.placeService.setPlaceForDate(id, date);
     }
 
     @PatchMapping("/unbook/{id}/{date}")
-    public void setPlaceFree(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate date) {
+    public void setPlaceFree(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         this.placeService.setPlaceFree(id, date);
     }
 
@@ -77,16 +77,16 @@ public class PlaceRestController {
     }
 
     @GetMapping("/place/{date}")
-    public Place getFreePlace(LocalDate date) {
+    public Place getFreePlace(@PathVariable @DateTimeFormat LocalDate date) {
         return this.placeService.getFreePlace(date);
     }
 
-    @GetMapping("/place/{id}")
+    @GetMapping("/{id}")
     public Place getPlaceById(@PathVariable UUID id) {
         return this.placeService.getPlaceById(id);
     }
 
-    @DeleteMapping("/place/{id}")
+    @DeleteMapping("/{id}")
     public void deletePlace(@PathVariable UUID id) {
         this.placeService.deletePlace(id);
     }
