@@ -9,7 +9,7 @@ public class HomeController {
     @Autowired
     private MasterRestController masterController;
     @Autowired
-    private OrderController orderController;
+    private OrderRestController orderController;
 
     @GetMapping
     public String printHomePage(ModelMap model) {

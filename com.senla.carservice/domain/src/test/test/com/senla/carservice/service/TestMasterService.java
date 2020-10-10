@@ -1,6 +1,7 @@
 package com.senla.carservice.service;
 
-import com.senla.carservice.entity.master.*;
+import com.senla.carservice.entity.master.Master;
+import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.repository.jpa.MasterJpaRepository;
 import com.senla.carservice.util.calendar.Calendar;
@@ -27,21 +28,21 @@ class TestMasterService {
             = Mockito.mock(MasterJpaRepository.class);
     @InjectMocks
     private MasterService masterService;
-    private AbstractMaster testMechanic;
-    private AbstractMaster secondReshaper;
-    private AbstractMaster testReshaper;
-    private AbstractMaster testElectrician;
-    private AbstractMaster testPainter;
-    private final List<AbstractMaster> masterList = new ArrayList<>();
+    private Master testMechanic;
+    private Master secondReshaper;
+    private Master testReshaper;
+    private Master testElectrician;
+    private Master testPainter;
+    private final List<Master> masterList = new ArrayList<>();
     private UUID id;
 
     @BeforeEach
     void init() {
-        testMechanic = new Mechanic("Vasili", 3.4, new Calendar(), Speciality.MECHANIC);
-        secondReshaper = new Mechanic("Yakov", 5.9, new Calendar(), Speciality.RESHAPER);
-        testReshaper = new Reshaper("Sergei", 3.6, new Calendar(), Speciality.RESHAPER);
-        testElectrician = new Electrician("Ivan", 2.5, new Calendar(), Speciality.ELECTRICIAN);
-        testPainter = new Painter("Evgeny", 2.9, new Calendar(), Speciality.PAINTER);
+        testMechanic = new Master("Vasili", 3.4, new Calendar(), Speciality.MECHANIC);
+        secondReshaper = new Master("Yakov", 5.9, new Calendar(), Speciality.RESHAPER);
+        testReshaper = new Master("Sergei", 3.6, new Calendar(), Speciality.RESHAPER);
+        testElectrician = new Master("Ivan", 2.5, new Calendar(), Speciality.ELECTRICIAN);
+        testPainter = new Master("Evgeny", 2.9, new Calendar(), Speciality.PAINTER);
         id = testMechanic.getId();
 
         masterList.add(testMechanic);
@@ -95,7 +96,7 @@ class TestMasterService {
 
     @Test
     void givenNameAndSpecialityShouldFIndMaster() {
-        AbstractMaster master = this.masterService.getByNameAndSpeciality("Evgeny", Speciality.PAINTER);
+        Master master = this.masterService.getByNameAndSpeciality("Evgeny", Speciality.PAINTER);
 
         Assertions.assertEquals(this.testPainter, master);
     }
@@ -121,7 +122,7 @@ class TestMasterService {
 
     @Test
     void shouldGetMastersSortedByAlphabet() {
-        List<AbstractMaster> masters = this.masterService.getMastersByAlphabet();
+        List<Master> masters = this.masterService.getMastersByAlphabet();
         Assertions.assertEquals("Sergei", masters.get(2).getFullName());
     }
 
@@ -129,7 +130,7 @@ class TestMasterService {
     void shouldGetAllFreeMasters() {
         testMechanic.getCalendar().setDateForBooking(LocalDate.now());
 
-        List<AbstractMaster> masters = this.masterService.getFreeMasters(LocalDate.now());
+        List<Master> masters = this.masterService.getFreeMasters(LocalDate.now());
 
         Assertions.assertEquals(4, masters.size());
 
@@ -137,7 +138,7 @@ class TestMasterService {
 
     @Test
     void givenSpecialityShouldGetChosenMasters() {
-        List<AbstractMaster> masters = this.masterService.getMastersBySpeciality(Speciality.RESHAPER);
+        List<Master> masters = this.masterService.getMastersBySpeciality(Speciality.RESHAPER);
 
         Assertions.assertEquals(2, masters.size());
 

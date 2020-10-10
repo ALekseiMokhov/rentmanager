@@ -36,25 +36,25 @@ public class PlaceRestController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/date/{date}")
+    @GetMapping("/all/{date}")
     public List<PlaceDto> getFreePlacesForDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return this.placeService.getFreePlacesForDate(date).stream()
                 .map(p -> PlaceMapper.INSTANCE.placeToDto(p))
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/add/{quantity}")
+    @PostMapping("/{quantity}")
     public void addPlaces(@PathVariable("quantity") int quantity) {
         this.placeService.addPlaces(quantity);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public void addPlace() {
         this.placeService.addPlace();
 
     }
 
-    @GetMapping("/isSet/{id}/{date}")
+    @GetMapping("/is-set/{id}/{date}")
     public boolean isPlaceSetForDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return this.placeService.isPlaceSetForDate(id, date);
     }
@@ -64,19 +64,19 @@ public class PlaceRestController {
         this.placeService.setPlaceForDate(id, date);
     }
 
-    @PatchMapping("/unbook/{id}/{date}")
+    @PatchMapping("/un-book/{id}/{date}")
     public void setPlaceFree(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         this.placeService.setPlaceFree(id, date);
     }
 
-    @PutMapping("/save/{json}")
+    @PutMapping("/{json}")
     public void savePlace(@PathVariable String json) {
         Gson gson = new GsonBuilder().create();
         PlaceDto placeDto = gson.fromJson(json, PlaceDto.class);
         this.placeService.savePlace(PlaceMapper.INSTANCE.dtoToPlace(placeDto));
     }
 
-    @GetMapping("/place/{date}")
+    @GetMapping("/free/{date}")
     public Place getFreePlace(@PathVariable @DateTimeFormat LocalDate date) {
         return this.placeService.getFreePlace(date);
     }

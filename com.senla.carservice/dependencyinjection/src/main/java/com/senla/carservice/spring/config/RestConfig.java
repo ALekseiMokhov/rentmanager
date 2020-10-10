@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @EnableWebMvc
 /*@Profile("rest")*/
 @PropertySource("classpath:application.properties")
-@ComponentScan("com.senla.carservice")
+@ComponentScan({"com.senla.carservice.controller"})
 public class RestConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
@@ -37,11 +37,5 @@ public class RestConfig implements WebMvcConfigurer {
     public ViewResolver viewResolver() {
         return new BeanNameViewResolver();
     }
-
-  /*  @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.enableContentNegotiation(new MappingJackson2JsonView());
-
-    }*/
 
 }

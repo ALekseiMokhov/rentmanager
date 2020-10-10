@@ -21,7 +21,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"com.senla.carservice"})
+@ComponentScan(basePackages = {"com.senla.carservice.repository",
+                               "com.senla.carservice.service",
+                               "com.senla.carservice.dto"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableSpringConfigured

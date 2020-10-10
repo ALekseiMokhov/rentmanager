@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.AbstractMaster;
+import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -39,9 +39,9 @@ public class OrderService implements IOrderService {
 
     @Transactional
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set<Speciality> required) {
-        List<AbstractMaster> availableMasters = new ArrayList<>();
+        List<Master> availableMasters = new ArrayList<>();
         for (Speciality speciality : required) {
-            AbstractMaster master = masterService.getFreeBySpeciality(startOfExecution, speciality);
+           Master master = masterService.getFreeBySpeciality(startOfExecution, speciality);
             availableMasters.add(master);
             masterService.setMasterForDate(master.getId(), startOfExecution);
 
@@ -84,11 +84,11 @@ public class OrderService implements IOrderService {
         Place oldPlace = order.getPlace();
         Place newPlace = this.placeService.getFreePlace(newDate);
 
-        List<AbstractMaster> oldMasters = order.getMasters();
+        List<Master> oldMasters = order.getMasters();
         Set<Speciality> required = oldMasters.stream()
                 .map(m -> m.getSpeciality())
                 .collect(Collectors.toSet());
-        List<AbstractMaster> newMasters = new ArrayList<>();
+        List<Master> newMasters = new ArrayList<>();
 
         this.placeService.setPlaceFree(oldPlace.getId(), oldDate);
 
@@ -100,7 +100,7 @@ public class OrderService implements IOrderService {
                         .deleteBookedDate(oldDate));
 
         for (Speciality speciality : required) {
-            AbstractMaster master = masterService.getFreeBySpeciality(newDate, speciality);
+            Master master = masterService.getFreeBySpeciality(newDate, speciality);
             newMasters.add(master);
             masterService.setMasterForDate(master.getId(), newDate);
 
@@ -113,10 +113,10 @@ public class OrderService implements IOrderService {
 
     public void setNewMasters(UUID id) {
         Order order = this.repository.getById(id);
-        List<AbstractMaster> newMasters = new ArrayList<>();
+        List<Master> newMasters = new ArrayList<>();
 
-        for (AbstractMaster master : order.getMasters()) {
-            AbstractMaster master1 = this.masterService
+        for (Master master : order.getMasters()) {
+            Master master1 = this.masterService
                     .getFreeBySpeciality(order.getStartOfExecution(), master.getSpeciality());
             this.masterService.setMasterForDate(master1.getId(), order.getStartOfExecution());
             newMasters.add(master1);

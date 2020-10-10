@@ -1,7 +1,7 @@
 package com.senla.carservice.service.interfaces;
 
 
-import com.senla.carservice.entity.master.AbstractMaster;
+import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.UUID;
 @Service
 
 public interface IMasterService {
-    void saveMaster(AbstractMaster master);
+    void saveMaster(Master master);
 
     void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality);
 
     void removeMaster(UUID id);
 
-    AbstractMaster getById(UUID id);
+    Master getById(UUID id);
 
     boolean isBookedForDate(UUID id, LocalDate date);
 
@@ -28,19 +28,19 @@ public interface IMasterService {
 
     void setBookedDateFree(UUID id, LocalDate date);
 
-    AbstractMaster getByNameAndSpeciality(String name, Speciality speciality);
+    Master getByNameAndSpeciality(String name, Speciality speciality);
 
-    AbstractMaster getBySpeciality(Speciality speciality);
+    Master getBySpeciality(Speciality speciality);
 
-    AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality);
+    Master getFreeBySpeciality(LocalDate date, Speciality speciality);
 
     Set<Speciality> getAvailableSpecialities();
 
-    List<AbstractMaster> getMastersByAlphabet();
+    List<Master> getMastersByAlphabet();
 
-    List<AbstractMaster> getFreeMasters(LocalDate date);
+    List<Master> getFreeMasters(LocalDate date);
 
-    List<AbstractMaster> getMastersBySpeciality(Speciality speciality);
+    List<Master> getMastersBySpeciality(Speciality speciality);
 
     void deleteMaster(UUID id);
 }

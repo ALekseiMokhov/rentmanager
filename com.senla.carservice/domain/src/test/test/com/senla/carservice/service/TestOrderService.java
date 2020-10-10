@@ -1,9 +1,7 @@
 package com.senla.carservice.service;
 
 import com.senla.carservice.entity.garage.Place;
-import com.senla.carservice.entity.master.AbstractMaster;
-import com.senla.carservice.entity.master.Painter;
-import com.senla.carservice.entity.master.Reshaper;
+import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -39,7 +37,7 @@ class TestOrderService {
     private OrderService orderService;
 
     private Place place;
-    private AbstractMaster reshaper;
+    private Master reshaper;
     private Set<Speciality> required;
     private UUID id;
     private UUID idExp;
@@ -48,9 +46,9 @@ class TestOrderService {
     void init() {
 
         place = new Place(new Calendar());
-        reshaper = new Reshaper("Sergei", 3.6, new Calendar(), Speciality.RESHAPER);
-        AbstractMaster painter = new Painter("Andrew", 22, new Calendar(), Speciality.PAINTER);
-        List<AbstractMaster> masterList = new ArrayList<>();
+        reshaper = new Master("Sergei", 3.6, new Calendar(), Speciality.RESHAPER);
+        Master painter = new Master("Andrew", 22, new Calendar(), Speciality.PAINTER);
+        List<Master> masterList = new ArrayList<>();
         masterList.add(reshaper);
 
         List<Order> orderList = new ArrayList<>();
@@ -60,7 +58,7 @@ class TestOrderService {
         Order testOrder = new Order(LocalDate.now(), LocalDate.of(2020, 9, 23), place, masterList);
         id = testOrder.getId();
 
-        List<AbstractMaster> expensiveMasters = new ArrayList<>();
+        List<Master> expensiveMasters = new ArrayList<>();
         expensiveMasters.add(reshaper);
         expensiveMasters.add(painter);
 

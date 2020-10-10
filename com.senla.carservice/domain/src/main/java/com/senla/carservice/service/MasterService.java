@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 public class MasterService implements IMasterService {
     @Autowired
     @Qualifier("masterJpaRepository")
-    private IGenericRepository<AbstractMaster> repository;
+    private IGenericRepository<Master> repository;
 
     public MasterService() {
     }
 
-    public void saveMaster(AbstractMaster master) {
+    public void saveMaster(Master master) {
         if (this.repository.getById(master.getId()) != null) {
             this.repository.update(master);
         } else {this.repository.save(master);
@@ -36,26 +36,8 @@ public class MasterService implements IMasterService {
     @Override
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
 
-        AbstractMaster master;
+        Master  master = new Master(fullName, dailyPayment, calendar, speciality);
 
-        switch (speciality) {
-            case RESHAPER -> {
-                master = new Reshaper(fullName, dailyPayment, calendar, speciality);
-            }
-            case ELECTRICIAN -> {
-                master = new Electrician(fullName, dailyPayment, calendar, speciality);
-            }
-            case PAINTER -> {
-                master = new Painter(fullName, dailyPayment, calendar, speciality);
-            }
-            case MECHANIC -> {
-                master = new Mechanic(fullName, dailyPayment, calendar, speciality);
-            }
-            default -> {
-                throw new NoSuchElementException("there is no suitable speciality!");
-            }
-
-        }
         this.repository.save(master);
 
     }
@@ -67,13 +49,13 @@ public class MasterService implements IMasterService {
     }
 
     @Override
-    public AbstractMaster getById(UUID id) {
+    public Master getById(UUID id) {
         return this.repository.getById(id);
     }
 
 
     public boolean isBookedForDate(UUID id, LocalDate date) {
-        AbstractMaster master = this.repository.getById(id);
+        Master master = this.repository.getById(id);
 
 
         return master.getCalendar().isDateBooked(date);
@@ -81,7 +63,7 @@ public class MasterService implements IMasterService {
 
 
     public void setMasterForDate(UUID id, LocalDate date) {
-        AbstractMaster master = this.repository.getById(id);
+        Master master = this.repository.getById(id);
         if (master.getCalendar() == null) {
             master.setCalendar(new Calendar());
         }
@@ -90,11 +72,11 @@ public class MasterService implements IMasterService {
     }
 
     public void setBookedDateFree(UUID id, LocalDate date) {
-        AbstractMaster master = this.repository.getById(id);
+        Master master = this.repository.getById(id);
         master.getCalendar().deleteBookedDate(date);
     }
 
-    public AbstractMaster getByNameAndSpeciality(String name, Speciality speciality) {
+    public Master getByNameAndSpeciality(String name, Speciality speciality) {
 
         return this.repository.findAll()
                 .stream()
@@ -106,7 +88,7 @@ public class MasterService implements IMasterService {
 
     }
 
-    public AbstractMaster getBySpeciality(Speciality speciality) {
+    public Master getBySpeciality(Speciality speciality) {
 
         return this.repository.findAll()
                 .stream()
@@ -120,7 +102,7 @@ public class MasterService implements IMasterService {
         return Set.of(Speciality.values());
     }
 
-    public AbstractMaster getFreeBySpeciality(LocalDate date, Speciality speciality) {
+    public Master getFreeBySpeciality(LocalDate date, Speciality speciality) {
 
         return this.repository.findAll()
                 .stream()
@@ -133,22 +115,22 @@ public class MasterService implements IMasterService {
     }
 
 
-    public List<AbstractMaster> getMastersByAlphabet() {
-        Comparator<AbstractMaster> comparator = Comparator.comparing(m -> m.getFullName());
-        List<AbstractMaster>
+    public List<Master> getMastersByAlphabet() {
+        Comparator<Master> comparator = Comparator.comparing(m -> m.getFullName());
+        List<Master>
                 sortedList = this.repository.findAll();
         Collections.sort(sortedList, comparator);
         return sortedList;
     }
 
-    public List<AbstractMaster> getFreeMasters(LocalDate date) {
-        List<AbstractMaster> res = this.repository.findAll();
+    public List<Master> getFreeMasters(LocalDate date) {
+        List<Master> res = this.repository.findAll();
         return res.stream()
                 .filter((m) -> m.getCalendar().isDateBooked(date) == false)
                 .collect(Collectors.toList());
     }
 
-    public List<AbstractMaster> getMastersBySpeciality(Speciality speciality) {
+    public List<Master> getMastersBySpeciality(Speciality speciality) {
 
         return this.repository.findAll().stream()
                 .filter(((m) -> (m).getSpeciality() == speciality))
