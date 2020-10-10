@@ -1,6 +1,9 @@
 package com.senla.carservice.service;
 
 
+import com.senla.carservice.dto.mappers.MasterMapper;
+import com.senla.carservice.dto.mappers.OrderMapper;
+import com.senla.carservice.dto.mappers.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
@@ -31,6 +34,12 @@ public class OrderService implements IOrderService {
     @Autowired
     @Qualifier("placeService")
     private IPlaceService placeService;
+    @Autowired
+    private PlaceMapper placeMapper;
+    @Autowired
+    private MasterMapper masterMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
 
     public OrderService() {
@@ -41,12 +50,12 @@ public class OrderService implements IOrderService {
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set<Speciality> required) {
         List<Master> availableMasters = new ArrayList<>();
         for (Speciality speciality : required) {
-           Master master = masterService.getFreeBySpeciality(startOfExecution, speciality);
+            Master master = masterService.getFreeBySpeciality(startOfExecution, speciality);
             availableMasters.add(master);
             masterService.setMasterForDate(master.getId(), startOfExecution);
 
         }
-        Place place = this.placeService.getFreePlace(startOfExecution);
+        Place place = this.placeMapper.dtoToPlace(this.placeService.getFreePlace(startOfExecution));
         this.placeService.setPlaceForDate(place.getId(), startOfExecution);
         Order order = new Order(date, startOfExecution, place, availableMasters);
         order.setStatus(OrderStatus.MANAGED);
@@ -82,7 +91,7 @@ public class OrderService implements IOrderService {
         LocalDate oldDate = order.getStartOfExecution();
 
         Place oldPlace = order.getPlace();
-        Place newPlace = this.placeService.getFreePlace(newDate);
+        Place newPlace = this.placeMapper.dtoToPlace(this.placeService.getFreePlace(newDate));
 
         List<Master> oldMasters = order.getMasters();
         Set<Speciality> required = oldMasters.stream()
@@ -139,7 +148,7 @@ public class OrderService implements IOrderService {
 
                 Place place = order.getPlace();
                 this.placeService.setPlaceFree(place.getId(), order.getStartOfExecution());
-                this.placeService.savePlace(place);
+                this.placeService.savePlace(this.placeMapper.placeToDto(place));
 
 
             }

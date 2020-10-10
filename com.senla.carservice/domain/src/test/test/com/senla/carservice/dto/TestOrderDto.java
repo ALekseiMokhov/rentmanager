@@ -3,16 +3,26 @@ package com.senla.carservice.dto;
 import com.senla.carservice.dto.mappers.OrderMapper;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
+import com.senla.carservice.spring.TestConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = TestConfig.class)
 public class TestOrderDto {
-    LocalDate start;
-    LocalDate finish;
+    @Autowired
+    private OrderMapper mapper;
+
+    private LocalDate start;
+    private LocalDate finish;
 
     @BeforeEach
     void init() {
@@ -31,7 +41,7 @@ public class TestOrderDto {
         order.setStatus(OrderStatus.COMPLETED);
 
         /*when*/
-        OrderDto dto = OrderMapper.INSTANCE.dtoFromOrder(order);
+        OrderDto dto = mapper.dtoFromOrder(order);
 
         /*then*/
         Assertions.assertNotNull(dto);
@@ -52,7 +62,7 @@ public class TestOrderDto {
         dto.setStatus(String.valueOf(OrderStatus.COMPLETED));
 
         /*when*/
-        Order order = OrderMapper.INSTANCE.orderFromDto(dto);
+        Order order = mapper.orderFromDto(dto);
 
         /*then*/
         Assertions.assertNotNull(order);

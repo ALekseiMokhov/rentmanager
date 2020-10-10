@@ -7,14 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name = "masters")
-public  class Master {
+public class Master {
     @Id
     @GeneratedValue
     private UUID id;

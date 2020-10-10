@@ -3,18 +3,19 @@ package com.senla.carservice.dto.mappers;
 import com.senla.carservice.dto.PlaceDto;
 import com.senla.carservice.entity.garage.Place;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
-import java.util.Collection;
 import java.util.List;
 
-@Mapper(uses = UuidMapper.class)
+@Mapper(uses = UuidMapper.class, componentModel = "spring")
+
 public interface PlaceMapper {
-    PlaceMapper INSTANCE = Mappers.getMapper(PlaceMapper.class);
+    /*PlaceMapper INSTANCE = Mappers.getMapper(PlaceMapper.class);*/
 
     PlaceDto placeToDto(Place place);
 
     Place dtoToPlace(PlaceDto placeDto);
 
-    Collection<PlaceDto> dtoList
+    List<PlaceDto> placesListToDto(List<Place> places);
+
+    List<Place> dtoListToPlaces(List<PlaceDto> dto);
 }

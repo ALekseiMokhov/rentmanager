@@ -1,22 +1,19 @@
 package com.senla.carservice.controller;
 
 
-import com.google.gson.*;
-import com.senla.carservice.dto.*;
-import com.senla.carservice.dto.mappers.MasterMapper;
-import com.senla.carservice.entity.master.AbstractMaster;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.service.interfaces.IMasterService;
-import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/masters")
@@ -62,20 +59,21 @@ public class MasterRestController {
 
     }*/
     @PostMapping("/")
-    public void saveMaster(@RequestBody Master master){
+    public void saveMaster(@RequestBody Master master) {
 
     }
+
     @PostMapping("/{fullName}/{dailyPayment}/{speciality}")
     public void addMaster(@PathVariable String fullName,
                           @PathVariable double dailyPayment, @PathVariable String speciality) {
-
+/*
                 MasterDto dto = new MasterDto();
                 dto.setCalendar(new Calendar());
                 dto.setDailyPayment(dailyPayment);
                 dto.setFullName(fullName);
                 dto.setSpeciality(speciality);
                 dto.setId(String.valueOf(UUID.randomUUID()));
-                this.masterService.saveMaster(MasterMapper.INSTANCE.masterFromDto(dto));
+                this.masterService.saveMaster(MasterMapper.INSTANCE.masterFromDto(dto));*/
 
 
     }
@@ -105,11 +103,11 @@ public class MasterRestController {
         this.masterService.isBookedForDate(id, date);
     }
 
-    @GetMapping("/master/{name}/{speciality}")
+/*    @GetMapping("/master/{name}/{speciality}")
     public MasterDto getByNameAndSpeciality(@PathVariable String name,
                                                    @PathVariable Speciality speciality) {
         return convertMasterToDto(this.masterService.getByNameAndSpeciality(name, speciality));
-    }
+    }*/
 
    /* @GetMapping("/free/{date}/{speciality}")
     public MasterDto getFreeBySpeciality(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date, @PathVariable Speciality speciality) {
@@ -136,16 +134,16 @@ public class MasterRestController {
                 .collect(Collectors.toList());
     }*/
 
- /*   @GetMapping("/specialities/{speciality}")*/
+    /*   @GetMapping("/specialities/{speciality}")*/
     /*TODO */
 /*    public List<MasterDto> getMastersBySpeciality(@PathVariable Speciality speciality) {
         return this.masterService.getMastersBySpeciality(speciality).stream()
                 .map(m -> MasterToDto(m))
                 .collect(Collectors.toList());*/
-    }
+}
 
-    @DeleteMapping("/{id}")
+/*    @DeleteMapping("/{id}")
     public void deleteMaster(@PathVariable UUID id) {
         this.masterService.deleteMaster(id);
-    }
+    }*/
 

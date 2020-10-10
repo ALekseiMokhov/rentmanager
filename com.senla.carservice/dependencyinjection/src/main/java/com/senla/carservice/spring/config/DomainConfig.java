@@ -22,12 +22,12 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = {"com.senla.carservice.repository",
-                               "com.senla.carservice.service",
-                               "com.senla.carservice.dto"})
+        "com.senla.carservice.service",
+        "com.senla.carservice.dto"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableSpringConfigured
-public class PersistenceConfig {
+public class DomainConfig {
     @Autowired
     private ConfigurableEnvironment env;
 

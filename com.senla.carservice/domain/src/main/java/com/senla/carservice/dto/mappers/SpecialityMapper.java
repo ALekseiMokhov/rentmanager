@@ -1,7 +1,9 @@
 package com.senla.carservice.dto.mappers;
 
 import com.senla.carservice.entity.master.Speciality;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SpecialityMapper {
 
     public Speciality asSpeciality(String spec) {

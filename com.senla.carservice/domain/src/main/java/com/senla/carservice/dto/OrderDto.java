@@ -6,7 +6,9 @@ import lombok.Data;
 public class OrderDto {
     private String id;
     private String status;
+
     private String dateBooked;
+
     private String startOfExecution;
     private String finishOfExecution;
 }

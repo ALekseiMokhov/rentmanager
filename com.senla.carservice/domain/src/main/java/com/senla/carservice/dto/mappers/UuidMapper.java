@@ -1,9 +1,11 @@
 package com.senla.carservice.dto.mappers;
 
 import org.springframework.expression.ParseException;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class UuidMapper {
 
     public String asString(UUID id) {

@@ -2,14 +2,26 @@ package com.senla.carservice.dto;
 
 
 import com.senla.carservice.dto.mappers.MasterMapper;
-import com.senla.carservice.entity.master.*;
+import com.senla.carservice.entity.master.Master;
+import com.senla.carservice.entity.master.Speciality;
+import com.senla.carservice.spring.TestConfig;
 import com.senla.carservice.util.calendar.Calendar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.UUID;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = TestConfig.class)
 public class TestMasterDto {
+
+    @Autowired
+    private MasterMapper mapper;
+
     @Test
     void shouldMapMechanicToDto() {
         /*given*/
@@ -20,7 +32,7 @@ public class TestMasterDto {
         master.setDailyPayment(21.5);
         master.setSpeciality(Speciality.MECHANIC);
         /*when*/
-      MasterDto masterDto = MasterMapper.INSTANCE.masterToDto( master);
+        MasterDto masterDto = this.mapper.masterToDto(master);
         /*then*/
         Assertions.assertNotNull(masterDto);
         Assertions.assertEquals("MECHANIC", masterDto.getSpeciality());
@@ -38,27 +50,27 @@ public class TestMasterDto {
         master.setDailyPayment(19.5);
         master.setSpeciality(Speciality.ELECTRICIAN);
         /*when*/
-       MasterDto electricianDto = MasterMapper.INSTANCE.masterToDto(master);
+        MasterDto masterDto = this.mapper.masterToDto(master);
         /*then*/
-        Assertions.assertNotNull(electricianDto);
-        Assertions.assertEquals("ELECTRICIAN", electricianDto.getSpeciality());
-        Assertions.assertEquals(master.getId().toString(), electricianDto.getId());
-        Assertions.assertEquals(master.getFullName(), electricianDto.getFullName());
+        Assertions.assertNotNull(masterDto);
+        Assertions.assertEquals("ELECTRICIAN", masterDto.getSpeciality());
+        Assertions.assertEquals(master.getId().toString(), masterDto.getId());
+        Assertions.assertEquals(master.getFullName(), masterDto.getFullName());
     }
 
     @Test
     void shouldMapPainterDtoToPainter() {
         /*given*/
-        MasterDto painterDto = new MasterDto();
-        painterDto.setId(UUID.randomUUID().toString());
-        painterDto.setCalendar(new Calendar());
-        painterDto.setFullName("Basiliy");
-        painterDto.setDailyPayment(33.1);
-        painterDto.setSpeciality("PAINTER");
+        MasterDto masterDto = new MasterDto();
+        masterDto.setId(UUID.randomUUID().toString());
+        masterDto.setCalendar(new Calendar());
+        masterDto.setFullName("Basiliy");
+        masterDto.setDailyPayment(33.1);
+        masterDto.setSpeciality("PAINTER");
         /*when*/
-        Master painter = MasterMapper.INSTANCE.masterFromDto(painterDto);
+        Master painter = mapper.masterFromDto(masterDto);
         /*then*/
-        Assertions.assertEquals(painter.getFullName(), painterDto.getFullName());
-        Assertions.assertEquals(painter.getId().toString(), painterDto.getId());
+        Assertions.assertEquals(painter.getFullName(), masterDto.getFullName());
+        Assertions.assertEquals(painter.getId().toString(), masterDto.getId());
     }
 }

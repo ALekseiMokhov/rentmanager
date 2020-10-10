@@ -6,7 +6,9 @@ import com.senla.carservice.entity.master.Master;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {UuidMapper.class, SpecialityMapper.class})
+import java.util.List;
+
+@Mapper(uses = {UuidMapper.class, SpecialityMapper.class}, componentModel = "spring")
 
 public interface MasterMapper {
     MasterMapper INSTANCE = Mappers.getMapper(MasterMapper.class);
@@ -17,6 +19,9 @@ public interface MasterMapper {
     Master masterFromDto(MasterDto masterDto);
 
 
+    List<MasterDto> mastersToDto(List<Master> masters);
+
+    List<Master> dtoToMasters(List<MasterDto> masterdto);
 
 
 }

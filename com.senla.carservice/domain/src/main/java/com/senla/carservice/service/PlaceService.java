@@ -1,10 +1,13 @@
 package com.senla.carservice.service;
 
 
+import com.senla.carservice.dto.PlaceDto;
+import com.senla.carservice.dto.mappers.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.service.interfaces.IPlaceService;
 import com.senla.carservice.util.calendar.Calendar;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +20,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 @Service
 @Slf4j
 @Transactional
@@ -24,14 +28,13 @@ public class PlaceService implements IPlaceService {
     @Autowired
     @Qualifier("placeJpaRepository")
     private IGenericRepository<Place> repository;
+    @Autowired
+    private PlaceMapper placeMapper;
 
 
-    public PlaceService() {
-
-    }
-
-    public List<Place> getPlaces() {
-        return this.repository.findAll();
+    public List<PlaceDto> getPlaces() {
+        return this.placeMapper.placesListToDto(
+                this.repository.findAll());
     }
 
 
@@ -42,11 +45,11 @@ public class PlaceService implements IPlaceService {
     }
 
     @Transactional
-    public List<Place> getFreePlacesForDate(LocalDate date) {
+    public List<PlaceDto> getFreePlacesForDate(LocalDate date) {
 
-        return this.repository.findAll().stream()
+        return this.placeMapper.placesListToDto(this.repository.findAll().stream()
                 .filter(p -> p.getCalendar().isDateBooked(date) == false)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Transactional
@@ -87,20 +90,20 @@ public class PlaceService implements IPlaceService {
     }
 
     @Transactional
-    public Place getFreePlace(LocalDate date) {
+    public PlaceDto getFreePlace(LocalDate date) {
         List<Place> res = this.repository.findAll();
         for (Place place : res) {
             if (!place.getCalendar()
                     .isDateBooked(date)) {
-                return place;
+                return this.placeMapper.placeToDto(place);
             }
 
         }
         throw new NoSuchElementException("There is no free place for chosen date!");
     }
 
-    public Place getPlaceById(UUID id) {
-        return this.repository.getById(id);
+    public PlaceDto getPlaceById(UUID id) {
+        return this.placeMapper.placeToDto(this.repository.getById(id));
 
     }
 
@@ -111,7 +114,8 @@ public class PlaceService implements IPlaceService {
     }
 
     @Override
-    public void savePlace(Place place) {
+    public void savePlace(PlaceDto dto) {
+        Place place = this.placeMapper.dtoToPlace(dto);
         if (this.repository.getById(place.getId()) != null) {
             this.repository.update(place);
         } else this.repository.save(place);

@@ -1,7 +1,8 @@
 package com.senla.carservice.service;
 
 
-import com.senla.carservice.entity.master.*;
+import com.senla.carservice.entity.master.Master;
+import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.service.interfaces.IMasterService;
 import com.senla.carservice.util.calendar.Calendar;
@@ -27,7 +28,8 @@ public class MasterService implements IMasterService {
     public void saveMaster(Master master) {
         if (this.repository.getById(master.getId()) != null) {
             this.repository.update(master);
-        } else {this.repository.save(master);
+        } else {
+            this.repository.save(master);
         }
 
     }
@@ -36,7 +38,7 @@ public class MasterService implements IMasterService {
     @Override
     public void addMaster(String fullName, double dailyPayment, Calendar calendar, Speciality speciality) {
 
-        Master  master = new Master(fullName, dailyPayment, calendar, speciality);
+        Master master = new Master(fullName, dailyPayment, calendar, speciality);
 
         this.repository.save(master);
 

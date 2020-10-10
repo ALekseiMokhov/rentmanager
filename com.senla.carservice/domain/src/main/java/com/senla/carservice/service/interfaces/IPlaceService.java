@@ -1,7 +1,7 @@
 package com.senla.carservice.service.interfaces;
 
 
-import com.senla.carservice.entity.garage.Place;
+import com.senla.carservice.dto.PlaceDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,9 +11,9 @@ import java.util.UUID;
 @Service
 
 public interface IPlaceService {
-    List<Place> getPlaces();
+    List<PlaceDto> getPlaces();
 
-    List<Place> getFreePlacesForDate(LocalDate date);
+    List<PlaceDto> getFreePlacesForDate(LocalDate date);
 
     void addPlaces(int i);
 
@@ -25,11 +25,11 @@ public interface IPlaceService {
 
     UUID addPlace();
 
-    Place getFreePlace(LocalDate date);
+    PlaceDto getFreePlace(LocalDate date);
 
-    Place getPlaceById(UUID id);
+    PlaceDto getPlaceById(UUID id);
 
     void deletePlace(UUID id);
 
-    void savePlace(Place place);
+    void savePlace(PlaceDto dto);
 }

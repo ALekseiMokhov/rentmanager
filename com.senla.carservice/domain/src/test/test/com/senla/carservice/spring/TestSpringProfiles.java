@@ -1,6 +1,6 @@
 package com.senla.carservice.spring;
 
-import com.senla.carservice.spring.config.PersistenceConfig;
+import com.senla.carservice.spring.config.DomainConfig;
 import com.senla.carservice.spring.config.RestConfig;
 import com.senla.carservice.spring.config.WebAppInitializer;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes =
-        {WebAppInitializer.class, RestConfig.class, PersistenceConfig.class})
+        {WebAppInitializer.class, RestConfig.class, DomainConfig.class})
 @ActiveProfiles(profiles = "localtest")
 public class TestSpringProfiles {
 
