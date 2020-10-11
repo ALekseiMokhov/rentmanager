@@ -1,5 +1,7 @@
 package com.senla.carservice.spring.config;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.util.Arrays;
+
+@Slf4j
 @Configuration
 @EnableWebMvc
 /*@Profile("rest")*/
@@ -23,7 +28,10 @@ public class RestConfig implements WebMvcConfigurer {
 
     @Autowired
     public RestConfig(ApplicationContext applicationContext) {
+
         this.applicationContext = applicationContext;
+       log.info(String.valueOf(Arrays.asList(applicationContext.getBeanDefinitionNames())));
+
     }
 
     @Bean

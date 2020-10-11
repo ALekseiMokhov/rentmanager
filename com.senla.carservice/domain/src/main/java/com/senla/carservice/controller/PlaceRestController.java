@@ -26,16 +26,16 @@ public class PlaceRestController {
 
     @GetMapping("/")
     public List<PlaceDto> getPlaces() {
-        return this.placeService.getPlaces();
+        return this.placeService.getPlaceDto();
     }
 
-    @GetMapping("/")
+    @GetMapping("/free")
     public List<PlaceDto> getFreePlacesForDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        return this.placeService.getFreePlacesForDate(date);
+        return this.placeService.getFreePlaceDtoForDate(date);
     }
 
-    @PostMapping("/")
-    public void addPlaces(@RequestParam int quantity) {
+    @PostMapping("/{quanity}")
+    public void addPlaces(@PathVariable int quantity) {
         this.placeService.addPlaces(quantity);
     }
 
@@ -67,7 +67,7 @@ public class PlaceRestController {
 
     @GetMapping("/free/{date}")
     public PlaceDto getFreePlace(@PathVariable @DateTimeFormat LocalDate date) {
-        return this.placeService.getFreePlace(date);
+        return this.placeService.getFreePlaceDto(date);
     }
 
     @GetMapping("/{id}")

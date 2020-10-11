@@ -1,6 +1,9 @@
 package com.senla.carservice.service;
 
 
+import com.senla.carservice.dto.MasterDto;
+import com.senla.carservice.dto.OrderDto;
+import com.senla.carservice.dto.PlaceDto;
 import com.senla.carservice.dto.mappers.MasterMapper;
 import com.senla.carservice.dto.mappers.OrderMapper;
 import com.senla.carservice.dto.mappers.PlaceMapper;
@@ -50,12 +53,13 @@ public class OrderService implements IOrderService {
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set<Speciality> required) {
         List<Master> availableMasters = new ArrayList<>();
         for (Speciality speciality : required) {
-            Master master = masterService.getFreeBySpeciality(startOfExecution, speciality);
+            Master master = this.masterMapper.
+                    masterFromDto(masterService.getFreeBySpeciality(startOfExecution, speciality));
             availableMasters.add(master);
             masterService.setMasterForDate(master.getId(), startOfExecution);
 
         }
-        Place place = this.placeMapper.dtoToPlace(this.placeService.getFreePlace(startOfExecution));
+        Place place = this.placeMapper.dtoToPlace(this.placeService.getFreePlaceDto(startOfExecution));
         this.placeService.setPlaceForDate(place.getId(), startOfExecution);
         Order order = new Order(date, startOfExecution, place, availableMasters);
         order.setStatus(OrderStatus.MANAGED);
@@ -66,16 +70,20 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public void saveOrder(OrderDto orderDto, List<MasterDto> masterDtos, PlaceDto placeDto) {
+        Order order = this.orderMapper.orderFromDto(orderDto);
+        order.setMasters(this.masterMapper.dtoToMasters(masterDtos));
+        order.setPlace(this.placeMapper.dtoToPlace(placeDto));
         if (this.repository.getById(order.getId()) != null) {
             this.repository.update(order);
         } else this.repository.save(order);
+        /*TODO check data consistency with masters and place*/
 
     }
 
-    public Order findOrderById(UUID id) {
+    public OrderDto findOrderById(UUID id) {
 
-        return this.repository.getById(id);
+        return this.orderMapper.dtoFromOrder(this.repository.getById(id)) ;
 
     }
 
@@ -91,7 +99,7 @@ public class OrderService implements IOrderService {
         LocalDate oldDate = order.getStartOfExecution();
 
         Place oldPlace = order.getPlace();
-        Place newPlace = this.placeMapper.dtoToPlace(this.placeService.getFreePlace(newDate));
+        Place newPlace = this.placeMapper.dtoToPlace(this.placeService.getFreePlaceDto(newDate));
 
         List<Master> oldMasters = order.getMasters();
         Set<Speciality> required = oldMasters.stream()
@@ -109,7 +117,8 @@ public class OrderService implements IOrderService {
                         .deleteBookedDate(oldDate));
 
         for (Speciality speciality : required) {
-            Master master = masterService.getFreeBySpeciality(newDate, speciality);
+            Master master = this.masterMapper.
+                    masterFromDto(masterService.getFreeBySpeciality(newDate, speciality));
             newMasters.add(master);
             masterService.setMasterForDate(master.getId(), newDate);
 
@@ -125,8 +134,8 @@ public class OrderService implements IOrderService {
         List<Master> newMasters = new ArrayList<>();
 
         for (Master master : order.getMasters()) {
-            Master master1 = this.masterService
-                    .getFreeBySpeciality(order.getStartOfExecution(), master.getSpeciality());
+            Master master1 = this.masterMapper.masterFromDto(this.masterService
+                    .getFreeBySpeciality(order.getStartOfExecution(), master.getSpeciality()));
             this.masterService.setMasterForDate(master1.getId(), order.getStartOfExecution());
             newMasters.add(master1);
 
@@ -144,7 +153,7 @@ public class OrderService implements IOrderService {
                         .forEach(master -> master.getCalendar().deleteBookedDate(order.getStartOfExecution()));
                 order.getMasters()
                         .stream()
-                        .forEach(master -> this.masterService.saveMaster(master));
+                        .forEach(master -> this.masterService.saveMaster(this.masterMapper.masterToDto(master)));
 
                 Place place = order.getPlace();
                 this.placeService.setPlaceFree(place.getId(), order.getStartOfExecution());
@@ -174,29 +183,31 @@ public class OrderService implements IOrderService {
 
     }
 
-    public List<Order> getOrders() {
-        return this.repository.findAll();
+    public List<OrderDto> getOrders() {
+        return this.orderMapper.dtoFromOrders(this.repository.findAll());
     }
 
 
-    public List<Order> getOrdersByPrice(OrderStatus status) {
+    public List<OrderDto> getOrdersByPrice(OrderStatus status) {
         Comparator<Order> priceComparator = Comparator.comparing(o -> o.getTotalPrice());
         List<Order> sortedList = this.repository.findAll();
         Collections.sort(sortedList, priceComparator);
-        return sortedList.stream()
+        sortedList = sortedList.stream()
                 .filter(o -> o.getStatus() == status)
                 .collect(Collectors.toList());
+        return this.orderMapper.dtoFromOrders(sortedList);
     }
 
-    public List<Order> getOrdersByBookedDate(OrderStatus status) {
+    public List<OrderDto> getOrdersByBookedDate(OrderStatus status) {
         Comparator<Order> dateOfBookingComparator = Comparator.comparing(o -> o.getDateBooked());
         List<Order> sortedList = this.repository.findAll();
         Collections.sort(sortedList, dateOfBookingComparator);
-        return sortedList.stream()
+        sortedList = sortedList.stream()
                 .filter(o -> o.getStatus() == status).collect(Collectors.toList());
+        return this.orderMapper.dtoFromOrders(sortedList);
     }
 
-    public List<Order> getOrdersByExecutionDate(OrderStatus status) {
+    public List<OrderDto> getOrdersByExecutionDate(OrderStatus status) {
         Comparator<Order> dateOfExecutionComparator = Comparator.comparing(o -> o.getStartOfExecution());
         List<Order> sortedList = null;
 
@@ -204,20 +215,20 @@ public class OrderService implements IOrderService {
 
 
         Collections.sort(sortedList, dateOfExecutionComparator);
-        return sortedList.stream()
+        sortedList = sortedList.stream()
                 .filter(o -> o.getStatus() == status)
                 .collect(Collectors.toList());
+        return this.orderMapper.dtoFromOrders(sortedList);
     }
 
-    public List<Order> getOrdersForPeriod(LocalDate start, LocalDate end) {
-        List<Order> res = new ArrayList<>();
+    public List<OrderDto> getOrdersForPeriod(LocalDate start, LocalDate end) {
+        List<Order> res = this.repository.findAll();
 
-        res.addAll(this.repository.findAll());
-
-        return res.stream()
+        res = res.stream()
                 .filter(o -> o.getStartOfExecution()
                         .compareTo(start) >= 0 && o.getFinishOfExecution().compareTo(end) <= 0)
                 .collect(Collectors.toList());
+        return this.orderMapper.dtoFromOrders(res);
     }
 
 

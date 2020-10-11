@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor
 @Service
 @Slf4j
 @Transactional
@@ -32,7 +31,7 @@ public class PlaceService implements IPlaceService {
     private PlaceMapper placeMapper;
 
 
-    public List<PlaceDto> getPlaces() {
+    public List<PlaceDto> getPlaceDto() {
         return this.placeMapper.placesListToDto(
                 this.repository.findAll());
     }
@@ -45,7 +44,7 @@ public class PlaceService implements IPlaceService {
     }
 
     @Transactional
-    public List<PlaceDto> getFreePlacesForDate(LocalDate date) {
+    public List<PlaceDto> getFreePlaceDtoForDate(LocalDate date) {
 
         return this.placeMapper.placesListToDto(this.repository.findAll().stream()
                 .filter(p -> p.getCalendar().isDateBooked(date) == false)
@@ -90,7 +89,7 @@ public class PlaceService implements IPlaceService {
     }
 
     @Transactional
-    public PlaceDto getFreePlace(LocalDate date) {
+    public PlaceDto getFreePlaceDto(LocalDate date) {
         List<Place> res = this.repository.findAll();
         for (Place place : res) {
             if (!place.getCalendar()

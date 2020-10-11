@@ -11,9 +11,9 @@ import java.util.UUID;
 @Service
 
 public interface IPlaceService {
-    List<PlaceDto> getPlaces();
+    List<PlaceDto> getPlaceDto();
 
-    List<PlaceDto> getFreePlacesForDate(LocalDate date);
+    List<PlaceDto> getFreePlaceDtoForDate(LocalDate date);
 
     void addPlaces(int i);
 
@@ -25,7 +25,7 @@ public interface IPlaceService {
 
     UUID addPlace();
 
-    PlaceDto getFreePlace(LocalDate date);
+    PlaceDto getFreePlaceDto(LocalDate date);
 
     PlaceDto getPlaceById(UUID id);
 

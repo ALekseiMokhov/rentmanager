@@ -1,6 +1,9 @@
 package com.senla.carservice.service.interfaces;
 
 
+import com.senla.carservice.dto.MasterDto;
+import com.senla.carservice.dto.OrderDto;
+import com.senla.carservice.dto.PlaceDto;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
@@ -15,9 +18,9 @@ import java.util.UUID;
 public interface IOrderService {
     void addOrder(LocalDate date, LocalDate startOfExecution, Set<Speciality> required);
 
-    void saveOrder(Order order);
+    void saveOrder(OrderDto orderDto, List<MasterDto> masterDtos, PlaceDto placeDto);
 
-    Order findOrderById(UUID id);
+    OrderDto findOrderById(UUID id);
 
     void shiftOrderExecutionDate(UUID id, LocalDate newDate);
 
@@ -29,15 +32,15 @@ public interface IOrderService {
 
     void deleteOrder(UUID id);
 
-    List<Order> getOrders();
+    List<OrderDto> getOrders();
 
-    List<Order> getOrdersByBookedDate(OrderStatus status);
+    List<OrderDto> getOrdersByBookedDate(OrderStatus status);
 
-    List<Order> getOrdersByExecutionDate(OrderStatus status);
+    List<OrderDto> getOrdersByExecutionDate(OrderStatus status);
 
-    List<Order> getOrdersForPeriod(LocalDate start, LocalDate end);
+    List<OrderDto> getOrdersForPeriod(LocalDate start, LocalDate end);
 
-    List<Order> getOrdersByPrice(OrderStatus status);
+    List<OrderDto> getOrdersByPrice(OrderStatus status);
 
 
 }

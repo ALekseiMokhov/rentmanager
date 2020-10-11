@@ -1,7 +1,6 @@
 package com.senla.carservice.controller;
 
 import com.senla.carservice.dto.OrderDto;
-import com.senla.carservice.dto.mappers.OrderMapper;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.OrderStatus;
 import com.senla.carservice.service.interfaces.IOrderService;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orders")
@@ -24,11 +22,6 @@ public class OrderRestController {
     @Autowired
     @Qualifier("orderService")
     private IOrderService orderService;
-
-    public OrderRestController() {
-
-
-    }
 
     @PostMapping("/{date}/{start}/{required}")
     public void addOrder(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
@@ -40,7 +33,7 @@ public class OrderRestController {
     @GetMapping("/{id}")
     public OrderDto findOrderById(@PathVariable UUID id) {
 
-        return OrderMapper.INSTANCE.dtoFromOrder(this.orderService.findOrderById(id));
+        return this.orderService.findOrderById(id);
     }
 
     @PatchMapping("/{id}/{date}")
@@ -68,41 +61,31 @@ public class OrderRestController {
         this.orderService.deleteOrder(id);
     }
 
-    @GetMapping("{/}")
+    @GetMapping("/")
     public List<OrderDto> getOrders() {
-        return this.orderService.getOrders().stream()
-                .map(o -> OrderMapper.INSTANCE.dtoFromOrder(o))
-                .collect(Collectors.toList());
+        return this.orderService.getOrders();
     }
 
     @GetMapping("/booked-date/{status}")
     public List<OrderDto> getOrdersByBookedDate(@PathVariable OrderStatus status) {
-        return this.orderService.getOrdersByBookedDate(status).stream()
-                .map(o -> OrderMapper.INSTANCE.dtoFromOrder(o))
-                .collect(Collectors.toList());
+        return this.orderService.getOrdersByBookedDate(status);
     }
 
     @GetMapping("/execution/{status}")
     public List<OrderDto> getOrdersByExecutionDate(@PathVariable OrderStatus status) {
-        return this.orderService.getOrdersByExecutionDate(status).stream()
-                .map(o -> OrderMapper.INSTANCE.dtoFromOrder(o))
-                .collect(Collectors.toList());
+        return this.orderService.getOrdersByExecutionDate(status);
     }
 
     @GetMapping("/{start}/{end}")
     public List<OrderDto> getOrdersForPeriod(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
-        return this.orderService.getOrdersForPeriod(start, end).stream()
-                .map(o -> OrderMapper.INSTANCE.dtoFromOrder(o))
-                .collect(Collectors.toList());
+        return this.orderService.getOrdersForPeriod(start, end);
     }
 
     @GetMapping("/by-price/{status}")
     public List<OrderDto> getOrdersByPrice(@PathVariable OrderStatus status) {
 
-        return this.orderService.getOrdersByPrice(status).stream()
-                .map(o -> OrderMapper.INSTANCE.dtoFromOrder(o))
-                .collect(Collectors.toList());
+        return this.orderService.getOrdersByPrice(status);
     }
 
 
