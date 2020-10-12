@@ -4,6 +4,7 @@ import com.senla.carservice.dto.OrderDto;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.entity.order.OrderStatus;
 import com.senla.carservice.service.interfaces.IOrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
+@Slf4j
 @RestController
 @RequestMapping("/orders")
 /*@Profile({"rest", "test"})*/
@@ -63,7 +64,9 @@ public class OrderRestController {
 
     @GetMapping("/")
     public List<OrderDto> getOrders() {
+        log.debug("rest method getall orders triggered");
         return this.orderService.getOrders();
+
     }
 
     @GetMapping("/booked-date/{status}")
