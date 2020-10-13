@@ -25,7 +25,7 @@ class TestPlaceService {
     private final IGenericRepository mockRepo
             = Mockito.mock(PlaceJpaRepository.class);
     @InjectMocks
-    private PlaceService placeService;
+    private com.senla.carservice.service.PlaceService placeService;
     @Mock
     private PlaceMapper mapper;
     private PlaceDto placeDto;

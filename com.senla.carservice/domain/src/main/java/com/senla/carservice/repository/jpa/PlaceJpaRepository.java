@@ -4,7 +4,7 @@ import com.senla.carservice.entity.garage.Place;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PlaceJpaRepository extends GenericJpaRepository {
+public class PlaceJpaRepository extends com.senla.carservice.repository.jpa.GenericJpaRepository {
     public PlaceJpaRepository() {
         super.setClass(Place.class);
     }

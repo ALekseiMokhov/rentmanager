@@ -1,7 +1,6 @@
 package com.senla.carservice.service;
 
 import com.senla.carservice.dto.MasterDto;
-import com.senla.carservice.dto.mappers.MasterMapper;
 import com.senla.carservice.dto.mappers.MasterMapperImpl;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;

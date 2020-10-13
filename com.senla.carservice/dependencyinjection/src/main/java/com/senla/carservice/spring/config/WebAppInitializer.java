@@ -2,6 +2,8 @@ package com.senla.carservice.spring.config;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -18,7 +20,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-                /*WebViewConfig.class,*/RestConfig.class
+                WebViewConfig.class
         };
     }
 
@@ -28,4 +30,17 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
                 "/"
         };
     }
+    @Override
+    protected WebApplicationContext createRootApplicationContext() {
+
+        WebApplicationContext context =
+                (WebApplicationContext)super.createRootApplicationContext();
+        ((ConfigurableEnvironment)context.getEnvironment()).setActiveProfiles("ui");
+
+        return context;
+
+    }
+
+
+
 }

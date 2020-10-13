@@ -26,7 +26,7 @@ import java.util.Properties;
         "com.senla.carservice.dto"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-@EnableSpringConfigured
+@EnableSpringConfigured/*TODO delete*/
 public class DomainConfig {
     @Autowired
     private ConfigurableEnvironment env;

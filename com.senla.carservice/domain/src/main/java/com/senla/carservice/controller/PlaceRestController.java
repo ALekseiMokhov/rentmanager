@@ -5,6 +5,7 @@ import com.senla.carservice.dto.PlaceDto;
 import com.senla.carservice.service.interfaces.IPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/places")
-/*@Profile({"rest","test"})*/
+@Profile({"rest","test"})
 public class PlaceRestController {
     @Autowired
     @Qualifier("placeService")
