@@ -42,6 +42,7 @@ public class Order {
         this.masters = masters;
         this.place = place;
         this.id = UUID.randomUUID();
+        this.status = OrderStatus.MANAGED;
     }
     
     public Order(UUID id, LocalDate dateBooked, LocalDate startOfExecution, Place place, List <AbstractMaster> masters) {

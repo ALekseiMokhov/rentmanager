@@ -40,12 +40,6 @@ import java.util.stream.Collectors;
     public OrderService() {
     }
 
-    public OrderService(IOrderRepository orderRepository, IMasterService masterService, IPlaceService placeService) {
-        this.repository = orderRepository;
-        this.masterService = masterService;
-        this.placeService = placeService;
-    }
-
 
     @Transactional
     public void addOrder(LocalDate date, LocalDate startOfExecution, Set <Speciality> required) {
@@ -181,7 +175,7 @@ import java.util.stream.Collectors;
 
     public List <Order> getOrdersByPrice(OrderStatus status) {
         Comparator <Order> priceComparator = Comparator.comparing( o -> o.getTotalPrice() );
-        List <Order> sortedList = null;
+        List <Order> sortedList = this.repository.findAll();
         Collections.sort( sortedList, priceComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status )
@@ -190,9 +184,7 @@ import java.util.stream.Collectors;
 
     public List <Order> getOrdersByBookedDate(OrderStatus status) {
         Comparator <Order> dateOfBookingComparator = Comparator.comparing( o -> o.getDateBooked() );
-        List <Order> sortedList = null;
-
-        sortedList = this.repository.findAll();
+        List <Order> sortedList = this.repository.findAll();
         Collections.sort( sortedList, dateOfBookingComparator );
         return sortedList.stream()
                 .filter( o -> o.getStatus() == status ).collect( Collectors.toList() );
