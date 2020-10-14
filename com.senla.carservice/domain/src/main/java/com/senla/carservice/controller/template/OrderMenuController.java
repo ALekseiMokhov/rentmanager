@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Set;
 
 /*
- */@Controller
+ */
+@Controller
 @RequestMapping("/orders")
 @Profile("ui")
 public class OrderMenuController {
@@ -20,15 +21,16 @@ public class OrderMenuController {
     private IOrderService orderService;
 
     @GetMapping("")
-    public String showAll(ModelMap model){
-        model.addAttribute( "message", this.orderService.getOrders());
+    public String showAll(ModelMap model) {
+        model.addAttribute("message", this.orderService.getOrders());
         return "orders";
     }
+
     @GetMapping("/add")
-    public String addOrder(@RequestParam(required = false)String startOfExecution,
+    public String addOrder(@RequestParam(required = false) String startOfExecution,
                            @RequestParam(required = false) Set<String> specialities,
-                            ModelMap model){
-        model.addAttribute( "message", this.orderService.getOrders());
+                           ModelMap model) {
+        model.addAttribute("message", this.orderService.getOrders());
         return "orders";
     }
 }

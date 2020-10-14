@@ -2,7 +2,6 @@ package com.senla.carservice.service.interfaces;
 
 
 import com.senla.carservice.dto.MasterDto;
-import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.util.calendar.Calendar;
 import org.springframework.stereotype.Service;

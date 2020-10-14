@@ -1,8 +1,5 @@
 package com.senla.carservice.controller.template;
 
-import com.senla.carservice.controller.MasterRestController;
-import com.senla.carservice.controller.OrderRestController;
-import com.senla.carservice.controller.PlaceRestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
@@ -24,8 +21,8 @@ public class HomeController {
     @GetMapping
     public String printHomePage(ModelMap model) {
 
-        model.addAttribute( "name", "Visitor" );
-        model.addAttribute( "message", "Car service dashboard" );
+        model.addAttribute("name", "Visitor");
+        model.addAttribute("message", "Car service dashboard");
 
         return "home";
 

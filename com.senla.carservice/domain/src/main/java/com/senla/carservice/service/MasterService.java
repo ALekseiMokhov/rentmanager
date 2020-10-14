@@ -2,7 +2,7 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.dto.MasterDto;
-import com.senla.carservice.dto.mappers.MasterMapper;
+import com.senla.carservice.dto.mappers.interfaces.MasterMapper;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
@@ -54,7 +54,7 @@ public class MasterService implements IMasterService {
 
     @Override
     public MasterDto getById(UUID id) {
-        return this.mapper.masterToDto(this.repository.getById(id)) ;
+        return this.mapper.masterToDto(this.repository.getById(id));
     }
 
 

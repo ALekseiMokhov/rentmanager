@@ -1,6 +1,7 @@
-package com.senla.carservice.dto.mappers;
+package com.senla.carservice.dto.mappers.interfaces;
 
 import com.senla.carservice.dto.PlaceDto;
+import com.senla.carservice.dto.mappers.UuidMapper;
 import com.senla.carservice.entity.garage.Place;
 import org.mapstruct.Mapper;
 

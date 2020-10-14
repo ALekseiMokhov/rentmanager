@@ -2,12 +2,11 @@ package com.senla.carservice.service;
 
 
 import com.senla.carservice.dto.PlaceDto;
-import com.senla.carservice.dto.mappers.PlaceMapper;
+import com.senla.carservice.dto.mappers.interfaces.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.service.interfaces.IPlaceService;
 import com.senla.carservice.util.calendar.Calendar;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

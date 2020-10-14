@@ -4,9 +4,9 @@ package com.senla.carservice.service;
 import com.senla.carservice.dto.MasterDto;
 import com.senla.carservice.dto.OrderDto;
 import com.senla.carservice.dto.PlaceDto;
-import com.senla.carservice.dto.mappers.MasterMapper;
-import com.senla.carservice.dto.mappers.OrderMapper;
-import com.senla.carservice.dto.mappers.PlaceMapper;
+import com.senla.carservice.dto.mappers.interfaces.MasterMapper;
+import com.senla.carservice.dto.mappers.interfaces.OrderMapper;
+import com.senla.carservice.dto.mappers.interfaces.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
@@ -83,7 +83,7 @@ public class OrderService implements IOrderService {
 
     public OrderDto findOrderById(UUID id) {
 
-        return this.orderMapper.dtoFromOrder(this.repository.getById(id)) ;
+        return this.orderMapper.dtoFromOrder(this.repository.getById(id));
 
     }
 

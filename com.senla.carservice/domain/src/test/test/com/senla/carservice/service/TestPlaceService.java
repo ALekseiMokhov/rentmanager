@@ -1,7 +1,7 @@
 package com.senla.carservice.service;
 
 import com.senla.carservice.dto.PlaceDto;
-import com.senla.carservice.dto.mappers.PlaceMapper;
+import com.senla.carservice.dto.mappers.interfaces.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
 import com.senla.carservice.repository.jpa.PlaceJpaRepository;

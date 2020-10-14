@@ -1,6 +1,6 @@
 package com.senla.carservice.dto;
 
-import com.senla.carservice.dto.mappers.PlaceMapper;
+import com.senla.carservice.dto.mappers.interfaces.PlaceMapper;
 import com.senla.carservice.entity.garage.Place;
 import com.senla.carservice.spring.TestConfig;
 import com.senla.carservice.util.calendar.Calendar;

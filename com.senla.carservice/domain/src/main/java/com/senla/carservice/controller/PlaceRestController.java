@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/places")
-@Profile({"rest","test"})
+@Profile({"rest", "test"})
 public class PlaceRestController {
     @Autowired
     @Qualifier("placeService")

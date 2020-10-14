@@ -5,7 +5,6 @@ import com.senla.carservice.dto.MasterDto;
 import com.senla.carservice.dto.OrderDto;
 import com.senla.carservice.dto.PlaceDto;
 import com.senla.carservice.entity.master.Speciality;
-import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
 import org.springframework.stereotype.Service;
 

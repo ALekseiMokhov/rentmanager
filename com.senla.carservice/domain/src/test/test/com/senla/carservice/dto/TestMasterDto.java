@@ -1,7 +1,7 @@
 package com.senla.carservice.dto;
 
 
-import com.senla.carservice.dto.mappers.MasterMapper;
+import com.senla.carservice.dto.mappers.interfaces.MasterMapper;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.spring.TestConfig;

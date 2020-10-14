@@ -1,6 +1,6 @@
 package com.senla.carservice.dto;
 
-import com.senla.carservice.dto.mappers.OrderMapper;
+import com.senla.carservice.dto.mappers.interfaces.OrderMapper;
 import com.senla.carservice.entity.order.Order;
 import com.senla.carservice.entity.order.OrderStatus;
 import com.senla.carservice.spring.TestConfig;

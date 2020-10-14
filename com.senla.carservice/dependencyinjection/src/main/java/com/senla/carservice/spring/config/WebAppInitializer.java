@@ -13,7 +13,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{DomainConfig.class};
+        return new Class[]{DomainConfig.class/*,SpringSecurityConfig.class*/};
 
     }
 
@@ -30,17 +30,17 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
                 "/"
         };
     }
+
     @Override
     protected WebApplicationContext createRootApplicationContext() {
 
         WebApplicationContext context =
-                (WebApplicationContext)super.createRootApplicationContext();
-        ((ConfigurableEnvironment)context.getEnvironment()).setActiveProfiles("ui");
+                (WebApplicationContext) super.createRootApplicationContext();
+        ((ConfigurableEnvironment) context.getEnvironment()).setActiveProfiles("rest");
 
         return context;
 
     }
-
 
 
 }

@@ -1,7 +1,7 @@
 package com.senla.carservice.service;
 
 import com.senla.carservice.dto.MasterDto;
-import com.senla.carservice.dto.mappers.MasterMapperImpl;
+import com.senla.carservice.dto.mappers.interfaces.MasterMapperImpl;
 import com.senla.carservice.entity.master.Master;
 import com.senla.carservice.entity.master.Speciality;
 import com.senla.carservice.repository.interfaces.IGenericRepository;
@@ -109,8 +109,8 @@ class TestMasterService {
     @Test
     void givenNameAndSpecialityShouldFIndMaster() {
         this.masterService.getByNameAndSpeciality("Evgeny", Speciality.PAINTER);
-        verify(mockRepo,times(1)).findAll();
-        verify(masterMapper,times(1)).masterToDto(any(Master.class));
+        verify(mockRepo, times(1)).findAll();
+        verify(masterMapper, times(1)).masterToDto(any(Master.class));
     }
 
     @Test
@@ -137,7 +137,7 @@ class TestMasterService {
         testMechanic.getCalendar().setDateForBooking(LocalDate.now());
 
         List<MasterDto> masters = this.masterService.getFreeMasters(LocalDate.now());
-       verify(masterMapper,times(1)).mastersToDto(any(List.class));
+        verify(masterMapper, times(1)).mastersToDto(any(List.class));
 
     }
 
@@ -146,7 +146,6 @@ class TestMasterService {
         this.masterService.getMastersBySpeciality(Speciality.RESHAPER);
         /*Assertions.assertTrue(masterMapper.mastersToDto(masterList));*/
         /*TODO correct test!*/
-
 
 
     }

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -21,7 +20,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
-@ComponentScan({"com.senla.carservice.controller"})
+@ComponentScan({"com.senla.carservice.controller", "com.senla.carservice.security"})
 public class WebViewConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
@@ -31,6 +30,7 @@ public class WebViewConfig implements WebMvcConfigurer {
         log.debug(String.valueOf(Arrays.asList(applicationContext.getBeanDefinitionNames())));
 
     }
+
     /*THYMELEAF profile*/
     @Bean
     @Profile("ui")
@@ -52,9 +52,10 @@ public class WebViewConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
+
     @Bean
     @Profile("ui")
-    public ThymeleafViewResolver thymeleafViewResolver(){
+    public ThymeleafViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
@@ -75,8 +76,6 @@ public class WebViewConfig implements WebMvcConfigurer {
     public ViewResolver viewResolver() {
         return new BeanNameViewResolver();
     }
-
-
 
 
 }

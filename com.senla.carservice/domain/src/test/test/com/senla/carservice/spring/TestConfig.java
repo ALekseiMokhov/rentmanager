@@ -1,6 +1,7 @@
 package com.senla.carservice.spring;
 
 import com.senla.carservice.dto.mappers.*;
+import com.senla.carservice.dto.mappers.interfaces.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
