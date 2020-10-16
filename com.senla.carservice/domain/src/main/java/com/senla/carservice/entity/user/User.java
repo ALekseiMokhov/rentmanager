@@ -2,11 +2,13 @@ package com.senla.carservice.entity.user;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Entity
@@ -30,7 +32,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayDeque<>();
+        return Collections.singleton(new SimpleGrantedAuthority(String.valueOf(role)));
     }
 
     @Override
