@@ -20,6 +20,7 @@
         <module>dependencyinjection</module>
         <module>domain</module>
         <module>web</module>
+        <module>security</module>
     </modules>
 
     <build>

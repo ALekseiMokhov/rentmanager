@@ -1,8 +1,6 @@
 package com.senla.carservice.entity.user;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +11,10 @@ import java.util.UUID;
 
 @Entity
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name="users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -22,6 +23,8 @@ public class User implements UserDetails {
     private String name;
     @NonNull
     private String password;
+    @NonNull
+    private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
 

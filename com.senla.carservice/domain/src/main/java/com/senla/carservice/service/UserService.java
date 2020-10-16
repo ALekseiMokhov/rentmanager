@@ -11,17 +11,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @Service
+@Transactional
 public class UserService implements IUserDetailService {
     @Autowired
     @Qualifier("userJpaRepository")
     private IGenericRepository<User> repository;
-    @Autowired
-    UserMapper userMapper;
 
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,7 +32,16 @@ public class UserService implements IUserDetailService {
                 .get();
 
     }
-    public UserDto getUserDtoByName(String name){
-     return this.userMapper.fromUser((User) loadUserByUsername(name))  ;
+
+    public void saveUser(User user) {
+        this.repository.save(user);
+    }
+
+    public void updateUser(User user) {
+        this.repository.update(user);
+    }
+
+    public void deleteUser(User user) {
+        this.repository.delete(user.getId());
     }
 }

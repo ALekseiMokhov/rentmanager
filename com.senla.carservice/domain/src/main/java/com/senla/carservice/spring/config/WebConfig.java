@@ -20,13 +20,15 @@ import java.util.Arrays;
 @Configuration
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
-@ComponentScan({"com.senla.carservice.controller", "com.senla.carservice.security"})
-public class WebViewConfig implements WebMvcConfigurer {
+@ComponentScan({"com.senla.carservice.controller", "com.senla.carservice.security",
+                "com.senla.carservice.spring.exceptions"})
+public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
     @Autowired
-    public WebViewConfig(ApplicationContext applicationContext) {
+    public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+        log.debug(String.valueOf(applicationContext.getBeanDefinitionCount()));
         log.debug(String.valueOf(Arrays.asList(applicationContext.getBeanDefinitionNames())));
 
     }
