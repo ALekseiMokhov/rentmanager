@@ -30,35 +30,23 @@ public class UserRestController {
         return message;
     }
 
-    @PostMapping("/register/{name}/{pass}/{role}/{email}")
+    @PostMapping("/register/{name}/{pass}/{role}")
     public String register(@PathVariable @Min(4) String name,
                            @PathVariable @Min(5) String pass,
-                            @PathVariable @NotEmpty String role,
-                            @PathVariable @Email String email){
+                            @PathVariable @NotEmpty String role){
        User user = User.builder()
                .name(name)
                .password(pass)
                .role(Role.valueOf(role))
-               .email(email)
                .build();
-     /*  if(this.userDetailService.loadUserByUsername(name)!=null){
-           throw new ExistedUserException("User already exists!");
-
-           TODO fix NoSuchElEx
-       }*/
         this.userDetailService.saveUser(user);
         return "new User added: " + name ;
     }
-    /*@PostMapping("/login/{name}/{pass}")
-    public String login(@PathVariable @NotEmpty String name, @PathVariable @NotEmpty String pass){
-      User user = (User) this.userDetailService.loadUserByUsername(name);
-       if(user.getPassword().equals(pass)==false){
-           throw new MalformedLoginDataException(" Incorrect password input!");
-       }
-        if(log.isDebugEnabled()){
-           log.debug(name + " was successfully logged in");
-       }
-        return "user successfully logged in: "+name;
-    }*/
 
+    @GetMapping("/get/{name}")
+    public String getUser(@PathVariable String name){
+
+        User user = (User) this.userDetailService.loadUserByUsername(name);
+        return user.getName() + " "+user.getRole() +" "+user.getId()+" "+user.getAuthorities();
+    }
 }

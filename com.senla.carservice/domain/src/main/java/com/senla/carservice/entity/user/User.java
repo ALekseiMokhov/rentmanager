@@ -25,8 +25,6 @@ public class User implements UserDetails {
     private String name;
     @NonNull
     private String password;
-    @NonNull
-    private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
 
