@@ -20,8 +20,8 @@ import java.util.Arrays;
 @Configuration
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
-@ComponentScan({"com.senla.carservice.controller", "com.senla.carservice.security",
-                "com.senla.carservice.spring.exceptions"})
+@ComponentScan({"com.senla.carservice.controller",
+        "com.senla.carservice.spring.exceptions"})
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 

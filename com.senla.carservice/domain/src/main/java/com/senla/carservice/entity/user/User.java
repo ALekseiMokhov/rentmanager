@@ -1,59 +1,66 @@
 package com.senla.carservice.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="users")
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
+    @JsonIgnore
     private UUID id;
     @NonNull
     private String name;
     @NonNull
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
-    @Override
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(String.valueOf(role)));
+        List<GrantedAuthority> authorities
+                = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(String.valueOf(role)));
+
+        }
+
+        return authorities;
     }
 
-    @Override
+
     public String getUsername() {
         return this.name;
     }
 
-    @Override
+
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
+
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
+
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
+
     public boolean isEnabled() {
         return true;
     }
