@@ -1,9 +1,6 @@
 package com.senla.carservice.security;
 
-import com.senla.carservice.security.jwt.JwtAuthenticationEntryPoint;
 import com.senla.carservice.security.jwt.JwtAuthenticationFilter;
-import com.senla.carservice.security.jwt.JwtTokenProvider;
-import com.senla.carservice.service.UserService;
 import com.senla.carservice.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -26,7 +22,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @ComponentScan("com.senla.carservice.security")
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,
+                            securedEnabled = true,
+                            jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -55,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .antMatchers("/**", "/register/**").permitAll()
-                .antMatchers("/masters/**").hasRole("ADMIN")
+                .antMatchers("/masters/**","/places/**").hasRole("ADMIN")
+                .antMatchers("/orders/**").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
         ;
 

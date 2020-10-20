@@ -6,7 +6,6 @@ import com.senla.carservice.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +46,7 @@ public class UserService implements IUserService {
     public User saveUser(User user) {
         user.setPassword(user.getPassword());
         this.repository.save(user);
-        log.info(user.getName() + "has been saved successfully ");
+        log.info(user.getName() + " has been successfully saved");
         return user;
     }
 

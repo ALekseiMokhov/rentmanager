@@ -7,9 +7,13 @@ import java.util.UUID;
 
 public interface IUserService extends UserDetailsService {
     User loadUserByUsername(String username);
+
     User findById(UUID id);
+
     User saveUser(User user);
+
     void updateUser(User user);
+
     void deleteUser(User user);
 
 }
