@@ -22,6 +22,13 @@ public class UserService implements IUserService {
     private IGenericRepository<User> repository;
 
 
+    @Override
+    public Boolean isPresent(String name) {
+        return this.repository.findAll().stream()
+                .anyMatch(u->u.getName().equals(name));
+
+    }
+
     public User loadUserByUsername(String username) {
         User user = null;
         try {

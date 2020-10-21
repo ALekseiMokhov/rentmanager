@@ -1,7 +1,6 @@
 package com.senla.carservice.spring.config;
 
 
-import com.senla.carservice.security.SecurityConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.WebApplicationContext;

@@ -16,4 +16,6 @@ public interface IUserService extends UserDetailsService {
 
     void deleteUser(User user);
 
+    Boolean isPresent(String name);
+
 }

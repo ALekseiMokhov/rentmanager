@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -53,12 +55,12 @@ public class OrderRestController {
     public void cancelOrder(@PathVariable UUID id) {
         this.orderService.cancelOrder(id);
     }
-
+    @Secured("ROLE_ADMIN")
     @PatchMapping("/complete/{id}")
     public void completeOrder(@PathVariable UUID id) {
         this.orderService.completeOrder(id);
     }
-
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable UUID id) {
         this.orderService.deleteOrder(id);
@@ -70,23 +72,23 @@ public class OrderRestController {
         return this.orderService.getOrders();
 
     }
-
+    @PreAuthorize("ROLE_ADMIN")
     @GetMapping("/booked-date/{status}")
     public List<OrderDto> getOrdersByBookedDate(@PathVariable OrderStatus status) {
         return this.orderService.getOrdersByBookedDate(status);
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/execution/{status}")
     public List<OrderDto> getOrdersByExecutionDate(@PathVariable OrderStatus status) {
         return this.orderService.getOrdersByExecutionDate(status);
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/{start}/{end}")
     public List<OrderDto> getOrdersForPeriod(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
         return this.orderService.getOrdersForPeriod(start, end);
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/by-price/{status}")
     public List<OrderDto> getOrdersByPrice(@PathVariable OrderStatus status) {
 

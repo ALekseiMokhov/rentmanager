@@ -48,7 +48,7 @@ public class UserRestController {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .roles(userDto.getRoles())
                 .build();
-        if (this.userService.loadUserByUsername(user.getName()) != null) {
+        if (  this.userService.isPresent(user.getName())) {
             return new ResponseEntity("User already exists! ",
                     HttpStatus.BAD_REQUEST);
         }

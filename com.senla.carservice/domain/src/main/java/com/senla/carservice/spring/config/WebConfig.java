@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
@@ -32,6 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
         log.debug(String.valueOf(Arrays.asList(applicationContext.getBeanDefinitionNames())));
 
     }
+
 
     /*THYMELEAF profile*/
     @Bean

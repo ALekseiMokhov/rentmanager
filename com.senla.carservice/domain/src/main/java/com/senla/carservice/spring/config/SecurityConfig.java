@@ -1,4 +1,4 @@
-package com.senla.carservice.security;
+package com.senla.carservice.spring.config;
 
 import com.senla.carservice.security.jwt.JwtAuthenticationFilter;
 import com.senla.carservice.service.interfaces.IUserService;
@@ -18,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @ComponentScan("com.senla.carservice.security")
@@ -42,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.httpBasic().disable()
+        http
+                .httpBasic().disable()
                 .formLogin().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -50,20 +54,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
+                .addFilterBefore(jwtAuthenticationFilter(),
+                        UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeRequests()
-                .antMatchers("/**", "/register/**").permitAll()
+                .antMatchers("/", "/register/**","/signin/").permitAll()
                 .antMatchers("/masters/**","/places/**").hasRole("ADMIN")
                 .antMatchers("/orders/**").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
-        ;
 
-
-        http.addFilterBefore(jwtAuthenticationFilter(),
-                UsernamePasswordAuthenticationFilter.class);
-
-        ;
-
+                ;
 
     }
 
@@ -86,6 +86,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    ;
 
 }
