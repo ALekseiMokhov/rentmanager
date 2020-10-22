@@ -25,9 +25,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @ComponentScan("com.senla.carservice.security")
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true,
-                            securedEnabled = true,
-                            jsr250Enabled = true)
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

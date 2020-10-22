@@ -13,12 +13,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice()
 class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = RuntimeException.class)
+  /*  @ExceptionHandler(value = RuntimeException.class)
     @ResponseBody
     public ResponseEntity<String> handleResourceNotFoundException(Exception ex, WebRequest request) {
         if (log.isDebugEnabled()) {
             log.debug("handling ResourceNotFoundException...");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-    }
+    }*/
 }

@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.debug("Granted authorities for "+userDetails.getUsername() + " are: " + userDetails.getAuthorities() );
             }
         } catch (Exception e) {
-            log.error("Could not set user authentication in security context", e);
+            log.debug("Could not set user authentication in security context", e);
         }
 
         filterChain.doFilter(request, response);
