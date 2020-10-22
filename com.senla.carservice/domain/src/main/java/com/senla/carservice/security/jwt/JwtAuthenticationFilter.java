@@ -34,13 +34,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UUID userId = tokenProvider.getUserIdFromJWT(jwt);
                 UserDetails userDetails = userService.findById(userId);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                log.debug("auth: "+authentication);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.debug("Granted authorities for "+userDetails.getUsername() + " are: " + userDetails.getAuthorities() );
             }
-        } catch (Exception ex) {
-            log.error("Could not set user authentication in security context", ex);
+        } catch (Exception e) {
+            log.error("Could not set user authentication in security context", e);
         }
 
         filterChain.doFilter(request, response);

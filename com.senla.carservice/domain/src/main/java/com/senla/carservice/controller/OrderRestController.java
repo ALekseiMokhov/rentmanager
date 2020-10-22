@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,11 @@ public class OrderRestController {
     private IOrderService orderService;
 
     @PostMapping("/{date}/{start}/{required}")
-    public void addOrder(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
-                         @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startOfExecution,
-                         @PathVariable Set<Speciality> required) {
+    public ResponseEntity addOrder(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                   @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startOfExecution,
+                                   @PathVariable Set<Speciality> required) {
         this.orderService.addOrder(date, startOfExecution, required);
+        return new ResponseEntity( "Order has been created for "+startOfExecution, HttpStatus.CREATED );
     }
 
     @GetMapping("/{id}")
@@ -42,28 +45,37 @@ public class OrderRestController {
     }
 
     @PatchMapping("/{id}/{date}")
-    public void shiftOrderExecutionDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate newDate) {
+    public ResponseEntity shiftOrderExecutionDate(@PathVariable UUID id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate newDate) {
         this.orderService.shiftOrderExecutionDate(id, newDate);
+        return new ResponseEntity( "Order has been set for new Date: "+newDate, HttpStatus.ACCEPTED );
+
     }
 
     @PatchMapping("/new-masters/{id}")
-    public void setNewMasters(@PathVariable UUID id) {
+    public ResponseEntity setNewMasters(@PathVariable UUID id) {
         this.orderService.setNewMasters(id);
+        return new ResponseEntity( "New masters was set for Order "+ this.orderService.findOrderById( id ), HttpStatus.ACCEPTED ) ;
     }
 
     @PatchMapping("/cancel/{id}")
-    public void cancelOrder(@PathVariable UUID id) {
+    public ResponseEntity cancelOrder(@PathVariable UUID id) {
         this.orderService.cancelOrder(id);
+        return new ResponseEntity( " Order was cancelled! "+ this.orderService.findOrderById( id ), HttpStatus.ACCEPTED ) ;
+
     }
     @Secured("ROLE_ADMIN")
     @PatchMapping("/complete/{id}")
-    public void completeOrder(@PathVariable UUID id) {
+    public ResponseEntity completeOrder(@PathVariable UUID id) {
         this.orderService.completeOrder(id);
+        return new ResponseEntity( " Order was completed! "+ this.orderService.findOrderById( id ), HttpStatus.ACCEPTED ) ;
+
     }
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable UUID id) {
+    public ResponseEntity deleteOrder(@PathVariable UUID id) {
         this.orderService.deleteOrder(id);
+        return new ResponseEntity( " Order was cancelled! "+ this.orderService.findOrderById( id ), HttpStatus.ACCEPTED ) ;
+
     }
 
     @GetMapping("/")
