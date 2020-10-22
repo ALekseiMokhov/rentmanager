@@ -13,36 +13,36 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <spring.version>5.2.7.RELEASE</spring.version>
-        <aspectj.version>1.9.6</aspectj.version>
+        <jackson.version>2.9.8</jackson.version>
+        <spring.security.version>5.4.1</spring.security.version>
     </properties>
     <modules>
-        <module>com.senla.carservice.dependencyinjection</module>
-        <module>com.senla.carservice.domain</module>
-        <module>com.senla.carservice.ui</module>
-        <module>com.senla.carservice.web</module>
+        <module>domain</module>
+        <module>web</module>
+
     </modules>
 
     <build>
         <plugins>
-           <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <configLocation>src/main/resources/checkstyle.xml</configLocation>
-                    <failOnViolation>false</failOnViolation>
-                    <consoleOutput>true</consoleOutput>
-                    <suppressionsLocation>src/main/resources/supressions.xml</suppressionsLocation>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            <!-- <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-checkstyle-plugin</artifactId>
+                 <version>2.6</version>
+                 <configuration>
+                     <configLocation>src/main/resources/checkstyle.xml</configLocation>
+                     <failOnViolation>false</failOnViolation>
+                     <consoleOutput>true</consoleOutput>
+                     <suppressionsLocation>src/main/resources/supressions.xml</suppressionsLocation>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>check</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>-->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
@@ -60,6 +60,7 @@
                     <path>/</path>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
     <dependencies>
@@ -137,39 +138,25 @@
             <version>1.4.200</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
+        <!--Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
 
     </dependencies>
 
 </project>
+
