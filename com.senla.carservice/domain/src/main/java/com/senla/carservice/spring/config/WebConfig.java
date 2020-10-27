@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,9 +20,12 @@ import java.util.Arrays;
 @Slf4j
 @Configuration
 @EnableWebMvc
+@EnableGlobalMethodSecurity(prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true)
 @PropertySource("classpath:application.properties")
-@ComponentScan({"com.senla.carservice.controller", "com.senla.carservice.security",
-                "com.senla.carservice.spring.exceptions"})
+@ComponentScan({"com.senla.carservice.controller",
+        "com.senla.carservice.spring.exceptionhandlers"})
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
@@ -32,6 +36,7 @@ public class WebConfig implements WebMvcConfigurer {
         log.debug(String.valueOf(Arrays.asList(applicationContext.getBeanDefinitionNames())));
 
     }
+
 
     /*THYMELEAF profile*/
     @Bean

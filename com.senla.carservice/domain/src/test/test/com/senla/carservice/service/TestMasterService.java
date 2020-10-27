@@ -30,6 +30,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 class TestMasterService {
     private final IGenericRepository mockRepo
             = Mockito.mock(MasterJpaRepository.class);
+    private final List<Master> masterList = new ArrayList<>();
     @InjectMocks
     private MasterService masterService;
     @Mock
@@ -41,7 +42,6 @@ class TestMasterService {
     private Master testPainter;
     private MasterDto testMechanicDto;
     private MasterDto testPainterDto;
-    private final List<Master> masterList = new ArrayList<>();
     private UUID id;
 
     @BeforeEach

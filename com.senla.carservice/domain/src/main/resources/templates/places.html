@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring MVC application</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
 <body class="container p-3 mb-2 bg-info text-white">
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -44,8 +44,8 @@
 <p>find place by Id:</p>
 <div>
     <form action="#" method="get" th:action="@{/places/getById}">
-        <input type="text" name="id" placeholder="find place">
-        <input type="submit" value="submit" placeholder="submit">
+        <input name="id" placeholder="find place" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
     <p th:text="${place_found_by_id}"></p>
 </div>
@@ -53,8 +53,8 @@
 <p>find free place:</p>
 <div>
     <form method="get" th:action="@{/places/getFreePlace}">
-        <input type="text" name="id" placeholder="enter date(YYYY-MM-DD):">
-        <input type="submit" value="submit" placeholder="submit">
+        <input name="id" placeholder="enter date(YYYY-MM-DD):" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
     <p th:text="${free_place}"></p>
 </div>
@@ -62,47 +62,47 @@
 <p>add extra places to garage:</p>
 <div>
     <form method="post" th:action="@{/places/addPlaces}">
-        <input type="text" name="numberOfPlaces" placeholder="add places">
-        <input type="submit" value="submit" placeholder="submit">
+        <input name="numberOfPlaces" placeholder="add places" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
 </div>
 <br>
 <p>book chosen place for the specific date:</p>
 <div>
     <form method="post" th:action="@{/places/setDate}">
-        <input type="text" th:name="id" placeholder="enter the id to book:">
-        <input type="text" th:name="date" placeholder="date(YYYY-MM-DD):">
-        <input type="submit" value="submit" placeholder="submit">
+        <input placeholder="enter the id to book:" th:name="id" type="text">
+        <input placeholder="date(YYYY-MM-DD):" th:name="date" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
 </div>
 <br>
 <p>unbook Place:</p>
 <div>
     <form method="post" th:action="@{/places/un-book}">
-        <input type="text" th:name="oldId" placeholder="enter the id to book:">
-        <input type="text" th:name="newId" placeholder="date(YYYY-MM-DD):">
-        <input type="submit" value="submit" placeholder="submit">
+        <input placeholder="enter the id to book:" th:name="oldId" type="text">
+        <input placeholder="date(YYYY-MM-DD):" th:name="newId" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
 </div>
 <br>
 <p>delete place by Id:</p>
 <div>
     <form method="post" th:action="@{/places/delete}">
-        <input type="text" name="id" placeholder="id to delete">
-        <input type="submit" value="submit" placeholder="submit">
+        <input name="id" placeholder="id to delete" type="text">
+        <input placeholder="submit" type="submit" value="submit">
     </form>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </body>
 </html>

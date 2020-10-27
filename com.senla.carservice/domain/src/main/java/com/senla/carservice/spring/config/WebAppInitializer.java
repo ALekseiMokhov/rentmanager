@@ -1,7 +1,6 @@
 package com.senla.carservice.spring.config;
 
 
-import com.senla.carservice.security.SpringSecurityConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.WebApplicationContext;
@@ -14,7 +13,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{DomainConfig.class, SpringSecurityConfig.class};
+        return new Class[]{DomainConfig.class, SecurityConfig.class};
 
     }
 

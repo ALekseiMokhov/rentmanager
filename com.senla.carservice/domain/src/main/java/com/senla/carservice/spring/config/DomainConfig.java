@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -26,7 +25,6 @@ import java.util.Properties;
         "com.senla.carservice.dto"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-@EnableSpringConfigured/*TODO delete*/
 public class DomainConfig {
     @Autowired
     private ConfigurableEnvironment env;
