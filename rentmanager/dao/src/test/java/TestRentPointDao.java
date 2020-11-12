@@ -1,5 +1,6 @@
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +34,11 @@ public class TestRentPointDao {
     }
     @Test
     @Transactional
-    @Rollback(true)
-    void persistAndExpectNoRollback(){
+    @Rollback
+    void persistAndExpectNoExceptions(){
         rentPointDao.save( testingPoint );
+        RentPoint pointCreated = rentPointDao.findById( 1l );
+        Assertions.assertNotNull( testingPoint );
+        Assertions.assertEquals(testingPoint,pointCreated);
     }
 }

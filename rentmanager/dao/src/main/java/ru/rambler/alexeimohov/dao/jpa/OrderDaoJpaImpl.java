@@ -1,11 +1,13 @@
 package ru.rambler.alexeimohov.dao.jpa;
 
+import org.springframework.stereotype.Repository;
 import ru.rambler.alexeimohov.dao.interfaces.OrderDao;
 import ru.rambler.alexeimohov.dao.jpa.queries.OrderQueries;
 import ru.rambler.alexeimohov.entities.Order;
 
 import java.util.List;
 
+@Repository
 public class OrderDaoJpaImpl extends GenericJpaDao implements OrderDao {
     @Override
     public Order findById(Long id) {

@@ -29,7 +29,8 @@ public class MessageJpaDaoImpl extends GenericJpaDao implements MessageDao {
 
     @Override
     public List <Message> findAll() {
-        return entityManager.createNativeQuery( MessageQueries.FIND_ALL_MESSAGES ).getResultList();
+        return entityManager.createQuery( MessageQueries.FIND_ALL_MESSAGES )
+                .getResultList();
     }
 
     @Override

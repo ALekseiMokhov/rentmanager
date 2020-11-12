@@ -1,0 +1,78 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
+import ru.rambler.alexeimohov.dao.interfaces.OrderDao;
+import ru.rambler.alexeimohov.dao.interfaces.UserDao;
+import ru.rambler.alexeimohov.dao.interfaces.VehicleDao;
+import ru.rambler.alexeimohov.entities.Order;
+import ru.rambler.alexeimohov.entities.User;
+import ru.rambler.alexeimohov.entities.Vehicle;
+import ru.rambler.alexeimohov.entities.enums.Privilege;
+import ru.rambler.alexeimohov.entities.enums.Role;
+import ru.rambler.alexeimohov.entities.enums.VehicleType;
+
+@ContextConfiguration(classes = TestConfig.class)
+@ExtendWith(SpringExtension.class)
+public class TestOrderService {
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private OrderDao orderDao;
+    @Autowired
+    private VehicleDao vehicleDao;
+
+    private User user;
+    private Order order;
+    private Vehicle vehicle;
+
+    @BeforeEach
+    @Transactional
+    void init() {
+        user = new User();
+        user.setFullName( "Sergey Borisov" );
+        user.setEmail( "spring_coder@gmail.com" );
+        user.setPassword( "7jfw56hjj8qlb" );
+        user.setPhoneNumber( 8_999_444_00_00l );
+        user.setRole( Role.ADMIN );
+        user.setPrivilege( Privilege.PARTNER );
+
+        vehicle = new Vehicle();
+        vehicle.setType( VehicleType.SCOOTER );
+        vehicle.setFinePrice( 30.2 );
+        vehicle.setRentPrice( 5.3 );
+
+        order = new Order();
+        order.setBlockedFunds( 10.6 );
+        order.setHasValidSubscription( false );
+        order.setVehicle( vehicle );
+        order.setUser( user );
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void persistOrderAndExpectConsistency() {
+        orderDao.save( order );
+        Assertions.assertEquals( 1, vehicleDao.findAll().size() );
+        Assertions.assertEquals( order.getUser(), userDao.findByUserName( "Sergey Borisov" ) );
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void deleteUserAndExpectConsistency() {
+        orderDao.save( order );
+        userDao.remove( 1l );
+        /*TODO fix */
+        System.out.println( orderDao.findById( 1l ).getUser().getFullName());;
+
+    }
+}
