@@ -1,4 +1,4 @@
-package ru.rambler.alexeimohov.dto.mappers;
+package ru.rambler.alexeimohov.dto.mappers.interfaces;
 
 import java.util.List;
 

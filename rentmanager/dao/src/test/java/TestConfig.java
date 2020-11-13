@@ -18,6 +18,7 @@ import java.util.Properties;
 
 /*
 * Configuration class for integration tests of DAO layer H2 db*/
+/*TODO add profiling : test*/
 @Configuration
 @ComponentScan("ru.rambler.alexeimohov.dao")
 @EnableTransactionManagement

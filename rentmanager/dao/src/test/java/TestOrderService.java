@@ -64,15 +64,5 @@ public class TestOrderService {
         Assertions.assertEquals( order.getUser(), userDao.findByUserName( "Sergey Borisov" ) );
 
     }
-
-    @Test
-    @Transactional
-    @Rollback
-    void deleteUserAndExpectConsistency() {
-        orderDao.save( order );
-        userDao.remove( 1l );
-        /*TODO fix */
-        System.out.println( orderDao.findById( 1l ).getUser().getFullName());;
-
-    }
+    
 }

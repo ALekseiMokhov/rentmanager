@@ -4,7 +4,7 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 import org.springframework.stereotype.Component;
-   @Component
+@Component
 public class GeometryMapper {
 
     public Point asPoint(String dto) throws ParseException {

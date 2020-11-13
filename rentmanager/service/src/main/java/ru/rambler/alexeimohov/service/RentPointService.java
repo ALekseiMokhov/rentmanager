@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.RentPointDao;
 import ru.rambler.alexeimohov.dto.RentPointDto;
-import ru.rambler.alexeimohov.dto.mappers.RentPointMapper;
+import ru.rambler.alexeimohov.dto.mappers.interfaces.RentPointMapper;
 import ru.rambler.alexeimohov.entities.RentPoint;
 import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
 import ru.rambler.alexeimohov.util.PointConverter;
