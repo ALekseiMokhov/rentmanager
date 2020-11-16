@@ -1,6 +1,7 @@
 package ru.rambler.alexeimohov.service;
 
 import com.vividsolutions.jts.io.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.RentPointDao;
@@ -16,7 +17,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = false, rollbackFor = Exception.class)
 public class RentPointService implements IRentPointService {
+    @Autowired
     RentPointDao rentPointDao;
+    @Autowired
     RentPointMapper mapper;
 
     public RentPointService(RentPointDao rentPointDao, RentPointMapper mapper) {
