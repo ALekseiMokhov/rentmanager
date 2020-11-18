@@ -1,5 +1,6 @@
 package ru.rambler.alexeimohov.dto;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,11 +27,15 @@ public class TestSubscriptionDto {
     }
     @Test
     void convertEntityToDtoAndExpectConsistency(){
-
+          SubscriptionDto converted = subscriptionMapper.toDto( subscription )  ;
+        Assertions.assertEquals("2040-12-31", converted.getExpirationDate() );
+        Assertions.assertEquals( "Sergei",converted.getUserName() );
     }
 
     @Test
     void convertDtoToEntityAndExpectConsistency(){
+      Subscription converted = subscriptionMapper.fromDto( subscriptionDto )  ;
+      Assertions.assertEquals( "2040-12-31",converted.getExpirationDate().toString() );
 
     }
 }

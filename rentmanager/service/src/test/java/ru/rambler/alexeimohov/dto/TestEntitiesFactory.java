@@ -79,6 +79,7 @@ public class TestEntitiesFactory {
     static SubscriptionDto getSubscriptionDto() {
          SubscriptionDto subscriptionDto = new SubscriptionDto(  );
          subscriptionDto.setId( "46363" );
+         subscriptionDto.setUserName( "Test Name" );
          subscriptionDto.setStartDate( "2020-10-10" );
          subscriptionDto.setExpirationDate( "2040-12-31" );
          subscriptionDto.setPrice( "54.0" );
@@ -120,7 +121,8 @@ public class TestEntitiesFactory {
        OrderDto orderDto = new OrderDto();
        orderDto.setId( "29572" );
        orderDto.setBlockedFunds( "23.8" );
-       orderDto.setCreationTime( "2020-10-10 09:14:37" );
+       orderDto.setUserName("Someone");
+       orderDto.setCreationTime( "2018-12-30T19:34:50.63" );
        orderDto.setHasValidSubscription( "true" );
        return orderDto;
     }

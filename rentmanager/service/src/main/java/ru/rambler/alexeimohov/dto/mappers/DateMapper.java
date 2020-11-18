@@ -29,7 +29,7 @@ public class DateMapper {
 
     public LocalDateTime asDateTime(String dateTime) {
 
-        return LocalDateTime.parse( dateTime , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return LocalDateTime.parse( dateTime );
 
 
     }
