@@ -1,15 +1,22 @@
 package ru.rambler.alexeimohov.dto.mappers.interfaces;
 
-import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import ru.rambler.alexeimohov.dto.MessageDto;
-import ru.rambler.alexeimohov.dto.mappers.CycleAvoidingMappingContext;
+import ru.rambler.alexeimohov.dto.mappers.DateMapper;
 import ru.rambler.alexeimohov.entities.Message;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = "spring", uses = DateMapper.class)
 public interface MessageMapper {
+    @Mapping(source = "user.id", target = "userId")
+    MessageDto toDto(Message message);
 
-    MessageDto messageToDto(Message message, @Context CycleAvoidingMappingContext context);
+    @Mapping(source = "userId", target = "user.id")
+    Message fromDto(MessageDto dto);
 
-    Message DtoToMessage(MessageDto dto, @Context CycleAvoidingMappingContext context);
+    List <MessageDto> listToDto(List <Message> list);
+
+    List <Message> listFromDto(List <MessageDto> list);
 }

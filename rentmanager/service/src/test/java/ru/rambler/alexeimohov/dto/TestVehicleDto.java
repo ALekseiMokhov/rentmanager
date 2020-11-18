@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapper;
-import ru.rambler.alexeimohov.entities.RentPoint;
 import ru.rambler.alexeimohov.entities.Vehicle;
-import ru.rambler.alexeimohov.entities.enums.VehicleType;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)
@@ -22,27 +20,21 @@ public class TestVehicleDto {
 
     private VehicleDto vehicleDto;
 
-    private RentPoint rentPoint;
-
     @BeforeEach
     void init() {
-        vehicle = new Vehicle();
-        vehicle.setId( 1l );
-        vehicle.setType( VehicleType.SCOOTER );
-        vehicle.setChildish( false );
-        vehicle.setRentPrice( 13.4 );
-        vehicle.setFinePrice( 12.0 );
-        vehicle.setModelName( "S1" );
-        rentPoint = new RentPoint();
-        rentPoint.setId( 2l );
-        rentPoint.setPointName( "Main point" );
-        vehicle.setRentPoint( rentPoint );
+        vehicle=TestEntitiesFactory.getVehicle();
+        vehicleDto=TestEntitiesFactory.getVehicleDto();
     }
 
     @Test
-    void ConvertToDtoAndExpectConsistentFields() {
-        vehicleDto = vehicleMapper.toDto( vehicle );
-        Assertions.assertNotNull( vehicleDto.getRentPoint() );
-        Assertions.assertEquals( vehicleDto.getModelName(), "S1" );
+    void convertToDtoAndExpectConsistentFields() {
+        VehicleDto retrieved = vehicleMapper.toDto( vehicle );
+        Assertions.assertNotNull( retrieved.getRentPoint().getCoordinate() );
+        Assertions.assertEquals( retrieved.getModelName(), "S1" );
+    }
+    @Test
+    void convertFromDtoANdExpectConsistentFields(){
+        Vehicle retrieved = vehicleMapper.fromDto( vehicleDto );
+        Assertions.assertEquals( 3.5,retrieved.getRentPrice() );
     }
 }

@@ -1,14 +1,13 @@
 package ru.rambler.alexeimohov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+
 public class OrderDto {
     private String id;
 
@@ -24,9 +23,9 @@ public class OrderDto {
 
     private String status;
     
-    private String user;
+    private String userName;
 
-    private String vehicle;
+    private String vehicleName;
 
 
 }

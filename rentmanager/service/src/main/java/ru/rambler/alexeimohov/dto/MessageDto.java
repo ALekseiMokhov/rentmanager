@@ -6,13 +6,15 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+
 public class MessageDto {
 
-    String id;
+    private String id;
 
-    String text;
+    private String text;
 
-    UserDto user;
+    private String userId;
 
-    String dateTineOfSending;
+    private String dateTimeOfSending;
 }

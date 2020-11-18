@@ -5,7 +5,15 @@ import ru.rambler.alexeimohov.dto.RentPointDto;
 import ru.rambler.alexeimohov.dto.mappers.GeometryConverter;
 import ru.rambler.alexeimohov.entities.RentPoint;
 
-@Mapper(componentModel = "spring", uses = GeometryConverter.class)
-public interface RentPointMapper extends GenericMapper <RentPoint, RentPointDto> {
+import java.util.List;
 
+@Mapper(componentModel = "spring", uses = GeometryConverter.class)
+public interface RentPointMapper /*extends GenericMapper <RentPoint, RentPointDto>*/ {
+    RentPoint fromDto(RentPointDto dto);
+
+    RentPointDto toDto(RentPoint rentPoint);
+
+    List <RentPoint> listFromDto(List <RentPointDto> list);
+
+    List <RentPointDto> listToDto(List <RentPoint> list);
 }

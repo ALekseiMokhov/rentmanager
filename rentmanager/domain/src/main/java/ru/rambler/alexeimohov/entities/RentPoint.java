@@ -1,7 +1,10 @@
 package ru.rambler.alexeimohov.entities;
 
 import com.vividsolutions.jts.geom.Point;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import ru.rambler.alexeimohov.entities.enums.PointType;
 
 import javax.persistence.*;
@@ -46,8 +49,7 @@ public class RentPoint {
              return (int) (p1.getType().getPointValue()-p2.getType().getPointValue());
          }
      } ;
-
-    public RentPoint() {
+public RentPoint() {
         this.vehicles = new ArrayList <>();
     }
 

@@ -1,14 +1,13 @@
 package ru.rambler.alexeimohov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+
 public class CardDto {
 
     private String id;
@@ -21,5 +20,5 @@ public class CardDto {
     
     private String availableFunds;
 
-    private String user;
+    private String userId;
 }

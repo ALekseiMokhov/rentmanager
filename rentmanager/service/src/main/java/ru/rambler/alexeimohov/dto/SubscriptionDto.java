@@ -1,17 +1,17 @@
 package ru.rambler.alexeimohov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+
 public class SubscriptionDto {
     private String id;
 
-    private String user;
+    private String userName;
 
     private String price;
 

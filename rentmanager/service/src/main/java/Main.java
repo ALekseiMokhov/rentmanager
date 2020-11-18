@@ -1,8 +1,6 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.rambler.alexeimohov.dao.interfaces.MessageDao;
 import ru.rambler.alexeimohov.dao.interfaces.UserDao;
-import ru.rambler.alexeimohov.service.RentPointService;
 import ru.rambler.alexeimohov.spring.PersistenceConfig;
 
 import java.util.Arrays;

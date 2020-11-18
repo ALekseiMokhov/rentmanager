@@ -1,7 +1,5 @@
 package ru.rambler.alexeimohov.dto;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.RentPointMapper;
 import ru.rambler.alexeimohov.entities.RentPoint;
-import ru.rambler.alexeimohov.entities.enums.PointType;
 
 /*
 * Integration test for DTO using local package Configuration*/
@@ -28,21 +25,15 @@ public class TestRentPointDto {
 
     @BeforeEach
     void init(){
-      rentPoint = new RentPoint();
-      rentPoint.setId( 856l );
-      rentPoint.setPointName( "Main point" );
-      rentPoint.setType( PointType.SECOND_LINE );
-      rentPoint.setCoordinate( new GeometryFactory().createPoint( new Coordinate(334,58) ) );
+       rentPoint = TestEntitiesFactory.getRentPoint();
 
-      rentPointDto = new RentPointDto();
-      rentPointDto.setId("576474");
-      rentPointDto.setPointName( "Susan McCassey" );
-      rentPointDto.setCoordinate( "POINT (222 111)" );
+       rentPointDto = TestEntitiesFactory.getRentPointDto();
     }
 
     @Test
-    void MapPointTODtoAndExpectCorrectFieldValues(){
+    void MapPointToDtoAndExpectCorrectFieldValues(){
       RentPointDto dtoMapped = rentPointMapper.toDto( rentPoint );
+        System.out.println(dtoMapped.getCoordinate());
         Assertions.assertEquals("Main point" , dtoMapped.getPointName() );
         Assertions.assertEquals("POINT (334 58)" , dtoMapped.getCoordinate() );
     }

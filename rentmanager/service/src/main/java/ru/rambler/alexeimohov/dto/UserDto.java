@@ -2,12 +2,12 @@ package ru.rambler.alexeimohov.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+
 public class UserDto {
     private String id;
 
@@ -23,9 +23,4 @@ public class UserDto {
 
     private String privilege;
 
-    private List <MessageDto> messages;
-
-    public UserDto() {
-        this.messages = new ArrayList <>();
-    }
 }

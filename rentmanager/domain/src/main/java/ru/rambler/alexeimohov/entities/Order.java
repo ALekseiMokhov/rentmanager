@@ -1,6 +1,9 @@
 package ru.rambler.alexeimohov.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
 
 import javax.persistence.*;

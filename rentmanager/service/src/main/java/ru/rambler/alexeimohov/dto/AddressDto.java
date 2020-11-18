@@ -1,14 +1,12 @@
 package ru.rambler.alexeimohov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class AddressDto {
 
     private String id;
@@ -18,6 +16,5 @@ public class AddressDto {
     private String buildingNumber;
 
     private String street;
-    
-    private String rentPoint;
+
 }

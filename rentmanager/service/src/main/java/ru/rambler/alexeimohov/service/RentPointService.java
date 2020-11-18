@@ -26,14 +26,14 @@ public class RentPointService implements IRentPointService {
         this.rentPointDao = rentPointDao;
         this.mapper = mapper;
     }
-
+/*
     public void saveOrUpdateRentPoint(RentPointDto dto) throws ParseException {
         if (rentPointDao.getByCoordinate( PointConverter.fromDto( dto.getCoordinate() ) ) != null) {
             rentPointDao.update( mapper.fromDto( dto ) );
         } else {
             rentPointDao.save( mapper.fromDto( dto ) );
         }
-    }
+    }*/
 
     public RentPointDto getById(Long id) {
         return mapper.toDto( rentPointDao.findById( id ) );
