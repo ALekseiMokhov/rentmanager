@@ -31,6 +31,10 @@ public class Vehicle {
     @Column(name = "is_childish")
     private boolean isChildish;
 
+    @NotNull
+    @Column(name = "is_free")
+    private boolean isFree;
+
     @NotNull(message = "Vehicle rent price should be specified!")
     @Column(name = "rent_price")
     private double rentPrice;

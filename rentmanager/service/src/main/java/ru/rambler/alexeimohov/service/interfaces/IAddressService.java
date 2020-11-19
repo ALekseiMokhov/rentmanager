@@ -7,8 +7,15 @@ import java.util.List;
 
 @Service
 public interface IAddressService {
-    List <AddressDto>getAddressesByCity(String cityName);
+
+
     void remove(Long id);
+
     AddressDto getById(Long id);
+
     void saveOrUpdate(AddressDto dto);
+
+    List <AddressDto>getAddressesByCity(String cityName);
+
+    List <AddressDto>getAll();
 }

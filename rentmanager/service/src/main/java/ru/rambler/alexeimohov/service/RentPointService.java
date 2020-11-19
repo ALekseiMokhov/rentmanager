@@ -26,20 +26,20 @@ public class RentPointService implements IRentPointService {
         this.rentPointDao = rentPointDao;
         this.mapper = mapper;
     }
-/*
-    public void saveOrUpdateRentPoint(RentPointDto dto) throws ParseException {
+    public void saveOrUpdate(RentPointDto dto) throws ParseException {
         if (rentPointDao.getByCoordinate( PointConverter.fromDto( dto.getCoordinate() ) ) != null) {
             rentPointDao.update( mapper.fromDto( dto ) );
         } else {
             rentPointDao.save( mapper.fromDto( dto ) );
         }
-    }*/
+    }
 
     public RentPointDto getById(Long id) {
         return mapper.toDto( rentPointDao.findById( id ) );
     }
 
-    public void removeRentPoint(Long id) {
+
+    public void remove(Long id) {
         rentPointDao.remove( id );
     }
 
@@ -47,6 +47,11 @@ public class RentPointService implements IRentPointService {
         return rentPointDao.findAll().stream()
                 .map( p -> mapper.toDto( p ) )
                 .collect( Collectors.toList() );
+    }
+
+    @Override
+    public RentPointDto getByCoordinate(Double x, Double y) {
+        return null;
     }
 
     public List <RentPointDto> getPointsByValue() {

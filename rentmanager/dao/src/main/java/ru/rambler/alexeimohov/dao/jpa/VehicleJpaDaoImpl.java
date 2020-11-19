@@ -24,6 +24,20 @@ public class VehicleJpaDaoImpl extends GenericJpaDao implements VehicleDao {
     }
 
     @Override
+    public List <Vehicle> findAllFromPoint(Long id) {
+        return entityManager.createQuery( VehicleQueries.SELECT_ALL_FREE_VEHICLES_BY_POINT )
+                .setParameter( "id",id )
+                .getResultList();
+    }
+
+    @Override
+    public List <Vehicle> findAllFreeFromPoint(Long id) {
+           return entityManager.createQuery( VehicleQueries.SELECT_ALL_FREE_VEHICLES_BY_POINT )
+                .setParameter( "id",id )
+                .getResultList();
+    }
+
+    @Override
     public Vehicle findById(Long id) {
         return entityManager.find( Vehicle.class, id );
 
