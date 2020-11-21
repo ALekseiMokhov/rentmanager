@@ -13,6 +13,8 @@ public class OrderDto {
 
     private String creationTime;
 
+    private String startTime;
+
     private String finishTime;
 
     private String blockedFunds;

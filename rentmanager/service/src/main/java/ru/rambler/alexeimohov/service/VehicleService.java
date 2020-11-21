@@ -41,6 +41,12 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
+    public void setDateForBooking(Long id, LocalDate date) {
+       Vehicle vehicle = vehicleDao.findById( id )  ;
+       vehicle.getBookedDates().add( date );
+    }
+
+    @Override
     public VehicleDto getById(Long id) {
         return vehicleMapper.toDto( vehicleDao.findById( id ) );
     }

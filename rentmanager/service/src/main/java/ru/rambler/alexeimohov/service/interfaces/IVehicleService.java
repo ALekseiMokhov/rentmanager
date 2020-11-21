@@ -10,6 +10,8 @@ public interface IVehicleService {
 
     void saveOrUpdate(VehicleDto dto);
 
+    void setDateForBooking(Long id, LocalDate date);
+
     VehicleDto getById(Long id);
 
     List <VehicleDto> getAll();

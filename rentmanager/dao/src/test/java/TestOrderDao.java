@@ -19,7 +19,7 @@ import ru.rambler.alexeimohov.entities.enums.VehicleType;
 
 @ContextConfiguration(classes = TestConfig.class)
 @ExtendWith(SpringExtension.class)
-public class TestOrderService {
+public class TestOrderDao {
     @Autowired
     private UserDao userDao;
     @Autowired

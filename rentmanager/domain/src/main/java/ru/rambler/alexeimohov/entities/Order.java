@@ -1,9 +1,6 @@
 package ru.rambler.alexeimohov.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
 
 import javax.persistence.*;
@@ -29,6 +26,10 @@ public class Order {
     @Column(name = "creation_time")
     @NotNull(message = "Order must contain creation time!")
     private LocalDateTime creationTime;
+
+    @Column(name = "start_time")
+    @NotNull(message = "Order must have time of the beginning!")
+    private LocalDateTime startTime;
 
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
@@ -56,8 +57,8 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
-    
+
     public Order() {
-        this.creationTime = LocalDateTime.now();
+        this.status = OrderStatus.CREATED;
     }
 }

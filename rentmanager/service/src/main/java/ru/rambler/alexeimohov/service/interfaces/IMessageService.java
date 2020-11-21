@@ -8,6 +8,8 @@ public interface IMessageService {
 
     void saveOrUpdate(MessageDto dto);
 
+    void sendMessage(MessageDto dto) ;
+
     MessageDto getById(Long id);
 
     List <MessageDto> getAll();

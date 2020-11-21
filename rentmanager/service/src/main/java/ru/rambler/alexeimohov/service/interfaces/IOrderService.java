@@ -11,6 +11,10 @@ public interface IOrderService {
 
     void remove(Long id)   ;
 
+    void finish(Long id) ;
+
+    void cancel(Long id);
+
     List <OrderDto> getAll();
 
 
