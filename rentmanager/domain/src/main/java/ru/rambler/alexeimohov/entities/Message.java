@@ -40,7 +40,7 @@ public class Message {
         this.dateTimeOfSending = LocalDateTime.now();
     }
 
-    /* overriding due to use entity id for equals*/
+    /* overriding due to use id for equals*/
     @Override
     public boolean equals(Object o) {
         if (this == o)

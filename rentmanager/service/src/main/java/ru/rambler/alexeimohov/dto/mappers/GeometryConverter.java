@@ -3,7 +3,6 @@ package ru.rambler.alexeimohov.dto.mappers;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
-import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component

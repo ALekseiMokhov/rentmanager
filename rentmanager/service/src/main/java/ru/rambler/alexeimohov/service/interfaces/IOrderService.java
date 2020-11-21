@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
 import ru.rambler.alexeimohov.dto.OrderDto;
-import ru.rambler.alexeimohov.entities.Order;
 
 import java.util.List;
 

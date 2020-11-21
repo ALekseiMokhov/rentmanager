@@ -8,7 +8,7 @@ import ru.rambler.alexeimohov.entities.Message;
 import java.util.List;
 
 @Repository("messageDao")
-public class MessageJpaDaoImpl extends GenericJpaDao implements MessageDao {
+public class MessageDaoJpaImpl extends GenericJpaDao implements MessageDao {
 
 
     @Override

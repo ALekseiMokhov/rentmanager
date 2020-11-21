@@ -13,6 +13,7 @@ import ru.rambler.alexeimohov.entities.Vehicle;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class TestVehicleDto {
+
     @Autowired
     private VehicleMapper vehicleMapper;
 
@@ -22,8 +23,8 @@ public class TestVehicleDto {
 
     @BeforeEach
     void init() {
-        vehicle=TestEntitiesFactory.getVehicle();
-        vehicleDto=TestEntitiesFactory.getVehicleDto();
+        this.vehicle=TestEntitiesFactory.getVehicle();
+        this.vehicleDto=TestEntitiesFactory.getVehicleDto();
     }
 
     @Test

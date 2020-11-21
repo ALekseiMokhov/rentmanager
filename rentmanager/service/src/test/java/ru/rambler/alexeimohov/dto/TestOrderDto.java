@@ -21,13 +21,13 @@ public class TestOrderDto {
     private  OrderDto orderDto;
     @BeforeEach
     void init(){
-    order = TestEntitiesFactory.getOrder();
-    orderDto = TestEntitiesFactory.getOrderDto();
+        this.order = TestEntitiesFactory.getOrder();
+        this.orderDto = TestEntitiesFactory.getOrderDto();
     }
     @Test
     void convertEntityToDtoAndExpectConsistency(){
       OrderDto converted = orderMapper.toDto( order );
-        Assertions.assertEquals("S1", converted.getVehicleName()  );
+        Assertions.assertEquals("1", converted.getVehicleId()  );
         Assertions.assertEquals("Sergei", converted.getUserName()  );
 
     }

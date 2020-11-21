@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
 import ru.rambler.alexeimohov.dto.SubscriptionDto;
-import ru.rambler.alexeimohov.entities.Subscription;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
 import ru.rambler.alexeimohov.dto.VehicleDto;
-import ru.rambler.alexeimohov.entities.Vehicle;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IVehicleService {
@@ -20,5 +20,5 @@ public interface IVehicleService {
 
     List <VehicleDto> getAllFromPoint(Long id);
 
-    List <VehicleDto> getAllFreeFromPoint(Long id);
+    List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate localDate);
 }

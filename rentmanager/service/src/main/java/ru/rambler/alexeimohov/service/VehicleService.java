@@ -8,6 +8,7 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapper;
 import ru.rambler.alexeimohov.entities.Vehicle;
 import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -65,7 +66,7 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List <VehicleDto> getAllFreeFromPoint(Long id) {
-        return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id ) );
+    public List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate date) {
+        return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id,date ) );
     }
 }

@@ -22,8 +22,8 @@ public class TestCardDto {
 
     @BeforeEach
     void init(){
-       card = TestEntitiesFactory.getCard();
-       cardDto = TestEntitiesFactory.getCardDto();
+        this.card = TestEntitiesFactory.getCard();
+        this.cardDto = TestEntitiesFactory.getCardDto();
 
     }
     @Test

@@ -49,11 +49,11 @@ public class Order {
     @NotNull
     private OrderStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
     

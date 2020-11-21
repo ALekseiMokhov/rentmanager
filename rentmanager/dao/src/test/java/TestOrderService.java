@@ -34,7 +34,7 @@ public class TestOrderService {
     @BeforeEach
     @Transactional
     void init() {
-        user = new User();
+        this.user = new User();
         user.setFullName( "Sergey Borisov" );
         user.setEmail( "spring_coder@gmail.com" );
         user.setPassword( "7jfw56hjj8qlb" );
@@ -42,12 +42,12 @@ public class TestOrderService {
         user.setRole( Role.ADMIN );
         user.setPrivilege( Privilege.PARTNER );
 
-        vehicle = new Vehicle();
+        this.vehicle = new Vehicle();
         vehicle.setType( VehicleType.SCOOTER );
         vehicle.setFinePrice( 30.2 );
         vehicle.setRentPrice( 5.3 );
 
-        order = new Order();
+        this.order = new Order();
         order.setBlockedFunds( 10.6 );
         order.setHasValidSubscription( false );
         order.setVehicle( vehicle );

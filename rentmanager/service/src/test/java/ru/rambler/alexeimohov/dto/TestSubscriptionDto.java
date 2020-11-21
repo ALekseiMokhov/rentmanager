@@ -22,8 +22,8 @@ public class TestSubscriptionDto {
 
     @BeforeEach
     void init(){
-       subscription = TestEntitiesFactory.getSubscription();
-       subscriptionDto = TestEntitiesFactory.getSubscriptionDto();
+        this.subscription = TestEntitiesFactory.getSubscription();
+        this.subscriptionDto = TestEntitiesFactory.getSubscriptionDto();
     }
     @Test
     void convertEntityToDtoAndExpectConsistency(){

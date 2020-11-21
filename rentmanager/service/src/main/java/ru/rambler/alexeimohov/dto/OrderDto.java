@@ -25,7 +25,7 @@ public class OrderDto {
     
     private String userName;
 
-    private String vehicleName;
+    private String vehicleId;
 
 
 }

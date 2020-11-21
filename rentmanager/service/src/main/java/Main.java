@@ -1,7 +1,5 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.rambler.alexeimohov.dao.interfaces.UserDao;
-import ru.rambler.alexeimohov.service.AddressService;
 import ru.rambler.alexeimohov.service.interfaces.IAddressService;
 import ru.rambler.alexeimohov.spring.PersistenceConfig;
 

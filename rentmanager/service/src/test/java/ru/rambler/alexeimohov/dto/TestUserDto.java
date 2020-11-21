@@ -23,8 +23,8 @@ public class TestUserDto {
 
     @BeforeEach
     void init() {
-        user = TestEntitiesFactory.getUser();
-        userDto = TestEntitiesFactory.getUserDto();
+        this.user = TestEntitiesFactory.getUser();
+        this.userDto = TestEntitiesFactory.getUserDto();
     }
 
     @Test

@@ -25,9 +25,9 @@ public class TestRentPointDto {
 
     @BeforeEach
     void init(){
-       rentPoint = TestEntitiesFactory.getRentPoint();
+        this.rentPoint = TestEntitiesFactory.getRentPoint();
 
-       rentPointDto = TestEntitiesFactory.getRentPointDto();
+        this.rentPointDto = TestEntitiesFactory.getRentPointDto();
     }
 
     @Test

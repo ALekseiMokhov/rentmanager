@@ -8,7 +8,7 @@ import ru.rambler.alexeimohov.entities.Order;
 import java.util.List;
 
 @Repository
-public class OrderDaoJpaImpl extends GenericJpaDao implements OrderDao {
+public class OrderJpaDaoImpl extends GenericJpaDao implements OrderDao {
     @Override
     public Order findById(Long id) {
         return ((Order) entityManager.createQuery( OrderQueries.FIND_ORDER_BY_ID )

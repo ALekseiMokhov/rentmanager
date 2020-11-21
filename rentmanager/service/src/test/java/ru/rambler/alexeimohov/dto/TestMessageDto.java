@@ -22,8 +22,8 @@ public class TestMessageDto {
 
     @BeforeEach
     void init() {
-       message = TestEntitiesFactory.getMessage();
-       messageDto = TestEntitiesFactory.getMessageDto();
+        this.message = TestEntitiesFactory.getMessage();
+        this.messageDto = TestEntitiesFactory.getMessageDto();
     }
 
     @Test

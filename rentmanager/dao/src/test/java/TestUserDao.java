@@ -36,15 +36,15 @@ public class TestUserDao {
     @BeforeEach
     @Transactional
     void init() {
-        message = new Message();
-        message.setText( "Welcome to our site, Evgeny!" );
+        this.message = new Message();
+        this.message.setText( "Welcome to our site, Evgeny!" );
 
-        subscription = new Subscription();
+        this.subscription = new Subscription();
         subscription.setStartDate( LocalDate.of( 2020, 01, 01 ) );
         subscription.setExpirationDate( LocalDate.of( 2020, 02, 01 ) );
         subscription.setPrice( 20.5 );
 
-        user = new User();
+        this.user = new User();
         user.setFullName( "Evgeny Ivanov" );
         user.setEmail( "coder@gmail.com" );
         user.setPassword( "4fwfm2n8qlb" );
@@ -74,13 +74,15 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void deleteMessageAndExpectConsistency() {
-        Message toDelete = userDao.findById( 1l ).getMessages().get( 0 );
+        System.out.println(userDao.findAll().size());
+        User retrieved = userDao.findById( 2l );
+        Message toDelete = retrieved.getMessages().get( 0 );
         Assertions.assertNotNull( toDelete );
-        User retrieved = userDao.findById( 1l );
+
         retrieved.removeMessage( toDelete );
         userDao.update( retrieved );
 
-        Assertions.assertNull( messageDao.findById( 1l ).getUser() );
+        Assertions.assertNull( messageDao.findById( 2l ).getUser() );
 
     }
 
@@ -88,7 +90,7 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void deleteSubscriptionAndExpectConsistency() {
-        User userRetrieved = userDao.findById( 1l );
+        User userRetrieved = userDao.findById( 3l );
         Subscription retrievedSub = userRetrieved.getSubscription();
 
         Assertions.assertNotNull( retrievedSub );

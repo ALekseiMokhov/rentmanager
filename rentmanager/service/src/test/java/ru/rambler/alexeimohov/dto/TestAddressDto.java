@@ -22,8 +22,8 @@ public class TestAddressDto {
 
     @BeforeEach
     void init(){
-      address = TestEntitiesFactory.getAddress();
-      addressDto = TestEntitiesFactory.getAddressDto();
+        this.address = TestEntitiesFactory.getAddress();
+        this.addressDto = TestEntitiesFactory.getAddressDto();
     }
     @Test
     void convertEntityToDtoAndExpectConsistency(){

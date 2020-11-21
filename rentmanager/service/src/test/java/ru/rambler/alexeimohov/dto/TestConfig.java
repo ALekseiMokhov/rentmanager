@@ -11,12 +11,6 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapperImpl;
 @Configuration
 @ComponentScan("ru.rambler.alexeimohov.dto")
 public class TestConfig {
-    @Bean
-    RentPointMapper rentPointMapper(){
-        return  new RentPointMapperImpl();
-    }
 
-    @Bean
-    UserMapper userMapper(){return  new UserMapperImpl();}
 
 }
