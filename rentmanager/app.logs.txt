@@ -1,0 +1,2 @@
+2020-11-23 12:03:15 INFO  Main:15 - hello world
+2020-11-23 12:03:15 ERROR Main:21 - Something else is wrong here

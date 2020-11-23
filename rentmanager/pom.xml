@@ -19,6 +19,7 @@
     <properties>
         <source>15</source>
         <spring.version>5.2.8.RELEASE</spring.version>
+        <slf4j.version>1.6.6</slf4j.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.12</lombok.version>
@@ -41,6 +42,12 @@
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
         </dependency>
+
+     <!--   <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.4</version>
+        </dependency>-->
         <!-- db dependencies -->
         <dependency>
             <groupId>mysql</groupId>
@@ -69,7 +76,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.28</version>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

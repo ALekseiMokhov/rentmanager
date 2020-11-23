@@ -23,12 +23,12 @@ public class VehicleService implements IVehicleService {
         this.vehicleDao = vehicleDao;
         this.vehicleMapper = vehicleMapper;
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
        vehicleDao.remove( id );
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(VehicleDto dto) {
         Vehicle vehicle = vehicleMapper.fromDto( dto );
@@ -39,7 +39,7 @@ public class VehicleService implements IVehicleService {
              vehicleDao.update( vehicle );
          }
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void setDateForBooking(Long id, LocalDate date) {
        Vehicle vehicle = vehicleDao.findById( id )  ;

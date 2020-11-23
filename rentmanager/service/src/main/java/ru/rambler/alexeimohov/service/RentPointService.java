@@ -1,6 +1,7 @@
 package ru.rambler.alexeimohov.service;
 
 import com.vividsolutions.jts.io.ParseException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = false, rollbackFor = Exception.class)
+@Slf4j
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class RentPointService implements IRentPointService {
     @Autowired
     RentPointDao rentPointDao;
@@ -26,11 +28,15 @@ public class RentPointService implements IRentPointService {
         this.rentPointDao = rentPointDao;
         this.mapper = mapper;
     }
+
+    @Transactional(readOnly = false)
     public void saveOrUpdate(RentPointDto dto) throws ParseException {
-        if (rentPointDao.getByCoordinate( PointConverter.fromDto( dto.getCoordinate() ) ) != null) {
-            rentPointDao.update( mapper.fromDto( dto ) );
-        } else {
+        if (rentPointDao.getByCoordinate( PointConverter.fromDto( dto.getCoordinate() ) ) == null) {
             rentPointDao.save( mapper.fromDto( dto ) );
+            log.debug( "rent point saved " + dto.getPointName());
+        } else {
+            rentPointDao.update( mapper.fromDto( dto ) );
+            log.debug( "rent point updated " + dto.getPointName());
         }
     }
 
@@ -38,9 +44,10 @@ public class RentPointService implements IRentPointService {
         return mapper.toDto( rentPointDao.findById( id ) );
     }
 
-
+    @Transactional(readOnly = false)
     public void remove(Long id) {
         rentPointDao.remove( id );
+        log.info( "rentpoint was deleted: "+id );
     }
 
     public List <RentPointDto> getAll() {
@@ -51,7 +58,8 @@ public class RentPointService implements IRentPointService {
 
     @Override
     public RentPointDto getByCoordinate(Double x, Double y) {
-        return null;
+        return  null /*TODO fill the method*/
+                ;
     }
 
     public List <RentPointDto> getPointsByValue() {

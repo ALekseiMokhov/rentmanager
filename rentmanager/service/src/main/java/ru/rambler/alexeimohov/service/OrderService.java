@@ -1,5 +1,8 @@
 package ru.rambler.alexeimohov.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.OrderDao;
@@ -12,6 +15,8 @@ import ru.rambler.alexeimohov.entities.Order;
 import ru.rambler.alexeimohov.entities.User;
 import ru.rambler.alexeimohov.entities.Vehicle;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
+import ru.rambler.alexeimohov.service.events.OrderCancelledEvent;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 import ru.rambler.alexeimohov.service.interfaces.IOrderService;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
@@ -25,36 +30,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = false, rollbackFor = Exception.class)
-public class OrderService implements IOrderService {
+@Slf4j
+@Transactional(readOnly = true, rollbackFor = Exception.class)
+public class OrderService implements IOrderService  {
 
     private OrderDao orderDao;
 
-    private IUserService userService;
-
-    private IVehicleService vehicleService;
-
-    private IMessageService messageService;
-
-    private UserMapper userMapper;
-
-    private VehicleMapper vehicleMapper;
-
-    private MessageMapper messageMapper;
-
     private OrderMapper orderMapper;
 
+    private ApplicationEventPublisher publisher;
 
-    public OrderService(OrderDao orderDao, IUserService userService, IVehicleService vehicleService,
-                        IMessageService messageService, UserMapper userMapper,
-                        VehicleMapper vehicleMapper, MessageMapper messageMapper, OrderMapper orderMapper) {
+
+    public OrderService(OrderDao orderDao, OrderMapper orderMapper) {
         this.orderDao = orderDao;
-        this.userService = userService;
-        this.vehicleService = vehicleService;
-        this.messageService = messageService;
-        this.userMapper = userMapper;
-        this.vehicleMapper = vehicleMapper;
-        this.messageMapper = messageMapper;
         this.orderMapper = orderMapper;
     }
 
@@ -62,34 +50,28 @@ public class OrderService implements IOrderService {
     public OrderDto getById(Long id) {
         return orderMapper.toDto( orderDao.findById( id ) );
     }
-
+    
+    @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
-
-        User user = userMapper.fromDto(userService.getByUserName( dto.getUserName() )  );
-        if(user.getSubscription()!=null && user.getSubscription().getExpirationDate().isBefore( order.getStartTime().toLocalDate() ))
-                    {
-                        order.setHasValidSubscription( true );
-                    }
-        order.setUser( user );
-
-        Vehicle vehicle = vehicleMapper.fromDto( vehicleService.getById( Long.valueOf( dto.getVehicleId() ) ) );
-        vehicleService.setDateForBooking( vehicle.getId(),order.getStartTime().toLocalDate() );
-        order.setVehicle( vehicle );
-
-        if (orderDao.findById( order.getId() ) == null) {
+         if((order.getId()==null) ||(orderDao.findById( order.getId() ) == null) ){
             orderDao.save( order );
+            log.debug( "order created : "+order.getId() );
         } else {
             orderDao.update( order );
+             log.debug( "order updated : "+order.getId() );
         }
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
         orderDao.remove( id );
+        log.debug( "order deleted : "+ id );
     }
 
+
+    @Transactional(readOnly = false)
     @Override
     public void finish(Long id) {
       Order order = orderDao.findById( id );
@@ -99,14 +81,18 @@ public class OrderService implements IOrderService {
                         countTotalPrice( order.getStartTime(),order.getFinishTime(),
                                 order.getVehicle().getRentPrice() ,order.getVehicle().getFinePrice() )  );
       }
-        orderDao.findById( id ).setStatus( OrderStatus.FINISHED );
-      messageService.sendMessage( null/* text from property*/ );
+        order.setStatus( OrderStatus.FINISHED );
+        publisher.publishEvent( new OrderFinishedEvent( order.getUser().getId(),order.getVehicle().getId() ) );
+        log.debug( "event was published " );
 
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void cancel(Long id) {
-      orderDao.findById( id ).setStatus( OrderStatus.CANCELLED );
+        Order order =  orderDao.findById( id );
+        order.setStatus( OrderStatus.CANCELLED );
+        publisher.publishEvent( new OrderCancelledEvent( order.getUser().getId(),order.getVehicle().getId() ) );
+        log.debug( "event was published " );
     }
 
     @Override
@@ -114,8 +100,11 @@ public class OrderService implements IOrderService {
         return orderMapper.listToDto( orderDao.findAll() );
     }
 
+    
+        // count total price
     private double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine)   {
-       long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS     ) ;
-       return  (price*hours + fine);
+        long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS     ) ;
+        return  (price*hours + fine);
     }
+
 }

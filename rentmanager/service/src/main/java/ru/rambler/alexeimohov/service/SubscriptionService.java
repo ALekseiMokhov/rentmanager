@@ -28,6 +28,7 @@ public class SubscriptionService implements ISubscriptionService {
         return subscriptionMapper.toDto( subscriptionDao.findById( id ) );
     }
 
+    @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(SubscriptionDto dto) {
         Subscription subscription = subscriptionMapper.fromDto( dto );
@@ -38,7 +39,7 @@ public class SubscriptionService implements ISubscriptionService {
             subscriptionDao.update( subscription );
         }
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
         subscriptionDao.remove( id );

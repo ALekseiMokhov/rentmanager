@@ -27,8 +27,8 @@ public class TestOrderDto {
     @Test
     void convertEntityToDtoAndExpectConsistency(){
       OrderDto converted = orderMapper.toDto( order );
-        Assertions.assertEquals("1", converted.getVehicleId()  );
-        Assertions.assertEquals("Sergei", converted.getUserName()  );
+        Assertions.assertEquals("1", converted.getUserDto().getId() );
+        Assertions.assertEquals("Sergei", converted.getUserDto().getFullName() );
 
     }
 

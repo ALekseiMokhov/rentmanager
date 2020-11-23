@@ -1,17 +1,23 @@
 package ru.rambler.alexeimohov.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dao.interfaces.MessageDao;
 import ru.rambler.alexeimohov.dto.MessageDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.entities.Message;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 
+import java.awt.desktop.AppForegroundListener;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = false, rollbackFor = Exception.class)
+@Slf4j
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class MessageService implements IMessageService {
 
     private MessageDao messageDao;
@@ -21,7 +27,7 @@ public class MessageService implements IMessageService {
         this.messageDao = messageDao;
         this.messageMapper = messageMapper;
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(MessageDto dto) {
         Message message = messageMapper.fromDto( dto );
@@ -29,6 +35,12 @@ public class MessageService implements IMessageService {
             messageDao.save( message );
         }
         else messageDao.update( message );
+    }
+
+    @Override
+    @TransactionalEventListener
+    public void sendMessage(OrderFinishedEvent event) {
+        log.debug("Message sent!");
     }
 
     @Override
@@ -40,9 +52,12 @@ public class MessageService implements IMessageService {
     public List <MessageDto> getAll() {
         return messageMapper.listToDto( messageDao.findAll() );
     }
-
+    @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
           messageDao.remove( id );
     }
+
+    
+
 }

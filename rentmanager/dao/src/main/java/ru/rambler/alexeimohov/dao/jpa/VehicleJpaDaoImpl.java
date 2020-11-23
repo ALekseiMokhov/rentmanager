@@ -78,7 +78,7 @@ public class VehicleJpaDaoImpl extends GenericJpaDao implements VehicleDao {
 
     @Override
     public List <Vehicle> findAll() {
-        return entityManager.createQuery( VehicleQueries.SELECT_ALL_VEHICLES )
+        return entityManager.createQuery( "Select v from Vehicle v" )
                 .getResultList();
     }
 

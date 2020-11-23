@@ -121,10 +121,10 @@ public class TestEntitiesFactory {
        OrderDto orderDto = new OrderDto();
        orderDto.setId( "29572" );
        orderDto.setBlockedFunds( "23.8" );
-       orderDto.setUserName("Someone");
+       orderDto.setUserDto(getUserDto());
        orderDto.setCreationTime( "2018-12-30T19:34:50.63" );
        orderDto.setHasValidSubscription( "true" );
-       orderDto.setVehicleId( getVehicleDto().getId() );
+       orderDto.setVehicleDto( getVehicleDto() );
        return orderDto;
     }
 

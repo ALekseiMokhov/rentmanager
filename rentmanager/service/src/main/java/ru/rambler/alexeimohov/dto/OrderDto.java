@@ -25,9 +25,9 @@ public class OrderDto {
 
     private String status;
     
-    private String userName;
+    private UserDto userDto;
 
-    private String vehicleId;
+    private VehicleDto vehicleDto;
 
 
 }
