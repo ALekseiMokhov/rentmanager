@@ -57,10 +57,10 @@ public class TestOrderService {
 
         this.vehicle = new Vehicle();
 
-        this.order = new Order(342l, LocalDateTime.now(),LocalDateTime.now(),null,
+        this.order = new Order(342l, LocalDateTime.now(),LocalDateTime.now(),null, 1111_1111_1111_1111l,
                 8.0,0.0,false, OrderStatus.IN_RENT,user,vehicle );
         this.orderDto = new OrderDto( "1" ,String.valueOf( LocalDateTime.now() ),
-                String.valueOf( LocalDateTime.now() ),null,"20",
+                String.valueOf( LocalDateTime.now() ),null,"1111_1111_1111_1111l","20",
                 null,"false","IN_RENT",new UserDto(),new VehicleDto());
 
     }

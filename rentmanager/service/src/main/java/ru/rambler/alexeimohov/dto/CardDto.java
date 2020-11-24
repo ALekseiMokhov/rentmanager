@@ -20,5 +20,7 @@ public class CardDto {
     
     private String availableFunds;
 
+    private String blockedFunds;
+
     private String userId;
 }

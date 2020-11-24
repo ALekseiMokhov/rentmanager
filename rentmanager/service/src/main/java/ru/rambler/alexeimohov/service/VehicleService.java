@@ -32,7 +32,7 @@ public class VehicleService implements IVehicleService {
     @Override
     public void saveOrUpdate(VehicleDto dto) {
         Vehicle vehicle = vehicleMapper.fromDto( dto );
-         if(vehicleDao.findById( vehicle.getId() )==null){
+         if(vehicle.getId( )==null){
              vehicleDao.save( vehicle );
          }
          else {

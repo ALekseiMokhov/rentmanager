@@ -1,9 +1,11 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
+import org.springframework.stereotype.Service;
 import ru.rambler.alexeimohov.dto.SubscriptionDto;
 
 import java.util.List;
 
+@Service
 public interface ISubscriptionService {
 
     SubscriptionDto getById(Long id);
@@ -14,5 +16,5 @@ public interface ISubscriptionService {
 
     List <SubscriptionDto> getAll();
 
-    String getSubscriptionHolder(Long id);
+    String getSubscriptionHolderName(Long id);
 }

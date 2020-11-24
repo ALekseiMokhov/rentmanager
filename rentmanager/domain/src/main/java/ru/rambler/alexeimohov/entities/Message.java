@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "id")
-
 public class Message {
 
     @Id
@@ -29,8 +27,7 @@ public class Message {
     @Length(max = 1024)
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
     private User user;
 
     @Column(name = "date_time")
@@ -40,7 +37,7 @@ public class Message {
         this.dateTimeOfSending = LocalDateTime.now();
     }
 
-    /* overriding due to use id for equals*/
+    /* overriding due to use of id for equals*/
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -56,6 +53,6 @@ public class Message {
 
     @Override
     public int hashCode() {
-        return 42;
+        return getClass().hashCode();
     }
 }

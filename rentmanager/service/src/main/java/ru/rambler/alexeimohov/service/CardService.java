@@ -3,10 +3,13 @@ package ru.rambler.alexeimohov.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dao.interfaces.CardDao;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapper;
 import ru.rambler.alexeimohov.entities.Card;
+import ru.rambler.alexeimohov.entities.User;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
 import java.util.List;
@@ -28,7 +31,7 @@ public class CardService implements ICardService {
     @Override
     public void saveOrUpdate(CardDto dto) {
         Card card = cardMapper.fromDto( dto );
-        if (cardDao.findById( card.getId() ) == null) {
+        if (card.getId()  == null) {
             cardDao.save( card );
             log.debug( "card been saved: "+ card.getCreditCardNumber());
         } else {
@@ -46,18 +49,33 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public CardDto getByCardNumber(Long cardNumber) {
+    public CardDto getByCardNumber(long cardNumber) {
         return cardMapper.toDto( cardDao.findByCardNumber( cardNumber ) );
 
     }
 
     @Override
-    public CardDto getById(Long id) {
+    public CardDto getById(long id) {
         return cardMapper.toDto( cardDao.findById( id ) );
     }
 
     @Override
     public List <CardDto> getAll() {
         return cardMapper.listToDto( cardDao.findAll() );
+    }
+
+
+    @TransactionalEventListener
+    public void onApplicationEvent(OrderFinishedEvent event) {
+        log.info( "triggered by order" );
+        Card card = cardDao.findByCardNumber( Long.valueOf( event.getOrderDto().getCreditCardNumber() ) )  ;
+        log.info("Card retrieved: "+ card.getId() +"\n"  + "card's available funds: " +card.getAvailableFunds());
+
+        card.unBlockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        card.writeOff(  Double.parseDouble( event.getOrderDto().getTotalPrice() ));
+        cardDao.update( card );
+        
+        log.info("Card retrieved: "+ card.getId() +"\n"  + "card's available funds: " +card.getAvailableFunds());
+      
     }
 }

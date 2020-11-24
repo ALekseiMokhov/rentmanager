@@ -1,10 +1,12 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
+import org.springframework.stereotype.Service;
 import ru.rambler.alexeimohov.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public interface IVehicleService {
     void remove(Long id);
 

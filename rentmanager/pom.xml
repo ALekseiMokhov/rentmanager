@@ -12,6 +12,8 @@
         <module>dao</module>
         <module>service</module>
         <module>config</module>
+        <module>controller</module>
+        <module>web</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -40,14 +42,14 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
+            <version>2.3.0</version>
         </dependency>
 
-     <!--   <dependency>
+        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.4</version>
-        </dependency>-->
+            <version>1.6.1</version>
+        </dependency>
         <!-- db dependencies -->
         <dependency>
             <groupId>mysql</groupId>
@@ -70,6 +72,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- Spring mvc-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <!-- Logging dependencies-->

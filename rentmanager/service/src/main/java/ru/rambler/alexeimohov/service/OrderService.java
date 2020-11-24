@@ -2,32 +2,20 @@ package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.OrderDao;
 import ru.rambler.alexeimohov.dto.OrderDto;
-import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.OrderMapper;
-import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
-import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapper;
 import ru.rambler.alexeimohov.entities.Order;
-import ru.rambler.alexeimohov.entities.User;
-import ru.rambler.alexeimohov.entities.Vehicle;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
-import ru.rambler.alexeimohov.service.events.OrderCancelledEvent;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
-import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 import ru.rambler.alexeimohov.service.interfaces.IOrderService;
-import ru.rambler.alexeimohov.service.interfaces.IUserService;
-import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -41,9 +29,10 @@ public class OrderService implements IOrderService  {
     private ApplicationEventPublisher publisher;
 
 
-    public OrderService(OrderDao orderDao, OrderMapper orderMapper) {
+    public OrderService(OrderDao orderDao, OrderMapper orderMapper, ApplicationEventPublisher publisher) {
         this.orderDao = orderDao;
         this.orderMapper = orderMapper;
+        this.publisher = publisher;
     }
 
     @Override
@@ -55,8 +44,9 @@ public class OrderService implements IOrderService  {
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
-         if((order.getId()==null) ||(orderDao.findById( order.getId() ) == null) ){
+         if(order.getId()==null ){
             orderDao.save( order );
+            publisher.publishEvent( new OrderCreatedEvent( orderMapper.toDto(order) ) );
             log.debug( "order created : "+order.getId() );
         } else {
             orderDao.update( order );
@@ -82,7 +72,7 @@ public class OrderService implements IOrderService  {
                                 order.getVehicle().getRentPrice() ,order.getVehicle().getFinePrice() )  );
       }
         order.setStatus( OrderStatus.FINISHED );
-        publisher.publishEvent( new OrderFinishedEvent( order.getUser().getId(),order.getVehicle().getId() ) );
+        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto(order) ) );
         log.debug( "event was published " );
 
     }
@@ -91,7 +81,7 @@ public class OrderService implements IOrderService  {
     public void cancel(Long id) {
         Order order =  orderDao.findById( id );
         order.setStatus( OrderStatus.CANCELLED );
-        publisher.publishEvent( new OrderCancelledEvent( order.getUser().getId(),order.getVehicle().getId() ) );
+        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto(order) ) );
         log.debug( "event was published " );
     }
 

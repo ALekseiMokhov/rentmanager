@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "`order`")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
 public class Order {
@@ -33,6 +34,10 @@ public class Order {
 
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
+
+    @Column(name = "card_number")
+    @NotNull(message = "Card can'tbe null!")
+    private long creditCardNumber;
 
     @Column(name = "blocked_funds")
     @NotNull(message = "Order is processed after blocking user funds!")
@@ -54,7 +59,7 @@ public class Order {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 

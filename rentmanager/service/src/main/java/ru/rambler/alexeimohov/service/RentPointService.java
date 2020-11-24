@@ -1,5 +1,7 @@
 package ru.rambler.alexeimohov.service;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.ParseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,13 @@ public class RentPointService implements IRentPointService {
 
     @Transactional(readOnly = false)
     public void saveOrUpdate(RentPointDto dto) throws ParseException {
-        if (rentPointDao.getByCoordinate( PointConverter.fromDto( dto.getCoordinate() ) ) == null) {
-            rentPointDao.save( mapper.fromDto( dto ) );
-            log.debug( "rent point saved " + dto.getPointName());
+        RentPoint rentPoint =mapper.fromDto( dto );
+        if (rentPoint.getId() == null) {
+            rentPointDao.save( rentPoint );
+            log.debug( "rent point saved " + dto.getPointName() );
         } else {
             rentPointDao.update( mapper.fromDto( dto ) );
-            log.debug( "rent point updated " + dto.getPointName());
+            log.debug( "rent point updated " + dto.getPointName() );
         }
     }
 
@@ -47,7 +50,7 @@ public class RentPointService implements IRentPointService {
     @Transactional(readOnly = false)
     public void remove(Long id) {
         rentPointDao.remove( id );
-        log.info( "rentpoint was deleted: "+id );
+        log.info( "rentpoint was deleted: " + id );
     }
 
     public List <RentPointDto> getAll() {
@@ -58,8 +61,10 @@ public class RentPointService implements IRentPointService {
 
     @Override
     public RentPointDto getByCoordinate(Double x, Double y) {
-        return  null /*TODO fill the method*/
-                ;
+        RentPoint retrieved = rentPointDao.getByCoordinate( new GeometryFactory().createPoint( new Coordinate( x, y ) ) );
+        log.debug( "Rent point was retrieved by coordinate: " +"("+x +","+y+")");
+        return mapper.toDto( retrieved );
+
     }
 
     public List <RentPointDto> getPointsByValue() {

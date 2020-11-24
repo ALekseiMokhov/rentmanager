@@ -32,7 +32,7 @@ public class SubscriptionService implements ISubscriptionService {
     @Override
     public void saveOrUpdate(SubscriptionDto dto) {
         Subscription subscription = subscriptionMapper.fromDto( dto );
-        if(subscriptionDao.findById( subscription.getId() )==null){
+        if(subscription.getId() ==null){
             subscriptionDao.save( subscription );
         }
         else {
@@ -51,7 +51,7 @@ public class SubscriptionService implements ISubscriptionService {
     }
 
     @Override
-    public String getSubscriptionHolder(Long id) {
+    public String getSubscriptionHolderName(Long id) {
         return subscriptionDao.getSubscribeHolder( id ).getFullName();
     }
 }

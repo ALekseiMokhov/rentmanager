@@ -1,11 +1,12 @@
 package ru.rambler.alexeimohov.dao.jpa;
 
+import org.springframework.stereotype.Repository;
 import ru.rambler.alexeimohov.dao.interfaces.CardDao;
 import ru.rambler.alexeimohov.dao.jpa.queries.CardQueries;
 import ru.rambler.alexeimohov.entities.Card;
 
 import java.util.List;
-
+    @Repository
 public class CardDaoJpaImpl extends GenericJpaDao implements CardDao {
     @Override
     public Card findByCardNumber(Long number) {

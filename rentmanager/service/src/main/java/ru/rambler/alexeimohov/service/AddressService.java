@@ -35,7 +35,7 @@ public class AddressService implements IAddressService {
     @Transactional(readOnly = false)
     public void saveOrUpdate(AddressDto dto) {
         Address address = mapper.fromDto(dto);
-        if (addressDao.findById( address.getId() ) == null) {
+        if ( address.getId() == null) {
             addressDao.save( address );
             log.debug( "address saved " );
         } else {

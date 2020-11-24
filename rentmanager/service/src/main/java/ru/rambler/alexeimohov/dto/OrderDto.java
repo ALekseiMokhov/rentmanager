@@ -17,6 +17,8 @@ public class OrderDto {
 
     private String finishTime;
 
+    private String creditCardNumber;
+
     private String blockedFunds;
 
     private String totalPrice;

@@ -15,7 +15,7 @@ import java.util.List;
 
 /*
     Entity representing scooter sharing place with com.vividsolutions.jts.geom.
-    Point  mapped as GeometryType related 1:1 Address, 1:n Vehicle .
+    Point  mapped as GeometryType related 1:1 Address, 1:n Vehicle bidirectional.
     Nested comparator comparing by PointType field pointValue
  * */
 @Entity
@@ -40,7 +40,10 @@ public class RentPoint {
     @NotNull(message = "Coordinate of renting point must be specified!")
     private Point coordinate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "rentPoint", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "rentPoint",
+            cascade = CascadeType.ALL)
     private List <Vehicle>vehicles;
 
      public static Comparator<RentPoint>pointValueComparator = new Comparator <RentPoint>() {
