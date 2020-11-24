@@ -11,7 +11,7 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.RentPointMapper;
 import ru.rambler.alexeimohov.entities.RentPoint;
 
 /*
-* Integration test for DTO using local package Configuration*/
+ * Integration test for DTO using local package Configuration*/
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class TestRentPointDto {
@@ -24,24 +24,24 @@ public class TestRentPointDto {
     private RentPointDto rentPointDto;
 
     @BeforeEach
-    void init(){
+    void init() {
         this.rentPoint = TestEntitiesFactory.getRentPoint();
 
         this.rentPointDto = TestEntitiesFactory.getRentPointDto();
     }
 
     @Test
-    void MapPointToDtoAndExpectCorrectFieldValues(){
-      RentPointDto dtoMapped = rentPointMapper.toDto( rentPoint );
-        System.out.println(dtoMapped.getCoordinate());
-        Assertions.assertEquals("Main point" , dtoMapped.getPointName() );
-        Assertions.assertEquals("POINT (334 58)" , dtoMapped.getCoordinate() );
+    void MapPointToDtoAndExpectCorrectFieldValues() {
+        RentPointDto dtoMapped = rentPointMapper.toDto( rentPoint );
+        System.out.println( dtoMapped.getCoordinate() );
+        Assertions.assertEquals( "Main point", dtoMapped.getPointName() );
+        Assertions.assertEquals( "POINT (334 58)", dtoMapped.getCoordinate() );
     }
 
     @Test
-    void MapDtoToPointAndExpectCorrectFieldValues(){
-       RentPoint rentPointMapped = rentPointMapper.fromDto( rentPointDto ) ;
-        Assertions.assertEquals("Susan McCassey" , rentPointMapped.getPointName() );
-        Assertions.assertEquals(222, rentPointMapped.getCoordinate().getX() );
+    void MapDtoToPointAndExpectCorrectFieldValues() {
+        RentPoint rentPointMapped = rentPointMapper.fromDto( rentPointDto );
+        Assertions.assertEquals( "Susan McCassey", rentPointMapped.getPointName() );
+        Assertions.assertEquals( 222, rentPointMapped.getCoordinate().getX() );
     }
 }

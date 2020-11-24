@@ -1,6 +1,5 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dto.CardDto;
@@ -21,11 +20,11 @@ public interface IUserService {
 
     UserDto getByUserName(String userName);
 
-    void addCreditCard(long id,CardDto cardDto);
+    void addCreditCard(long id, CardDto cardDto);
 
-    void removeCreditCard(long id,CardDto cardDto);
+    void removeCreditCard(long id, CardDto cardDto);
 
-    void addMessage(long id,MessageDto messageDto);
+    void addMessage(long id, MessageDto messageDto);
 
     void removeMessage(long id, MessageDto messageDto);
 

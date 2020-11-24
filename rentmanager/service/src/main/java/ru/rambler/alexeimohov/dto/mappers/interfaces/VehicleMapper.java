@@ -7,7 +7,7 @@ import ru.rambler.alexeimohov.entities.Vehicle;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",uses = GeometryConverter.class)
+@Mapper(componentModel = "spring", uses = GeometryConverter.class)
 public interface VehicleMapper {
 
     VehicleDto toDto(Vehicle vehicle);

@@ -41,7 +41,7 @@ public class TestEntitiesFactory {
     }
 
     static Vehicle getVehicle() {
-      Vehicle vehicle = new Vehicle();
+        Vehicle vehicle = new Vehicle();
         vehicle = new Vehicle();
         vehicle.setId( 1l );
         vehicle.setType( VehicleType.SCOOTER );
@@ -50,40 +50,40 @@ public class TestEntitiesFactory {
         vehicle.setFinePrice( 12.0 );
         vehicle.setModelName( "S1" );
         vehicle.setRentPoint( getRentPoint() );
-      return vehicle;
+        return vehicle;
     }
 
     static VehicleDto getVehicleDto() {
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setIsChildish( "false" );
-        vehicleDto.setModelName("S1") ;
+        vehicleDto.setModelName( "S1" );
         vehicleDto.setRentPrice( "3.5" );
         vehicleDto.setFinePrice( "22.9" );
         vehicleDto.setIsHumanPowered( "true" );
-        vehicleDto.setType( "SCOOTER");
+        vehicleDto.setType( "SCOOTER" );
         vehicleDto.setId( "43" );
         vehicleDto.setRentPoint( getRentPointDto() );
         return vehicleDto;
     }
 
     static Subscription getSubscription() {
-         Subscription subscription = new Subscription();
-         subscription.setId( 223l );
-         subscription.setPrice( 43.9 );
-         subscription.setStartDate( LocalDate.now() );
-         subscription.setExpirationDate( LocalDate.of( 2040,12,31 ) );
-         subscription.setUser( getUser() );
-         return subscription;
+        Subscription subscription = new Subscription();
+        subscription.setId( 223l );
+        subscription.setPrice( 43.9 );
+        subscription.setStartDate( LocalDate.now() );
+        subscription.setExpirationDate( LocalDate.of( 2040, 12, 31 ) );
+        subscription.setUser( getUser() );
+        return subscription;
     }
 
     static SubscriptionDto getSubscriptionDto() {
-         SubscriptionDto subscriptionDto = new SubscriptionDto(  );
-         subscriptionDto.setId( "46363" );
-         subscriptionDto.setUserName( "Test Name" );
-         subscriptionDto.setStartDate( "2020-10-10" );
-         subscriptionDto.setExpirationDate( "2040-12-31" );
-         subscriptionDto.setPrice( "54.0" );
-         return subscriptionDto;
+        SubscriptionDto subscriptionDto = new SubscriptionDto();
+        subscriptionDto.setId( "46363" );
+        subscriptionDto.setUserName( "Test Name" );
+        subscriptionDto.setStartDate( "2020-10-10" );
+        subscriptionDto.setExpirationDate( "2040-12-31" );
+        subscriptionDto.setPrice( "54.0" );
+        return subscriptionDto;
     }
 
     static RentPoint getRentPoint() {
@@ -114,66 +114,66 @@ public class TestEntitiesFactory {
         order.setUser( getUser() );
         order.setBlockedFunds( 4.0 );
         order.setStatus( OrderStatus.IN_RENT );
-        return  order;
+        return order;
     }
 
     static OrderDto getOrderDto() {
-       OrderDto orderDto = new OrderDto();
-       orderDto.setId( "29572" );
-       orderDto.setBlockedFunds( "23.8" );
-       orderDto.setUserDto(getUserDto());
-       orderDto.setCreationTime( "2018-12-30T19:34:50.63" );
-       orderDto.setHasValidSubscription( "true" );
-       orderDto.setVehicleDto( getVehicleDto() );
-       return orderDto;
+        OrderDto orderDto = new OrderDto();
+        orderDto.setId( "29572" );
+        orderDto.setBlockedFunds( "23.8" );
+        orderDto.setUserDto( getUserDto() );
+        orderDto.setCreationTime( "2018-12-30T19:34:50.63" );
+        orderDto.setHasValidSubscription( "true" );
+        orderDto.setVehicleDto( getVehicleDto() );
+        return orderDto;
     }
 
     static Message getMessage() {
-       Message message = new Message(  );
-       message.setId( 7475l );
-       message.setText( "Hi there!" );
-       message.setUser( getUser() );
-       return message;
+        Message message = new Message();
+        message.setId( 7475l );
+        message.setText( "Hi there!" );
+        message.setUser( getUser() );
+        return message;
     }
 
     static MessageDto getMessageDto() {
-       MessageDto messageDto = new MessageDto()     ;
-       messageDto.setId( "2352" );
-       messageDto.setDateTimeOfSending( String.valueOf( LocalDateTime.now() ) );
-       messageDto.setText( "Hi again there!It's longer now!" );
-       messageDto.setUserId( getUserDto().getId() );
-       return  messageDto;
+        MessageDto messageDto = new MessageDto();
+        messageDto.setId( "2352" );
+        messageDto.setDateTimeOfSending( String.valueOf( LocalDateTime.now() ) );
+        messageDto.setText( "Hi again there!It's longer now!" );
+        messageDto.setUserId( getUserDto().getId() );
+        return messageDto;
     }
 
     static Card getCard() {
-         Card card = new Card();
-         card.setId( 345l );
-         card.setAvailableFunds(3333.4);
-         card.setCreditCardNumber( 4444_4444_4444_4444l );
-         card.setUser( getUser() );
-         card.setExpirationDate( LocalDate.of( 2040,12,31 ));
-         return card;
+        Card card = new Card();
+        card.setId( 345l );
+        card.setAvailableFunds( 3333.4 );
+        card.setCreditCardNumber( 4444_4444_4444_4444l );
+        card.setUser( getUser() );
+        card.setExpirationDate( LocalDate.of( 2040, 12, 31 ) );
+        return card;
 
     }
 
     static CardDto getCardDto() {
-         CardDto cardDto = new CardDto();
-         cardDto.setId( "325" );
-         cardDto.setUserId( String.valueOf( getUser().getId() ) );
-         cardDto.setCreditCardNumber( "1111111111111111" );
-         cardDto.setAvailableFunds( "232" );
-         cardDto.setExpirationDate( "2040-12-31" );
-         return cardDto;
+        CardDto cardDto = new CardDto();
+        cardDto.setId( "325" );
+        cardDto.setUserId( String.valueOf( getUser().getId() ) );
+        cardDto.setCreditCardNumber( "1111111111111111" );
+        cardDto.setAvailableFunds( "232" );
+        cardDto.setExpirationDate( "2040-12-31" );
+        return cardDto;
     }
 
     static Address getAddress() {
-       Address address = new Address();
-       address.setId( 1l );
-       address.setRentPoint( getRentPoint() );
-       address.setCity( "Moscow" );
-       address.setStreet( "Tverskaya" );
-       address.setBuildingNumber( 232 );
-       return address;
+        Address address = new Address();
+        address.setId( 1l );
+        address.setRentPoint( getRentPoint() );
+        address.setCity( "Moscow" );
+        address.setStreet( "Tverskaya" );
+        address.setBuildingNumber( 232 );
+        return address;
     }
 
     static AddressDto getAddressDto() {

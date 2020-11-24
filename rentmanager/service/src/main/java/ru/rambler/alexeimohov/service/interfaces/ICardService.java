@@ -19,7 +19,7 @@ public interface ICardService {
     CardDto getById(long id);
 
     List <CardDto> getAll();
-    
+
     @TransactionalEventListener
-     void onApplicationEvent(OrderFinishedEvent event) ;
+    void onApplicationEvent(OrderFinishedEvent event);
 }

@@ -23,8 +23,8 @@ public class TestVehicleDto {
 
     @BeforeEach
     void init() {
-        this.vehicle=TestEntitiesFactory.getVehicle();
-        this.vehicleDto=TestEntitiesFactory.getVehicleDto();
+        this.vehicle = TestEntitiesFactory.getVehicle();
+        this.vehicleDto = TestEntitiesFactory.getVehicleDto();
     }
 
     @Test
@@ -33,9 +33,10 @@ public class TestVehicleDto {
         Assertions.assertNotNull( retrieved.getRentPoint().getCoordinate() );
         Assertions.assertEquals( retrieved.getModelName(), "S1" );
     }
+
     @Test
-    void convertFromDtoANdExpectConsistentFields(){
+    void convertFromDtoANdExpectConsistentFields() {
         Vehicle retrieved = vehicleMapper.fromDto( vehicleDto );
-        Assertions.assertEquals( 3.5,retrieved.getRentPrice() );
+        Assertions.assertEquals( 3.5, retrieved.getRentPrice() );
     }
 }

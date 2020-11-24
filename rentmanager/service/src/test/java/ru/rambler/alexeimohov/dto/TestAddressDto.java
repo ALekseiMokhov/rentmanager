@@ -18,24 +18,25 @@ public class TestAddressDto {
 
     private Address address;
 
-    private  AddressDto addressDto;
+    private AddressDto addressDto;
 
     @BeforeEach
-    void init(){
+    void init() {
         this.address = TestEntitiesFactory.getAddress();
         this.addressDto = TestEntitiesFactory.getAddressDto();
     }
+
     @Test
-    void convertEntityToDtoAndExpectConsistency(){
-       AddressDto  converted = addressMapper.toDto( address );
-        Assertions.assertEquals("Moscow", converted.getCity()  );
-        Assertions.assertEquals("232", converted.getBuildingNumber()  );
+    void convertEntityToDtoAndExpectConsistency() {
+        AddressDto converted = addressMapper.toDto( address );
+        Assertions.assertEquals( "Moscow", converted.getCity() );
+        Assertions.assertEquals( "232", converted.getBuildingNumber() );
     }
 
     @Test
-    void convertDtoToEntityAndExpectConsistency(){
-       Address converted = addressMapper.fromDto( addressDto );
-       Assertions.assertEquals( 693l,converted.getId() );
-       Assertions.assertEquals( 1,converted.getBuildingNumber() );
+    void convertDtoToEntityAndExpectConsistency() {
+        Address converted = addressMapper.fromDto( addressDto );
+        Assertions.assertEquals( 693l, converted.getId() );
+        Assertions.assertEquals( 1, converted.getBuildingNumber() );
     }
 }

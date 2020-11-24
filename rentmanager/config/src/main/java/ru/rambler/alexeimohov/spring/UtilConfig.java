@@ -13,21 +13,26 @@ import java.util.Properties;
 @Configuration
 @PropertySource("application.properties")
 public class UtilConfig {
-    @Value( "spring.mail.host" )
+    @Value("${spring.mail.host}")
     private String host;
-    @Value( "spring.mail.username" )
+    @Value("${spring.mail.username}")
     private String username;
-    @Value( "spring.mail.password" )
+    @Value("${spring.mail.password}")
     private String password;
-    @Value( "${spring.mail.port}" )
+    @Value("${spring.mail.port}")
     private int port;
-    @Value( "spring.mail.protocol" )
+    @Value("${spring.mail.protocol}")
     private String protocol;
-    @Value( "mail.debug" )
-    private String debug ;
-    
+    @Value("${mail.debug}")
+    private String debug;
+
     @Bean
-    public JavaMailSender getMailSender(){
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost( host );
         mailSender.setUsername( username );
@@ -36,13 +41,8 @@ public class UtilConfig {
         mailSender.setProtocol( protocol );
 
         Properties properties = mailSender.getJavaMailProperties();
-        properties.setProperty( "mail.debug", debug);
+        properties.setProperty( "mail.debug", debug );
 
         return mailSender;
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 }

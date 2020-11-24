@@ -1,6 +1,5 @@
 package ru.rambler.alexeimohov.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,11 +21,12 @@ import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.any;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 public class TestOrderService {
-    private OrderDao orderDao  = Mockito.mock( OrderJpaDaoImpl.class);
+    private OrderDao orderDao = Mockito.mock( OrderJpaDaoImpl.class );
 
     private IUserService userService = Mockito.mock( UserService.class );
 
@@ -35,7 +35,7 @@ public class TestOrderService {
     private OrderMapper orderMapper = Mockito.mock( OrderMapperImpl.class );
 
     private UserMapper userMapper = Mockito.mock( UserMapperImpl.class );
-    
+
     private VehicleMapper vehicleMapper = Mockito.mock( VehicleMapperImpl.class );
 
     @InjectMocks
@@ -52,31 +52,32 @@ public class TestOrderService {
 
     @BeforeEach
     void init() {
-        this.user=new User();
+        this.user = new User();
         user.setFullName( "Alex" );
 
         this.vehicle = new Vehicle();
 
-        this.order = new Order(342l, LocalDateTime.now(),LocalDateTime.now(),null, 1111_1111_1111_1111l,
-                8.0,0.0,false, OrderStatus.IN_RENT,user,vehicle );
-        this.orderDto = new OrderDto( "1" ,String.valueOf( LocalDateTime.now() ),
-                String.valueOf( LocalDateTime.now() ),null,"1111_1111_1111_1111l","20",
-                null,"false","IN_RENT",new UserDto(),new VehicleDto());
+        this.order = new Order( 342l, LocalDateTime.now(), LocalDateTime.now(), null, 1111_1111_1111_1111l,
+                8.0, 0.0, false, OrderStatus.IN_RENT, user, vehicle );
+        this.orderDto = new OrderDto( "1", String.valueOf( LocalDateTime.now() ),
+                String.valueOf( LocalDateTime.now() ), null, "1111_1111_1111_1111l", "20",
+                null, "false", "IN_RENT", new UserDto(), new VehicleDto() );
 
     }
-          @Test
-    void createOrderAndExpectConsistency(){
+
+    @Test
+    void createOrderAndExpectConsistency() {
 
         //given
-         given( orderMapper.fromDto( any() ) ).willReturn( order );
-         given( userMapper.fromDto( any() ) ).willReturn( user );
-         given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
+        given( orderMapper.fromDto( any() ) ).willReturn( order );
+        given( userMapper.fromDto( any() ) ).willReturn( user );
+        given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
         //when
-         orderService.saveOrUpdate( orderDto );
+        orderService.saveOrUpdate( orderDto );
         //then
-         /*verify( userService,times( 1 ) ) .getByUserName( anyString() ) ;*/
+        /*verify( userService,times( 1 ) ) .getByUserName( anyString() ) ;*/
          /*verify( vehicleService,times( 1 ) ) .getById( anyLong() ) ;
          verify( vehicleService,times( 1 ) ) .setDateForBooking( any(),any() ); ;*/
 
-   }
+    }
 }

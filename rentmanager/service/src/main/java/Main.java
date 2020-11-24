@@ -31,7 +31,6 @@ public class Main {
         userDto.setPhoneNumber( "223344" );
 
 
-
         IUserService userService = context.getBean( IUserService.class );
         userService.saveOrUpdate( userDto );
         userService.addCreditCard( 1, cardDto );
@@ -39,7 +38,7 @@ public class Main {
 
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setRentPrice( "0.023" );
-        IVehicleService vehicleService =  context.getBean( IVehicleService.class );
+        IVehicleService vehicleService = context.getBean( IVehicleService.class );
         vehicleService.saveOrUpdate( vehicleDto );
 
         OrderDto dto = new OrderDto();
@@ -47,7 +46,7 @@ public class Main {
         dto.setVehicleDto( vehicleService.getById( 1l ) );
         dto.setUserDto( userService.getById( 1l ) );
         dto.setStartTime( String.valueOf( LocalDateTime.of( 2020, 10, 10, 1, 1, 1, 1 ) ) );
-        service.saveOrUpdate( dto);
+        service.saveOrUpdate( dto );
 
         service.finish( 1l );
 

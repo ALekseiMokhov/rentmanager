@@ -23,27 +23,29 @@ public class VehicleService implements IVehicleService {
         this.vehicleDao = vehicleDao;
         this.vehicleMapper = vehicleMapper;
     }
+
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
-       vehicleDao.remove( id );
+        vehicleDao.remove( id );
     }
+
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(VehicleDto dto) {
         Vehicle vehicle = vehicleMapper.fromDto( dto );
-         if(vehicle.getId( )==null){
-             vehicleDao.save( vehicle );
-         }
-         else {
-             vehicleDao.update( vehicle );
-         }
+        if (vehicle.getId() == null) {
+            vehicleDao.save( vehicle );
+        } else {
+            vehicleDao.update( vehicle );
+        }
     }
+
     @Transactional(readOnly = false)
     @Override
     public void setDateForBooking(Long id, LocalDate date) {
-       Vehicle vehicle = vehicleDao.findById( id )  ;
-       vehicle.getBookedDates().add( date );
+        Vehicle vehicle = vehicleDao.findById( id );
+        vehicle.getBookedDates().add( date );
     }
 
     @Override
@@ -68,11 +70,11 @@ public class VehicleService implements IVehicleService {
 
     @Override
     public List <VehicleDto> getAllFromPoint(Long id) {
-        return vehicleMapper.listToDto(  vehicleDao.findAllFromPoint( id ) );
+        return vehicleMapper.listToDto( vehicleDao.findAllFromPoint( id ) );
     }
 
     @Override
     public List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate date) {
-        return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id,date ) );
+        return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id, date ) );
     }
 }

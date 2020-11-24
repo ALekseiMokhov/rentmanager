@@ -33,9 +33,10 @@ public class TestUserDto {
         Assertions.assertEquals( "EXCLUSIVE", converted.getPrivilege() );
 
     }
+
     @Test
-    void reverseConvertFromDto(){
-        User converted = userMapper.fromDto( userDto ) ;
+    void reverseConvertFromDto() {
+        User converted = userMapper.fromDto( userDto );
         Assertions.assertEquals( converted.getRole(), Role.USER );
     }
 }

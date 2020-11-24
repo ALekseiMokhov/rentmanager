@@ -74,7 +74,7 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void deleteMessageAndExpectConsistency() {
-        System.out.println(userDao.findAll().size());
+        System.out.println( userDao.findAll().size() );
         User retrieved = userDao.findById( 2l );
         Message toDelete = retrieved.getMessages().get( 0 );
         Assertions.assertNotNull( toDelete );

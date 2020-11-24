@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.SubscriptionDao;
 import ru.rambler.alexeimohov.dto.SubscriptionDto;
+import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.SubscriptionMapper;
+import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 
@@ -18,9 +20,12 @@ public class SubscriptionService implements ISubscriptionService {
 
     private SubscriptionMapper subscriptionMapper;
 
-    public SubscriptionService(SubscriptionDao subscriptionDao, SubscriptionMapper subscriptionMapper) {
+    private UserMapper userMapper;
+
+    public SubscriptionService(SubscriptionDao subscriptionDao, SubscriptionMapper subscriptionMapper, UserMapper userMapper) {
         this.subscriptionDao = subscriptionDao;
         this.subscriptionMapper = subscriptionMapper;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -32,13 +37,13 @@ public class SubscriptionService implements ISubscriptionService {
     @Override
     public void saveOrUpdate(SubscriptionDto dto) {
         Subscription subscription = subscriptionMapper.fromDto( dto );
-        if(subscription.getId() ==null){
+        if (subscription.getId() == null) {
             subscriptionDao.save( subscription );
-        }
-        else {
+        } else {
             subscriptionDao.update( subscription );
         }
     }
+
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
@@ -51,7 +56,8 @@ public class SubscriptionService implements ISubscriptionService {
     }
 
     @Override
-    public String getSubscriptionHolderName(Long id) {
-        return subscriptionDao.getSubscribeHolder( id ).getFullName();
+    public UserDto getSubscriptionHolder(Long id) {
+        return userMapper.toDto( subscriptionDao.getSubscribeHolder( id ) );
     }
+
 }

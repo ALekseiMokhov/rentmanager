@@ -10,9 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SubscriptionMapper {
-     @InheritInverseConfiguration
+    @InheritInverseConfiguration
     Subscription fromDto(SubscriptionDto dto);
-     @Mapping( source = "user.fullName",target = "userName")
+
+    @Mapping(source = "user.fullName", target = "userName")
     SubscriptionDto toDto(Subscription subscription);
 
     List <Subscription> listFromDto(List <SubscriptionDto> list);

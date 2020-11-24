@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.*;
+
 /*
  * Unit tests with BDD mockito and classic mockito methods*/
 @ExtendWith(MockitoExtension.class)
@@ -41,28 +42,28 @@ class TestCardService {
         this.user = new User();
         this.user.setFullName( "Sergei Ivanov" );
         this.user.setId( 1l );
-        this.card = new Card( 1l, LocalDate.of( 2040,12,31 ),
-                LocalDateTime.now(),4556140832208361l,1000.0,50.0, user);
-        this.cardDto = new CardDto("1","2040-12-31", "2020-11-12T09:00:00",
-                "4556140832208361","1000","300","1");
+        this.card = new Card( 1l, LocalDate.of( 2040, 12, 31 ),
+                LocalDateTime.now(), 4556140832208361l, 1000.0, 50.0, user );
+        this.cardDto = new CardDto( "1", "2040-12-31", "2020-11-12T09:00:00",
+                "4556140832208361", "1000", "300", "1" );
     }
 
     @Test
     void saveExistingEntityAndExpectUpdate() {
         //given
         given( cardDao.findById( anyLong() ) ).willReturn( card );
-        when(mapper.fromDto( any() )).thenReturn( card ) ;
+        when( mapper.fromDto( any() ) ).thenReturn( card );
         //when
         service.saveOrUpdate( cardDto );
         //then
-        then(cardDao).should().update( this.card );
+        then( cardDao ).should().update( this.card );
     }
 
 
     @Test
     void getByCardNumberAndExpectMaptoDto() {
         //given
-        given( cardDao.findByCardNumber( 4556140832208361l ) ).willReturn( card ) ;
+        given( cardDao.findByCardNumber( 4556140832208361l ) ).willReturn( card );
         //when
         service.getByCardNumber( 4556140832208361l );
         //then

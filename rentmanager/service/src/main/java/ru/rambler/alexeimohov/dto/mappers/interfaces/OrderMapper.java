@@ -9,11 +9,11 @@ import ru.rambler.alexeimohov.entities.Order;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",uses = GeometryConverter.class)
+@Mapper(componentModel = "spring", uses = GeometryConverter.class)
 public interface OrderMapper {
-    @Mapping(source = "hasValidSubscription", target ="hasValidSubscription" )
-    @Mapping(source = "user", target ="userDto" )
-    @Mapping(source = "vehicle", target ="vehicleDto" )
+    @Mapping(source = "hasValidSubscription", target = "hasValidSubscription")
+    @Mapping(source = "user", target = "userDto")
+    @Mapping(source = "vehicle", target = "vehicleDto")
     OrderDto toDto(Order order);
 
 

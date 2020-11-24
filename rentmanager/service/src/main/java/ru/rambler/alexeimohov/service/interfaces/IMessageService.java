@@ -3,6 +3,7 @@ package ru.rambler.alexeimohov.service.interfaces;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dto.MessageDto;
+import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public interface IMessageService {
 
     void remove(Long id);
 
+    void sendCustomMessage(UserDto to, String topic, String text);
+
     @TransactionalEventListener
-    void sendMessage(OrderFinishedEvent event) ;
+    void sendMessage(OrderFinishedEvent event);
 
 
 }

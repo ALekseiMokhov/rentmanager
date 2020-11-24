@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -27,7 +26,7 @@ public class Message {
     @Length(max = 1024)
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH })
     private User user;
 
     @Column(name = "date_time")

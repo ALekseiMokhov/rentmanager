@@ -42,30 +42,31 @@ public class Card {
     private double blockedFunds;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH })
     private User user;
 
-    public void addFunds(double amount){
-        availableFunds+=amount;
+    public void addFunds(double amount) {
+        availableFunds += amount;
     }
 
-    public void writeOff(double amount){
-        if(amount>availableFunds){
-            throw new IllegalArgumentException("Incorrect amount to write-off!");
+    public void writeOff(double amount) {
+        if (amount > availableFunds) {
+            throw new IllegalArgumentException( "Incorrect amount to write-off!" );
         }
-        availableFunds-=amount;
+        availableFunds -= amount;
     }
 
-    public void blockFunds(double amount){
-          writeOff( amount );
-        blockedFunds+=amount;
+    public void blockFunds(double amount) {
+        writeOff( amount );
+        blockedFunds += amount;
     }
-    public void unBlockFunds(double amount){
-        if(amount>blockedFunds){
-            throw new IllegalArgumentException("Incorrect amount to unblock!");
+
+    public void unBlockFunds(double amount) {
+        if (amount > blockedFunds) {
+            throw new IllegalArgumentException( "Incorrect amount to unblock!" );
 
         }
-        blockedFunds-=amount;
+        blockedFunds -= amount;
         addFunds( amount );
     }
 }

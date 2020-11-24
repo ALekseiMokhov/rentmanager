@@ -17,7 +17,7 @@ public interface IVehicleService {
     VehicleDto getById(Long id);
 
     List <VehicleDto> getAll();
-    
+
     List <VehicleDto> getAllChildish();
 
     List <VehicleDto> getAllMuscular();

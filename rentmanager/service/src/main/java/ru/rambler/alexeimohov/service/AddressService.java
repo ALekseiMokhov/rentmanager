@@ -20,22 +20,22 @@ public class AddressService implements IAddressService {
     private AddressDao addressDao;
 
     private AddressMapper mapper;
-    
+
 
     public AddressService(AddressDao addressDao, AddressMapper mapper) {
         this.addressDao = addressDao;
         this.mapper = mapper;
     }
 
-    public AddressDto getById(Long id){
-       return mapper.toDto( addressDao.findById( id ) ) ;
+    public AddressDto getById(Long id) {
+        return mapper.toDto( addressDao.findById( id ) );
     }
 
     @Override
     @Transactional(readOnly = false)
     public void saveOrUpdate(AddressDto dto) {
-        Address address = mapper.fromDto(dto);
-        if ( address.getId() == null) {
+        Address address = mapper.fromDto( dto );
+        if (address.getId() == null) {
             addressDao.save( address );
             log.debug( "address saved " );
         } else {
@@ -43,10 +43,11 @@ public class AddressService implements IAddressService {
             log.debug( "address.updated" );
         }
     }
+
     @Transactional(readOnly = false)
-    public void remove (Long id){
+    public void remove(Long id) {
         addressDao.remove( id );
-        log.info( "card deleted : "+id );
+        log.info( "card deleted : " + id );
     }
 
     public List <AddressDto> getAddressesByCity(String cityName) {

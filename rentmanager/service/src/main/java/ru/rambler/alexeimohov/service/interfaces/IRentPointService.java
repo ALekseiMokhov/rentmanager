@@ -8,12 +8,14 @@ import java.util.List;
 
 @Service
 public interface IRentPointService {
-    
+
     RentPointDto getById(Long id);
 
     void saveOrUpdate(RentPointDto dto) throws ParseException;
 
-    List <RentPointDto > getAll();
+    List <RentPointDto> getAll();
+
+    List <RentPointDto> getPointsByValue();
 
     void remove(Long id);
 

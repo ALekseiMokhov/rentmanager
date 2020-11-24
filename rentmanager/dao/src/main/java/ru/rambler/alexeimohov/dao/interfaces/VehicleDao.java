@@ -9,7 +9,7 @@ import java.util.Set;
 public interface VehicleDao extends IGenericDao <Vehicle> {
     void setDateBooked(Long id, LocalDate date);
 
-    boolean isBooked(Long id,LocalDate date);
+    boolean isBooked(Long id, LocalDate date);
 
     Set <LocalDate> getBookedDates(Long id);
 

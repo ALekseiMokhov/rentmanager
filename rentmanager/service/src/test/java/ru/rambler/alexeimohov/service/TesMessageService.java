@@ -50,7 +50,7 @@ class TesMessageService {
         //then
         then( messageDao ).should( never() )
                 .update( message );
-        verify( messageDao,times( 1 ) ).save( message );
+        verify( messageDao, times( 1 ) ).save( message );
     }
-    
+
 }

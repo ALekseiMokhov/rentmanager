@@ -18,25 +18,27 @@ public class TestOrderDto {
 
     private Order order;
 
-    private  OrderDto orderDto;
+    private OrderDto orderDto;
+
     @BeforeEach
-    void init(){
+    void init() {
         this.order = TestEntitiesFactory.getOrder();
         this.orderDto = TestEntitiesFactory.getOrderDto();
     }
+
     @Test
-    void convertEntityToDtoAndExpectConsistency(){
-      OrderDto converted = orderMapper.toDto( order );
-        Assertions.assertEquals("1", converted.getUserDto().getId() );
-        Assertions.assertEquals("Sergei", converted.getUserDto().getFullName() );
+    void convertEntityToDtoAndExpectConsistency() {
+        OrderDto converted = orderMapper.toDto( order );
+        Assertions.assertEquals( "1", converted.getUserDto().getId() );
+        Assertions.assertEquals( "Sergei", converted.getUserDto().getFullName() );
 
     }
 
     @Test
-    void convertDtoToEntityAndExpectConsistency(){
-       Order converted = orderMapper.fromDto( orderDto );
-       Assertions.assertEquals( "Someone",converted.getUser().getFullName() );
-       Assertions.assertEquals( true,converted.isHasValidSubscription());
+    void convertDtoToEntityAndExpectConsistency() {
+        Order converted = orderMapper.fromDto( orderDto );
+        Assertions.assertEquals( "Someone", converted.getUser().getFullName() );
+        Assertions.assertEquals( true, converted.isHasValidSubscription() );
     }
-    
+
 }

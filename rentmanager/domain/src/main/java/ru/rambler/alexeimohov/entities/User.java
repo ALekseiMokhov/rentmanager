@@ -12,9 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /*Main entity class
  * Relationships:
@@ -63,14 +61,14 @@ public class User {
     private Privilege privilege;
 
     @OneToMany(
-            mappedBy ="user",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List <Message> messages;
 
     @OneToMany(
-            mappedBy ="user",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
@@ -91,7 +89,7 @@ public class User {
         this.subscription = subscription;
         this.privilege = privilege;
         this.messages = new ArrayList <>();
-        this.creditCards = new ArrayList <>() ;
+        this.creditCards = new ArrayList <>();
     }
 
     public void addMessage(Message message) {
@@ -106,9 +104,10 @@ public class User {
 
     public void addCreditCard(Card card) {
 
-        creditCards.add( card )  ;
+        creditCards.add( card );
         card.setUser( this );
     }
+
     public void removeCreditCard(Card card) {
         creditCards.remove( card );
         card.setUser( null );

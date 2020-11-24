@@ -2,6 +2,8 @@ package ru.rambler.alexeimohov.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -10,11 +12,11 @@ import lombok.*;
 public class AddressDto {
 
     private String id;
-
+    @NotNull
     private String city;
-
+    @NotNull
     private String buildingNumber;
-
+    @NotNull
     private String street;
 
 }

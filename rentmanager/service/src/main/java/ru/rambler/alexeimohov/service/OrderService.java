@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 @Slf4j
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class OrderService implements IOrderService  {
+public class OrderService implements IOrderService {
 
     private OrderDao orderDao;
 
@@ -39,49 +39,51 @@ public class OrderService implements IOrderService  {
     public OrderDto getById(Long id) {
         return orderMapper.toDto( orderDao.findById( id ) );
     }
-    
+
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
-         if(order.getId()==null ){
+        if (order.getId() == null) {
             orderDao.save( order );
-            publisher.publishEvent( new OrderCreatedEvent( orderMapper.toDto(order) ) );
-            log.debug( "order created : "+order.getId() );
+            publisher.publishEvent( new OrderCreatedEvent( orderMapper.toDto( order ) ) );
+            log.debug( "order created : " + order.getId() );
         } else {
             orderDao.update( order );
-             log.debug( "order updated : "+order.getId() );
+            log.debug( "order updated : " + order.getId() );
         }
     }
+
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
         orderDao.remove( id );
-        log.debug( "order deleted : "+ id );
+        log.debug( "order deleted : " + id );
     }
 
 
     @Transactional(readOnly = false)
     @Override
     public void finish(Long id) {
-      Order order = orderDao.findById( id );
-      order.setFinishTime( LocalDateTime.now() );
-      if(order.isHasValidSubscription()==false){
-                order.setTotalPrice(
-                        countTotalPrice( order.getStartTime(),order.getFinishTime(),
-                                order.getVehicle().getRentPrice() ,order.getVehicle().getFinePrice() )  );
-      }
+        Order order = orderDao.findById( id );
+        order.setFinishTime( LocalDateTime.now() );
+        if (order.isHasValidSubscription() == false) {
+            order.setTotalPrice(
+                    countTotalPrice( order.getStartTime(), order.getFinishTime(),
+                            order.getVehicle().getRentPrice(), order.getVehicle().getFinePrice() ) );
+        }
         order.setStatus( OrderStatus.FINISHED );
-        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto(order) ) );
+        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
         log.debug( "event was published " );
 
     }
+
     @Transactional(readOnly = false)
     @Override
     public void cancel(Long id) {
-        Order order =  orderDao.findById( id );
+        Order order = orderDao.findById( id );
         order.setStatus( OrderStatus.CANCELLED );
-        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto(order) ) );
+        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
         log.debug( "event was published " );
     }
 
@@ -90,11 +92,11 @@ public class OrderService implements IOrderService  {
         return orderMapper.listToDto( orderDao.findAll() );
     }
 
-    
-        // count total price
-    private double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine)   {
-        long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS     ) ;
-        return  (price*hours + fine);
+
+    // count total price
+    private double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine) {
+        long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS );
+        return (price * hours + fine);
     }
 
 }

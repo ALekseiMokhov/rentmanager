@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
-     /*
-     * Caches and return DTO instance to avoid endless mapping*/
+
+/*
+ * Caches and return DTO instance to avoid endless mapping*/
 @Component
 public class CycleAvoidingMappingContext {
 

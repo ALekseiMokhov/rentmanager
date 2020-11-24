@@ -26,7 +26,7 @@
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.12</lombok.version>
     </properties>
-   
+
     <dependencies>
         <!--hibernate dependencies with spatial jar for persisting Point -->
         <dependency>
@@ -98,7 +98,7 @@
             <version>2.13.2</version>
             <scope>runtime</scope>
         </dependency>
-         <!-- Testing depndencies -->
+        <!-- Testing depndencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -112,7 +112,12 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>

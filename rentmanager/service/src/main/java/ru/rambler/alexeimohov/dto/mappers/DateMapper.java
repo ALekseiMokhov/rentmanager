@@ -22,8 +22,9 @@ public class DateMapper {
 
 
     }
+
     public String timeAsString(LocalDateTime dateTime) {
-        return  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss") 
+        return DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss" )
                 .format( dateTime );
     }
 

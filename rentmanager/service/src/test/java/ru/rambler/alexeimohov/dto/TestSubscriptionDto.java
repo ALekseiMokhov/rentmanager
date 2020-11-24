@@ -21,21 +21,22 @@ public class TestSubscriptionDto {
     private SubscriptionDto subscriptionDto;
 
     @BeforeEach
-    void init(){
+    void init() {
         this.subscription = TestEntitiesFactory.getSubscription();
         this.subscriptionDto = TestEntitiesFactory.getSubscriptionDto();
     }
+
     @Test
-    void convertEntityToDtoAndExpectConsistency(){
-          SubscriptionDto converted = subscriptionMapper.toDto( subscription )  ;
-        Assertions.assertEquals("2040-12-31", converted.getExpirationDate() );
-        Assertions.assertEquals( "Sergei",converted.getUserName() );
+    void convertEntityToDtoAndExpectConsistency() {
+        SubscriptionDto converted = subscriptionMapper.toDto( subscription );
+        Assertions.assertEquals( "2040-12-31", converted.getExpirationDate() );
+        Assertions.assertEquals( "Sergei", converted.getUserName() );
     }
 
     @Test
-    void convertDtoToEntityAndExpectConsistency(){
-      Subscription converted = subscriptionMapper.fromDto( subscriptionDto )  ;
-      Assertions.assertEquals( "2040-12-31",converted.getExpirationDate().toString() );
+    void convertDtoToEntityAndExpectConsistency() {
+        Subscription converted = subscriptionMapper.fromDto( subscriptionDto );
+        Assertions.assertEquals( "2040-12-31", converted.getExpirationDate().toString() );
 
     }
 }

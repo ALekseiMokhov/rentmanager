@@ -11,9 +11,9 @@ public interface IOrderService {
 
     void saveOrUpdate(OrderDto dto);
 
-    void remove(Long id)   ;
+    void remove(Long id);
 
-    void finish(Long id) ;
+    void finish(Long id);
 
     void cancel(Long id);
 

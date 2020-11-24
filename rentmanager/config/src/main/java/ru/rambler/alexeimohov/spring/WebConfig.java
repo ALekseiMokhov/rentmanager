@@ -20,21 +20,21 @@ import java.util.Arrays;
 @Configuration
 @EnableWebMvc
 @PropertySource("application.properties")
-@ComponentScan({"ru.rambler.alexeimohov.controller"})
+@ComponentScan({ "ru.rambler.alexeimohov.controller" })
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
-        log.debug(String.valueOf(applicationContext.getBeanDefinitionCount()));
-        log.debug(String.valueOf( Arrays.asList(applicationContext.getBeanDefinitionNames())));
+        log.debug( String.valueOf( applicationContext.getBeanDefinitionCount() ) );
+        log.debug( String.valueOf( Arrays.asList( applicationContext.getBeanDefinitionNames() ) ) );
 
     }
 
     @Bean
     public View jsonTemplate() {
         MappingJackson2JsonView view = new MappingJackson2JsonView();
-        view.setPrettyPrint(true);
+        view.setPrettyPrint( true );
         return view;
     }
 

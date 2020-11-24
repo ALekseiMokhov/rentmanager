@@ -65,5 +65,5 @@ public class TestOrderDao {
         Assertions.assertEquals( order.getUser(), userDao.findByUserName( "Sergey Borisov" ) );
 
     }
-    
+
 }

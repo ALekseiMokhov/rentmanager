@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /*
-* Configuration class for integration tests of DAO layer H2 db*/
+ * Configuration class for integration tests of DAO layer H2 db*/
 /*TODO add profiling : test*/
 @Configuration
 @ComponentScan("ru.rambler.alexeimohov.dao")
@@ -39,10 +39,10 @@ public class TestConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName( "org.h2.Driver");
+        dataSource.setDriverClassName( "org.h2.Driver" );
         dataSource.setUrl( "jdbc:h2:tcp://localhost/~/test" );
         dataSource.setUsername( "sa" );
-        dataSource.setPassword( "");
+        dataSource.setPassword( "" );
         return dataSource;
     }
 
@@ -63,10 +63,10 @@ public class TestConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty( "hibernate.hbm2ddl.auto","create-drop");
-        properties.setProperty( "hibernate.dialect","org.hibernate.spatial.dialect.h2geodb.GeoDBDialect"  );
-        properties.setProperty( "hibernate.show_sql","true"  );
-        properties.setProperty( "hibernate.format_sql","true" );
+        properties.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
+        properties.setProperty( "hibernate.dialect", "org.hibernate.spatial.dialect.h2geodb.GeoDBDialect" );
+        properties.setProperty( "hibernate.show_sql", "true" );
+        properties.setProperty( "hibernate.format_sql", "true" );
 
         return properties;
     }

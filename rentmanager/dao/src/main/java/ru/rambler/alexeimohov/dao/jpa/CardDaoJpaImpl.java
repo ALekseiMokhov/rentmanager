@@ -6,7 +6,8 @@ import ru.rambler.alexeimohov.dao.jpa.queries.CardQueries;
 import ru.rambler.alexeimohov.entities.Card;
 
 import java.util.List;
-    @Repository
+
+@Repository
 public class CardDaoJpaImpl extends GenericJpaDao implements CardDao {
     @Override
     public Card findByCardNumber(Long number) {

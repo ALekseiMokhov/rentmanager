@@ -12,7 +12,6 @@ import ru.rambler.alexeimohov.dto.RentPointDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.RentPointMapper;
 import ru.rambler.alexeimohov.entities.RentPoint;
 import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
-import ru.rambler.alexeimohov.util.PointConverter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +32,7 @@ public class RentPointService implements IRentPointService {
 
     @Transactional(readOnly = false)
     public void saveOrUpdate(RentPointDto dto) throws ParseException {
-        RentPoint rentPoint =mapper.fromDto( dto );
+        RentPoint rentPoint = mapper.fromDto( dto );
         if (rentPoint.getId() == null) {
             rentPointDao.save( rentPoint );
             log.debug( "rent point saved " + dto.getPointName() );
@@ -62,7 +61,7 @@ public class RentPointService implements IRentPointService {
     @Override
     public RentPointDto getByCoordinate(Double x, Double y) {
         RentPoint retrieved = rentPointDao.getByCoordinate( new GeometryFactory().createPoint( new Coordinate( x, y ) ) );
-        log.debug( "Rent point was retrieved by coordinate: " +"("+x +","+y+")");
+        log.debug( "Rent point was retrieved by coordinate: " + "(" + x + "," + y + ")" );
         return mapper.toDto( retrieved );
 
     }
