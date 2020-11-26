@@ -57,6 +57,9 @@ public class AddressService implements IAddressService {
                 .collect( Collectors.toList() );
     }
 
+    public AddressDto getAddressByPointId(long id){
+      return mapper.toDto(addressDao.findById( id ));
+    }
 
     @Override
     public List <AddressDto> getAll() {

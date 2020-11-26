@@ -8,7 +8,7 @@ import ru.rambler.alexeimohov.entities.User;
 import java.util.List;
 
 @Repository(value = "userDao")
-public class UserJpaDaoImpl extends GenericJpaDao implements UserDao {
+public class UserDaoJpaImpl extends GenericDaoJpa implements UserDao {
 
 
     public User findByUserName(String userName) {
@@ -18,11 +18,11 @@ public class UserJpaDaoImpl extends GenericJpaDao implements UserDao {
                 ;
     }
 
-    public User findById(Long id) {
+    public User findById(long id) {
         return entityManager.find( User.class, id );
     }
 
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.rambler.alexeimohov.dao.interfaces.CardDao;
-import ru.rambler.alexeimohov.dao.jpa.CardDaoJpaImpl;
+import ru.rambler.alexeimohov.dao.jpa.CardDaoImplJpa;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapperImpl;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.*;
 @ExtendWith(MockitoExtension.class)
 class TestCardService {
 
-    private CardDao cardDao = Mockito.mock( CardDaoJpaImpl.class );
+    private CardDao cardDao = Mockito.mock( CardDaoImplJpa.class );
 
     private CardMapper mapper = Mockito.mock( CardMapperImpl.class );
 

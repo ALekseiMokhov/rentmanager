@@ -19,7 +19,7 @@ public class TestEntitiesFactory {
         user.setId( 547469l );
         user.setFullName( "Sergei" );
         user.setPassword( "tu4hd845cY23L" );
-        user.setSubscription( new Subscription( 1l, user, 22.9, LocalDate.now(), LocalDate.now(),
+        user.setSubscription( new Subscription( 1l, user, 22.9,false, LocalDate.now(), LocalDate.now(),
                 LocalDate.of( 2033, 11, 16 ) ) );
         user.setPrivilege( Privilege.EXCLUSIVE );
         user.addMessage( new Message( 1l, "Hi there!", user, LocalDateTime.now() ) );

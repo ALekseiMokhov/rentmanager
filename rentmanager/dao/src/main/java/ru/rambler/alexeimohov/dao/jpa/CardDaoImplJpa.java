@@ -8,21 +8,21 @@ import ru.rambler.alexeimohov.entities.Card;
 import java.util.List;
 
 @Repository
-public class CardDaoJpaImpl extends GenericJpaDao implements CardDao {
+public class CardDaoImplJpa extends GenericDaoJpa implements CardDao {
     @Override
-    public Card findByCardNumber(Long number) {
+    public Card findByCardNumber(long number) {
         return (Card) entityManager.createQuery( CardQueries.FIND_CARD_BY_NUMBER )
                 .setParameter( "number", number )
                 .getSingleResult();
     }
 
     @Override
-    public Card findById(Long id) {
+    public Card findById(long id) {
         return entityManager.find( Card.class, id );
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

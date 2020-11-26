@@ -10,15 +10,15 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository("subscriptionDao")
-public class SubscriptionJpaDaoImpl extends GenericJpaDao implements SubscriptionDao {
+public class SubscriptionDaoJpaImpl extends GenericDaoJpa implements SubscriptionDao {
 
     @Override
-    public Subscription findById(Long id) {
+    public Subscription findById(long id) {
         return entityManager.find( Subscription.class, id );
     }
 
     @Override
-    public User getSubscribeHolder(Long id) {
+    public User getSubscribeHolder(long id) {
 
 
         return (User) entityManager.createNativeQuery( SubscriptionQueries.FIND_USER_FOR_SUBSCRIPTION, User.class )
@@ -27,7 +27,7 @@ public class SubscriptionJpaDaoImpl extends GenericJpaDao implements Subscriptio
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 
@@ -48,5 +48,9 @@ public class SubscriptionJpaDaoImpl extends GenericJpaDao implements Subscriptio
     @Override
     public void update(Subscription object) {
         entityManager.merge( object );
+    }
+
+    public boolean isExpired(long id){
+        return entityManager.find( Subscription.class,id ).isExpired();
     }
 }

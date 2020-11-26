@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IGenericDao<T> {
 
-    T findById(Long id);
+    T findById(long id);
 
-    void remove(Long id);
+    void remove(long id);
 
     void save(T object);
 

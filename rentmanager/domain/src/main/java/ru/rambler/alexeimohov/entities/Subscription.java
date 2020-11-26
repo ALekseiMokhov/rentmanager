@@ -26,6 +26,9 @@ public class Subscription {
     @NotNull(message = "The subscribe must have price!")
     private double price;
 
+    @NotNull
+    private boolean isExpired;
+
     @Column(name = "date_order")
     @NotNull(message = "The order date can't be null!")
     private LocalDate orderDate;
@@ -40,5 +43,9 @@ public class Subscription {
 
     public Subscription() {
         this.orderDate = LocalDate.now();
+    }
+
+    public boolean isExpired() {
+        return expirationDate.isAfter( LocalDate.now() );
     }
 }

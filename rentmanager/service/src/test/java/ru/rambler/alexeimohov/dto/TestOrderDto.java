@@ -29,7 +29,6 @@ public class TestOrderDto {
     @Test
     void convertEntityToDtoAndExpectConsistency() {
         OrderDto converted = orderMapper.toDto( order );
-        Assertions.assertEquals( "1", converted.getUserDto().getId() );
         Assertions.assertEquals( "Sergei", converted.getUserDto().getFullName() );
 
     }
@@ -37,7 +36,7 @@ public class TestOrderDto {
     @Test
     void convertDtoToEntityAndExpectConsistency() {
         Order converted = orderMapper.fromDto( orderDto );
-        Assertions.assertEquals( "Someone", converted.getUser().getFullName() );
+        Assertions.assertEquals( "Alexander", converted.getUser().getFullName() );
         Assertions.assertEquals( true, converted.isHasValidSubscription() );
     }
 

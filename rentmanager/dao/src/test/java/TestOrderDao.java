@@ -59,10 +59,12 @@ public class TestOrderDao {
     @Transactional
     @Rollback
     void persistOrderAndExpectConsistency() {
+        vehicleDao.save( vehicle );
         userDao.save( user );
         orderDao.save( order );
         Assertions.assertEquals( 1, vehicleDao.findAll().size() );
         Assertions.assertEquals( order.getUser(), userDao.findByUserName( "Sergey Borisov" ) );
+        Assertions.assertEquals( order.getVehicle(), vehicleDao.findAll().get( 0 ) );
 
     }
 

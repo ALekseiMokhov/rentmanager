@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class PersistenceConfig {
 

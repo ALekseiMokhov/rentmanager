@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.rambler.alexeimohov.dao.interfaces.AddressDao;
-import ru.rambler.alexeimohov.dao.jpa.AddressDaoJpaImpl;
+import ru.rambler.alexeimohov.dao.jpa.AddressDaoImplJpa;
 import ru.rambler.alexeimohov.dto.AddressDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.AddressMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.AddressMapperImpl;
@@ -27,7 +27,7 @@ class TestAddressService {
 
     private AddressDto addressDto;
 
-    private AddressDao addressDao = Mockito.mock( AddressDaoJpaImpl.class );
+    private AddressDao addressDao = Mockito.mock( AddressDaoImplJpa.class );
 
     private AddressMapper mapper = Mockito.mock( AddressMapperImpl.class );
 
@@ -48,17 +48,6 @@ class TestAddressService {
         service.getById( 1l );
         //then
         verify( mapper, times( 1 ) ).toDto( any() );
-    }
-
-    @Test
-    void saveNonExistingEntityAndExpectSaveMethod() {
-        //given
-        when( mapper.fromDto( any() ) ).thenReturn( address );
-        given( addressDao.findById( 1l ) ).willReturn( null );
-        //when
-        service.saveOrUpdate( addressDto );
-        //then
-        then( addressDao ).should().save( address );
     }
 
 

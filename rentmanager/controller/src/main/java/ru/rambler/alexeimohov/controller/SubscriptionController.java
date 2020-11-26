@@ -10,7 +10,7 @@ import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/subscription")
 public class SubscriptionController {
 
     private ISubscriptionService subscriptionService;
@@ -20,31 +20,35 @@ public class SubscriptionController {
     }
 
     @PostMapping("/")
-    public ResponseEntity createSubscription(@RequestBody SubscriptionDto dto){
+    public ResponseEntity createSubscription(@RequestBody SubscriptionDto dto) {
         subscriptionService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED )  ;
+        return new ResponseEntity( HttpStatus.CREATED );
     }
+
     @GetMapping("/{id}")
-    public SubscriptionDto getById(@PathVariable long id){
-        return subscriptionService.getById( id )  ;
+    public SubscriptionDto getById(@PathVariable long id) {
+        return subscriptionService.getById( id );
     }
+
     @GetMapping("/name/{id}")
-    public UserDto getHolder(@PathVariable long id ){
-        return subscriptionService.getSubscriptionHolder( id )  ;
+    public UserDto getHolder(@PathVariable long id) {
+        return subscriptionService.getSubscriptionHolder( id );
     }
 
     @PutMapping("/")
-    public ResponseEntity updateSubscription(@RequestBody SubscriptionDto dto){
+    public ResponseEntity updateSubscription(@RequestBody SubscriptionDto dto) {
         subscriptionService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.OK )  ;
+        return new ResponseEntity( HttpStatus.OK );
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteSubscription(@PathVariable long id){
+    public ResponseEntity deleteSubscription(@PathVariable long id) {
         subscriptionService.remove( id );
-        return new ResponseEntity( HttpStatus.OK )  ;
+        return new ResponseEntity( HttpStatus.OK );
     }
+
     @GetMapping("/")
-    public List <SubscriptionDto>getAllSubscriptions(){
+    public List <SubscriptionDto> getAllSubscriptions() {
         return subscriptionService.getAll();
     }
 }

@@ -8,15 +8,15 @@ import ru.rambler.alexeimohov.entities.Address;
 import java.util.List;
 
 @Repository("addressDao")
-public class AddressDaoJpaImpl extends GenericJpaDao implements AddressDao {
+public class AddressDaoImplJpa extends GenericDaoJpa implements AddressDao {
 
     @Override
-    public Address findById(Long id) {
+    public Address findById(long id) {
         return entityManager.find( Address.class, id );
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

@@ -10,7 +10,7 @@ import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping ("/rentpoint")
 public class RentPointController {
 
     private IRentPointService rentPointService;
@@ -22,36 +22,38 @@ public class RentPointController {
     @PostMapping("/")
     public ResponseEntity createRentPoint(@RequestBody RentPointDto dto) throws ParseException {
         rentPointService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED ) ;
+        return new ResponseEntity( HttpStatus.CREATED );
     }
 
     @GetMapping("/{id}")
-    public RentPointDto getById(@PathVariable long id){
-              return rentPointService.getById( id ) ;
+    public RentPointDto getById(@PathVariable long id) {
+        return rentPointService.getById( id );
     }
+
     @GetMapping("/{x}/{y}")
-    public RentPointDto getByCoordinate(@PathVariable double x,double y){
-              return rentPointService.getByCoordinate( x ,y) ;
+    public RentPointDto getByCoordinate(@PathVariable double x, double y) {
+        return rentPointService.getByCoordinate( x, y );
     }
+
     @PutMapping("/")
     public ResponseEntity updateRentPoint(@RequestBody RentPointDto dto) throws ParseException {
         rentPointService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.OK ) ;
+        return new ResponseEntity( HttpStatus.OK );
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteRentPoint(@PathVariable long id) throws ParseException {
         rentPointService.remove( id );
-        return new ResponseEntity( HttpStatus.OK ) ;
+        return new ResponseEntity( HttpStatus.OK );
     }
 
     @GetMapping("/")
-    public List <RentPointDto> getAllRentPoints(){
+    public List <RentPointDto> getAllRentPoints() {
         return rentPointService.getAll();
     }
 
     @GetMapping("/sort")
-    public List <RentPointDto> getPointsByValue(){
+    public List <RentPointDto> getPointsByValue() {
         return rentPointService.getPointsByValue();
     }
 

@@ -8,16 +8,16 @@ import ru.rambler.alexeimohov.entities.Order;
 import java.util.List;
 
 @Repository
-public class OrderJpaDaoImpl extends GenericJpaDao implements OrderDao {
+public class OrderDaoJpaImpl extends GenericDaoJpa implements OrderDao {
     @Override
-    public Order findById(Long id) {
+    public Order findById(long id) {
         return ((Order) entityManager.createQuery( OrderQueries.FIND_ORDER_BY_ID )
                 .setParameter( "id", id )
                 .getSingleResult());
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

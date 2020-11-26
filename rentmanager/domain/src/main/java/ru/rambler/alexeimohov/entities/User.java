@@ -75,6 +75,7 @@ public class User {
     private List <Card> creditCards;
 
     public User() {
+        this.creditCards = new ArrayList <>();
         this.messages = new ArrayList <>();
     }
 

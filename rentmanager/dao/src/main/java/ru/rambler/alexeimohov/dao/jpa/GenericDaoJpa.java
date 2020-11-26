@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 /*
  * Sharing @Persistence context among Dao implementations*/
 
-public abstract class GenericJpaDao {
+public abstract class GenericDaoJpa {
     @PersistenceContext
     EntityManager entityManager;
 }

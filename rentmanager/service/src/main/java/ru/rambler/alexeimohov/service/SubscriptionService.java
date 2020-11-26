@@ -29,7 +29,7 @@ public class SubscriptionService implements ISubscriptionService {
     }
 
     @Override
-    public SubscriptionDto getById(Long id) {
+    public SubscriptionDto getById(long id) {
         return subscriptionMapper.toDto( subscriptionDao.findById( id ) );
     }
 
@@ -46,7 +46,7 @@ public class SubscriptionService implements ISubscriptionService {
 
     @Transactional(readOnly = false)
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         subscriptionDao.remove( id );
     }
 
@@ -56,8 +56,12 @@ public class SubscriptionService implements ISubscriptionService {
     }
 
     @Override
-    public UserDto getSubscriptionHolder(Long id) {
+    public UserDto getSubscriptionHolder(long id) {
         return userMapper.toDto( subscriptionDao.getSubscribeHolder( id ) );
+    }
+
+    public boolean isExpired(long id){
+        return subscriptionDao.isExpired( id );
     }
 
 }

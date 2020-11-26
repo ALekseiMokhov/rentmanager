@@ -16,8 +16,11 @@ public class UserDto {
     @NotNull
     private String fullName;
     @NotNull
-    /*TODO check not to represent in view*/
+
     private String password;
+
+    private String hasValidSubscription;
+
     @NotNull
     @Email
     private String email;

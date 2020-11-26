@@ -8,17 +8,17 @@ import ru.rambler.alexeimohov.entities.Message;
 import java.util.List;
 
 @Repository("messageDao")
-public class MessageDaoJpaImpl extends GenericJpaDao implements MessageDao {
+public class MessageDaoImplJpa extends GenericDaoJpa implements MessageDao {
 
 
     @Override
-    public Message findById(Long id) {
+    public Message findById(long id) {
         return entityManager.find( Message.class, id );
 
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

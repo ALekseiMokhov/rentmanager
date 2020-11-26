@@ -1,0 +1,48 @@
+2020-11-26 12:22:51 DEBUG OrderService:53 - order updated : 342
+2020-11-26 12:23:07 DEBUG OrderService:53 - order updated : 342
+2020-11-26 12:23:11 DEBUG CardService:40 - card been updated: 4556140832208361
+2020-11-26 12:23:18 DEBUG AddressService:43 - address.updated
+2020-11-26 13:06:12 DEBUG OrderService:53 - order updated : 342
+2020-11-26 13:08:25 DEBUG OrderService:53 - order updated : 342
+2020-11-26 13:51:52 DEBUG OrderService:53 - order updated : 342
+2020-11-26 13:52:32 DEBUG OrderService:53 - order updated : 342
+2020-11-26 13:58:31 DEBUG OrderService:53 - order updated : 342
+2020-11-26 13:59:44 DEBUG OrderService:50 - order created : null
+2020-11-26 14:02:02 DEBUG OrderService:50 - order created : null
+2020-11-26 14:02:56 DEBUG OrderService:50 - order created : null
+2020-11-26 14:03:48 DEBUG OrderService:50 - order created : null
+2020-11-26 14:04:05 DEBUG OrderService:50 - order created : null
+2020-11-26 14:04:05 DEBUG OrderService:53 - order updated : 342
+2020-11-26 14:13:28 DEBUG OrderService:77 - event was published 
+2020-11-26 14:14:05 DEBUG OrderService:77 - event was published 
+2020-11-26 14:14:56 DEBUG OrderService:77 - event was published 
+2020-11-26 14:16:19 DEBUG OrderService:77 - event was published 
+2020-11-26 14:17:48 DEBUG OrderService:77 - event was published 
+2020-11-26 14:18:12 DEBUG OrderService:77 - event was published 
+2020-11-26 14:20:21 DEBUG OrderService:77 - event was published 
+2020-11-26 14:20:36 DEBUG OrderService:77 - event was published 
+2020-11-26 14:21:06 DEBUG OrderService:77 - event was published 
+2020-11-26 14:21:19 DEBUG OrderService:77 - event was published 
+2020-11-26 14:22:26 DEBUG OrderService:77 - event was published 
+2020-11-26 14:22:48 DEBUG OrderService:77 - event was published 
+2020-11-26 14:23:35 DEBUG OrderService:77 - event was published 
+2020-11-26 14:23:56 DEBUG OrderService:77 - event was published 
+2020-11-26 14:32:06 DEBUG OrderService:77 - event was published 
+2020-11-26 14:32:51 DEBUG OrderService:77 - event was published 
+2020-11-26 14:33:19 DEBUG OrderService:77 - event was published 
+2020-11-26 15:17:39 DEBUG OrderService:77 - event was published 
+2020-11-26 15:18:00 DEBUG OrderService:77 - event was published 
+2020-11-26 15:18:40 DEBUG OrderService:77 - event was published 
+2020-11-26 15:19:37 DEBUG OrderService:87 - event was published 
+2020-11-26 15:21:03 DEBUG OrderService:88 - event was published 
+2020-11-26 15:30:20 DEBUG OrderService:88 - event was published 
+2020-11-26 15:30:20 DEBUG OrderService:50 - order created : null
+2020-11-26 15:30:20 DEBUG OrderService:53 - order updated : 342
+2020-11-26 15:30:20 DEBUG OrderService:77 - event was published 
+2020-11-26 15:41:17 DEBUG RentPointService:64 - Rent point was retrieved by coordinate: (2.34,4782.0)
+2020-11-26 15:42:22 DEBUG RentPointService:64 - Rent point was retrieved by coordinate: (2.34,4782.0)
+2020-11-26 16:06:47 DEBUG RentPointService:64 - Rent point was retrieved by coordinate: (2.34,4782.0)
+2020-11-26 17:01:44 DEBUG UserService:80 - user's cards 1
+2020-11-26 17:03:36 DEBUG UserService:80 - user's cards 1
+2020-11-26 17:19:09 DEBUG UserService:80 - user's cards 1
+2020-11-26 17:19:16 DEBUG UserService:80 - user's cards 1

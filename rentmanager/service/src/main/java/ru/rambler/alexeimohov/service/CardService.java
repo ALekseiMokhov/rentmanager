@@ -8,6 +8,7 @@ import ru.rambler.alexeimohov.dao.interfaces.CardDao;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapper;
 import ru.rambler.alexeimohov.entities.Card;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
@@ -67,13 +68,27 @@ public class CardService implements ICardService {
 
 
     @TransactionalEventListener
-    public void onApplicationEvent(OrderFinishedEvent event) {
-        log.info( "triggered by order" );
+    public void onOrderFinishedEvent(OrderFinishedEvent event) {
+        log.info( "triggered by order finished event" );
         Card card = cardDao.findByCardNumber( Long.valueOf( event.getOrderDto().getCreditCardNumber() ) );
         log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
         card.unBlockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
         card.writeOff( Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
+        cardDao.update( card );
+
+        log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
+
+    }
+
+    @TransactionalEventListener
+    public void onOrderCreatedEvent(OrderCreatedEvent event) {
+        log.info( "triggered by order created event" );
+        Card card = cardDao.findByCardNumber( Long.valueOf( event.getOrderDto().getCreditCardNumber() ) );
+        log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
+
+        card.blockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        card.writeOff( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
         cardDao.update( card );
 
         log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );

@@ -1,12 +1,15 @@
 package ru.rambler.alexeimohov.controller;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.OrderDto;
+import ru.rambler.alexeimohov.dto.UserDto;
+import ru.rambler.alexeimohov.dto.VehicleDto;
 import ru.rambler.alexeimohov.service.interfaces.IOrderService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,8 +23,18 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/{startDateTime}")
-    public ResponseEntity createOrder(@PathVariable LocalDateTime startDateTime, @RequestBody ObjectNode objectNode) {
+    @PostMapping("/{startDateTime}/{cardNumber}")
+    public ResponseEntity createOrder(@PathVariable LocalDateTime startDateTime, @CreditCardNumber @PathVariable long cardNumber,
+                                      @Valid @RequestBody UserDto userDto, @Valid @RequestBody VehicleDto vehicleDto) {
+        OrderDto created = new OrderDto();
+        created.setUserDto( userDto );
+        created.setHasValidSubscription( userDto.getHasValidSubscription() );
+        created.setStartTime( String.valueOf( startDateTime ) );
+        created.setVehicleDto( vehicleDto );
+        created.setCreditCardNumber( String.valueOf( cardNumber ) );
+        created.setBlockedFunds( vehicleDto.getRentPrice() );
+
+        orderService.saveOrUpdate( created );
         return new ResponseEntity( HttpStatus.CREATED );
     }
 

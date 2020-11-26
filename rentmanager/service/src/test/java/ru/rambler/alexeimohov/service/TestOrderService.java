@@ -1,13 +1,16 @@
 package ru.rambler.alexeimohov.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 import ru.rambler.alexeimohov.dao.interfaces.OrderDao;
-import ru.rambler.alexeimohov.dao.jpa.OrderJpaDaoImpl;
+import ru.rambler.alexeimohov.dao.jpa.OrderDaoJpaImpl;
 import ru.rambler.alexeimohov.dto.OrderDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.VehicleDto;
@@ -16,21 +19,19 @@ import ru.rambler.alexeimohov.entities.Order;
 import ru.rambler.alexeimohov.entities.User;
 import ru.rambler.alexeimohov.entities.Vehicle;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
-import ru.rambler.alexeimohov.service.interfaces.IUserService;
-import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
+import ru.rambler.alexeimohov.entities.enums.Privilege;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.BDDMockito.any;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestOrderService {
-    private OrderDao orderDao = Mockito.mock( OrderJpaDaoImpl.class );
+    private OrderDao orderDao = Mockito.mock( OrderDaoJpaImpl.class );
 
-    private IUserService userService = Mockito.mock( UserService.class );
-
-    private IVehicleService vehicleService = Mockito.mock( VehicleService.class );
+    private ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class  );
 
     private OrderMapper orderMapper = Mockito.mock( OrderMapperImpl.class );
 
@@ -54,6 +55,7 @@ public class TestOrderService {
     void init() {
         this.user = new User();
         user.setFullName( "Alex" );
+        user.setPrivilege( Privilege.NEWBIE );
 
         this.vehicle = new Vehicle();
 
@@ -73,11 +75,61 @@ public class TestOrderService {
         given( userMapper.fromDto( any() ) ).willReturn( user );
         given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
         //when
+        order.setId( null );
+        orderService.saveOrUpdate(orderDto);
+        //then
+        verify( orderDao,times( 1 ) ) .save( order );
+        verify( orderDao,never() ).update( order );
+        verify( publisher,times(  1) ) .publishEvent( any( OrderCreatedEvent.class ));
+
+    }   @Test
+    void updateOrderAndExpectConsistency() {
+
+        //given
+        given( orderMapper.fromDto( any() ) ).willReturn( order );
+        given( userMapper.fromDto( any() ) ).willReturn( user );
+        given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
+        //when
         orderService.saveOrUpdate( orderDto );
         //then
-        /*verify( userService,times( 1 ) ) .getByUserName( anyString() ) ;*/
-         /*verify( vehicleService,times( 1 ) ) .getById( anyLong() ) ;
-         verify( vehicleService,times( 1 ) ) .setDateForBooking( any(),any() ); ;*/
+        verify( orderDao,times( 1 ) ) .update( order );
+        verify( orderDao,never() ).save( order );
+        verify( publisher,never(  ) ) .publishEvent( any() );
 
     }
+    @Test
+    void finishAndExpectPublishingEvent() {
+
+        //given
+        given( orderDao.findById( any() )).willReturn(order  );
+        InOrder inOrder = inOrder( orderDao,publisher );
+        //when
+        orderService.finish( anyLong() );
+        //then
+        inOrder.verify( orderDao ).findById( anyLong() );
+        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class));
+        inOrder.verifyNoMoreInteractions();
+    }
+
+    @Test
+    void cancelAndExpectConsistency() {
+
+        //given
+        given( orderDao.findById( any() )).willReturn(order  );
+        InOrder inOrder = inOrder( orderDao,publisher );
+        //when
+        orderService.cancel( anyLong() );
+        //then
+        Assertions.assertEquals( 0,order.getTotalPrice() );
+        inOrder.verify( orderDao ).findById( anyLong() );
+        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class));
+        inOrder.verifyNoMoreInteractions();
+    }
+
+    @Test
+    void countTotalPriceFail() {
+          Assertions.assertThrows( IllegalArgumentException.class,
+                  ()-> orderService.countTotalPrice( LocalDateTime.MAX,LocalDateTime.now(),2.0,0,1 ) );
+    }
+
 }

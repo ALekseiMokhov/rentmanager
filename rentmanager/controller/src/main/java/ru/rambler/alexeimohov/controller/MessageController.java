@@ -1,11 +1,11 @@
 package ru.rambler.alexeimohov.controller;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.MessageDto;
+import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 
@@ -56,8 +56,8 @@ public class MessageController {
     }
 
     @PostMapping("/{topic}")
-    public ResponseEntity sendCustomMessage(@PathVariable String topic, @RequestBody ObjectNode objectNode) {
-        messageService.sendCustomMessage( /*objectNode.get( "dto" ).*/null, topic, objectNode.get( "text" ).asText() );
+    public ResponseEntity sendCustomMessage(@PathVariable String topic, @RequestBody UserDto dto, @RequestBody String text) {
+        messageService.sendCustomMessage( dto, topic, text );
 
         return new ResponseEntity( HttpStatus.CREATED );
     }

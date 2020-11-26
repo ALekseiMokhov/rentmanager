@@ -38,7 +38,8 @@ public class TestRentPointDao {
     @Rollback
     void persistAndExpectNoExceptions() {
         rentPointDao.save( testingPoint );
-        RentPoint pointCreated = rentPointDao.findById( 1l );
+
+        RentPoint pointCreated = rentPointDao.findAll( ).get( 0 );
         Assertions.assertNotNull( testingPoint );
         Assertions.assertEquals( testingPoint, pointCreated );
     }

@@ -11,6 +11,8 @@ public interface IAddressService {
 
     void remove(Long id);
 
+    AddressDto getAddressByPointId(long id);
+
     AddressDto getById(Long id);
 
     void saveOrUpdate(AddressDto dto);

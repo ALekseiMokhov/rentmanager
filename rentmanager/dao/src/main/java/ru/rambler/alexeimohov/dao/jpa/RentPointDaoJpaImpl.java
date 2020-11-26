@@ -12,7 +12,7 @@ import ru.rambler.alexeimohov.entities.RentPoint;
 import java.util.List;
 
 @Repository("rentPointDao")
-public class RentPointJpaDaoImpl extends GenericJpaDao implements RentPointDao {
+public class RentPointDaoJpaImpl extends GenericDaoJpa implements RentPointDao {
 
 
     @Override
@@ -22,12 +22,12 @@ public class RentPointJpaDaoImpl extends GenericJpaDao implements RentPointDao {
     }
 
     @Override
-    public RentPoint findById(Long id) {
+    public RentPoint findById(long id) {
         return entityManager.find( RentPoint.class, id );
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 

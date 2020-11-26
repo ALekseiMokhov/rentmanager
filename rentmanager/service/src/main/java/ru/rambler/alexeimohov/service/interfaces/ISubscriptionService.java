@@ -9,13 +9,13 @@ import java.util.List;
 @Service
 public interface ISubscriptionService {
 
-    SubscriptionDto getById(Long id);
+    SubscriptionDto getById(long id);
 
     void saveOrUpdate(SubscriptionDto dto);
 
-    void remove(Long id);
+    void remove(long id);
 
     List <SubscriptionDto> getAll();
 
-    UserDto getSubscriptionHolder(Long id);
+    UserDto getSubscriptionHolder(long id);
 }

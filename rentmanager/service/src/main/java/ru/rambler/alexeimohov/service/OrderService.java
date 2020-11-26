@@ -70,7 +70,7 @@ public class OrderService implements IOrderService {
         if (order.isHasValidSubscription() == false) {
             order.setTotalPrice(
                     countTotalPrice( order.getStartTime(), order.getFinishTime(),
-                            order.getVehicle().getRentPrice(), order.getVehicle().getFinePrice() ) );
+                            order.getVehicle().getRentPrice(), order.getVehicle().getFinePrice(), order.getUser().getPrivilege().getCoefficient() ) );
         }
         order.setStatus( OrderStatus.FINISHED );
         publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
@@ -82,6 +82,7 @@ public class OrderService implements IOrderService {
     @Override
     public void cancel(Long id) {
         Order order = orderDao.findById( id );
+        order.setTotalPrice( 0.0 );
         order.setStatus( OrderStatus.CANCELLED );
         publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
         log.debug( "event was published " );
@@ -94,9 +95,12 @@ public class OrderService implements IOrderService {
 
 
     // count total price
-    private double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine) {
+    public double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine, double coefficient) {
+        if(start.isAfter( end )){
+            throw new IllegalArgumentException("Finish time can't be before start time!");
+        }
         long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS );
-        return (price * hours + fine);
+        return (price * hours + fine) * coefficient;
     }
 
 }

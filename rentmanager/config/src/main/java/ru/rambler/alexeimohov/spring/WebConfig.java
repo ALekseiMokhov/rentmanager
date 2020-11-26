@@ -19,8 +19,8 @@ import java.util.Arrays;
 @Slf4j
 @Configuration
 @EnableWebMvc
-@PropertySource("application.properties")
-@ComponentScan({ "ru.rambler.alexeimohov.controller" })
+@PropertySource("classpath:application.properties")
+@ComponentScan({ "ru.rambler.alexeimohov" })
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 

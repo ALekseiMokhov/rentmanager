@@ -16,7 +16,8 @@ import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
 import java.util.List;
-
+    /*
+    * Should be used as service to add/remove messages and credit cards as parent entity service*/
 @Service
 @Slf4j
 @Transactional(readOnly = false, rollbackFor = Exception.class)

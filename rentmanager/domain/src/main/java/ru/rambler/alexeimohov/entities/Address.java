@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor()
+@ToString(exclude = {"id","rentPoint"})
 @EqualsAndHashCode(exclude = { "id", "rentPoint" })
 public class Address {
     @Id

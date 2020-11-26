@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 public class UtilConfig {
     @Value("${spring.mail.host}")
     private String host;

@@ -1,0 +1,69 @@
+package ru.rambler.alexeimohov.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.rambler.alexeimohov.dto.CardDto;
+import ru.rambler.alexeimohov.dto.UserDto;
+import ru.rambler.alexeimohov.service.interfaces.IUserService;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    private IUserService userService;
+
+    public UserController(IUserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/")
+    public ResponseEntity createUser(@Valid @RequestBody UserDto dto) {
+        userService.saveOrUpdate( dto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getById(@PathVariable long id) {
+        return userService.getById( id );
+    }
+
+    @GetMapping("/{name}")
+    public UserDto getByUserName(@PathVariable String name) {
+        return userService.getByUserName( name );
+    }
+
+    @PutMapping("/")
+    public ResponseEntity updateUser(@Valid @RequestBody UserDto dto) {
+        userService.saveOrUpdate( dto );
+        return new ResponseEntity( HttpStatus.OK );
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable long id) {
+        userService.remove( id );
+        return new ResponseEntity( HttpStatus.OK );
+
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity addCard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
+        userService.addCreditCard( id, cardDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+
+    @PatchMapping("/{id}/delete")
+    public ResponseEntity removeard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
+        userService.removeCreditCard( id, cardDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+
+    @GetMapping("/")
+    public List <UserDto> getAll() {
+        return userService.getAll();
+    }
+}

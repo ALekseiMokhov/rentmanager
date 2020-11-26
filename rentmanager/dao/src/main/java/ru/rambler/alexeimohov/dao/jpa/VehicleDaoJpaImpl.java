@@ -10,25 +10,25 @@ import java.util.List;
 import java.util.Set;
 
 @Repository(value = "vehicleDao")
-public class VehicleJpaDaoImpl extends GenericJpaDao implements VehicleDao {
+public class VehicleDaoJpaImpl extends GenericDaoJpa implements VehicleDao {
 
 
     @Override
-    public void setDateBooked(Long id, LocalDate date) {
+    public void setDateBooked(long id, LocalDate date) {
         Vehicle vehicle = entityManager.find( Vehicle.class, id );
         vehicle.getBookedDates().add( date );
         entityManager.merge( vehicle );
     }
 
     @Override
-    public boolean isBooked(Long id, LocalDate date) {
+    public boolean isBooked(long id, LocalDate date) {
         return entityManager.find( Vehicle.class, id )
                 .getBookedDates()
                 .contains( date );
     }
 
     @Override
-    public Set <LocalDate> getBookedDates(Long id) {
+    public Set <LocalDate> getBookedDates(long id) {
         return entityManager.find( Vehicle.class, id )
                 .getBookedDates();
     }
@@ -46,14 +46,14 @@ public class VehicleJpaDaoImpl extends GenericJpaDao implements VehicleDao {
     }
 
     @Override
-    public List <Vehicle> findAllFromPoint(Long id) {
+    public List <Vehicle> findAllFromPoint(long id) {
         return entityManager.createQuery( VehicleQueries.SELECT_ALL_VEHICLES )
                 .setParameter( "id", id )
                 .getResultList();
     }
 
     @Override
-    public List <Vehicle> findAllFreeFromPoint(Long id, LocalDate date) {
+    public List <Vehicle> findAllFreeFromPoint(long id, LocalDate date) {
         return entityManager.createQuery( VehicleQueries.SELECT_ALL_FREE_VEHICLES_BY_POINT )
                 .setParameter( "id", id )
                 .setParameter( "date", date )
@@ -61,13 +61,13 @@ public class VehicleJpaDaoImpl extends GenericJpaDao implements VehicleDao {
     }
 
     @Override
-    public Vehicle findById(Long id) {
+    public Vehicle findById(long id) {
         return entityManager.find( Vehicle.class, id );
 
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
 
