@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapper;
 import ru.rambler.alexeimohov.entities.Card;
 
+import java.time.LocalDate;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class TestCardDto {
@@ -38,7 +40,7 @@ public class TestCardDto {
     @Test
     void convertDtoToEntityAndExpectConsistency() {
         Card converted = cardMapper.fromDto( cardDto );
-        Assertions.assertEquals( 232, converted.getAvailableFunds() );
+        Assertions.assertEquals( LocalDate.of( 2040,12,31  ), converted.getExpirationDate());
         Assertions.assertEquals( 1111111111111111l, converted.getCreditCardNumber() );
         Assertions.assertEquals( 547469l, converted.getUser().getId() );
     }

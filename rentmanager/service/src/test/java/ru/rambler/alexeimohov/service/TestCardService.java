@@ -43,7 +43,7 @@ class TestCardService {
         this.user.setFullName( "Sergei Ivanov" );
         this.user.setId( 1l );
         this.card = new Card( 1l, LocalDate.of( 2040, 12, 31 ),
-                LocalDateTime.now(), 4556140832208361l, 1000.0, 50.0, user );
+                LocalDate.now(), 4556140832208361l, 1000.0, 50.0, user );
         this.cardDto = new CardDto( "1", "2040-12-31", "2020-11-12T09:00:00",
                 "4556140832208361", "1000", "300", "1" );
     }

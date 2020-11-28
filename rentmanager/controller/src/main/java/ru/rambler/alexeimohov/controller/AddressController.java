@@ -19,11 +19,11 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-/*    @PostMapping("/")
+    @PostMapping("/")
     public ResponseEntity saveAdress(@Validated @RequestBody AddressDto dto) {
         addressService.saveOrUpdate( dto );
         return new ResponseEntity( "Address saved", HttpStatus.CREATED );
-    }*/
+    }
 
     @GetMapping("/{id}")
     public AddressDto getAddressById(@PathVariable long id) {
@@ -35,7 +35,7 @@ public class AddressController {
         return addressService.getAddressByPointId( id );
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/")
     public ResponseEntity getAddressById(@Validated @RequestBody AddressDto dto) {
         addressService.saveOrUpdate( dto );
         return new ResponseEntity( "Address updated", HttpStatus.OK );

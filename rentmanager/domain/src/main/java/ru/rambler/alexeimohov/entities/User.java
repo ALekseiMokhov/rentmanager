@@ -42,8 +42,7 @@ public class User {
     @Email(message = "Email should be in valid format!")
     private String email;
 
-    @Column(name = "phone_number")
-    @Length(min = 11, max = 11)
+    @Column(name = "phone_number",unique = true)
     private long phoneNumber;
 
     @Enumerated(EnumType.STRING)

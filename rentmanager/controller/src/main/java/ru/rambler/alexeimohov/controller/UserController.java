@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.CardDto;
+import ru.rambler.alexeimohov.dto.MessageDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
@@ -50,15 +51,26 @@ public class UserController {
 
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/card/{id}")
     public ResponseEntity addCard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
         userService.addCreditCard( id, cardDto );
         return new ResponseEntity( HttpStatus.CREATED );
     }
 
-    @PatchMapping("/{id}/delete")
-    public ResponseEntity removeard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
+    @PatchMapping("/card/{id}/delete")
+    public ResponseEntity removeCard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
         userService.removeCreditCard( id, cardDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+    @PatchMapping("/message/{id}")
+    public ResponseEntity addMessage(@PathVariable long id, @Valid @RequestBody MessageDto messageDto) {
+        userService.addMessage( id, messageDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+
+    @PatchMapping("/message/{id}/delete")
+    public ResponseEntity removeMessage(@PathVariable long id, @Valid @RequestBody MessageDto messageDto) {
+        userService.removeMessage( id, messageDto );
         return new ResponseEntity( HttpStatus.CREATED );
     }
 

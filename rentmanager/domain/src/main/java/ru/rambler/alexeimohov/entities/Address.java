@@ -29,12 +29,11 @@ public class Address {
     private String street;
 
     @NotNull
-    @Length(min = 3, max = 32)
     @Column(name = "building_number")
     private int buildingNumber;
 
     @MapsId
-    @OneToOne
+    @OneToOne(cascade ={ CascadeType.REFRESH,CascadeType.MERGE,CascadeType.REMOVE,CascadeType.DETACH})
     @JoinColumn(name = "id")
     private RentPoint rentPoint;
 

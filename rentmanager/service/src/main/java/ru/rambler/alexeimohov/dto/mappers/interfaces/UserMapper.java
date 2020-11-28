@@ -16,7 +16,10 @@ public interface UserMapper {
 
     @BeforeMapping
     default void beforeMapping(@MappingTarget UserDto target, User source) {
-        if (source.getSubscription().isExpired()) {
+        if(source.getSubscription() ==null){
+             target.setHasValidSubscription( "false" );
+        }
+        else if (source.getSubscription().isExpired()) {
             target.setHasValidSubscription( "false" );
         }
     }

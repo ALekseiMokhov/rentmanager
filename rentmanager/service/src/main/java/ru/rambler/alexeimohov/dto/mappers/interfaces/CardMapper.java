@@ -1,5 +1,6 @@
 package ru.rambler.alexeimohov.dto.mappers.interfaces;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.rambler.alexeimohov.dto.CardDto;
@@ -9,10 +10,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CardMapper {
-    @Mapping(source = "user.id", target = "userId")
+    @InheritInverseConfiguration
     CardDto toDto(Card card);
 
     @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "expirationDate", target = "expirationDate", dateFormat = "yyyy-MM-dd")
+    @Mapping(source = "validFromDate", target = "validFromDate", dateFormat = "yyyy-MM-dd")
     Card fromDto(CardDto dto);
 
     List <Card> listFromDto(List <CardDto> list);

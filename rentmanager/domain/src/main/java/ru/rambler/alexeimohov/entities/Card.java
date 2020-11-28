@@ -24,15 +24,14 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "expiration_date", columnDefinition = "Timestamp")
+    @Column(name = "expiration_date", columnDefinition = "DATE")
     private LocalDate expirationDate;
 
-    @Column(name = "valid_date", columnDefinition = "Timestamp")
-    private LocalDateTime validFromDate;
+    @Column(name = "valid_date", columnDefinition = "DATE")
+    private LocalDate validFromDate;
 
     @NotNull(message = "credit card shouldn't be null!")
-    @CreditCardNumber(message = "Credit card should fit Luhn algorithm!")
-    @Column(name = "credit_card_number")
+    @Column(name = "credit_card_number",unique = true)
     private long creditCardNumber;
 
     @Column(name = "available_funds")

@@ -18,5 +18,7 @@ public class AddressDto {
     private String buildingNumber;
     @NotNull
     private String street;
+    @NotNull
+    private RentPointDto rentPoint;
 
 }

@@ -51,24 +51,24 @@ public class MessageService implements IMessageService {
 
     @Override
     @TransactionalEventListener
+    @Transactional(readOnly = false)
     public void sendMessage(OrderFinishedEvent event) {
         OrderDto dto = event.getOrderDto();
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
         Message message = new Message();
 
         message.setDateTimeOfSending( LocalDateTime.now() );
         message.setUser( userMapper.fromDto( dto.getUserDto() ) );
 
-        mailMessage.setFrom( "alexeimohov@rambler.ru" );
-        mailMessage.setTo( dto.getUserDto().getEmail() );
-        mailMessage.setSubject( "Order " + dto.getId() + " " + dto.getStatus() );
-        mailMessage.setText( String.format( """
+        message.setFrom( "alexeimohov@rambler.ru" );
+        message.setTo( dto.getUserDto().getEmail() );
+        message.setSubject( "Order " + dto.getId() + " " + dto.getStatus() );
+        message.setText( String.format( """
                  Hello, %s!Thanks for choosing our service!
                  Your total price is %s .
                  Hope to see you again!
                 """, dto.getUserDto().getFullName(), dto.getTotalPrice() ) );
 
-        javaMailSender.send( mailMessage );
+        javaMailSender.send( message );
         messageDao.save( message );
         log.info( "Message sent!" );
     }

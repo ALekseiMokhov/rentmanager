@@ -8,7 +8,8 @@ import ru.rambler.alexeimohov.dto.RentPointDto;
 import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
 
 import java.util.List;
-
+      /*
+      *  No POST method due to unidirectional association with Address. RentPoint persisted as a field of Address entity*/
 @RestController
 @RequestMapping ("/rentpoint")
 public class RentPointController {
@@ -17,12 +18,6 @@ public class RentPointController {
 
     public RentPointController(IRentPointService rentPointService) {
         this.rentPointService = rentPointService;
-    }
-
-    @PostMapping("/")
-    public ResponseEntity createRentPoint(@RequestBody RentPointDto dto) throws ParseException {
-        rentPointService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED );
     }
 
     @GetMapping("/{id}")
