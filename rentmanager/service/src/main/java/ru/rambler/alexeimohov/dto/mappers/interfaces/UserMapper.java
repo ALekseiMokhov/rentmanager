@@ -22,6 +22,9 @@ public interface UserMapper {
         else if (source.getSubscription().isExpired()) {
             target.setHasValidSubscription( "false" );
         }
+         else{
+             target.setHasValidSubscription( "true" );
+         }
     }
     @Mapping( source = "password",target = "password",ignore = true )
     UserDto toDto(User user);

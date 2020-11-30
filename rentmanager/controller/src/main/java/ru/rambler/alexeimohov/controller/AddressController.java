@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.AddressDto;
 import ru.rambler.alexeimohov.service.interfaces.IAddressService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class AddressController {
     }
 
     @PostMapping("/")
-    public ResponseEntity saveAdress(@Validated @RequestBody AddressDto dto) {
+    public ResponseEntity saveAdress(@Valid @RequestBody AddressDto dto) {
         addressService.saveOrUpdate( dto );
         return new ResponseEntity( "Address saved", HttpStatus.CREATED );
     }

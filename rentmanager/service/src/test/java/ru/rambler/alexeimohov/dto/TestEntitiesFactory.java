@@ -45,7 +45,8 @@ public class TestEntitiesFactory {
         vehicle = new Vehicle();
         vehicle.setId( 1l );
         vehicle.setType( VehicleType.SCOOTER );
-        vehicle.setChildish( false );
+        vehicle.setIsChildish( true );
+        vehicle.setIsHumanPowered( true );
         vehicle.setRentPrice( 13.4 );
         vehicle.setFinePrice( 12.0 );
         vehicle.setModelName( "S1" );
@@ -55,11 +56,11 @@ public class TestEntitiesFactory {
 
     static VehicleDto getVehicleDto() {
         VehicleDto vehicleDto = new VehicleDto();
-        vehicleDto.setIsChildish( "false" );
+        vehicleDto.setIsChildish(  "true");
         vehicleDto.setModelName( "S1" );
         vehicleDto.setRentPrice( "3.5" );
         vehicleDto.setFinePrice( "22.9" );
-        vehicleDto.setIsHumanPowered( "true" );
+        vehicleDto.setIsHumanPowered(  "true");
         vehicleDto.setType( "SCOOTER" );
         vehicleDto.setId( "43" );
         vehicleDto.setRentPoint( getRentPointDto() );

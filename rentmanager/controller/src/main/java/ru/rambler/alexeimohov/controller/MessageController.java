@@ -24,11 +24,11 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PostMapping("/")
+   /* @PostMapping("/")
     public ResponseEntity createMessage(@Validated @RequestBody MessageDto dto) {
         messageService.saveOrUpdate( dto );
         return new ResponseEntity( HttpStatus.CREATED );
-    }
+    }*/
 
     @GetMapping("/{id}")
     public MessageDto getById(@RequestParam long id) {

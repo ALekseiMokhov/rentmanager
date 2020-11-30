@@ -1,6 +1,7 @@
 package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -13,6 +14,7 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.User;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
+import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
 import java.util.List;
@@ -29,16 +31,19 @@ public class UserService implements IUserService {
 
     private CardMapper cardMapper;
 
+        private ApplicationEventPublisher publisher;
+
     private MessageMapper messageMapper;
 
-    public UserService(UserDao userDao, UserMapper userMapper, CardMapper cardMapper, MessageMapper messageMapper) {
-        this.userDao = userDao;
-        this.userMapper = userMapper;
-        this.cardMapper = cardMapper;
-        this.messageMapper = messageMapper;
-    }
+        public UserService(UserDao userDao, UserMapper userMapper, CardMapper cardMapper, ApplicationEventPublisher publisher, MessageMapper messageMapper) {
+            this.userDao = userDao;
+            this.userMapper = userMapper;
+            this.cardMapper = cardMapper;
+            this.publisher = publisher;
+            this.messageMapper = messageMapper;
+        }
 
-    @Override
+        @Override
     public UserDto getById(Long id) {
         return userMapper.toDto( userDao.findById( id ) );
     }
@@ -66,6 +71,7 @@ public class UserService implements IUserService {
         if (user.getId() == null) {
             userDao.save( user );
             log.debug( "user has been saved: " + user.getFullName() );
+            publisher.publishEvent( new UserRegisteredEvent( userMapper.toDto( user ) ) );
         } else {
             userDao.update( user );
             log.debug( "user has been updated: " + user.getFullName() );
@@ -103,9 +109,5 @@ public class UserService implements IUserService {
     }
 
 
-    @TransactionalEventListener
-    public void onApplicationEvent(OrderFinishedEvent event) {
-        User user = userDao.findById( Long.valueOf( event.getOrderDto().getUserDto().getId() ) );
-        log.info( "triggered by order service : " + user.getFullName() + " " + user.getCreditCards().size() );
-    }
+
 }

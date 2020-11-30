@@ -28,8 +28,5 @@ public interface IUserService {
 
     void removeMessage(long id, MessageDto messageDto);
 
-    @TransactionalEventListener
-    void onApplicationEvent(OrderFinishedEvent event);
-
     void saveOrUpdate(UserDto dto);
 }

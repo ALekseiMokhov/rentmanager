@@ -63,7 +63,7 @@ public class UserController {
         return new ResponseEntity( HttpStatus.CREATED );
     }
     @PatchMapping("/message/{id}")
-    public ResponseEntity addMessage(@PathVariable long id, @Valid @RequestBody MessageDto messageDto) {
+    public ResponseEntity addMessage(@PathVariable long id,@RequestBody MessageDto messageDto) {
         userService.addMessage( id, messageDto );
         return new ResponseEntity( HttpStatus.CREATED );
     }

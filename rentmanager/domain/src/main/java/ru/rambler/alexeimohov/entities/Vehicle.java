@@ -31,11 +31,11 @@ public class Vehicle {
 
     @NotNull
     @Column(name = "is_human_powered")
-    private boolean isHumanPowered;
+    private Boolean isHumanPowered;
 
     @NotNull
     @Column(name = "is_childish")
-    private boolean isChildish;
+    private Boolean isChildish;
 
     @NotNull(message = "Vehicle rent price should be specified!")
     @Column(name = "rent_price")

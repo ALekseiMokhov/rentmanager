@@ -68,6 +68,7 @@ public class CardService implements ICardService {
 
 
     @TransactionalEventListener
+    @Transactional(readOnly = false)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
         log.info( "triggered by order finished event" );
         Card card = cardDao.findByCardNumber( Long.valueOf( event.getOrderDto().getCreditCardNumber() ) );
@@ -75,13 +76,13 @@ public class CardService implements ICardService {
 
         card.unBlockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
         card.writeOff( Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
-        cardDao.update( card );
 
         log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
     }
 
     @TransactionalEventListener
+    @Transactional (readOnly = false)
     public void onOrderCreatedEvent(OrderCreatedEvent event) {
         log.info( "triggered by order created event" );
         Card card = cardDao.findByCardNumber( Long.valueOf( event.getOrderDto().getCreditCardNumber() ) );
@@ -89,8 +90,8 @@ public class CardService implements ICardService {
 
         card.blockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
         card.writeOff( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-        cardDao.update( card );
-
+        /*cardDao.update( card );
+*/
         log.info( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
     }

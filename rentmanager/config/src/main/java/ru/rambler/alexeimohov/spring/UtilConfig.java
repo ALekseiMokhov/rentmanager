@@ -25,6 +25,10 @@ public class UtilConfig {
     private String protocol;
     @Value("${mail.debug}")
     private String debug;
+    @Value("${spring.mail.properties.mail.smtp.auth}")
+    private String auth;
+    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+    private String enable;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -42,6 +46,8 @@ public class UtilConfig {
 
         Properties properties = mailSender.getJavaMailProperties();
         properties.setProperty( "mail.debug", debug );
+        properties.setProperty("mail.smtp.auth", auth);
+        properties.setProperty("mail.smtp.starttls.enable", enable);
 
         return mailSender;
     }
