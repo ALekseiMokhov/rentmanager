@@ -2,8 +2,8 @@ package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dao.interfaces.UserDao;
@@ -18,10 +18,7 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Card;
 import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.entities.User;
-import ru.rambler.alexeimohov.service.events.MessageSentEvent;
-import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
-import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
-import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
+import ru.rambler.alexeimohov.service.events.*;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
 import java.util.List;
@@ -83,27 +80,28 @@ public class UserService implements IUserService {
         User user = userMapper.fromDto( dto );
         if (user.getId() == null) {
             userDao.save( user );
-            log.debug( "user has been saved: " + user.getFullName() );
+            log.debug( "user has been saved: " + user.getUsername() );
             publisher.publishEvent( new UserRegisteredEvent( userMapper.toDto( user ) ) );
         } else {
             userDao.update( user );
-            log.debug( "user has been updated: " + user.getFullName() );
+            log.debug( "user has been updated: " + user.getUsername() );
         }
     }
 
     @Override
     @Transactional(readOnly = false)
-    public void setSubscription( SubscriptionDto dto) {
-           Subscription subscription = subscriptionMapper.fromDto( dto );
-           User user = userDao.findByUserName( subscription.getUser().getFullName() )  ;
-           user.setSubscription(subscription);
+    public void setSubscription(SubscriptionDto dto) {
+        Subscription subscription = subscriptionMapper.fromDto( dto );
+        User user = userDao.findByUserName( subscription.getUser().getUsername() );
+        user.setSubscription( subscription );
+        publisher.publishEvent( new SubscriptionSetEvent( subscriptionMapper.toDto( subscription ) ) );
     }
 
     @Override
     @Transactional(readOnly = false)
 
     public void removeSubscription(long id) {
-        User user = userDao.findById( id ) ;
+        User user = userDao.findById( id );
         user.setSubscription( null );
     }
 
@@ -138,15 +136,15 @@ public class UserService implements IUserService {
     }
 
     @TransactionalEventListener
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
-         User retrieved = userMapper.fromDto( event.getOrderDto().getUserDto() );
-
+        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getFullName() );
+        log.debug( "_____USER_____: " + retrieved.toString() );
         Card card = retrieved.getCreditCards().stream()
-                .filter( c->c.getCreditCardNumber()==Long.parseLong(  event.getOrderDto().getCreditCardNumber())  )
+                .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
                 .findFirst()
                 .get();
-
+        log.debug( "_____USER_____: " + card.toString() );
         log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
         card.unBlockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
@@ -158,29 +156,20 @@ public class UserService implements IUserService {
 
     }
 
-    @Override
-    @EventListener
-    @Transactional(readOnly = false)
-    public void onMessageSentEvent(MessageSentEvent event) {
-
-    }
 
     @TransactionalEventListener
-    @Transactional (readOnly = false)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderCreatedEvent(OrderCreatedEvent event) {
-        User retrieved = userDao.findByUserName(  event.getOrderDto().getUserDto().getFullName())  ;
+        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getFullName() );
 
         Card card = retrieved.getCreditCards().stream()
-                .filter( c->c.getCreditCardNumber()==Long.parseLong(  event.getOrderDto().getCreditCardNumber())  )
+                .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
                 .findFirst()
                 .get();
-        log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
+
 
         card.blockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-
-        userDao.update( retrieved );
-
-        log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
+        
 
     }
 

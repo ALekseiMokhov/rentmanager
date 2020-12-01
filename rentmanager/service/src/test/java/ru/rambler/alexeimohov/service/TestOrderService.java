@@ -54,7 +54,7 @@ public class TestOrderService {
     @BeforeEach
     void init() {
         this.user = new User();
-        user.setFullName( "Alex" );
+        user.setUsername( "Alex" );
         user.setPrivilege( Privilege.NEWBIE );
 
         this.vehicle = new Vehicle();

@@ -52,9 +52,9 @@ public class UserController {
 
     }
 
-    @PatchMapping("/card/{id}")
-    public ResponseEntity addCard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
-        userService.addCreditCard( id, cardDto );
+    @PatchMapping("/card/{userId}")
+    public ResponseEntity addCard(@PathVariable long userId, @Valid @RequestBody CardDto cardDto) {
+        userService.addCreditCard( userId, cardDto );
         return new ResponseEntity( HttpStatus.CREATED );
     }
     @PatchMapping("/subscription/")

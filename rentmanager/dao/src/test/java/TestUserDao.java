@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.MessageDao;
 import ru.rambler.alexeimohov.dao.interfaces.SubscriptionDao;
 import ru.rambler.alexeimohov.dao.interfaces.UserDao;
+import ru.rambler.alexeimohov.entities.Card;
 import ru.rambler.alexeimohov.entities.Message;
 import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.entities.User;
@@ -32,6 +33,7 @@ public class TestUserDao {
     private Message message;
     private User user;
     private Subscription subscription;
+    private Card card;
 
     @BeforeEach
     @Transactional
@@ -44,8 +46,12 @@ public class TestUserDao {
         subscription.setExpirationDate( LocalDate.of( 2020, 02, 01 ) );
         subscription.setPrice( 20.5 );
 
+        this.card = new Card();
+        card.setAvailableFunds( 1000 );
+
+
         this.user = new User();
-        user.setFullName( "Evgeny Ivanov" );
+        user.setUsername( "Evgeny Ivanov" );
         user.setEmail( "coder@gmail.com" );
         user.setPassword( "4fwfm2n8qlb" );
         user.setPhoneNumber( 8_999_306_22_22l );
@@ -53,6 +59,8 @@ public class TestUserDao {
         user.setPrivilege( Privilege.NEWBIE );
         user.setSubscription( subscription );
         user.addMessage( message );
+        user.addCreditCard( card );
+
         userDao.save( user );
     }
 
@@ -65,7 +73,7 @@ public class TestUserDao {
         Message message = messageDao.findById( retrieved.getId() );
         List <Message> messages = messageDao.findAll();
 
-        Assertions.assertEquals( "Evgeny Ivanov", retrieved.getFullName() );
+        Assertions.assertEquals( "Evgeny Ivanov", retrieved.getUsername() );
         Assertions.assertEquals( "Welcome to our site, Evgeny!", message.getText() );
         Assertions.assertEquals( 1, messages.size() );
     }
@@ -75,14 +83,14 @@ public class TestUserDao {
     @Rollback
     void deleteMessageAndExpectConsistency() {
         System.out.println( userDao.findAll().size() );
-        User retrieved = userDao.findById( 2l );
+        User retrieved = userDao.findByUserName( "Evgeny Ivanov" );
         Message toDelete = retrieved.getMessages().get( 0 );
         Assertions.assertNotNull( toDelete );
-
+        Long id = toDelete.getId();
         retrieved.removeMessage( toDelete );
         userDao.update( retrieved );
 
-        Assertions.assertNull( messageDao.findById( 2l ).getUser() );
+        Assertions.assertNull( messageDao.findById( id ).getUser() );
 
     }
 
@@ -90,7 +98,7 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void deleteSubscriptionAndExpectConsistency() {
-        User userRetrieved = userDao.findById( 3l );
+        User userRetrieved = userDao.findByUserName( "Evgeny Ivanov" );
         Subscription retrievedSub = userRetrieved.getSubscription();
 
         Assertions.assertNotNull( retrievedSub );
@@ -102,4 +110,15 @@ public class TestUserDao {
 
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    void updateChildEntityAndExpectConsistency() {
+        User userRetrieved = userDao.findByUserName( "Evgeny Ivanov" );
+        userRetrieved.getCreditCards().get( 0 ).blockFunds( 100 );
+        userDao.update( userRetrieved );
+        Assertions.assertEquals( 900, userDao.findByUserName("Evgeny Ivanov" ).getCreditCards().get( 0 ).getAvailableFunds() );
+
+
+    }
 }

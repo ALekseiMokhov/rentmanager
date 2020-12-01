@@ -44,6 +44,7 @@ public class OrderService implements IOrderService {
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
+        log.debug( "************************************* -- +" + dto.getId());
         /*check if vehicle is free*/
         /*check if blocked funds is enough is free*/
         if (order.getId() == null) {

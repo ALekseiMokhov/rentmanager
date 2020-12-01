@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dao.interfaces.MessageDao;
@@ -17,9 +18,7 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Message;
 import ru.rambler.alexeimohov.entities.User;
-import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
-import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
-import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
+import ru.rambler.alexeimohov.service.events.*;
 import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 
 import java.time.LocalDateTime;
@@ -48,6 +47,8 @@ public class MessageService implements IMessageService {
     private String orderFinishedText;
     @Value("${order.created.text}")
     private String orderCreatedText;
+    @Value("${subscription.ordered.text}")
+    private String subscriptionOrdered;
 
     public MessageService(MessageDao messageDao, MessageMapper messageMapper,
                           UserMapper userMapper, JavaMailSender javaMailSender, ApplicationEventPublisher publisher) {
@@ -61,6 +62,7 @@ public class MessageService implements IMessageService {
 
     @Override
     @TransactionalEventListener
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendMessageAfterCompleteOrder(OrderFinishedEvent event) {
         OrderDto dto = event.getOrderDto();
@@ -74,12 +76,16 @@ public class MessageService implements IMessageService {
         message.setSubject( "Order " + dto.getId() + " " + dto.getStatus() );
         message.setText( String.format( orderFinishedText, dto.getUserDto().getFullName(), dto.getTotalPrice() ) );
 
+
+
         javaMailSender.send( message );
+        messageDao.save( message );
         log.info( "Message sent!" );
     }
 
     @Override
     @TransactionalEventListener
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void greetNewUser(UserRegisteredEvent event) {
         UserDto dto = event.getUserDto();
@@ -93,10 +99,12 @@ public class MessageService implements IMessageService {
         message.setText( String.format( greetingText, dto.getFullName() ));
 
         javaMailSender.send( message );
+        messageDao.save( message );
         log.debug( "Message to new user has been sent!" +messageDao.findAll().size( ));
     }
     @Override
     @TransactionalEventListener
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendMessageAfterCreateOrder(OrderCreatedEvent event) {
         UserDto dto = event.getOrderDto().getUserDto();
@@ -107,13 +115,15 @@ public class MessageService implements IMessageService {
         message.setFrom( this.username );
         message.setTo( user.getEmail() );
         message.setSubject( "Order booked: " + event.getOrderDto().getId()  );
-        message.setText( String.format( orderCreatedText, dto.getFullName(),dto.getId() ));
+        message.setText( String.format( orderCreatedText, dto.getFullName(), event.getOrderDto().getId()  ));
 
         javaMailSender.send( message );
+        messageDao.save( message );
         log.debug( "Message after new order creation has been sent!" );
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendCustomMessage(UserDto dto, String topic, String text) {
         User user =   userMapper.fromDto( dto );
@@ -124,6 +134,29 @@ public class MessageService implements IMessageService {
         message.setFrom( this.username );
         message.setTo( user.getEmail() );
         message.setSubject( topic );
+
+        messageDao.save( message );
+    }
+
+    @Override
+    @TransactionalEventListener
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    @Async
+    public void sendMessageAfterSetSubscription(SubscriptionSetEvent event) {
+        UserDto dto = event.getSubscriptionDto().getUser();
+        User user =   userMapper.fromDto( dto );
+        Message message = new Message();
+
+        message.setUser(user );
+        message.setFrom( this.username );
+        message.setTo( user.getEmail() );
+        message.setSubject( "Subscription ordered: " + event.getSubscriptionDto().getId()  );
+        message.setText( String.format( subscriptionOrdered, dto.getFullName(),
+                event.getSubscriptionDto().getStartDate() ,event.getSubscriptionDto().getPrice() ));
+
+        javaMailSender.send( message );
+        messageDao.save( message );
+        log.debug( "Message after new order creation has been sent!" );
     }
 
     @Override

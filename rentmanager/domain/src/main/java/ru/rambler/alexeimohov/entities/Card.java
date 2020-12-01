@@ -18,7 +18,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(exclude = {"availableFunds","blockedFunds"})
+@ToString  (exclude = "user")
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,10 +66,6 @@ public class Card {
     }
 
     public void unBlockFunds(double amount) {
-        if (amount > blockedFunds) {
-            throw new IllegalArgumentException( "Incorrect amount to unblock!" );
-
-        }
         blockedFunds -= amount;
         addFunds( amount );
     }

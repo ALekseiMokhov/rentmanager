@@ -7,6 +7,7 @@ import ru.rambler.alexeimohov.dto.MessageDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
+import ru.rambler.alexeimohov.service.events.SubscriptionSetEvent;
 import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public interface IMessageService {
 
     @TransactionalEventListener
     void sendMessageAfterCreateOrder(OrderCreatedEvent event) ;
+
+    @TransactionalEventListener
+    void sendMessageAfterSetSubscription(SubscriptionSetEvent event) ;
 
     @TransactionalEventListener
     void greetNewUser(UserRegisteredEvent event);

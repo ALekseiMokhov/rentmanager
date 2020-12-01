@@ -17,7 +17,7 @@ public class TestEntitiesFactory {
     static User getUser() {
         User user = new User();
         user.setId( 547469l );
-        user.setFullName( "Sergei" );
+        user.setUsername( "Sergei" );
         user.setPassword( "tu4hd845cY23L" );
         user.setSubscription( new Subscription( 1l, user, 22.9,false, LocalDate.now(), LocalDate.now(),
                 LocalDate.of( 2033, 11, 16 ) ) );

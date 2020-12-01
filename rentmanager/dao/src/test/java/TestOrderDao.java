@@ -35,7 +35,7 @@ public class TestOrderDao {
     @Transactional
     void init() {
         this.user = new User();
-        user.setFullName( "Sergey Borisov" );
+        user.setUsername( "Sergey Borisov" );
         user.setEmail( "spring_coder@gmail.com" );
         user.setPassword( "7jfw56hjj8qlb" );
         user.setPhoneNumber( 8_999_444_00_00l );

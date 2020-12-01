@@ -1,11 +1,12 @@
 package ru.rambler.alexeimohov.entities;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.rambler.alexeimohov.entities.enums.Privilege;
 import ru.rambler.alexeimohov.entities.enums.Role;
 
@@ -14,6 +15,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /*Main entity class
@@ -21,13 +23,15 @@ import java.util.List;
  * 1:1 Subscription     through the joining table to avoid null values
  * 1:n Message bidirectional , methods add- and remove- for sync purpose
  * embedded enums: Role, Privilege
- * TODO: consider to make extra entity for security*/
+ * */
 @Entity
 @Table(name = "user")
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = "id")
-public class User implements Serializable {
+@EqualsAndHashCode(exclude ={ "subscription","messages","creditCards","privilege"})
+@Builder
+@ToString
+public class User implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +40,7 @@ public class User implements Serializable {
     @Length(min = 5, max = 35)
     @Column(name = "full_name", unique = true)
     @NaturalId
-    private String fullName;
+    private String username;
 
     @NotNull(message = "User password should'not be null")
     @Length(min = 8, max = 16)
@@ -79,10 +83,10 @@ public class User implements Serializable {
         this.messages = new ArrayList <>();
     }
 
-    public User(Long id, String fullName, String password, Long phoneNumber, String email,
+    public User(Long id, String username, String password, Long phoneNumber, String email,
                 Role role, Subscription subscription, Privilege privilege) {
         this.id = id;
-        this.fullName = fullName;
+        this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -124,5 +128,34 @@ public class User implements Serializable {
                subscription.setUser( this );
            }
            this.subscription=subscription;
+    }
+      /*UserDetails inherited methods*/
+    @Override
+    public Collection <? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities
+                = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(String.valueOf(role)));
+
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -44,6 +44,4 @@ public interface IUserService {
     @TransactionalEventListener
     void onOrderFinishedEvent(OrderFinishedEvent event);
 
-    @EventListener
-    void onMessageSentEvent(MessageSentEvent event);
 }

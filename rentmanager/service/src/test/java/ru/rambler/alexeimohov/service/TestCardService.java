@@ -15,7 +15,6 @@ import ru.rambler.alexeimohov.entities.Card;
 import ru.rambler.alexeimohov.entities.User;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.*;
 
@@ -40,7 +39,7 @@ class TestCardService {
     @BeforeEach
     void init() {
         this.user = new User();
-        this.user.setFullName( "Sergei Ivanov" );
+        this.user.setUsername( "Sergei Ivanov" );
         this.user.setId( 1l );
         this.card = new Card( 1l, LocalDate.of( 2040, 12, 31 ),
                 LocalDate.now(), 4556140832208361l, 1000.0, 50.0, user );
