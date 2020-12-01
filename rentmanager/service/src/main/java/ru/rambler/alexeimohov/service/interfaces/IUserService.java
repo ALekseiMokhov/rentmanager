@@ -1,10 +1,14 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.MessageDto;
+import ru.rambler.alexeimohov.dto.SubscriptionDto;
 import ru.rambler.alexeimohov.dto.UserDto;
+import ru.rambler.alexeimohov.service.events.MessageSentEvent;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 
 import java.util.List;
@@ -20,6 +24,10 @@ public interface IUserService {
 
     UserDto getByUserName(String userName);
 
+    void setSubscription( SubscriptionDto dto);
+
+    void removeSubscription(long id);
+
     void addCreditCard(long id, CardDto cardDto);
 
     void removeCreditCard(long id, CardDto cardDto);
@@ -29,4 +37,13 @@ public interface IUserService {
     void removeMessage(long id, MessageDto messageDto);
 
     void saveOrUpdate(UserDto dto);
+
+    @TransactionalEventListener
+    void onOrderCreatedEvent(OrderCreatedEvent event);
+
+    @TransactionalEventListener
+    void onOrderFinishedEvent(OrderFinishedEvent event);
+
+    @EventListener
+    void onMessageSentEvent(MessageSentEvent event);
 }

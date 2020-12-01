@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.MessageDto;
+import ru.rambler.alexeimohov.dto.SubscriptionDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
@@ -54,6 +55,16 @@ public class UserController {
     @PatchMapping("/card/{id}")
     public ResponseEntity addCard(@PathVariable long id, @Valid @RequestBody CardDto cardDto) {
         userService.addCreditCard( id, cardDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+    @PatchMapping("/subscription/")
+    public ResponseEntity setSubscription( @Valid @RequestBody SubscriptionDto subscriptionDto) {
+        userService.setSubscription( subscriptionDto );
+        return new ResponseEntity( HttpStatus.CREATED );
+    }
+    @PatchMapping("/subscription/{userId}")
+    public ResponseEntity removeSubscription(@PathVariable long userId ) {
+        userService.removeSubscription( userId );
         return new ResponseEntity( HttpStatus.CREATED );
     }
 

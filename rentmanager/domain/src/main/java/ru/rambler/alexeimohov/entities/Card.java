@@ -41,7 +41,11 @@ public class Card {
     private double blockedFunds;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH })
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "full_name",
+            referencedColumnName = "full_name"
+    )
     private User user;
 
     public void addFunds(double amount) {

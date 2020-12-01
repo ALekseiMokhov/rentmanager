@@ -4,6 +4,7 @@ package ru.rambler.alexeimohov.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 import ru.rambler.alexeimohov.entities.enums.Privilege;
 import ru.rambler.alexeimohov.entities.enums.Role;
@@ -11,6 +12,7 @@ import ru.rambler.alexeimohov.entities.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = "id")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,6 +35,7 @@ public class User {
     @NotNull(message = "User name should'not be null")
     @Length(min = 5, max = 35)
     @Column(name = "full_name", unique = true)
+    @NaturalId
     private String fullName;
 
     @NotNull(message = "User password should'not be null")
@@ -51,9 +54,7 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JoinTable(name = "user_subscription",
-            joinColumns = { @JoinColumn(name = "id_user", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "id_subscription", referencedColumnName = "id") })
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     private Subscription subscription;
 
     @Enumerated(EnumType.STRING)
@@ -111,5 +112,17 @@ public class User {
     public void removeCreditCard(Card card) {
         creditCards.remove( card );
         card.setUser( null );
+    }
+
+    public void setSubscription(Subscription subscription){
+           if(subscription==null){
+               if(this.subscription!=null){
+                   this.subscription.setUser( null );
+               }
+           }
+           else {
+               subscription.setUser( this );
+           }
+           this.subscription=subscription;
     }
 }

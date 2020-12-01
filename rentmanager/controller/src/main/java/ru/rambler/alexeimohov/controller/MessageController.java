@@ -24,31 +24,11 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-   /* @PostMapping("/")
-    public ResponseEntity createMessage(@Validated @RequestBody MessageDto dto) {
-        messageService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED );
-    }*/
-
     @GetMapping("/{id}")
     public MessageDto getById(@RequestParam long id) {
         return messageService.getById( id );
     }
-
-    @PutMapping("/")
-    public ResponseEntity updateMessage(@Validated @RequestBody MessageDto dto) {
-        messageService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.OK );
-
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteMessage(@RequestParam long id) {
-
-        messageService.remove( id );
-        return new ResponseEntity( HttpStatus.OK );
-
-    }
+    
 
     @GetMapping("/")
     public List <MessageDto> getAllMessages() {

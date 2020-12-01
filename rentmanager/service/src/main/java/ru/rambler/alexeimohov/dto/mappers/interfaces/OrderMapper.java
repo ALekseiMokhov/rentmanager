@@ -1,16 +1,26 @@
 package ru.rambler.alexeimohov.dto.mappers.interfaces;
 
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 import ru.rambler.alexeimohov.dto.OrderDto;
+import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.mappers.GeometryConverter;
 import ru.rambler.alexeimohov.entities.Order;
+import ru.rambler.alexeimohov.entities.User;
+import ru.rambler.alexeimohov.entities.enums.OrderStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = GeometryConverter.class)
 public interface OrderMapper {
+    @AfterMapping
+    default void afterMapping(@MappingTarget Order target, OrderDto source){
+         if(source.getCreationTime()==null){
+             target.setCreationTime( LocalDateTime.now() );
+         }
+
+    }
+
     @Mapping(source = "hasValidSubscription", target = "hasValidSubscription")
     @Mapping(source = "user", target = "userDto")
     @Mapping(source = "vehicle", target = "vehicleDto")

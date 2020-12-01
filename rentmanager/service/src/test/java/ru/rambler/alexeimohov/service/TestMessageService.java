@@ -40,18 +40,6 @@ class TestMessageService {
         this.messageDto = new MessageDto( "1l", "Text", null, LocalDateTime.MIN.toString() );
     }
 
-    @Test
-    void saveOrUpdateAndExpectCorrectMethod() {
-        //given
-        when( mapper.fromDto( any() ) ).thenReturn( message );
-        //when
-        service.saveOrUpdate( this.messageDto );
-        //then
-        then( messageDao ).should( never() )
-                .save( message );
-        verify( messageDao, times( 1 ) ).update( message );
-    }
-
  
 
 }

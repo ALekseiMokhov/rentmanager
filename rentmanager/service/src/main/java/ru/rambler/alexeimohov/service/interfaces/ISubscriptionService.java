@@ -11,9 +11,7 @@ public interface ISubscriptionService {
 
     SubscriptionDto getById(long id);
 
-    void saveOrUpdate(SubscriptionDto dto);
-
-    void remove(long id);
+    Boolean isValid(long id);
 
     List <SubscriptionDto> getAll();
 

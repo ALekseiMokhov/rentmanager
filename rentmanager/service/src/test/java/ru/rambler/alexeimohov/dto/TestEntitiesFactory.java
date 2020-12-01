@@ -80,7 +80,7 @@ public class TestEntitiesFactory {
     static SubscriptionDto getSubscriptionDto() {
         SubscriptionDto subscriptionDto = new SubscriptionDto();
         subscriptionDto.setId( "46363" );
-        subscriptionDto.setUserName( "Test Name" );
+        subscriptionDto.setUser( getUserDto() );
         subscriptionDto.setStartDate( "2020-10-10" );
         subscriptionDto.setExpirationDate( "2040-12-31" );
         subscriptionDto.setPrice( "54.0" );

@@ -14,13 +14,9 @@ import java.util.List;
 @Service
 public interface IMessageService {
 
-    void saveOrUpdate(MessageDto dto);
-
     MessageDto getById(Long id);
 
     List <MessageDto> getAll();
-
-    void remove(Long id);
 
     void sendCustomMessage(UserDto to, String topic, String text);
 

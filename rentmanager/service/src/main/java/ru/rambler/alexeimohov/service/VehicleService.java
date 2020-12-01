@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = false, rollbackFor = Exception.class)
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class VehicleService implements IVehicleService {
 
     private VehicleDao vehicleDao;

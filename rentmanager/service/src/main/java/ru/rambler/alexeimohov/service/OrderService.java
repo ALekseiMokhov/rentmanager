@@ -44,7 +44,13 @@ public class OrderService implements IOrderService {
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
+        /*check if vehicle is free*/
+        /*check if blocked funds is enough is free*/
         if (order.getId() == null) {
+            if(order.getStatus()==null){
+                order.setStatus( OrderStatus.CREATED );
+            }
+            log.debug( order.toString() );
             orderDao.save( order );
             publisher.publishEvent( new OrderCreatedEvent( orderMapper.toDto( order ) ) );
             log.debug( "order created : " + order.getId() );

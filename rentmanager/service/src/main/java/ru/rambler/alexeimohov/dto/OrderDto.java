@@ -22,11 +22,11 @@ public class OrderDto {
     @NotNull
     @CreditCardNumber
     private String creditCardNumber;
-    @NotNull
+    
     private String blockedFunds;
 
     private String totalPrice;
-    @NotNull
+
     private String hasValidSubscription;
 
     private String status;

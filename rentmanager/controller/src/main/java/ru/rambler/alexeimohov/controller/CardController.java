@@ -1,9 +1,9 @@
 package ru.rambler.alexeimohov.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
@@ -19,12 +19,6 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping("/")
-    public ResponseEntity saveCard(@Validated @RequestBody CardDto dto) {
-        cardService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED );
-    }
-
     @GetMapping("/{id}")
     public CardDto getById(@PathVariable long id) {
         return cardService.getById( id );
@@ -35,17 +29,8 @@ public class CardController {
         return cardService.getByCardNumber( cardNumber );
     }
 
-    @PutMapping("/")
-    public ResponseEntity updateAddress(@Validated @RequestBody CardDto dto) {
-        cardService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.OK );
-
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCard(@PathVariable long id) {
-        cardService.remove( id );
-        return new ResponseEntity( HttpStatus.OK );
+    public List<CardDto>getByUserName(@PathVariable String userName){
+        return cardService.getByUserName(userName);
     }
 
     @GetMapping("/")

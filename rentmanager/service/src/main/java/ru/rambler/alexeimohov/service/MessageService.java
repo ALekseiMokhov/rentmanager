@@ -2,6 +2,7 @@ package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -15,6 +16,7 @@ import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Message;
+import ru.rambler.alexeimohov.entities.User;
 import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
@@ -36,6 +38,8 @@ public class MessageService implements IMessageService {
 
     private JavaMailSender javaMailSender;
 
+    private ApplicationEventPublisher publisher;
+
     @Value("${spring.mail.username}")
     private String username;
     @Value("${greeting.text}")
@@ -45,26 +49,18 @@ public class MessageService implements IMessageService {
     @Value("${order.created.text}")
     private String orderCreatedText;
 
-    public MessageService(MessageDao messageDao, MessageMapper messageMapper, UserMapper userMapper, JavaMailSender javaMailSender) {
+    public MessageService(MessageDao messageDao, MessageMapper messageMapper,
+                          UserMapper userMapper, JavaMailSender javaMailSender, ApplicationEventPublisher publisher) {
         this.messageDao = messageDao;
         this.messageMapper = messageMapper;
         this.userMapper = userMapper;
         this.javaMailSender = javaMailSender;
+        this.publisher = publisher;
     }
 
-    @Transactional(readOnly = false)
-    @Override
-    public void saveOrUpdate(MessageDto dto) {
-        Message message = messageMapper.fromDto( dto );
-        log.debug( "msg created from dto: "+ message.getId()+" __"+message.getText());
-        if (message.getId() == null) {
-            messageDao.save( message );
-        } else messageDao.update( message );
-    }
 
     @Override
     @TransactionalEventListener
-    @Transactional(readOnly = false)
     @Async
     public void sendMessageAfterCompleteOrder(OrderFinishedEvent event) {
         OrderDto dto = event.getOrderDto();
@@ -79,13 +75,11 @@ public class MessageService implements IMessageService {
         message.setText( String.format( orderFinishedText, dto.getUserDto().getFullName(), dto.getTotalPrice() ) );
 
         javaMailSender.send( message );
-        messageDao.save( message );
         log.info( "Message sent!" );
     }
 
     @Override
     @TransactionalEventListener
-    @Transactional(readOnly = false)
     @Async
     public void greetNewUser(UserRegisteredEvent event) {
         UserDto dto = event.getUserDto();
@@ -99,41 +93,37 @@ public class MessageService implements IMessageService {
         message.setText( String.format( greetingText, dto.getFullName() ));
 
         javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message to new user has been sent!" );
+        log.debug( "Message to new user has been sent!" +messageDao.findAll().size( ));
     }
     @Override
     @TransactionalEventListener
     @Async
-    @Transactional(readOnly = false)
     public void sendMessageAfterCreateOrder(OrderCreatedEvent event) {
         UserDto dto = event.getOrderDto().getUserDto();
+        User user =   userMapper.fromDto( dto );
         Message message = new Message();
 
-        message.setDateTimeOfSending( LocalDateTime.now() );
-        message.setUser( userMapper.fromDto( dto ));
+        message.setUser(user );
         message.setFrom( this.username );
-        message.setTo( dto.getEmail() );
-        message.setSubject( "Order booked: " + dto.getId()  );
+        message.setTo( user.getEmail() );
+        message.setSubject( "Order booked: " + event.getOrderDto().getId()  );
         message.setText( String.format( orderCreatedText, dto.getFullName(),dto.getId() ));
 
         javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message to new user has been sent!" );
+        log.debug( "Message after new order creation has been sent!" );
     }
 
     @Override
-    @Transactional(readOnly = false)
     @Async
-    public void sendCustomMessage(UserDto to, String topic, String text) {
+    public void sendCustomMessage(UserDto dto, String topic, String text) {
+        User user =   userMapper.fromDto( dto );
         Message message = new Message();
-        message.setUser( userMapper.fromDto( to ) );
+
+        message.setUser(  user);
         message.setText( text );
         message.setFrom( this.username );
-        message.setTo( to.getEmail() );
+        message.setTo( user.getEmail() );
         message.setSubject( topic );
-        message.setDateTimeOfSending( LocalDateTime.now() );
-        messageDao.save( message );
     }
 
     @Override
@@ -144,12 +134,6 @@ public class MessageService implements IMessageService {
     @Override
     public List <MessageDto> getAll() {
         return messageMapper.listToDto( messageDao.findAll() );
-    }
-
-    @Transactional(readOnly = false)
-    @Override
-    public void remove(Long id) {
-        messageDao.remove( id );
     }
 
 

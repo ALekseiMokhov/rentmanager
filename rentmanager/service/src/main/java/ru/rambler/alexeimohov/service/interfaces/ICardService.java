@@ -11,19 +11,13 @@ import java.util.List;
 @Service
 public interface ICardService {
 
-    void saveOrUpdate(CardDto dto);
-
-    void remove(Long id);
-
     CardDto getByCardNumber(long cardNumber);
 
     CardDto getById(long id);
 
+    List <CardDto> getByUserName(String userName);
+
     List <CardDto> getAll();
 
-    @TransactionalEventListener
-    void onOrderCreatedEvent(OrderCreatedEvent event);
 
-    @TransactionalEventListener
-    void onOrderFinishedEvent(OrderFinishedEvent event);
 }

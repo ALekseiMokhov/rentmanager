@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class SubscriptionDto {
     private String id;
     @NotNull
-    private String userName;
+    private UserDto user;
     @NotNull
     private String price;
     @NotNull

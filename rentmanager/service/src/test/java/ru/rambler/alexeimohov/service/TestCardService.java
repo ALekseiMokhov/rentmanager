@@ -48,16 +48,7 @@ class TestCardService {
                 "4556140832208361", "1000", "300", "1" );
     }
 
-    @Test
-    void saveExistingEntityAndExpectUpdate() {
-        //given
-        given( cardDao.findById( anyLong() ) ).willReturn( card );
-        when( mapper.fromDto( any() ) ).thenReturn( card );
-        //when
-        service.saveOrUpdate( cardDto );
-        //then
-        then( cardDao ).should().update( this.card );
-    }
+
 
 
     @Test

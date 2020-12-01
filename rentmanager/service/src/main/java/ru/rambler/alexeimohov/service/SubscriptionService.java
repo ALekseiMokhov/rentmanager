@@ -13,7 +13,7 @@ import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = false, rollbackFor = Exception.class)
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class SubscriptionService implements ISubscriptionService {
 
     private SubscriptionDao subscriptionDao;
@@ -33,22 +33,6 @@ public class SubscriptionService implements ISubscriptionService {
         return subscriptionMapper.toDto( subscriptionDao.findById( id ) );
     }
 
-    @Transactional(readOnly = false)
-    @Override
-    public void saveOrUpdate(SubscriptionDto dto) {
-        Subscription subscription = subscriptionMapper.fromDto( dto );
-        if (subscription.getId() == null) {
-            subscriptionDao.save( subscription );
-        } else {
-            subscriptionDao.update( subscription );
-        }
-    }
-
-    @Transactional(readOnly = false)
-    @Override
-    public void remove(long id) {
-        subscriptionDao.remove( id );
-    }
 
     @Override
     public List <SubscriptionDto> getAll() {
@@ -59,8 +43,8 @@ public class SubscriptionService implements ISubscriptionService {
     public UserDto getSubscriptionHolder(long id) {
         return userMapper.toDto( subscriptionDao.getSubscribeHolder( id ) );
     }
-
-    public boolean isExpired(long id){
+    @Override
+    public Boolean isValid(long id){
         return subscriptionDao.isExpired( id );
     }
 

@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
+@ToString( )
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,12 +48,12 @@ public class Order {
     private double totalPrice;
 
     @Column(name = "has_valid_subscription")
-    @NotNull
+    @NotNull   (message = "Order should be aware of subscription!")
     private boolean hasValidSubscription;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
-    @NotNull
+    @NotNull   (message = "Order should obtain status!")
     private OrderStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

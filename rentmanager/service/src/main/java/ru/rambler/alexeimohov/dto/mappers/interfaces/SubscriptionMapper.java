@@ -8,12 +8,11 @@ import ru.rambler.alexeimohov.entities.Subscription;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface SubscriptionMapper {
-    @InheritInverseConfiguration
+
     Subscription fromDto(SubscriptionDto dto);
 
-    @Mapping(source = "user.fullName", target = "userName")
     SubscriptionDto toDto(Subscription subscription);
 
     List <Subscription> listFromDto(List <SubscriptionDto> list);

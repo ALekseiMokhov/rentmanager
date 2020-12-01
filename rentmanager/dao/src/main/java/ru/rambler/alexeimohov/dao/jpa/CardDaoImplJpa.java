@@ -22,6 +22,11 @@ public class CardDaoImplJpa extends GenericDaoJpa implements CardDao {
     }
 
     @Override
+    public void update(Card object) {
+        entityManager.merge( object );
+    }
+
+    @Override
     public void remove(long id) {
         entityManager.remove( this.findById( id ) );
     }
@@ -38,7 +43,11 @@ public class CardDaoImplJpa extends GenericDaoJpa implements CardDao {
     }
 
     @Override
-    public void update(Card object) {
-        entityManager.merge( object );
+    public List <Card> findAllByUserName(String userName) {
+        return entityManager.createQuery( CardQueries.FIND_CARDS_BY_USERNAME )
+                .setParameter( "userName", userName )
+                .getResultList();
     }
+
+
 }

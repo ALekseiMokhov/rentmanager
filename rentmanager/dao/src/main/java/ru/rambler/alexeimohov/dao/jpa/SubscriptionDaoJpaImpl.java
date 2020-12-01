@@ -33,12 +33,9 @@ public class SubscriptionDaoJpaImpl extends GenericDaoJpa implements Subscriptio
 
     @Override
     public void save(Subscription object) {
-        entityManager.persist( object );
-        Query query = entityManager.createNativeQuery( "insert into user_subscription values(?,?)" );
-        query.setParameter( 1, object.getUser().getId() );
-        query.setParameter( 2, object.getId() );
-        query.executeUpdate();
+        entityManager.merge( object );
     }
+
 
     @Override
     public List <Subscription> findAll() {

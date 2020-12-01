@@ -30,7 +30,7 @@ public class TestSubscriptionDto {
     void convertEntityToDtoAndExpectConsistency() {
         SubscriptionDto converted = subscriptionMapper.toDto( subscription );
         Assertions.assertEquals( "2040-12-31", converted.getExpirationDate() );
-        Assertions.assertEquals( "Sergei", converted.getUserName() );
+        Assertions.assertEquals( "Sergei", converted.getUser().getFullName() );
     }
 
     @Test

@@ -23,18 +23,11 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/{startDateTime}/{cardNumber}")
-    public ResponseEntity createOrder(@PathVariable LocalDateTime startDateTime, @CreditCardNumber @PathVariable long cardNumber,
-                                      @Valid @RequestBody UserDto userDto, @Valid @RequestBody VehicleDto vehicleDto) {
-        OrderDto created = new OrderDto();
-        created.setUserDto( userDto );
-        created.setHasValidSubscription( userDto.getHasValidSubscription() );
-        created.setStartTime( String.valueOf( startDateTime ) );
-        created.setVehicleDto( vehicleDto );
-        created.setCreditCardNumber( String.valueOf( cardNumber ) );
-        created.setBlockedFunds( vehicleDto.getRentPrice() );
+    @PostMapping("/")
+    public ResponseEntity createOrder(@RequestBody OrderDto orderDto) {
 
-        orderService.saveOrUpdate( created );
+
+        orderService.saveOrUpdate( orderDto );
         return new ResponseEntity( HttpStatus.CREATED );
     }
 
