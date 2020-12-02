@@ -2,7 +2,6 @@ package ru.rambler.alexeimohov.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.MessageDto;
 import ru.rambler.alexeimohov.dto.UserDto;
@@ -28,7 +27,7 @@ public class MessageController {
     public MessageDto getById(@RequestParam long id) {
         return messageService.getById( id );
     }
-    
+
 
     @GetMapping("/")
     public List <MessageDto> getAllMessages() {

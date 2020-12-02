@@ -40,7 +40,7 @@ public class TestCardDto {
     @Test
     void convertDtoToEntityAndExpectConsistency() {
         Card converted = cardMapper.fromDto( cardDto );
-        Assertions.assertEquals( LocalDate.of( 2040,12,31  ), converted.getExpirationDate());
+        Assertions.assertEquals( LocalDate.of( 2040, 12, 31 ), converted.getExpirationDate() );
         Assertions.assertEquals( 1111111111111111l, converted.getCreditCardNumber() );
         Assertions.assertEquals( 547469l, converted.getUser().getId() );
     }

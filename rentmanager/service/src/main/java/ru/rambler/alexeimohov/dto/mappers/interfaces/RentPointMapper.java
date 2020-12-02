@@ -8,7 +8,7 @@ import ru.rambler.alexeimohov.entities.RentPoint;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = GeometryConverter.class)
-public interface RentPointMapper  {
+public interface RentPointMapper {
     RentPoint fromDto(RentPointDto dto);
 
     RentPointDto toDto(RentPoint rentPoint);

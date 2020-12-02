@@ -8,5 +8,5 @@ public interface CardDao extends IGenericDao <Card> {
 
     Card findByCardNumber(long number);
 
-    List<Card> findAllByUserName(String userName);
+    List <Card> findAllByUserName(String userName);
 }

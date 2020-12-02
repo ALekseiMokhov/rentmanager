@@ -1,7 +1,10 @@
 package ru.rambler.alexeimohov.entities;
 
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +23,7 @@ import java.util.List;
 
 /*Main entity class
  * Relationships:
- * 1:1 Subscription     through the joining table to avoid null values
+ * 1:1 Subscription
  * 1:n Message bidirectional , methods add- and remove- for sync purpose
  * embedded enums: Role, Privilege
  * */
@@ -28,8 +31,7 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
-@EqualsAndHashCode(exclude ={ "subscription","messages","creditCards","privilege"})
-@Builder
+@EqualsAndHashCode(exclude = { "subscription", "messages", "creditCards", "privilege" })
 @ToString
 public class User implements Serializable, UserDetails {
     @Id
@@ -43,17 +45,20 @@ public class User implements Serializable, UserDetails {
     private String username;
 
     @NotNull(message = "User password should'not be null")
-    @Length(min = 8, max = 16)
+    @Column(length = 255)
     private String password;
 
     @Email(message = "Email should be in valid format!")
     private String email;
 
-    @Column(name = "phone_number",unique = true)
+    @Column(name = "phone_number", unique = true)
     private long phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "has_valid_sub", columnDefinition = "boolean default false")
+    private Boolean hasValidSubscription;
 
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
@@ -118,23 +123,23 @@ public class User implements Serializable, UserDetails {
         card.setUser( null );
     }
 
-    public void setSubscription(Subscription subscription){
-           if(subscription==null){
-               if(this.subscription!=null){
-                   this.subscription.setUser( null );
-               }
-           }
-           else {
-               subscription.setUser( this );
-           }
-           this.subscription=subscription;
+    public void setSubscription(Subscription subscription) {
+        if (subscription == null) {
+            if (this.subscription != null) {
+                this.subscription.setUser( null );
+            }
+        } else {
+            subscription.setUser( this );
+        }
+        this.subscription = subscription;
     }
-      /*UserDetails inherited methods*/
+
+    /*UserDetails inherited methods*/
     @Override
     public Collection <? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities
-                = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(String.valueOf(role)));
+        List <GrantedAuthority> authorities
+                = new ArrayList <>();
+        authorities.add( new SimpleGrantedAuthority( String.valueOf( role ) ) );
 
         return authorities;
     }

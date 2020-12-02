@@ -10,12 +10,13 @@ import ru.rambler.alexeimohov.entities.Vehicle;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {GeometryConverter.class, BooleanToStringConverter.class})
+@Mapper(componentModel = "spring", uses = { GeometryConverter.class, BooleanToStringConverter.class })
 public interface VehicleMapper {
-      @Mapping( source ="isChildish",target = "isChildish")
-      @Mapping( source ="isHumanPowered",target = "isHumanPowered")
+    @Mapping(source = "isChildish", target = "isChildish")
+    @Mapping(source = "isHumanPowered", target = "isHumanPowered")
     VehicleDto toDto(Vehicle vehicle);
-     @InheritInverseConfiguration
+
+    @InheritInverseConfiguration
     Vehicle fromDto(VehicleDto dto);
 
 

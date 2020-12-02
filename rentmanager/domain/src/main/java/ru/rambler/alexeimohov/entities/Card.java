@@ -1,12 +1,10 @@
 package ru.rambler.alexeimohov.entities;
 
 import lombok.*;
-import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 /*
  * User's credit card n:1
  * Methods to add/write-off @param avaliableFunds
@@ -18,9 +16,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"availableFunds","blockedFunds"})
-@ToString  (exclude = "user")
+@EqualsAndHashCode(exclude = { "availableFunds", "blockedFunds" })
+@ToString(exclude = "user")
 public class Card {
+    @Transient
+    private final Object lock = new Object();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +32,7 @@ public class Card {
     private LocalDate validFromDate;
 
     @NotNull(message = "credit card shouldn't be null!")
-    @Column(name = "credit_card_number",unique = true)
+    @Column(name = "credit_card_number", unique = true)
     private long creditCardNumber;
 
     @Column(name = "available_funds")
@@ -50,14 +50,15 @@ public class Card {
     private User user;
 
     public void addFunds(double amount) {
-        availableFunds += amount;
+        synchronized (lock) {
+            availableFunds += amount;
+        }
     }
 
     public void writeOff(double amount) {
-        if (amount > availableFunds) {
-            throw new IllegalArgumentException( "Incorrect amount to write-off!" );
+        synchronized (lock) {
+            availableFunds -= amount;
         }
-        availableFunds -= amount;
     }
 
     public void blockFunds(double amount) {

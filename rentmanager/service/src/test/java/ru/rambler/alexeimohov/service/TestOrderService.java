@@ -31,7 +31,7 @@ import static org.mockito.BDDMockito.*;
 public class TestOrderService {
     private OrderDao orderDao = Mockito.mock( OrderDaoJpaImpl.class );
 
-    private ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class  );
+    private ApplicationEventPublisher publisher = Mockito.mock( ApplicationEventPublisher.class );
 
     private OrderMapper orderMapper = Mockito.mock( OrderMapperImpl.class );
 
@@ -76,13 +76,15 @@ public class TestOrderService {
         given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
         //when
         order.setId( null );
-        orderService.saveOrUpdate(orderDto);
+        orderService.saveOrUpdate( orderDto );
         //then
-        verify( orderDao,times( 1 ) ) .save( order );
-        verify( orderDao,never() ).update( order );
-        verify( publisher,times(  1) ) .publishEvent( any( OrderCreatedEvent.class ));
+        verify( orderDao, times( 1 ) ).save( order );
+        verify( orderDao, never() ).update( order );
+        verify( publisher, times( 1 ) ).publishEvent( any( OrderCreatedEvent.class ) );
 
-    }   @Test
+    }
+
+    @Test
     void updateOrderAndExpectConsistency() {
 
         //given
@@ -92,22 +94,23 @@ public class TestOrderService {
         //when
         orderService.saveOrUpdate( orderDto );
         //then
-        verify( orderDao,times( 1 ) ) .update( order );
-        verify( orderDao,never() ).save( order );
-        verify( publisher,never(  ) ) .publishEvent( any() );
+        verify( orderDao, times( 1 ) ).update( order );
+        verify( orderDao, never() ).save( order );
+        verify( publisher, never() ).publishEvent( any() );
 
     }
+
     @Test
     void finishAndExpectPublishingEvent() {
 
         //given
-        given( orderDao.findById( any() )).willReturn(order  );
-        InOrder inOrder = inOrder( orderDao,publisher );
+        given( orderDao.findById( any() ) ).willReturn( order );
+        InOrder inOrder = inOrder( orderDao, publisher );
         //when
         orderService.finish( anyLong() );
         //then
         inOrder.verify( orderDao ).findById( anyLong() );
-        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class));
+        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class ) );
         inOrder.verifyNoMoreInteractions();
     }
 
@@ -115,21 +118,21 @@ public class TestOrderService {
     void cancelAndExpectConsistency() {
 
         //given
-        given( orderDao.findById( any() )).willReturn(order  );
-        InOrder inOrder = inOrder( orderDao,publisher );
+        given( orderDao.findById( any() ) ).willReturn( order );
+        InOrder inOrder = inOrder( orderDao, publisher );
         //when
         orderService.cancel( anyLong() );
         //then
-        Assertions.assertEquals( 0,order.getTotalPrice() );
+        Assertions.assertEquals( 0, order.getTotalPrice() );
         inOrder.verify( orderDao ).findById( anyLong() );
-        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class));
+        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class ) );
         inOrder.verifyNoMoreInteractions();
     }
 
     @Test
     void countTotalPriceFail() {
-          Assertions.assertThrows( IllegalArgumentException.class,
-                  ()-> orderService.countTotalPrice( LocalDateTime.MAX,LocalDateTime.now(),2.0,0,1 ) );
+        Assertions.assertThrows( IllegalArgumentException.class,
+                () -> orderService.countTotalPrice( LocalDateTime.MAX, LocalDateTime.now(), 2.0, 0, 1 ) );
     }
 
 }

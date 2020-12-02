@@ -32,7 +32,7 @@ public class TestVehicleDto {
         VehicleDto retrieved = vehicleMapper.toDto( vehicle );
         Assertions.assertNotNull( retrieved.getRentPoint().getCoordinate() );
         Assertions.assertEquals( retrieved.getModelName(), "S1" );
-        Assertions.assertEquals(  "true" ,retrieved.getIsChildish());
+        Assertions.assertEquals( "true", retrieved.getIsChildish() );
     }
 
     @Test

@@ -3,7 +3,6 @@ package ru.rambler.alexeimohov.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,10 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Message;
 import ru.rambler.alexeimohov.entities.User;
-import ru.rambler.alexeimohov.service.events.*;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
+import ru.rambler.alexeimohov.service.events.SubscriptionSetEvent;
+import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
 import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 
 import java.time.LocalDateTime;
@@ -71,11 +73,10 @@ public class MessageService implements IMessageService {
         message.setDateTimeOfSending( LocalDateTime.now() );
         message.setUser( userMapper.fromDto( dto.getUserDto() ) );
 
-        message.setFrom(  this.username);
+        message.setFrom( this.username );
         message.setTo( dto.getUserDto().getEmail() );
         message.setSubject( "Order " + dto.getId() + " " + dto.getStatus() );
-        message.setText( String.format( orderFinishedText, dto.getUserDto().getFullName(), dto.getTotalPrice() ) );
-
+        message.setText( String.format( orderFinishedText, dto.getUserDto().getUsername(), dto.getTotalPrice() ) );
 
 
         javaMailSender.send( message );
@@ -92,30 +93,31 @@ public class MessageService implements IMessageService {
         Message message = new Message();
 
         message.setDateTimeOfSending( LocalDateTime.now() );
-        message.setUser( userMapper.fromDto( dto ));
+        message.setUser( userMapper.fromDto( dto ) );
         message.setFrom( this.username );
         message.setTo( dto.getEmail() );
-        message.setSubject( "User registered " + dto.getId()  );
-        message.setText( String.format( greetingText, dto.getFullName() ));
+        message.setSubject( "User registered " + dto.getId() );
+        message.setText( String.format( greetingText, dto.getUsername() ) );
 
         javaMailSender.send( message );
         messageDao.save( message );
-        log.debug( "Message to new user has been sent!" +messageDao.findAll().size( ));
+        log.debug( "Message to new user has been sent!" + messageDao.findAll().size() );
     }
+
     @Override
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendMessageAfterCreateOrder(OrderCreatedEvent event) {
         UserDto dto = event.getOrderDto().getUserDto();
-        User user =   userMapper.fromDto( dto );
+        User user = userMapper.fromDto( dto );
         Message message = new Message();
 
-        message.setUser(user );
+        message.setUser( user );
         message.setFrom( this.username );
         message.setTo( user.getEmail() );
-        message.setSubject( "Order booked: " + event.getOrderDto().getId()  );
-        message.setText( String.format( orderCreatedText, dto.getFullName(), event.getOrderDto().getId()  ));
+        message.setSubject( "Order booked: " + event.getOrderDto().getId() );
+        message.setText( String.format( orderCreatedText, dto.getUsername(), event.getOrderDto().getId() ) );
 
         javaMailSender.send( message );
         messageDao.save( message );
@@ -126,10 +128,10 @@ public class MessageService implements IMessageService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendCustomMessage(UserDto dto, String topic, String text) {
-        User user =   userMapper.fromDto( dto );
+        User user = userMapper.fromDto( dto );
         Message message = new Message();
 
-        message.setUser(  user);
+        message.setUser( user );
         message.setText( text );
         message.setFrom( this.username );
         message.setTo( user.getEmail() );
@@ -144,15 +146,15 @@ public class MessageService implements IMessageService {
     @Async
     public void sendMessageAfterSetSubscription(SubscriptionSetEvent event) {
         UserDto dto = event.getSubscriptionDto().getUser();
-        User user =   userMapper.fromDto( dto );
+        User user = userMapper.fromDto( dto );
         Message message = new Message();
 
-        message.setUser(user );
+        message.setUser( user );
         message.setFrom( this.username );
         message.setTo( user.getEmail() );
-        message.setSubject( "Subscription ordered: " + event.getSubscriptionDto().getId()  );
-        message.setText( String.format( subscriptionOrdered, dto.getFullName(),
-                event.getSubscriptionDto().getStartDate() ,event.getSubscriptionDto().getPrice() ));
+        message.setSubject( "Subscription ordered: " + event.getSubscriptionDto().getId() );
+        message.setText( String.format( subscriptionOrdered, dto.getUsername(),
+                event.getSubscriptionDto().getStartDate(), event.getSubscriptionDto().getPrice() ) );
 
         javaMailSender.send( message );
         messageDao.save( message );

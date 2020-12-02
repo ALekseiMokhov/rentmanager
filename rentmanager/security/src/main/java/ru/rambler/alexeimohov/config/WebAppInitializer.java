@@ -1,23 +1,21 @@
-package ru.rambler.alexeimohov.spring;
+package ru.rambler.alexeimohov.config;
 
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ru.rambler.alexeimohov.spring.PersistenceConfig;
+import ru.rambler.alexeimohov.spring.UtilConfig;
+import ru.rambler.alexeimohov.spring.WebConfig;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(value = "ru.rambler.alexeimohov",
-        excludeFilters = { @ComponentScan.Filter(
-                type = FilterType.REGEX, pattern = ".*[Test]") })
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class <?>[] getRootConfigClasses() {
-        return new Class[]{ PersistenceConfig.class, UtilConfig.class /*SecurityConfig.class, */ };
+        return new Class[]{ PersistenceConfig.class, UtilConfig.class, CustomSecurityConfig.class };
 
     }
 

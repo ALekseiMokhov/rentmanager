@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dto.MessageDto;
 import ru.rambler.alexeimohov.dto.UserDto;
@@ -25,10 +24,10 @@ public interface IMessageService {
     void sendMessageAfterCompleteOrder(OrderFinishedEvent event);
 
     @TransactionalEventListener
-    void sendMessageAfterCreateOrder(OrderCreatedEvent event) ;
+    void sendMessageAfterCreateOrder(OrderCreatedEvent event);
 
     @TransactionalEventListener
-    void sendMessageAfterSetSubscription(SubscriptionSetEvent event) ;
+    void sendMessageAfterSetSubscription(SubscriptionSetEvent event);
 
     @TransactionalEventListener
     void greetNewUser(UserRegisteredEvent event);

@@ -1,3 +1,5 @@
+package ru.rambler.alexeimohov.jwt;
+
 public class JwtAuthenticationResponse {
     private String accessToken;
     private String tokenType = "Bearer";

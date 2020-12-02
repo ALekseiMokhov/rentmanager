@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.AddressMapper;
 import ru.rambler.alexeimohov.entities.Address;
-import ru.rambler.alexeimohov.entities.RentPoint;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestConfig.class)

@@ -3,13 +3,9 @@ package ru.rambler.alexeimohov.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dao.interfaces.CardDao;
 import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.CardMapper;
-import ru.rambler.alexeimohov.entities.Card;
-import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
-import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
 import java.util.List;
@@ -42,13 +38,14 @@ public class CardService implements ICardService {
 
     @Override
     public List <CardDto> getByUserName(String userName) {
-        return cardMapper.listToDto( cardDao.findAllByUserName(userName) );
+        return cardMapper.listToDto( cardDao.findAllByUserName( userName ) );
 
-    } @Override
+    }
+
+    @Override
     public List <CardDto> getAll() {
         return cardMapper.listToDto( cardDao.findAll() );
     }
-
 
 
 }

@@ -32,16 +32,16 @@ public class TestUserDto {
         user.setSubscription( null );
         UserDto converted = userMapper.toDto( user );
         Assertions.assertEquals( "EXCLUSIVE", converted.getPrivilege() );
-        Assertions.assertNull(  converted.getPassword());
-        Assertions.assertNotNull( converted.getHasValidSubscription());
-        Assertions.assertEquals("false", converted.getHasValidSubscription());
+        Assertions.assertNull( converted.getPassword() );
+        Assertions.assertNotNull( converted.getHasValidSubscription() );
+        Assertions.assertEquals( "false", converted.getHasValidSubscription() );
     }
 
     @Test
     void reverseConvertFromDto() {
         User converted = userMapper.fromDto( userDto );
         Assertions.assertEquals( converted.getRole(), Role.USER );
-        Assertions.assertNotNull(  converted.getPassword());
+        Assertions.assertNotNull( converted.getPassword() );
 
     }
 }

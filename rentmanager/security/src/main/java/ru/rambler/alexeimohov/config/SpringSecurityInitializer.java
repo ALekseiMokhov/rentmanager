@@ -1,4 +1,4 @@
-package ru.rambler.alexeimohov.spring.security;
+package ru.rambler.alexeimohov.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.stereotype.Component;

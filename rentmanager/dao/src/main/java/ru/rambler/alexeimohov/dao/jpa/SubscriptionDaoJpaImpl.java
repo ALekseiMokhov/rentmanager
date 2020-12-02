@@ -6,7 +6,6 @@ import ru.rambler.alexeimohov.dao.jpa.queries.SubscriptionQueries;
 import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.entities.User;
 
-import javax.persistence.Query;
 import java.util.List;
 
 @Repository("subscriptionDao")
@@ -47,7 +46,7 @@ public class SubscriptionDaoJpaImpl extends GenericDaoJpa implements Subscriptio
         entityManager.merge( object );
     }
 
-    public boolean isExpired(long id){
-        return entityManager.find( Subscription.class,id ).isExpired();
+    public boolean isExpired(long id) {
+        return entityManager.find( Subscription.class, id ).isExpired();
     }
 }

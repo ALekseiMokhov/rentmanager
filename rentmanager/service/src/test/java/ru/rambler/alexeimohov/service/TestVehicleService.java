@@ -12,40 +12,42 @@ import ru.rambler.alexeimohov.dao.jpa.VehicleDaoJpaImpl;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapperImpl;
 import ru.rambler.alexeimohov.entities.Vehicle;
-import static org.mockito.BDDMockito.*;
+
 import java.time.LocalDate;
 import java.util.List;
+
+import static org.mockito.BDDMockito.anyLong;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class TestVehicleService {
 
     private VehicleDao vehicleDao = Mockito.mock( VehicleDaoJpaImpl.class );
 
-    private VehicleMapper vehicleMapper = Mockito.mock( VehicleMapperImpl.class ) ;
+    private VehicleMapper vehicleMapper = Mockito.mock( VehicleMapperImpl.class );
 
-    private Vehicle vehicle ;
+    private Vehicle vehicle;
 
     private LocalDate date;
 
     private List <Vehicle> vehicleList;
+    @InjectMocks
+    private VehicleService vehicleService;
 
     @BeforeEach
-    void init(){
+    void init() {
         this.vehicle = new Vehicle();
         this.date = LocalDate.now();
     }
 
-    @InjectMocks
-    private VehicleService vehicleService;
-
     @Test
     void setDateForBookingAndExpectVehicleBooked() {
         //given
-        given( vehicleDao.findById( anyLong() ) ) .willReturn( vehicle );
+        given( vehicleDao.findById( anyLong() ) ).willReturn( vehicle );
         //when
-       vehicleService.setDateForBooking( 1l,date );
+        vehicleService.setDateForBooking( 1l, date );
         //then
-        Assertions.assertEquals(true, vehicle.getBookedDates().contains( date ) );
+        Assertions.assertEquals( true, vehicle.getBookedDates().contains( date ) );
     }
 
 

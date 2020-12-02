@@ -1,8 +1,8 @@
 package ru.rambler.alexeimohov.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -16,9 +16,10 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
     private String id;
     @NotNull
-    private String fullName;
+    private String username;
     @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Length(min = 8, max = 32)
     private String password;
 
     private String hasValidSubscription;

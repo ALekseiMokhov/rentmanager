@@ -8,10 +8,11 @@ import ru.rambler.alexeimohov.dto.RentPointDto;
 import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
 
 import java.util.List;
-      /*
-      *  No POST method due to unidirectional association with Address. RentPoint persisted as a field of Address entity*/
+
+/*
+ *  No POST method due to unidirectional association with Address. RentPoint persisted as a field of Address entity*/
 @RestController
-@RequestMapping ("/rentpoint")
+@RequestMapping("/rentpoint")
 public class RentPointController {
 
     private IRentPointService rentPointService;

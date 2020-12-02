@@ -26,8 +26,8 @@ public class SubscriptionController {
     }
 
     @GetMapping("/is-valid/{id}")
-    public Boolean isValid(@PathVariable long id){
-        return subscriptionService.isValid( id ) ;
+    public Boolean isValid(@PathVariable long id) {
+        return subscriptionService.isValid( id );
     }
 
     @GetMapping("/name/{id}")

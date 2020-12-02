@@ -29,7 +29,7 @@ public class TestOrderDto {
     @Test
     void convertEntityToDtoAndExpectConsistency() {
         OrderDto converted = orderMapper.toDto( order );
-        Assertions.assertEquals( "Sergei", converted.getUserDto().getFullName() );
+        Assertions.assertEquals( "Sergei", converted.getUserDto().getUsername() );
 
     }
 

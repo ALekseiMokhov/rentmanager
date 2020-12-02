@@ -2,6 +2,8 @@ package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,10 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
 import ru.rambler.alexeimohov.entities.Card;
 import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.entities.User;
-import ru.rambler.alexeimohov.service.events.*;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
+import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
+import ru.rambler.alexeimohov.service.events.SubscriptionSetEvent;
+import ru.rambler.alexeimohov.service.events.UserRegisteredEvent;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
 import java.util.List;
@@ -94,6 +99,7 @@ public class UserService implements IUserService {
         Subscription subscription = subscriptionMapper.fromDto( dto );
         User user = userDao.findByUserName( subscription.getUser().getUsername() );
         user.setSubscription( subscription );
+        user.setHasValidSubscription( true );
         publisher.publishEvent( new SubscriptionSetEvent( subscriptionMapper.toDto( subscription ) ) );
     }
 
@@ -103,6 +109,7 @@ public class UserService implements IUserService {
     public void removeSubscription(long id) {
         User user = userDao.findById( id );
         user.setSubscription( null );
+        user.setHasValidSubscription( false );
     }
 
     @Transactional(readOnly = false)
@@ -138,7 +145,7 @@ public class UserService implements IUserService {
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
-        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getFullName() );
+        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getUsername() );
         log.debug( "_____USER_____: " + retrieved.toString() );
         Card card = retrieved.getCreditCards().stream()
                 .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
@@ -160,7 +167,7 @@ public class UserService implements IUserService {
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderCreatedEvent(OrderCreatedEvent event) {
-        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getFullName() );
+        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getUsername() );
 
         Card card = retrieved.getCreditCards().stream()
                 .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
@@ -169,9 +176,17 @@ public class UserService implements IUserService {
 
 
         card.blockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-        
+
 
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User retrieved = userDao.findByUserName( username );
+        if (retrieved == null) {
+            throw new IllegalArgumentException( "User " + username + "doesn't exist!" );
+        }
+        return retrieved;
+    }
 }

@@ -46,8 +46,8 @@ public class UtilConfig {
 
         Properties properties = mailSender.getJavaMailProperties();
         properties.setProperty( "mail.debug", debug );
-        properties.setProperty("mail.smtp.auth", auth);
-        properties.setProperty("mail.smtp.starttls.enable", enable);
+        properties.setProperty( "mail.smtp.auth", auth );
+        properties.setProperty( "mail.smtp.starttls.enable", enable );
 
         return mailSender;
     }

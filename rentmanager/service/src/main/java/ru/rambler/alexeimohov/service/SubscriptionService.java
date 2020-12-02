@@ -7,7 +7,6 @@ import ru.rambler.alexeimohov.dto.SubscriptionDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.SubscriptionMapper;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.UserMapper;
-import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 
 import java.util.List;
@@ -43,8 +42,9 @@ public class SubscriptionService implements ISubscriptionService {
     public UserDto getSubscriptionHolder(long id) {
         return userMapper.toDto( subscriptionDao.getSubscribeHolder( id ) );
     }
+
     @Override
-    public Boolean isValid(long id){
+    public Boolean isValid(long id) {
         return subscriptionDao.isExpired( id );
     }
 

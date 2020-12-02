@@ -29,8 +29,8 @@ public class CardController {
         return cardService.getByCardNumber( cardNumber );
     }
 
-    public List<CardDto>getByUserName(@PathVariable String userName){
-        return cardService.getByUserName(userName);
+    public List <CardDto> getByUserName(@PathVariable String userName) {
+        return cardService.getByUserName( userName );
     }
 
     @GetMapping("/")

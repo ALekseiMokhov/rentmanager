@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,8 +20,15 @@ import java.util.Arrays;
 @Slf4j
 @Configuration
 @EnableWebMvc
+@EnableGlobalMethodSecurity(prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true)
 @PropertySource("classpath:application.properties")
-@ComponentScan({ "ru.rambler.alexeimohov" })
+@ComponentScan({ "ru.rambler.alexeimohov.spring",
+        "ru.rambler.alexeimohov.controller",
+        "ru.rambler.alexeimohov.dao",
+        "ru.rambler.alexeimohov.jwt",
+        "ru.rambler.alexeimohov.security" })
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 

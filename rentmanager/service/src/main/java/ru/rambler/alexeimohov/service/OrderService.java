@@ -44,11 +44,11 @@ public class OrderService implements IOrderService {
     @Override
     public void saveOrUpdate(OrderDto dto) {
         Order order = orderMapper.fromDto( dto );
-        log.debug( "************************************* -- +" + dto.getId());
+        log.debug( "************************************* -- +" + dto.getId() );
         /*check if vehicle is free*/
         /*check if blocked funds is enough is free*/
         if (order.getId() == null) {
-            if(order.getStatus()==null){
+            if (order.getStatus() == null) {
                 order.setStatus( OrderStatus.CREATED );
             }
             log.debug( order.toString() );
@@ -103,8 +103,8 @@ public class OrderService implements IOrderService {
 
     // count total price
     public double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine, double coefficient) {
-        if(start.isAfter( end )){
-            throw new IllegalArgumentException("Finish time can't be before start time!");
+        if (start.isAfter( end )) {
+            throw new IllegalArgumentException( "Finish time can't be before start time!" );
         }
         long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS );
         return (price * hours + fine) * coefficient;

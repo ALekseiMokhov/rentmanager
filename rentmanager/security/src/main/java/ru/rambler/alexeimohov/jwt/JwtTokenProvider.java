@@ -1,3 +1,5 @@
+package ru.rambler.alexeimohov.jwt;
+
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,9 +9,10 @@ import ru.rambler.alexeimohov.entities.User;
 
 import java.util.Date;
 
-@Component
+@Component("jwtProvider")
+
 @Slf4j
-public class JwtTokenProvider {
+public class JwtTokenProvider implements ITokenProvider {
     @Value("${jwt.token.secret}")
     private String code;
     @Value("${jwt.token.exp}")
@@ -20,39 +23,39 @@ public class JwtTokenProvider {
         User user = (User) authentication.getPrincipal();
 
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + this.validTime);
+        Date expiryDate = new Date( now.getTime() + this.validTime );
 
         return Jwts.builder()
-                .setSubject(String.valueOf(user.getId()))
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .signWith( SignatureAlgorithm.HS512, code)
+                .setSubject( String.valueOf( user.getId() ) )
+                .setIssuedAt( new Date() )
+                .setExpiration( expiryDate )
+                .signWith( SignatureAlgorithm.HS512, code )
                 .compact();
     }
 
     public Long getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(code)
-                .parseClaimsJws(token)
+                .setSigningKey( code )
+                .parseClaimsJws( token )
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return Long.parseLong( claims.getSubject() );
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(code).parseClaimsJws(token);
+            Jwts.parser().setSigningKey( code ).parseClaimsJws( token );
             return true;
         } catch (SignatureException ex) {
-            log.error("Invalid JWT signature");
+            log.error( "Invalid JWT signature" );
         } catch (MalformedJwtException ex) {
-            log.error("Invalid JWT token");
+            log.error( "Invalid JWT token" );
         } catch (ExpiredJwtException ex) {
-            log.error("Expired JWT token");
+            log.error( "Expired JWT token" );
         } catch (UnsupportedJwtException ex) {
-            log.error("Unsupported JWT token");
+            log.error( "Unsupported JWT token" );
         } catch (IllegalArgumentException ex) {
-            log.error("JWT claims string is empty.");
+            log.error( "JWT claims string is empty." );
         }
         return false;
     }

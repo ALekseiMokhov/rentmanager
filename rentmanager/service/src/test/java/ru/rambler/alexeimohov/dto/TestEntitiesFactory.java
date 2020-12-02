@@ -19,7 +19,7 @@ public class TestEntitiesFactory {
         user.setId( 547469l );
         user.setUsername( "Sergei" );
         user.setPassword( "tu4hd845cY23L" );
-        user.setSubscription( new Subscription( 1l, user, 22.9,false, LocalDate.now(), LocalDate.now(),
+        user.setSubscription( new Subscription( 1l, user, 22.9, false, LocalDate.now(), LocalDate.now(),
                 LocalDate.of( 2033, 11, 16 ) ) );
         user.setPrivilege( Privilege.EXCLUSIVE );
         user.addMessage( new Message( 1l, "Hi there!", user, LocalDateTime.now() ) );
@@ -31,7 +31,7 @@ public class TestEntitiesFactory {
     static UserDto getUserDto() {
         UserDto userDto = new UserDto();
         userDto.setId( "2" );
-        userDto.setFullName( "Alexander" );
+        userDto.setUsername( "Alexander" );
         userDto.setPassword( "4f837t873T" );
         userDto.setPhoneNumber( "89192223341" );
         userDto.setPrivilege( "NEWBIE" );
@@ -56,11 +56,11 @@ public class TestEntitiesFactory {
 
     static VehicleDto getVehicleDto() {
         VehicleDto vehicleDto = new VehicleDto();
-        vehicleDto.setIsChildish(  "true");
+        vehicleDto.setIsChildish( "true" );
         vehicleDto.setModelName( "S1" );
         vehicleDto.setRentPrice( "3.5" );
         vehicleDto.setFinePrice( "22.9" );
-        vehicleDto.setIsHumanPowered(  "true");
+        vehicleDto.setIsHumanPowered( "true" );
         vehicleDto.setType( "SCOOTER" );
         vehicleDto.setId( "43" );
         vehicleDto.setRentPoint( getRentPointDto() );

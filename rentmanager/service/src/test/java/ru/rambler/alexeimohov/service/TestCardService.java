@@ -16,7 +16,8 @@ import ru.rambler.alexeimohov.entities.User;
 
 import java.time.LocalDate;
 
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /*
  * Unit tests with BDD mockito and classic mockito methods*/
@@ -46,8 +47,6 @@ class TestCardService {
         this.cardDto = new CardDto( "1", "2040-12-31", "2020-11-12T09:00:00",
                 "4556140832208361", "1000", "300", "1" );
     }
-
-
 
 
     @Test

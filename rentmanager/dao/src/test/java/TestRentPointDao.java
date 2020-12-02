@@ -39,7 +39,7 @@ public class TestRentPointDao {
     void persistAndExpectNoExceptions() {
         rentPointDao.save( testingPoint );
 
-        RentPoint pointCreated = rentPointDao.findAll( ).get( 0 );
+        RentPoint pointCreated = rentPointDao.findAll().get( 0 );
         Assertions.assertNotNull( testingPoint );
         Assertions.assertEquals( testingPoint, pointCreated );
     }

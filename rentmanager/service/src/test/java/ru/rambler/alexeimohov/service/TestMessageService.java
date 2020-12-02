@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.service;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -14,8 +13,6 @@ import ru.rambler.alexeimohov.dto.mappers.interfaces.MessageMapperImpl;
 import ru.rambler.alexeimohov.entities.Message;
 
 import java.time.LocalDateTime;
-
-import static org.mockito.BDDMockito.*;
 
 
 /*
@@ -40,6 +37,5 @@ class TestMessageService {
         this.messageDto = new MessageDto( "1l", "Text", null, LocalDateTime.MIN.toString() );
     }
 
- 
 
 }
