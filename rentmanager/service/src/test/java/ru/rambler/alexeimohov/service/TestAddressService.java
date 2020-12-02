@@ -43,7 +43,7 @@ class TestAddressService {
     @Test
     void getByIdAndExpectMappingToDto() {
         //given
-        when( addressDao.findById( any() ) ).thenReturn( address );
+        when( addressDao.findById( anyLong() ) ).thenReturn( address );
         //when
         service.getById( 1l );
         //then

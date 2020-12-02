@@ -46,3 +46,15 @@
 2020-11-26 17:03:36 DEBUG UserService:80 - user's cards 1
 2020-11-26 17:19:09 DEBUG UserService:80 - user's cards 1
 2020-11-26 17:19:16 DEBUG UserService:80 - user's cards 1
+2020-12-03 00:06:46 DEBUG OrderService:113 - event was published 
+2020-12-03 00:11:59 DEBUG OrderService:113 - event was published 
+2020-12-03 00:11:59 DEBUG OrderService:72 - Order(id=null, creationTime=2020-12-03T00:11:59.696746100, startTime=2020-12-03T00:11:59.696746100, finishTime=null, creditCardNumber=1111111111111111, blockedFunds=8.0, totalPrice=0.0, hasValidSubscription=false, status=IN_RENT, user=User(id=null, username=Alex, password=null, email=null, phoneNumber=0, role=null, hasValidSubscription=null, subscription=null, privilege=NEWBIE, messages=[], creditCards=[Card(lock=java.lang.Object@1c32886a, id=null, expirationDate=null, validFromDate=null, creditCardNumber=1111111111111111, availableFunds=1.0E9, blockedFunds=0.0)]), vehicle=ru.rambler.alexeimohov.entities.Vehicle@c231db82)
+2020-12-03 00:11:59 DEBUG OrderService:75 - order created : null
+2020-12-03 00:11:59 DEBUG OrderService:78 - order updated : 342
+2020-12-03 00:12:25 DEBUG OrderService:113 - event was published 
+2020-12-03 00:12:25 DEBUG OrderService:72 - Order(id=null, creationTime=2020-12-03T00:12:25.088506200, startTime=2020-12-03T00:12:25.088506200, finishTime=null, creditCardNumber=1111111111111111, blockedFunds=8.0, totalPrice=0.0, hasValidSubscription=false, status=IN_RENT, user=User(id=null, username=Alex, password=null, email=null, phoneNumber=0, role=null, hasValidSubscription=null, subscription=null, privilege=NEWBIE, messages=[], creditCards=[Card(lock=java.lang.Object@1c32886a, id=null, expirationDate=null, validFromDate=null, creditCardNumber=1111111111111111, availableFunds=1.0E9, blockedFunds=0.0)]), vehicle=ru.rambler.alexeimohov.entities.Vehicle@c231db82)
+2020-12-03 00:12:25 DEBUG OrderService:75 - order created : null
+2020-12-03 00:12:25 DEBUG OrderService:78 - order updated : 342
+2020-12-03 00:12:25 DEBUG OrderService:102 - event was published 
+2020-12-03 00:13:00 DEBUG RentPointService:64 - Rent point was retrieved by coordinate: (2.34,4782.0)
+2020-12-03 00:13:20 DEBUG UserService:120 - user's cards 1

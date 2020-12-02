@@ -15,6 +15,7 @@ import ru.rambler.alexeimohov.dto.OrderDto;
 import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.dto.VehicleDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.*;
+import ru.rambler.alexeimohov.entities.Card;
 import ru.rambler.alexeimohov.entities.Order;
 import ru.rambler.alexeimohov.entities.User;
 import ru.rambler.alexeimohov.entities.Vehicle;
@@ -50,12 +51,19 @@ public class TestOrderService {
 
     private User user;
 
+    private Card card;
+
 
     @BeforeEach
     void init() {
+        this.card = new Card();
+        card.setCreditCardNumber( 1111_1111_1111_1111l );
+        card.setAvailableFunds( 1000_000_000 );
+        
         this.user = new User();
         user.setUsername( "Alex" );
         user.setPrivilege( Privilege.NEWBIE );
+        user.getCreditCards().add( card ) ;
 
         this.vehicle = new Vehicle();
 
@@ -104,7 +112,7 @@ public class TestOrderService {
     void finishAndExpectPublishingEvent() {
 
         //given
-        given( orderDao.findById( any() ) ).willReturn( order );
+        given( orderDao.findById( anyLong() ) ).willReturn( order );
         InOrder inOrder = inOrder( orderDao, publisher );
         //when
         orderService.finish( anyLong() );
@@ -118,7 +126,7 @@ public class TestOrderService {
     void cancelAndExpectConsistency() {
 
         //given
-        given( orderDao.findById( any() ) ).willReturn( order );
+        given( orderDao.findById( anyLong() ) ).willReturn( order );
         InOrder inOrder = inOrder( orderDao, publisher );
         //when
         orderService.cancel( anyLong() );

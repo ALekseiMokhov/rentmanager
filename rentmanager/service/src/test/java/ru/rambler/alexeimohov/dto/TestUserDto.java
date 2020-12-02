@@ -33,8 +33,7 @@ public class TestUserDto {
         UserDto converted = userMapper.toDto( user );
         Assertions.assertEquals( "EXCLUSIVE", converted.getPrivilege() );
         Assertions.assertNull( converted.getPassword() );
-        Assertions.assertNotNull( converted.getHasValidSubscription() );
-        Assertions.assertEquals( "false", converted.getHasValidSubscription() );
+        Assertions.assertEquals( "true", converted.getHasValidSubscription() );
     }
 
     @Test

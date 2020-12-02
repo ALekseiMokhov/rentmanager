@@ -1,6 +1,7 @@
 package ru.rambler.alexeimohov.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,8 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class OrderService implements IOrderService {
+      @Value( "{blocking.coefficient}" )
+    private Double blockingFundsCoef;
 
     private OrderDao orderDao;
 
@@ -43,10 +46,25 @@ public class OrderService implements IOrderService {
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(OrderDto dto) {
+
         Order order = orderMapper.fromDto( dto );
-        log.debug( "************************************* -- +" + dto.getId() );
-        /*check if vehicle is free*/
-        /*check if blocked funds is enough is free*/
+
+        if(order.getBlockedFunds()==0) {
+          order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
+        }
+
+        if(order.getVehicle().getBookedDates().contains( order.getStartTime().toLocalDate() ))  {
+            throw new IllegalArgumentException("Vehicle is booked for the chosen date!");
+        }
+
+        if(order.getUser().getCreditCards().stream()
+                .filter( c->c.getCreditCardNumber()==order.getCreditCardNumber())
+                .findFirst()
+                .get()
+                .getAvailableFunds()<order.getBlockedFunds()) {
+            throw new IllegalArgumentException("Not enough funds to process Order!");
+
+        }
         if (order.getId() == null) {
             if (order.getStatus() == null) {
                 order.setStatus( OrderStatus.CREATED );

@@ -35,12 +35,14 @@ public class AddressService implements IAddressService {
     @Transactional(readOnly = false)
     public void saveOrUpdate(AddressDto dto) {
         Address address = mapper.fromDto( dto );
-        if (address.getId() == null) {
-            addressDao.save( address );
-            log.debug( "address saved " );
-        } else {
-            addressDao.update( address );
-            log.debug( "address.updated" );
+        try {
+            if (address.getId() == null) {
+                addressDao.save( address );
+            } else {
+                addressDao.update( address );
+            }
+        } catch (Exception e) {
+           throw new RuntimeException("Unable to save address "+address.toString());
         }
     }
 

@@ -21,6 +21,7 @@ public class TestEntitiesFactory {
         user.setPassword( "tu4hd845cY23L" );
         user.setSubscription( new Subscription( 1l, user, 22.9, false, LocalDate.now(), LocalDate.now(),
                 LocalDate.of( 2033, 11, 16 ) ) );
+        user.setHasValidSubscription( true );
         user.setPrivilege( Privilege.EXCLUSIVE );
         user.addMessage( new Message( 1l, "Hi there!", user, LocalDateTime.now() ) );
         user.addMessage( new Message( 2l, "Second mssage", user, LocalDateTime.now() ) );

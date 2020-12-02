@@ -81,7 +81,7 @@ public class MessageService implements IMessageService {
 
         javaMailSender.send( message );
         messageDao.save( message );
-        log.info( "Message sent!" );
+        log.debug( "Message after order finished event sent!" );
     }
 
     @Override
@@ -101,7 +101,7 @@ public class MessageService implements IMessageService {
 
         javaMailSender.send( message );
         messageDao.save( message );
-        log.debug( "Message to new user has been sent!" + messageDao.findAll().size() );
+        log.debug( "Message to new user has been sent!" );
     }
 
     @Override
