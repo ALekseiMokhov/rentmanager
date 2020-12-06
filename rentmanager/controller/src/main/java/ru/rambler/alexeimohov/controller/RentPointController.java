@@ -12,7 +12,7 @@ import java.util.List;
 /*
  *  No POST method due to unidirectional association with Address. RentPoint persisted as a field of Address entity*/
 @RestController
-@RequestMapping("/rentpoint")
+@RequestMapping("/rentpoints")
 public class RentPointController {
 
     private IRentPointService rentPointService;
@@ -26,8 +26,8 @@ public class RentPointController {
         return rentPointService.getById( id );
     }
 
-    @GetMapping("/{x}/{y}")
-    public RentPointDto getByCoordinate(@PathVariable double x, double y) {
+    @GetMapping("/coordinate")
+    public RentPointDto getByCoordinate(@RequestParam double x, @RequestParam double y) {
         return rentPointService.getByCoordinate( x, y );
     }
 

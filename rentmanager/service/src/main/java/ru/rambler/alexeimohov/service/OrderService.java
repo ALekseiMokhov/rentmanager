@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class OrderService implements IOrderService {
-      @Value( "{blocking.coefficient}" )
+    @Value("#{T(Double).parseDouble('${blocking.coefficient}')}")
     private Double blockingFundsCoef;
 
     private OrderDao orderDao;
@@ -49,20 +49,20 @@ public class OrderService implements IOrderService {
 
         Order order = orderMapper.fromDto( dto );
 
-        if(order.getBlockedFunds()==0) {
-          order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
+        if (order.getBlockedFunds() == 0) {
+            order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
         }
 
-        if(order.getVehicle().getBookedDates().contains( order.getStartTime().toLocalDate() ))  {
-            throw new IllegalArgumentException("Vehicle is booked for the chosen date!");
+        if (order.getVehicle().getBookedDates().contains( order.getStartTime().toLocalDate() )) {
+            throw new IllegalArgumentException( "Vehicle is booked for the chosen date!" );
         }
 
-        if(order.getUser().getCreditCards().stream()
-                .filter( c->c.getCreditCardNumber()==order.getCreditCardNumber())
+        if (order.getUser().getCreditCards().stream()
+                .filter( c -> c.getCreditCardNumber() == order.getCreditCardNumber() )
                 .findFirst()
                 .get()
-                .getAvailableFunds()<order.getBlockedFunds()) {
-            throw new IllegalArgumentException("Not enough funds to process Order!");
+                .getAvailableFunds() < order.getBlockedFunds()) {
+            throw new IllegalArgumentException( "Not enough funds to process Order!" );
 
         }
         if (order.getId() == null) {

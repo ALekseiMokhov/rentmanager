@@ -33,11 +33,15 @@ public class PersistenceConfig {
         em.setDataSource( dataSource() );
         em.setPackagesToScan( new String[]{ "ru.rambler.alexeimohov.entities" } );
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter( vendorAdapter );
+        em.setJpaVendorAdapter( vendorAdapter() );
         em.setJpaProperties( additionalProperties() );
 
         return em;
+    }
+
+    @Bean
+    public JpaVendorAdapter vendorAdapter() {
+        return new HibernateJpaVendorAdapter();
     }
 
     @Bean

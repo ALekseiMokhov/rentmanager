@@ -30,6 +30,7 @@ import java.util.Arrays;
         "ru.rambler.alexeimohov.jwt",
         "ru.rambler.alexeimohov.security" })
 public class WebConfig implements WebMvcConfigurer {
+
     private final ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {

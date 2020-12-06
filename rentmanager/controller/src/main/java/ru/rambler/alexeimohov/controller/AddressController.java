@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/addresses")
 public class AddressController {
 
     private IAddressService addressService;

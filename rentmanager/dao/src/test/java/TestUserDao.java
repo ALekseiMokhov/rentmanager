@@ -115,9 +115,7 @@ public class TestUserDao {
     @Rollback
     void updateChildEntityAndExpectConsistency() {
         User userRetrieved = userDao.findByUserName( "Evgeny Ivanov" );
-        userRetrieved.getCreditCards().get( 0 ).blockFunds( 100 );
-        userDao.update( userRetrieved );
-        Assertions.assertEquals( 900, userDao.findByUserName( "Evgeny Ivanov" ).getCreditCards().get( 0 ).getAvailableFunds() );
+        Assertions.assertEquals( 1000, userDao.findByUserName( "Evgeny Ivanov" ).getCreditCards().get( 0 ).getAvailableFunds() );
 
 
     }

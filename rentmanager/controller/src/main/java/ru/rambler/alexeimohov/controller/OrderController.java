@@ -9,7 +9,7 @@ import ru.rambler.alexeimohov.service.interfaces.IOrderService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     private IOrderService orderService;

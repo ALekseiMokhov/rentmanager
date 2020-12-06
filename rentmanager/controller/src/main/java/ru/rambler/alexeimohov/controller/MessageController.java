@@ -13,7 +13,7 @@ import java.util.List;
 /*
  * method sendCustomMessage obtains @param ObjectNode from Jackson lib. It gathers UserDto and Text supposed to send*/
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/messages")
 public class MessageController {
     private IMessageService messageService;
 

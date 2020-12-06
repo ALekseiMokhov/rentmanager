@@ -12,7 +12,6 @@ import java.util.List;
 public interface UserMapper {
 
 
-
     @Mapping(source = "password", target = "password", ignore = true)
     UserDto toDto(User user);
 

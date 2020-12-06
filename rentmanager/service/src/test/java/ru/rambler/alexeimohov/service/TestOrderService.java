@@ -59,11 +59,11 @@ public class TestOrderService {
         this.card = new Card();
         card.setCreditCardNumber( 1111_1111_1111_1111l );
         card.setAvailableFunds( 1000_000_000 );
-        
+
         this.user = new User();
         user.setUsername( "Alex" );
         user.setPrivilege( Privilege.NEWBIE );
-        user.getCreditCards().add( card ) ;
+        user.getCreditCards().add( card );
 
         this.vehicle = new Vehicle();
 

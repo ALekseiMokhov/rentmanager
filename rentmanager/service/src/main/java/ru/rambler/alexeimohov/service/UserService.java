@@ -141,7 +141,7 @@ public class UserService implements IUserService {
         User user = userDao.findById( id );
         user.removeMessage( messageMapper.fromDto( messageDto ) );
     }
-
+       /*TODO test consistency with service methods*/
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
@@ -154,8 +154,8 @@ public class UserService implements IUserService {
         log.debug( "_____USER_____: " + card.toString() );
         log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
-        card.unBlockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-        card.writeOff( Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
+        unBlockFunds(card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        writeOff(card, Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
 
         userDao.update( retrieved );
 
@@ -175,7 +175,7 @@ public class UserService implements IUserService {
                 .get();
 
 
-        card.blockFunds( Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        blockFunds(card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
 
 
     }
@@ -188,5 +188,31 @@ public class UserService implements IUserService {
             throw new IllegalArgumentException( "User " + username + "doesn't exist!" );
         }
         return retrieved;
+    }
+
+    public void addFunds(Card card, double amount) {
+        synchronized (this) {
+            double balance =card.getAvailableFunds() + amount;
+            card.setAvailableFunds(balance);
+        }
+    }
+
+    public void writeOff(Card card ,double amount) {
+        synchronized (this) {
+            double balance =card.getAvailableFunds() - amount;
+            card.setAvailableFunds(balance);
+        }
+    }
+
+    public void blockFunds(Card card, double amount) {
+        writeOff( card, amount );
+        double blockedFunds = card.getBlockedFunds() + amount;
+        card.setBlockedFunds( blockedFunds );
+    }
+
+    public void unBlockFunds(Card card, double amount) {
+        writeOff( card, amount );
+        double blockedFunds = card.getBlockedFunds() - amount;
+        card.setBlockedFunds( blockedFunds );
     }
 }

@@ -11,7 +11,7 @@ import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subscription")
+@RequestMapping("/subscriptions")
 public class SubscriptionController {
 
     private ISubscriptionService subscriptionService;

@@ -19,8 +19,6 @@ import java.time.LocalDate;
 @EqualsAndHashCode(exclude = { "availableFunds", "blockedFunds" })
 @ToString(exclude = "user")
 public class Card {
-    @Transient
-    private final Object lock = new Object();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,27 +47,7 @@ public class Card {
     )
     private User user;
 
-    public void addFunds(double amount) {
-        synchronized (lock) {
-            availableFunds += amount;
-        }
-    }
 
-    public void writeOff(double amount) {
-        synchronized (lock) {
-            availableFunds -= amount;
-        }
-    }
-
-    public void blockFunds(double amount) {
-        writeOff( amount );
-        blockedFunds += amount;
-    }
-
-    public void unBlockFunds(double amount) {
-        blockedFunds -= amount;
-        addFunds( amount );
-    }
 }
 
 

@@ -31,6 +31,13 @@ public class AddressDaoImplJpa extends GenericDaoJpa implements AddressDao {
     }
 
     @Override
+    public List <Address> findAllSortedByCity(String cityName) {
+        return entityManager.createQuery( AddressQueries.FIND_ALL_SORTED_BY_CITY )
+                .setParameter( "city",cityName )
+                .getResultList();
+    }
+
+    @Override
     public void update(Address object) {
         entityManager.merge( object );
     }

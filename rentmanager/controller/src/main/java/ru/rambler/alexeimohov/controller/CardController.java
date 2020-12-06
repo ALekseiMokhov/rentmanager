@@ -10,7 +10,7 @@ import ru.rambler.alexeimohov.service.interfaces.ICardService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/card")
+@RequestMapping("/cards")
 public class CardController {
 
     private ICardService cardService;

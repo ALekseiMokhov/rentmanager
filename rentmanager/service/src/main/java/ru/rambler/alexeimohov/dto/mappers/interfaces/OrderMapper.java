@@ -1,7 +1,6 @@
 package ru.rambler.alexeimohov.dto.mappers.interfaces;
 
 import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Value;
 import ru.rambler.alexeimohov.dto.OrderDto;
 import ru.rambler.alexeimohov.dto.mappers.GeometryConverter;
 import ru.rambler.alexeimohov.entities.Order;

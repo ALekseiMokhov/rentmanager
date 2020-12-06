@@ -42,7 +42,7 @@ public class AddressService implements IAddressService {
                 addressDao.update( address );
             }
         } catch (Exception e) {
-           throw new RuntimeException("Unable to save address "+address.toString());
+            throw new RuntimeException( "Unable to save address " + address.toString() );
         }
     }
 
@@ -53,8 +53,7 @@ public class AddressService implements IAddressService {
     }
 
     public List <AddressDto> getAddressesByCity(String cityName) {
-        return addressDao.findAll().stream()
-                .filter( a -> a.getCity().equals( cityName ) )
+        return addressDao.findAllSortedByCity(cityName).stream()
                 .map( a -> mapper.toDto( a ) )
                 .collect( Collectors.toList() );
     }
