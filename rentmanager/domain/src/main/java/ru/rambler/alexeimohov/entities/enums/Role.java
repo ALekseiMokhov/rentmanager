@@ -1,5 +1,5 @@
 package ru.rambler.alexeimohov.entities.enums;
 
 public enum Role {
-    ADMIN, MANAGER, USER
+    ROLE_ADMIN,  ROLE_MANAGER,  ROLE_USER
 }

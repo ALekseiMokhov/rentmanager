@@ -54,9 +54,10 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class )
 
                 .authorizeRequests()
-                .antMatchers( "/", "/user/signup/*", "/user/signin/*" ).permitAll()
-                .antMatchers( "/order/**", "/message/**", "/card/**", "user/**" ).hasRole( "ADMIN" )
-                .antMatchers( "/rentpoint/**", "/subscription/**", "/vehicle/**" ).hasAnyRole( "ADMIN", "MANAGER" )
+                .antMatchers( "/", "/users/signup/**", "/users/signin/**" ).permitAll()
+                .antMatchers(  "/cards/**", "users/**" ).hasAuthority( "ROLE_ADMIN" )
+                .antMatchers( "/rentpoints/**", "/addresses/**","/subscriptions/**", "/vehicles/**", "/messages/**" ).hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER" )
+                .antMatchers( "/orders/**" ) .hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER","ROLE_USER" )
                 .anyRequest().authenticated()
 
         ;

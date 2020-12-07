@@ -57,7 +57,7 @@ public class User implements Serializable, UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "has_valid_sub", columnDefinition = "boolean default false")
+    @Column(name = "has_valid_sub")
     private Boolean hasValidSubscription;
 
     @OneToOne(fetch = FetchType.LAZY,

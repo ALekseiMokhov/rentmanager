@@ -55,7 +55,7 @@ public class TestUserDao {
         user.setEmail( "coder@gmail.com" );
         user.setPassword( "4fwfm2n8qlb" );
         user.setPhoneNumber( 8_999_306_22_22l );
-        user.setRole( Role.USER );
+        user.setRole( Role.ROLE_USER );
         user.setPrivilege( Privilege.NEWBIE );
         user.setSubscription( subscription );
         user.addMessage( message );

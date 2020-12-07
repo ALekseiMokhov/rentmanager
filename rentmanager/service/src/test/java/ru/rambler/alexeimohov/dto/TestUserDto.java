@@ -39,7 +39,7 @@ public class TestUserDto {
     @Test
     void reverseConvertFromDto() {
         User converted = userMapper.fromDto( userDto );
-        Assertions.assertEquals( converted.getRole(), Role.USER );
+        Assertions.assertEquals( converted.getRole(), Role.ROLE_USER );
         Assertions.assertNotNull( converted.getPassword() );
 
     }

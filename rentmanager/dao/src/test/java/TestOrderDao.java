@@ -39,7 +39,7 @@ public class TestOrderDao {
         user.setEmail( "spring_coder@gmail.com" );
         user.setPassword( "7jfw56hjj8qlb" );
         user.setPhoneNumber( 8_999_444_00_00l );
-        user.setRole( Role.ADMIN );
+        user.setRole( Role.ROLE_ADMIN );
         user.setPrivilege( Privilege.PARTNER );
 
         this.vehicle = new Vehicle();

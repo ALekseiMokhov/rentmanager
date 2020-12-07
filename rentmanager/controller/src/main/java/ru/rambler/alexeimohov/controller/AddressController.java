@@ -53,7 +53,7 @@ public class AddressController {
         return addressService.getAll();
     }
 
-    @GetMapping("/{city}")
+    @GetMapping("/from/{city}")
     public List <AddressDto> getAllByCity(@PathVariable String city) {
         return addressService.getAddressesByCity( city );
     }

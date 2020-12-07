@@ -69,9 +69,9 @@ public class UserController {
         return userService.getById( id );
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name")
     @Secured({ "ROLE_MANAGER", "ROLE_ADMIN" })
-    public UserDto getByUserName(@PathVariable String name) {
+    public UserDto getByUserName(@RequestParam String name) {
         return userService.getByUserName( name );
     }
 
@@ -134,6 +134,7 @@ public class UserController {
     }
 
     @GetMapping("/")
+    @Secured({ "ROLE_MANAGER", "ROLE_ADMIN" })
     public List <UserDto> getAll() {
         return userService.getAll();
     }

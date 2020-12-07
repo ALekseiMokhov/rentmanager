@@ -1,9 +1,4 @@
 
-     drop schema test;
-
-     create schema test;
-
-     use schema test;
 
     drop table if exists address;
 
