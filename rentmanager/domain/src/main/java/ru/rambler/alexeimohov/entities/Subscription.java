@@ -8,7 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-
+/*
+*
+* Entity @linked to User.
+* IOrderService ignores setting totalPrice for User with valid @field Subscription */
 @Entity
 @Table(name = "subscription")
 @Getter

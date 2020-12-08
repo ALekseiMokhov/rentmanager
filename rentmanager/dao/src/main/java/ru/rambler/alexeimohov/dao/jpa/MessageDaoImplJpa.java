@@ -6,7 +6,8 @@ import ru.rambler.alexeimohov.dao.jpa.queries.MessageQueries;
 import ru.rambler.alexeimohov.entities.Message;
 
 import java.util.List;
-
+/*
+ * Message DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository("messageDao")
 public class MessageDaoImplJpa extends GenericDaoJpa implements MessageDao {
 

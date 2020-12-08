@@ -21,6 +21,7 @@ public interface OrderMapper {
 
     @Mapping(source = "hasValidSubscription", target = "hasValidSubscription")
     @Mapping(source = "user", target = "userDto")
+    @Mapping(source = "creditCardNumber", target = "creditCardNumber")
     @Mapping(source = "vehicle", target = "vehicleDto")
     OrderDto toDto(Order order);
 

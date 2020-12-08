@@ -6,7 +6,8 @@ import ru.rambler.alexeimohov.dao.jpa.queries.UserQueries;
 import ru.rambler.alexeimohov.entities.User;
 
 import java.util.List;
-
+/* User DAO JPA implementation. Uses JPQL queries to sort data
+* @method findByUserName may retrieve User for authentication*/
 @Repository(value = "userDao")
 public class UserDaoJpaImpl extends GenericDaoJpa implements UserDao {
 

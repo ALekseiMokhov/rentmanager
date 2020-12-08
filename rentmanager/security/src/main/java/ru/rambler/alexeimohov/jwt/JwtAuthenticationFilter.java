@@ -16,7 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+ /*
+ * @linked to ITokenProvider filters incoming requests and grants authenticated user his authorities if any.
+ * @linked to IUserService to retrieve User and UserMapper to convert DTO data.*/
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /*
- * Entity unidirectionaly linked 1:1 to Rent_point obtaining its Id*/
+ * Class holding business address data of RentPoint.
+ * Entity unidirectionaly @linked 1:1 to RentPoint, obtaining its @field Id.
+ * Should be persisted together with RentPointDto*/
 @Entity
 @Table(name = "address")
 @Getter

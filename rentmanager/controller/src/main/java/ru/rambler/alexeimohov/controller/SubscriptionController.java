@@ -9,7 +9,8 @@ import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 
 import java.util.List;
-
+  /*
+  * Controller linked to ISubscriptionService */
 @RestController
 @RequestMapping("/subscriptions")
 public class SubscriptionController {

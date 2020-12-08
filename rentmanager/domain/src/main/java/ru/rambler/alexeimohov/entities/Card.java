@@ -6,9 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 /*
- * User's credit card n:1
- * Methods to add/write-off @param avaliableFunds
- * Methods to block-unblock @param blockedFunds*/
+ * User's credit card n:1.
+ * Manipulated by IUserService.*/
 
 @Entity
 @Table(name = "card")

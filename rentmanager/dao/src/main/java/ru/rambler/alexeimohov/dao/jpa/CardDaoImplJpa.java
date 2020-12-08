@@ -6,7 +6,8 @@ import ru.rambler.alexeimohov.dao.jpa.queries.CardQueries;
 import ru.rambler.alexeimohov.entities.Card;
 
 import java.util.List;
-
+/*
+ * Card DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository
 public class CardDaoImplJpa extends GenericDaoJpa implements CardDao {
     @Override

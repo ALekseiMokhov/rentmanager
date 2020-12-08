@@ -7,7 +7,7 @@ import ru.rambler.alexeimohov.entities.Subscription;
 import ru.rambler.alexeimohov.entities.User;
 
 import java.util.List;
-
+/* Subscription DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository("subscriptionDao")
 public class SubscriptionDaoJpaImpl extends GenericDaoJpa implements SubscriptionDao {
 

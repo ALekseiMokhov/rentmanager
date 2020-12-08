@@ -9,7 +9,11 @@ import ru.rambler.alexeimohov.service.interfaces.IAddressService;
 
 import javax.validation.Valid;
 import java.util.List;
-
+ /*
+ * Controller @linked to IAddressService.
+ * @linked to RentPointController.
+ * Persists and updates both Address and RentPoint entities.
+ * @see ru.rambler.alexeimohov.entities.Address in domain module */
 @RestController
 @RequestMapping("/addresses")
 public class AddressController {

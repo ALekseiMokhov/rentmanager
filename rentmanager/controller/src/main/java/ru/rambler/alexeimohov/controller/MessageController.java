@@ -11,7 +11,8 @@ import ru.rambler.alexeimohov.service.interfaces.IMessageService;
 import java.util.List;
 
 /*
- * method sendCustomMessage obtains @param ObjectNode from Jackson lib. It gathers UserDto and Text supposed to send*/
+Controller @linked to  IMessageService
+ * @method sendCustomMessage obtains @param ObjectNode from Jackson lib. It gathers UserDto and text supposed to send*/
 @RestController
 @RequestMapping("/messages")
 public class MessageController {

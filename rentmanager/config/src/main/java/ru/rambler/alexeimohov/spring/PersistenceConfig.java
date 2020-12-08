@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
-
+   /*
+   * Spring configuration class responsible for creation of persistence beans
+   * @linked to additional properties*/
 @Configuration
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement

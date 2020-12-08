@@ -6,7 +6,8 @@ import ru.rambler.alexeimohov.dao.jpa.queries.AddressQueries;
 import ru.rambler.alexeimohov.entities.Address;
 
 import java.util.List;
-
+  /*
+  * Address DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository("addressDao")
 public class AddressDaoImplJpa extends GenericDaoJpa implements AddressDao {
 
@@ -33,7 +34,7 @@ public class AddressDaoImplJpa extends GenericDaoJpa implements AddressDao {
     @Override
     public List <Address> findAllSortedByCity(String cityName) {
         return entityManager.createQuery( AddressQueries.FIND_ALL_SORTED_BY_CITY )
-                .setParameter( "city",cityName )
+                .setParameter( "city", cityName )
                 .getResultList();
     }
 

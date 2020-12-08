@@ -1,7 +1,9 @@
 package ru.rambler.alexeimohov.service.interfaces;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionalEventListener;
 import ru.rambler.alexeimohov.dto.VehicleDto;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +15,9 @@ public interface IVehicleService {
     void saveOrUpdate(VehicleDto dto);
 
     void setDateForBooking(Long id, LocalDate date);
+
+    @TransactionalEventListener
+    void setAfterOrderCreated(OrderCreatedEvent event);
 
     VehicleDto getById(Long id);
 

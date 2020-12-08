@@ -16,7 +16,8 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.Arrays;
-
+  /*
+  * Basic spring web configuration class responsible for injecting template beans */
 @Slf4j
 @Configuration
 @EnableWebMvc
@@ -36,7 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         log.debug( String.valueOf( applicationContext.getBeanDefinitionCount() ) );
-        log.debug( String.valueOf( Arrays.asList( applicationContext.getBeanDefinitionNames() ) ) );
 
     }
 

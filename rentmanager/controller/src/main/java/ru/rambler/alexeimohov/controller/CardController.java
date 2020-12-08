@@ -8,7 +8,8 @@ import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
 import java.util.List;
-
+ /*
+ * Controller @linked to ICardService*/
 @RestController
 @RequestMapping("/cards")
 public class CardController {

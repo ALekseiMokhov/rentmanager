@@ -12,9 +12,13 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.sql.SQLException;
 
+/*
+ * Main exception interceptor.
+ * Provides custom wrappers for checked exceptions and RuntimeException handler for internal app exceptions*/
 @RestControllerAdvice
 @Slf4j
-public class AppControllerAdvice {
+public class
+AppControllerAdvice {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity handleAccessDeniedException(Exception e, WebRequest request) {
@@ -46,14 +50,16 @@ public class AppControllerAdvice {
 
     @ExceptionHandler({ SQLException.class, IllegalArgumentException.class, NullPointerException.class })
     public ResponseEntity handleInternalException(Exception e, WebRequest request) {
+        log.debug( "server error : " + e.getLocalizedMessage() );
 
         return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( e.getMessage() );
     }
 
     @ExceptionHandler({ RuntimeException.class })
     public ResponseEntity handleRuntimeException(Exception e, WebRequest request) {
-
+        log.debug( "server runtime exception : " + e.getLocalizedMessage() );
         return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( e.getMessage() );
+
     }
 
 }

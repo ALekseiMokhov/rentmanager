@@ -3,10 +3,7 @@ package ru.rambler.alexeimohov.dto;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import ru.rambler.alexeimohov.entities.*;
-import ru.rambler.alexeimohov.entities.enums.OrderStatus;
-import ru.rambler.alexeimohov.entities.enums.PointType;
-import ru.rambler.alexeimohov.entities.enums.Privilege;
-import ru.rambler.alexeimohov.entities.enums.VehicleType;
+import ru.rambler.alexeimohov.entities.enums.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +20,7 @@ public class TestEntitiesFactory {
                 LocalDate.of( 2033, 11, 16 ) ) );
         user.setHasValidSubscription( true );
         user.setPrivilege( Privilege.EXCLUSIVE );
+        user.setRole( Role.ROLE_USER );
         user.addMessage( new Message( 1l, "Hi there!", user, LocalDateTime.now() ) );
         user.addMessage( new Message( 2l, "Second mssage", user, LocalDateTime.now() ) );
         user.addMessage( new Message( 3l, "The last message", user, LocalDateTime.now() ) );
@@ -36,7 +34,7 @@ public class TestEntitiesFactory {
         userDto.setPassword( "4f837t873T" );
         userDto.setPhoneNumber( "89192223341" );
         userDto.setPrivilege( "NEWBIE" );
-        userDto.setRole( "USER" );
+        userDto.setRole( "ROLE_USER" );
         userDto.setEmail( "Alex@gmail.com" );
         return userDto;
     }
@@ -123,6 +121,7 @@ public class TestEntitiesFactory {
         OrderDto orderDto = new OrderDto();
         orderDto.setId( "29572" );
         orderDto.setBlockedFunds( "23.8" );
+        orderDto.setCreditCardNumber( "5555982510856625" );
         orderDto.setUserDto( getUserDto() );
         orderDto.setCreationTime( "2018-12-30T19:34:50.63" );
         orderDto.setHasValidSubscription( "true" );

@@ -19,7 +19,10 @@ import ru.rambler.alexeimohov.service.interfaces.IUserService;
 
 import javax.validation.Valid;
 import java.util.List;
-
+/*
+*
+* Controller responsible for registering, authentication, authorization and CRUD operations on ru.rambler.alexeimohov.entities.User
+* Sets @param Card and @param Subscription for User*/
 @RestController
 @RequestMapping("/users")
 public class UserController {

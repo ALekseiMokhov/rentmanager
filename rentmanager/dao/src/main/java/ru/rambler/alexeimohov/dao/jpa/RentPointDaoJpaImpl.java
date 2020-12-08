@@ -10,7 +10,9 @@ import ru.rambler.alexeimohov.dao.jpa.queries.RentPointQueries;
 import ru.rambler.alexeimohov.entities.RentPoint;
 
 import java.util.List;
-
+/*
+ * RentPoint DAO JPA implementation. Uses JPQL queries to sort data
+ * Uses com.vividsolutions.jts.io.WKTReader to convert com.vividsolutions.jts.geom.Point as @param for RentPoint*/
 @Repository("rentPointDao")
 public class RentPointDaoJpaImpl extends GenericDaoJpa implements RentPointDao {
 

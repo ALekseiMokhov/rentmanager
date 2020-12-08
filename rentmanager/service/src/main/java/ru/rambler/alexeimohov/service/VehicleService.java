@@ -1,14 +1,17 @@
 package ru.rambler.alexeimohov.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rambler.alexeimohov.dao.interfaces.VehicleDao;
 import ru.rambler.alexeimohov.dto.VehicleDto;
 import ru.rambler.alexeimohov.dto.mappers.interfaces.VehicleMapper;
 import ru.rambler.alexeimohov.entities.Vehicle;
+import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -46,6 +49,14 @@ public class VehicleService implements IVehicleService {
     public void setDateForBooking(Long id, LocalDate date) {
         Vehicle vehicle = vehicleDao.findById( id );
         vehicle.getBookedDates().add( date );
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public void setAfterOrderCreated(OrderCreatedEvent event) {
+        Vehicle vehicle = vehicleDao.findById( Long.parseLong( event.getOrderDto().getVehicleDto().getId() ) );
+        vehicle.getBookedDates().add( LocalDate.from( LocalDateTime.parse( event.getOrderDto().getStartTime() ) ) );
+
     }
 
     @Override

@@ -1,0 +1,17 @@
+unnamed package
+ru.rambler.alexeimohov.config
+ru.rambler.alexeimohov.controller
+ru.rambler.alexeimohov.dao.interfaces
+ru.rambler.alexeimohov.dao.jpa
+ru.rambler.alexeimohov.dao.jpa.queries
+ru.rambler.alexeimohov.dto
+ru.rambler.alexeimohov.dto.mappers
+ru.rambler.alexeimohov.dto.mappers.interfaces
+ru.rambler.alexeimohov.entities
+ru.rambler.alexeimohov.entities.enums
+ru.rambler.alexeimohov.jwt
+ru.rambler.alexeimohov.service
+ru.rambler.alexeimohov.service.events
+ru.rambler.alexeimohov.service.interfaces
+ru.rambler.alexeimohov.spring
+ru.rambler.alexeimohov.util

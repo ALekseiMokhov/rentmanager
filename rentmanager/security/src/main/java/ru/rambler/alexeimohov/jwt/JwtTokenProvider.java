@@ -9,8 +9,12 @@ import ru.rambler.alexeimohov.entities.User;
 
 import java.util.Date;
 
+/*
+ *
+ *Bean generates and validates JWT token.
+ * Uses io.jsonwebtoken library.
+ * @field code and @field validTime are injected by Spring.*/
 @Component("jwtProvider")
-
 @Slf4j
 public class JwtTokenProvider implements ITokenProvider {
     @Value("${jwt.token.secret}")

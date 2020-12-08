@@ -21,11 +21,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/*Main entity class
+/*
  * Relationships:
  * 1:1 Subscription
- * 1:n Message bidirectional , methods add- and remove- for sync purpose
- * embedded enums: Role, Privilege
+ * 1:n Message bidirectional , methods add- and remove- for sync purpose .
+ * embedded enums: @field role, @field privilege .
+ * Implements org.springframework.security.core.userdetails.UserDetails
+ * Implements Serializable due to Hibernate's requirements for having @field username as @NaturalId
  * */
 @Entity
 @Table(name = "user")

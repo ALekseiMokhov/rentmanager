@@ -12,7 +12,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
+ /*
+ * @Linked n:1 to RentPoint (child-parent relationships).
+ * Persisted @field bookedDates with a join table*/
 @Entity
 @Table(name = "vehicle")
 @Getter

@@ -9,7 +9,9 @@ import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-
+  /*
+  * Controller @linked to IVehicleService
+  * */
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {

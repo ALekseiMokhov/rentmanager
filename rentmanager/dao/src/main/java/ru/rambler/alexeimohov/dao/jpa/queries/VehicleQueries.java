@@ -7,5 +7,7 @@ public interface VehicleQueries {
             select v from Vehicle v where v.rentPoint.id =:id and
             not exists (select d from v.bookedDates d where d=:date)
             """;
-    String SELECT_ALL_VEHICLES = "select v from Vehicle v where v.rentPoint.id =:id ";
+    String SELECT_ALL_VEHICLES = "select v from Vehicle v where v.rentPoint.id =:id";
+
+    String GET_BOOKED_DATES_NATIVE_QUERY = "select booked_dates from test.vehicle_booked_dates where id = ?1";
 }

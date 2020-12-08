@@ -8,7 +8,8 @@ import ru.rambler.alexeimohov.entities.Vehicle;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-
+/*
+ * Vehicle DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository(value = "vehicleDao")
 public class VehicleDaoJpaImpl extends GenericDaoJpa implements VehicleDao {
 

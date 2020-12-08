@@ -14,10 +14,13 @@ import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IOrderService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/*
+ * TODO refactor LocalDateTime params to synchronise with DB dates*/
 @Service
 @Slf4j
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -48,23 +51,20 @@ public class OrderService implements IOrderService {
     public void saveOrUpdate(OrderDto dto) {
 
         Order order = orderMapper.fromDto( dto );
+        log.debug( order.toString() );
 
         if (order.getBlockedFunds() == 0) {
             order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
         }
 
-        if (order.getVehicle().getBookedDates().contains( order.getStartTime().toLocalDate() )) {
-            throw new IllegalArgumentException( "Vehicle is booked for the chosen date!" );
+        if (order.getId() == null &&
+                orderDao.getBookedDatesOfChosenVehicle(
+                        order.getVehicle()
+                                .getId() )
+                        .contains( LocalDate.from( order.getStartTime() ) )) {
+            throw new IllegalArgumentException( "Chosen vehicle is already booked for the date!" );
         }
 
-        if (order.getUser().getCreditCards().stream()
-                .filter( c -> c.getCreditCardNumber() == order.getCreditCardNumber() )
-                .findFirst()
-                .get()
-                .getAvailableFunds() < order.getBlockedFunds()) {
-            throw new IllegalArgumentException( "Not enough funds to process Order!" );
-
-        }
         if (order.getId() == null) {
             if (order.getStatus() == null) {
                 order.setStatus( OrderStatus.CREATED );
@@ -91,6 +91,9 @@ public class OrderService implements IOrderService {
     @Override
     public void finish(Long id) {
         Order order = orderDao.findById( id );
+        log.debug( "start time: " + order.getStartTime() );
+        log.debug( "finish time: " + LocalDateTime.now() );
+
         order.setFinishTime( LocalDateTime.now() );
         if (order.isHasValidSubscription() == false) {
             order.setTotalPrice(
@@ -119,7 +122,9 @@ public class OrderService implements IOrderService {
     }
 
 
-    // count total price
+    /*
+    @method counts total price
+    * */
     public double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine, double coefficient) {
         if (start.isAfter( end )) {
             throw new IllegalArgumentException( "Finish time can't be before start time!" );

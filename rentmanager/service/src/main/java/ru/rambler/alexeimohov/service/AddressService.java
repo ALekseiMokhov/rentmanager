@@ -53,7 +53,7 @@ public class AddressService implements IAddressService {
     }
 
     public List <AddressDto> getAddressesByCity(String cityName) {
-        return addressDao.findAllSortedByCity(cityName).stream()
+        return addressDao.findAllSortedByCity( cityName ).stream()
                 .map( a -> mapper.toDto( a ) )
                 .collect( Collectors.toList() );
     }

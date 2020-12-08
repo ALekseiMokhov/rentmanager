@@ -11,7 +11,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /*
- * Entity sending to User n:1. Having Id as an equals param to compare*/
+ * Entity sending to User n:1. Having @field Id as an equals @param to compare.
+ * Manipulated by IUserService.*/
 @Entity
 @Table(name = "message")
 @Getter

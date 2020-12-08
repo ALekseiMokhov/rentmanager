@@ -141,21 +141,20 @@ public class UserService implements IUserService {
         User user = userDao.findById( id );
         user.removeMessage( messageMapper.fromDto( messageDto ) );
     }
-       /*TODO test consistency with service methods*/
+
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
+
         User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getUsername() );
-        log.debug( "_____USER_____: " + retrieved.toString() );
+
         Card card = retrieved.getCreditCards().stream()
                 .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
                 .findFirst()
                 .get();
-        log.debug( "_____USER_____: " + card.toString() );
-        log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
 
-        unBlockFunds(card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-        writeOff(card, Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
+        unBlockFunds( card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        writeOff( card, Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
 
         userDao.update( retrieved );
 
@@ -175,7 +174,7 @@ public class UserService implements IUserService {
                 .get();
 
 
-        blockFunds(card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        blockFunds( card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
 
 
     }
@@ -192,15 +191,15 @@ public class UserService implements IUserService {
 
     public void addFunds(Card card, double amount) {
         synchronized (this) {
-            double balance =card.getAvailableFunds() + amount;
-            card.setAvailableFunds(balance);
+            double balance = card.getAvailableFunds() + amount;
+            card.setAvailableFunds( balance );
         }
     }
 
-    public void writeOff(Card card ,double amount) {
+    public void writeOff(Card card, double amount) {
         synchronized (this) {
-            double balance =card.getAvailableFunds() - amount;
-            card.setAvailableFunds(balance);
+            double balance = card.getAvailableFunds() - amount;
+            card.setAvailableFunds( balance );
         }
     }
 

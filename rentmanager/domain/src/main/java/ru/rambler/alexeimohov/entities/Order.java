@@ -1,6 +1,7 @@
 package ru.rambler.alexeimohov.entities;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import ru.rambler.alexeimohov.entities.enums.OrderStatus;
 
 import javax.persistence.*;
@@ -8,10 +9,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /*
- * Order entity with embedded enum OrderStatus
- *  n:1 User  unidirectional
- * n:1 Vehicle    unidirectional
- * n:1 RentPoint unidirectional*/
+ * Order entity with an embedded enum OrderStatus (@field status  ).
+ *  n:1 User unidirectional .
+ * n:1 Vehicle unidirectional .
+ * n:1 RentPoint unidirectional.*/
 @Entity
 @Table(name = "`order`")
 @Getter
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
 @ToString()
+@Slf4j
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,5 +68,6 @@ public class Order {
 
     public Order() {
         this.status = OrderStatus.CREATED;
+
     }
 }

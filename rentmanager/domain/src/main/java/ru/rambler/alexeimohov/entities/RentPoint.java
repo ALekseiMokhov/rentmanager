@@ -14,9 +14,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /*
-    Entity representing scooter sharing place with com.vividsolutions.jts.geom.
-    Point  mapped as GeometryType related 1:1 Address, 1:n Vehicle bidirectional.
-    Nested comparator comparing by PointType field pointValue
+    Entity representing scooter and bicycle sharing place with com.vividsolutions.jts.geom.Point, persisted as GeometryType.
+    Related 1:1 Address, 1:n Vehicle bidirectional.
+    Nested comparator comparing by PointType @field pointValue.
+    Persists by AddressController.
  * */
 @Entity
 @Table(name = "rent_point")
@@ -51,7 +52,8 @@ public class RentPoint {
     public RentPoint() {
         this.vehicles = new ArrayList <>();
     }
-
+    /*
+    * @methods for consistency of JPA link*/
     public void addVehicle(Vehicle vehicle) {
         vehicles.add( vehicle );
         vehicle.setRentPoint( this );

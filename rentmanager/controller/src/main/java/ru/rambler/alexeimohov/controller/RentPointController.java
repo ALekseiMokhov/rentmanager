@@ -10,6 +10,7 @@ import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
 import java.util.List;
 
 /*
+Controller @linked to IRentPointService
  *  No POST method due to unidirectional association with Address. RentPoint persisted as a field of Address entity*/
 @RestController
 @RequestMapping("/rentpoints")

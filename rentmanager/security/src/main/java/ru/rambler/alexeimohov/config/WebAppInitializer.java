@@ -8,7 +8,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import ru.rambler.alexeimohov.spring.PersistenceConfig;
 import ru.rambler.alexeimohov.spring.UtilConfig;
 import ru.rambler.alexeimohov.spring.WebConfig;
-
+  /*
+  * Spring configuration class located in top module to avoid circular dependencies*/
 @EnableWebMvc
 @Configuration
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
