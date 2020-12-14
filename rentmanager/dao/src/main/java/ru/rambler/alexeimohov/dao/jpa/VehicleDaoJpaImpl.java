@@ -5,7 +5,9 @@ import ru.rambler.alexeimohov.dao.interfaces.VehicleDao;
 import ru.rambler.alexeimohov.dao.jpa.queries.VehicleQueries;
 import ru.rambler.alexeimohov.entities.Vehicle;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 /*
@@ -30,8 +32,11 @@ public class VehicleDaoJpaImpl extends GenericDaoJpa implements VehicleDao {
 
     @Override
     public Set <LocalDate> getBookedDates(long id) {
-        return entityManager.find( Vehicle.class, id )
-                .getBookedDates();
+        Set <LocalDate> retrieved = new HashSet <>();
+        retrieved.addAll( entityManager.createQuery( VehicleQueries.SELECT_ALL_BOOKED_DATES )
+                .setParameter( "id", id )
+                .getResultList() );
+        return retrieved;
     }
 
     @Override

@@ -32,4 +32,4 @@ Spring MVC project running scooter sharing service.
 - Send REST requests to the server. 
 
 ###Additional info
-Intellij IDEA's generated javadoc holds in mdule domain/documentation folder.
+Intellij IDEA's generated javadoc holds inside module domain/documentation folder.

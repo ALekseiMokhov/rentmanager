@@ -25,7 +25,7 @@ public class CardController {
         return cardService.getById( id );
     }
 
-    @GetMapping("/{cardNumber}")
+    @GetMapping("/number/{cardNumber}")
     public CardDto getByCardNumber(@PathVariable long cardNumber) {
         return cardService.getByCardNumber( cardNumber );
     }

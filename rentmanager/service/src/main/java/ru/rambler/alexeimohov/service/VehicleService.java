@@ -13,6 +13,8 @@ import ru.rambler.alexeimohov.service.interfaces.IVehicleService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -49,6 +51,12 @@ public class VehicleService implements IVehicleService {
     public void setDateForBooking(Long id, LocalDate date) {
         Vehicle vehicle = vehicleDao.findById( id );
         vehicle.getBookedDates().add( date );
+    }
+    @Transactional(readOnly = false)
+    @Override
+    public void cancelBooking(Long id, LocalDate date) {
+        Vehicle vehicle = vehicleDao.findById( id );
+        vehicle.getBookedDates().remove( date) ;
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
@@ -87,5 +95,13 @@ public class VehicleService implements IVehicleService {
     @Override
     public List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate date) {
         return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id, date ) );
+    }
+
+    @Override
+    public Set <String> getBookedDatesOfVehicle(long id) {
+
+        return vehicleDao.getBookedDates( id ).stream()
+                .map( d->d.toString() )
+                .collect( Collectors.toSet() );
     }
 }

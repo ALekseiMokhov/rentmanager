@@ -7,6 +7,7 @@ import ru.rambler.alexeimohov.dao.jpa.queries.OrderQueries;
 import ru.rambler.alexeimohov.dao.jpa.queries.VehicleQueries;
 import ru.rambler.alexeimohov.entities.Order;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -31,8 +32,8 @@ public class OrderDaoJpaImpl extends GenericDaoJpa implements OrderDao {
     }
 
     @Override
-    public Set <LocalDate> getBookedDatesOfChosenVehicle(long id) {
-        Set <LocalDate> retrieved = new HashSet <>();
+    public Set <Date> getBookedDatesOfChosenVehicle(long id) {
+        Set <Date> retrieved = new HashSet <>();
         retrieved.addAll( entityManager.createNativeQuery( VehicleQueries.GET_BOOKED_DATES_NATIVE_QUERY )
                 .setParameter( 1, id )
                 .getResultList() );

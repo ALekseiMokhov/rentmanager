@@ -3,6 +3,7 @@ package ru.rambler.alexeimohov.controller;
 import com.vividsolutions.jts.io.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.RentPointDto;
 import ru.rambler.alexeimohov.service.interfaces.IRentPointService;
@@ -37,7 +38,6 @@ public class RentPointController {
         rentPointService.saveOrUpdate( dto );
         return new ResponseEntity( HttpStatus.OK );
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity deleteRentPoint(@PathVariable long id) throws ParseException {
         rentPointService.remove( id );

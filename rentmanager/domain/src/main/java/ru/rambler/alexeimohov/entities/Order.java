@@ -28,7 +28,6 @@ public class Order {
     private Long id;
 
     @Column(name = "creation_time")
-    @NotNull(message = "Order must contain creation time!")
     private LocalDateTime creationTime;
 
     @Column(name = "start_time")

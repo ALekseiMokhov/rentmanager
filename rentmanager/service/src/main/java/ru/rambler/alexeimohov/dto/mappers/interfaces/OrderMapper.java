@@ -11,13 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = GeometryConverter.class)
 public interface OrderMapper {
 
-    @AfterMapping
-    default void afterMapping(@MappingTarget Order target, OrderDto source) {
-        if (source.getCreationTime() == null) {
-            target.setCreationTime( LocalDateTime.now() );
-        }
-
-    }
 
     @Mapping(source = "hasValidSubscription", target = "hasValidSubscription")
     @Mapping(source = "user", target = "userDto")

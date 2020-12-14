@@ -20,7 +20,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(exclude = {"id","rentPoint"})
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

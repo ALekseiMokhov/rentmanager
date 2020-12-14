@@ -7,6 +7,7 @@ import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public interface IVehicleService {
@@ -14,7 +15,9 @@ public interface IVehicleService {
 
     void saveOrUpdate(VehicleDto dto);
 
-    void setDateForBooking(Long id, LocalDate date);
+    void setDateForBooking(Long id, LocalDate d  );
+
+    void cancelBooking(Long id, LocalDate date);
 
     @TransactionalEventListener
     void setAfterOrderCreated(OrderCreatedEvent event);
@@ -30,4 +33,6 @@ public interface IVehicleService {
     List <VehicleDto> getAllFromPoint(Long id);
 
     List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate localDate);
+
+    Set <String> getBookedDatesOfVehicle(long id);
 }

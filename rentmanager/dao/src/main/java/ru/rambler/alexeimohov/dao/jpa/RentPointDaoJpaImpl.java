@@ -20,7 +20,8 @@ public class RentPointDaoJpaImpl extends GenericDaoJpa implements RentPointDao {
     @Override
     public RentPoint getByCoordinate(Point point) {
         return (RentPoint) entityManager.createQuery( RentPointQueries.FIND_POINT_BY_COORDINATE )
-                .setParameter( "coordinate", point );
+                .setParameter( "coordinate", point )
+                .getSingleResult();
     }
 
     @Override

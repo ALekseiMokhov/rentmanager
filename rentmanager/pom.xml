@@ -35,7 +35,7 @@
                 <configuration>
                     <user>root</user>
                     <password>87h7845gwlf76i0ws23fUj7687h7845gwlxxD76</password>
-                    <url>jdbc:mysql://localhost:3306/test?useSSL=false</url>
+                    <url>jdbc:mysql://localhost:3306/test?serverTimezone=Europe/Moscow</url>
                     <schemas>
                         <schema>test</schema>
                     </schemas>
@@ -47,7 +47,7 @@
 
 
     <properties>
-        <source>15</source>
+        <source>14</source>
         <spring.version>5.2.8.RELEASE</spring.version>
         <slf4j.version>1.6.6</slf4j.version>
         <hibernate.version>5.2.12.Final</hibernate.version>

@@ -14,13 +14,11 @@ import ru.rambler.alexeimohov.service.events.OrderCreatedEvent;
 import ru.rambler.alexeimohov.service.events.OrderFinishedEvent;
 import ru.rambler.alexeimohov.service.interfaces.IOrderService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-/*
- * TODO refactor LocalDateTime params to synchronise with DB dates*/
+
 @Service
 @Slf4j
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -53,18 +51,21 @@ public class OrderService implements IOrderService {
         Order order = orderMapper.fromDto( dto );
         log.debug( order.toString() );
 
+        if(order.getCreationTime()==null){
+            order.setCreationTime( LocalDateTime.now() );
+        }
+        /*
+        calculates amount to be blocked in users card*/
         if (order.getBlockedFunds() == 0) {
             order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
         }
-
-        if (order.getId() == null &&
-                orderDao.getBookedDatesOfChosenVehicle(
-                        order.getVehicle()
-                                .getId() )
-                        .contains( LocalDate.from( order.getStartTime() ) )) {
-            throw new IllegalArgumentException( "Chosen vehicle is already booked for the date!" );
-        }
-
+       /*For new Order checks whether Vehicle is free for the Date and amount of funds on user's card is sufficient
+       calling @method
+       * @throws IllegalArgumentException*/
+       if(order.getId() == null && isValidRequirements( order )==false){
+             throw new IllegalArgumentException("Check card's balance and vehicle's booked dates!");
+       }
+         /*Set status 'created'*/
         if (order.getId() == null) {
             if (order.getStatus() == null) {
                 order.setStatus( OrderStatus.CREATED );
@@ -91,8 +92,6 @@ public class OrderService implements IOrderService {
     @Override
     public void finish(Long id) {
         Order order = orderDao.findById( id );
-        log.debug( "start time: " + order.getStartTime() );
-        log.debug( "finish time: " + LocalDateTime.now() );
 
         order.setFinishTime( LocalDateTime.now() );
         if (order.isHasValidSubscription() == false) {
@@ -131,6 +130,20 @@ public class OrderService implements IOrderService {
         }
         long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS );
         return (price * hours + fine) * coefficient;
+    }
+    /*@methods validates requirements*/
+    public boolean isValidRequirements(Order order) {
+        if (
+                orderDao.getAvailableFunds( order.getCreditCardNumber() ) <= order.getBlockedFunds()) {
+            return false;
+        }
+        if (
+                orderDao.getBookedDatesOfChosenVehicle( order.getVehicle().getId() )
+                        .contains(java.sql.Date.valueOf (order.getStartTime().toLocalDate()) )) {
+
+            return false;
+        }
+        return true;
     }
 
 }

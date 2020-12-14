@@ -2,6 +2,7 @@ package ru.rambler.alexeimohov.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.rambler.alexeimohov.dto.AddressDto;
@@ -24,7 +25,8 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping("/")
+     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
+     @PostMapping("/")
     public ResponseEntity saveAdress(@Valid @RequestBody AddressDto dto) {
         addressService.saveOrUpdate( dto );
         return new ResponseEntity( "Address saved", HttpStatus.CREATED );
@@ -35,6 +37,7 @@ public class AddressController {
         return addressService.getById( id );
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @GetMapping("/point/{id}")
     public AddressDto getAddressByPointId(@PathVariable long id) {
         return addressService.getAddressByPointId( id );
@@ -45,7 +48,7 @@ public class AddressController {
         addressService.saveOrUpdate( dto );
         return new ResponseEntity( "Address updated", HttpStatus.OK );
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAddress(@PathVariable long id) {
         addressService.remove( id );

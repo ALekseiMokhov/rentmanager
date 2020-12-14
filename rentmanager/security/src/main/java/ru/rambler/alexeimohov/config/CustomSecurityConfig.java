@@ -20,7 +20,7 @@ import ru.rambler.alexeimohov.service.interfaces.IUserService;
   * Custom security configuration.
   * @linked to ITokenProvider,AuthenticationEntryPoint,IUserService.
   * Provides stateless JWT-based authentication and authorization.
-  * Encodes User's password(BCrypt algorithm.
+  * Encodes User's password with BCrypt algorithm.
   * Separates resources for different User's roles.
   * */
 @Configuration
@@ -62,8 +62,8 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers( "/", "/users/signup/**", "/users/signin/**" ).permitAll()
                 .antMatchers( "/cards/**", "users/**" ).hasAuthority( "ROLE_ADMIN" )
-                .antMatchers( "/rentpoints/**", "/addresses/**", "/subscriptions/**", "/vehicles/**", "/messages/**" ).hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER" )
-                .antMatchers( "/orders/**" ).hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER" )
+                .antMatchers( "/rentpoints/**", "/messages/**" ).hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER" )
+                .antMatchers( "/orders/**" , "/addresses/**", "/subscriptions/**", "/vehicles/**").hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER" )
                 .anyRequest().authenticated()
 
         ;
