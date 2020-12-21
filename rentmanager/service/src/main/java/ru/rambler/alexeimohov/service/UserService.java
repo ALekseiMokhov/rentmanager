@@ -92,12 +92,12 @@ public class UserService implements IUserService {
             log.debug( "user has been updated: " + user.getUsername() );
         }
     }
-
+         /*TODO fix persience and handle listener*/
     @Override
     @Transactional(readOnly = false)
     public void setSubscription(SubscriptionDto dto) {
         Subscription subscription = subscriptionMapper.fromDto( dto );
-        User user = userDao.findByUserName( subscription.getUser().getUsername() );
+        User user = userDao.findById( subscription.getUser().getId());
         user.setSubscription( subscription );
         user.setHasValidSubscription( true );
         publisher.publishEvent( new SubscriptionSetEvent( subscriptionMapper.toDto( subscription ) ) );

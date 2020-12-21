@@ -26,12 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "address" })
 public class RentPoint {
-    public static Comparator <RentPoint> pointValueComparator = new Comparator <RentPoint>() {
-        @Override
-        public int compare(RentPoint p1, RentPoint p2) {
-            return (int) (p1.getType().getPointValue() - p2.getType().getPointValue());
-        }
-    };
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,4 +58,10 @@ public class RentPoint {
         vehicles.remove( vehicle );
         vehicle.setRentPoint( null );
     }
+    public static Comparator <RentPoint> pointValueComparator = new Comparator <RentPoint>() {
+        @Override
+        public int compare(RentPoint p1, RentPoint p2) {
+            return (int) (p1.getType().getPointValue() - p2.getType().getPointValue());
+        }
+    };
 }
