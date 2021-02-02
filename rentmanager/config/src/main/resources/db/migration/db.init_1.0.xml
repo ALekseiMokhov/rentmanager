@@ -1,0 +1,338 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="address"/>
+            <dbms type="mysql"/>
+        </preConditions>
+
+        <dropTable tableName="address"
+                   cascadeConstraints="true"/>
+
+    </changeSet>
+    <changeSet id="2" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="card"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="card" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="3" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="user"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="user" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="4" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="rent_point"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="rent_point" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="5" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="subscription"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="subscription" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="6" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="hibernate_sequence"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="hibernate_sequence" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="7" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="message"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="message" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="8" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="vehicle"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="vehicle" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="9" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="vehicle_booked_dates"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="vehicle_booked_dates" cascadeConstraints="true"/>
+    </changeSet>
+
+    <changeSet id="10" author="admin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="first" tableName="'order'"/>
+            <dbms type="mysql"/>
+        </preConditions>
+        <dropTable tableName="'order'" cascadeConstraints="true"/>
+    </changeSet>
+
+
+    <changeSet id="11" author="admin">
+        <createTable schemaName="first" tableName="address">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="building_number" type="integer"/>
+            <column name="city" type="varchar(32)"/>
+            <column name="street" type="varchar(32)"/>
+        </createTable>
+        <addNotNullConstraint schemaName="first" tableName="address" columnName="building_number"
+                              columnDataType="integer"/>
+        <addNotNullConstraint schemaName="first" tableName="address" columnName="city" columnDataType="varchar(32)"/>
+        <addNotNullConstraint schemaName="first" tableName="address" columnName="street" columnDataType="varchar(32)"/>
+    </changeSet>
+
+    <changeSet id="12" author="admin">
+        <createTable schemaName="first" tableName="card">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="available_funds" type="double precision"/>
+            <column name="blocked_funds" type="double precision"/>
+            <column name="credit_card_number" type="bigint"/>
+            <column name="expiration_date" type="date"/>
+            <column name="valid_date" type="date"/>
+            <column name="full_name" type="varchar(255)"/>
+        </createTable>
+        <addNotNullConstraint schemaName="first" tableName="card" columnName="id"
+                              columnDataType="bigint"/>
+        <addNotNullConstraint schemaName="first" tableName="card" columnName="credit_card_number"
+                              columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="13" author="admin">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="bigint"/>
+        </createTable>
+        <insert tableName="hibernate_sequence">
+            <column name="next_val" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="14" author="admin">
+        <createTable schemaName="first" tableName="message">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="date_time" type="datetime"/>
+            <column name="text" type="longtext"/>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+        <addNotNullConstraint schemaName="first" tableName="message" columnName="id"
+                              columnDataType="bigint"/>
+        <addNotNullConstraint schemaName="first" tableName="message" columnName="text" columnDataType="longtext"/>
+    </changeSet>
+
+    <changeSet id="15" author="admin">
+        <createTable schemaName="first" tableName="order">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="blocked_funds" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_number" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="has_valid_subscription" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="finish_time" type="datetime">
+            </column>
+            <column name="order_status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_price" type="double precision">
+            </column>
+            <column name="id_user" type="bigint">
+            </column>
+            <column name="id_vehicle" type="bigint">
+            </column>
+        </createTable>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="id" columnDataType="bigint"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="card_number" columnDataType="bigint"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="blocked_funds"
+                              columnDataType="double precision"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="creation_time"
+                              columnDataType="datetime"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="start_time" columnDataType="datetime"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="order_status"
+                              columnDataType="varchar(255)"/>
+        <addNotNullConstraint schemaName="first" tableName="order" columnName="has_valid_subscription"
+                              columnDataType="bit"/>
+    </changeSet>
+
+    <changeSet id="16" author="admin">
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+            </column>
+            <column name="has_valid_sub" type="bit" defaultValue="false">
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="privilege" type="varchar(255)">
+            </column>
+            <column name="role" type="varchar(255)">
+            </column>
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="phone_number" type="bigint">
+            </column>
+            <column name="subscription_id" type="bigint">
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="17" author="admin">
+        <createTable tableName="rent_point">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="coordinate" type="geometry">
+                <constraints nullable="false"/>
+            </column>
+            <column name="point_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(255)">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="18" author="admin">
+        <createTable tableName="subscription">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date_expired" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isExpired" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_order" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_beginning" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="19" author="admin">
+        <createTable tableName="vehicle">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fine_price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_childish" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_human_powered" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model_name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rent_price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rent_point_id" type="bigint ">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20" author="admin">
+        <createTable tableName="vehicle_booked_dates">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="booked_dates" type="date">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="21" author="admin">
+        <addForeignKeyConstraint baseTableName="address" baseColumnNames="id" constraintName="address_rent_point"
+                                 referencedTableName="rent_point"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="22" author="admin">
+        <addForeignKeyConstraint baseTableName="card" baseColumnNames="full_name" constraintName="card_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="full_name"/>
+    </changeSet>
+    <changeSet id="23" author="admin">
+        <addForeignKeyConstraint baseTableName="message" baseColumnNames="user_id" constraintName="message_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="24" author="admin">
+        <addForeignKeyConstraint baseTableName="order" baseColumnNames="id_user" constraintName="order_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="25" author="admin">
+        <addForeignKeyConstraint baseTableName="order" baseColumnNames="id_vehicle" constraintName="order_vehicle"
+                                 referencedTableName="vehicle"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="26" author="admin">
+        <addForeignKeyConstraint baseTableName="user" baseColumnNames="subscription_id" constraintName="user_subscription"
+                                 referencedTableName="subscription"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="27" author="admin">
+        <addForeignKeyConstraint baseTableName="vehicle" baseColumnNames="rent_point_id" constraintName="vehicle_rent_point"
+                                 referencedTableName="rent_point"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="28" author="admin">
+        <addForeignKeyConstraint baseTableName="vehicle_booked_dates" baseColumnNames="id" constraintName="booked_dates_vehicle"
+                                 referencedTableName="vehicle"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

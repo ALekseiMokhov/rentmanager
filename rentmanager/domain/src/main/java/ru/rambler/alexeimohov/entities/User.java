@@ -40,6 +40,7 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @NotNull(message = "User name should'not be null")
     @Length(min = 5, max = 35)
     @Column(name = "full_name", unique = true)

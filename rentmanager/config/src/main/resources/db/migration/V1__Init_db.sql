@@ -1,33 +1,33 @@
+    use first;
+
+    drop table address;
 
 
-    drop table if exists address;
+    drop table card;
 
 
-    drop table if exists card;
+    drop table hibernate_sequence;
 
 
-    drop table if exists hibernate_sequence;
+    drop table message;
 
 
-    drop table if exists message;
+    drop table `order`;
 
 
-    drop table if exists `order`;
+    drop table rent_point;
 
 
-    drop table if exists rent_point;
+    drop table  subscription;
 
 
-    drop table if exists subscription;
+    drop table user;
 
 
-    drop table if exists user;
+    drop table vehicle;
 
 
-    drop table if exists vehicle;
-
-
-    drop table if exists vehicle_booked_dates;
+    drop table vehicle_booked_dates;
 
 
     create table address(
