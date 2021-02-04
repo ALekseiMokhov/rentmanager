@@ -13,7 +13,7 @@ public interface RentPointMapper {
 
     RentPointDto toDto(RentPoint rentPoint);
 
-    List <RentPoint> listFromDto(List <RentPointDto> list);
+    List<RentPoint> listFromDto(List<RentPointDto> list);
 
-    List <RentPointDto> listToDto(List <RentPoint> list);
+    List<RentPointDto> listToDto(List<RentPoint> list);
 }

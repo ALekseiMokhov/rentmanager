@@ -8,20 +8,21 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import ru.rambler.alexeimohov.spring.PersistenceConfig;
 import ru.rambler.alexeimohov.spring.UtilConfig;
 import ru.rambler.alexeimohov.spring.WebConfig;
-  /*
-  * Spring configuration class located in top module to avoid circular dependencies*/
+
+/*
+ * Spring configuration class located in top module to avoid circular dependencies*/
 @EnableWebMvc
 @Configuration
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    protected Class <?>[] getRootConfigClasses() {
-        return new Class[]{ PersistenceConfig.class, UtilConfig.class, CustomSecurityConfig.class };
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{PersistenceConfig.class, UtilConfig.class, CustomSecurityConfig.class};
 
     }
 
     @Override
-    protected Class <?>[] getServletConfigClasses() {
+    protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
                 WebConfig.class
         };

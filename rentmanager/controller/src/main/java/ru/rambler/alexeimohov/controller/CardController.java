@@ -8,7 +8,8 @@ import ru.rambler.alexeimohov.dto.CardDto;
 import ru.rambler.alexeimohov.service.interfaces.ICardService;
 
 import java.util.List;
- /*
+
+/*
  * Controller @linked to ICardService*/
 @RestController
 @RequestMapping("/cards")
@@ -22,20 +23,20 @@ public class CardController {
 
     @GetMapping("/{id}")
     public CardDto getById(@PathVariable long id) {
-        return cardService.getById( id );
+        return cardService.getById(id);
     }
 
     @GetMapping("/number/{cardNumber}")
     public CardDto getByCardNumber(@PathVariable long cardNumber) {
-        return cardService.getByCardNumber( cardNumber );
+        return cardService.getByCardNumber(cardNumber);
     }
 
-    public List <CardDto> getByUserName(@PathVariable String userName) {
-        return cardService.getByUserName( userName );
+    public List<CardDto> getByUserName(@PathVariable String userName) {
+        return cardService.getByUserName(userName);
     }
 
     @GetMapping("/")
-    public List <CardDto> getAll() {
+    public List<CardDto> getAll() {
         return cardService.getAll();
     }
 }

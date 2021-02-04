@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 /*
  * Vehicle DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository(value = "vehicleDao")
@@ -18,78 +19,78 @@ public class VehicleDaoJpaImpl extends GenericDaoJpa implements VehicleDao {
 
     @Override
     public void setDateBooked(long id, LocalDate date) {
-        Vehicle vehicle = entityManager.find( Vehicle.class, id );
-        vehicle.getBookedDates().add( date );
-        entityManager.merge( vehicle );
+        Vehicle vehicle = entityManager.find(Vehicle.class, id);
+        vehicle.getBookedDates().add(date);
+        entityManager.merge(vehicle);
     }
 
     @Override
     public boolean isBooked(long id, LocalDate date) {
-        return entityManager.find( Vehicle.class, id )
+        return entityManager.find(Vehicle.class, id)
                 .getBookedDates()
-                .contains( date );
+                .contains(date);
     }
 
     @Override
-    public Set <LocalDate> getBookedDates(long id) {
-        Set <LocalDate> retrieved = new HashSet <>();
-        retrieved.addAll( entityManager.createQuery( VehicleQueries.SELECT_ALL_BOOKED_DATES )
-                .setParameter( "id", id )
-                .getResultList() );
+    public Set<LocalDate> getBookedDates(long id) {
+        Set<LocalDate> retrieved = new HashSet<>();
+        retrieved.addAll(entityManager.createQuery(VehicleQueries.SELECT_ALL_BOOKED_DATES)
+                .setParameter("id", id)
+                .getResultList());
         return retrieved;
     }
 
     @Override
-    public List <Vehicle> findAllChildish() {
-        return entityManager.createQuery( VehicleQueries.SELECT_ALL_CHILDISH_VEHICLES )
+    public List<Vehicle> findAllChildish() {
+        return entityManager.createQuery(VehicleQueries.SELECT_ALL_CHILDISH_VEHICLES)
                 .getResultList();
     }
 
     @Override
-    public List <Vehicle> findAllMuscular() {
-        return entityManager.createQuery( VehicleQueries.SELECT_ALL_HUMAN_POWERED_VEHICLES )
+    public List<Vehicle> findAllMuscular() {
+        return entityManager.createQuery(VehicleQueries.SELECT_ALL_HUMAN_POWERED_VEHICLES)
                 .getResultList();
     }
 
     @Override
-    public List <Vehicle> findAllFromPoint(long id) {
-        return entityManager.createQuery( VehicleQueries.SELECT_ALL_VEHICLES )
-                .setParameter( "id", id )
+    public List<Vehicle> findAllFromPoint(long id) {
+        return entityManager.createQuery(VehicleQueries.SELECT_ALL_VEHICLES)
+                .setParameter("id", id)
                 .getResultList();
     }
 
     @Override
-    public List <Vehicle> findAllFreeFromPoint(long id, LocalDate date) {
-        return entityManager.createQuery( VehicleQueries.SELECT_ALL_FREE_VEHICLES_BY_POINT )
-                .setParameter( "id", id )
-                .setParameter( "date", date )
+    public List<Vehicle> findAllFreeFromPoint(long id, LocalDate date) {
+        return entityManager.createQuery(VehicleQueries.SELECT_ALL_FREE_VEHICLES_BY_POINT)
+                .setParameter("id", id)
+                .setParameter("date", date)
                 .getResultList();
     }
 
     @Override
     public Vehicle findById(long id) {
-        return entityManager.find( Vehicle.class, id );
+        return entityManager.find(Vehicle.class, id);
 
     }
 
     @Override
     public void remove(long id) {
-        entityManager.remove( this.findById( id ) );
+        entityManager.remove(this.findById(id));
     }
 
     @Override
     public void save(Vehicle object) {
-        entityManager.persist( object );
+        entityManager.persist(object);
     }
 
     @Override
-    public List <Vehicle> findAll() {
-        return entityManager.createQuery( "Select v from Vehicle v" )
+    public List<Vehicle> findAll() {
+        return entityManager.createQuery("Select v from Vehicle v")
                 .getResultList();
     }
 
     @Override
     public void update(Vehicle object) {
-        entityManager.merge( object );
+        entityManager.merge(object);
     }
 }

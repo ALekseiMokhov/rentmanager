@@ -16,7 +16,7 @@ public interface MessageMapper {
     @Mapping(source = "userId", target = "user.id")
     Message fromDto(MessageDto dto);
 
-    List <MessageDto> listToDto(List <Message> list);
+    List<MessageDto> listToDto(List<Message> list);
 
-    List <Message> listFromDto(List <MessageDto> list);
+    List<Message> listFromDto(List<MessageDto> list);
 }

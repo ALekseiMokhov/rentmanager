@@ -16,8 +16,9 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.Arrays;
-  /*
-  * Basic spring web configuration class responsible for injecting template beans */
+
+/*
+ * Basic spring web configuration class responsible for injecting template beans */
 @Slf4j
 @Configuration
 @EnableWebMvc
@@ -25,25 +26,25 @@ import java.util.Arrays;
         securedEnabled = true,
         jsr250Enabled = true)
 @PropertySource("classpath:application.properties")
-@ComponentScan({ "ru.rambler.alexeimohov.spring",
+@ComponentScan({"ru.rambler.alexeimohov.spring",
         "ru.rambler.alexeimohov.controller",
         "ru.rambler.alexeimohov.dao",
         "ru.rambler.alexeimohov.jwt",
-        "ru.rambler.alexeimohov.security" })
+        "ru.rambler.alexeimohov.security"})
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
-        log.debug( String.valueOf( applicationContext.getBeanDefinitionCount() ) );
+        log.debug(String.valueOf(applicationContext.getBeanDefinitionCount()));
 
     }
 
     @Bean
     public View jsonTemplate() {
         MappingJackson2JsonView view = new MappingJackson2JsonView();
-        view.setPrettyPrint( true );
+        view.setPrettyPrint(true);
         return view;
     }
 

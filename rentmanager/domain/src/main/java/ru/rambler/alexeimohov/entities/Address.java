@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor()
-@ToString(exclude = { "id", "rentPoint" })
-@EqualsAndHashCode(exclude = { "id", "rentPoint" })
+@ToString(exclude = {"id", "rentPoint"})
+@EqualsAndHashCode(exclude = {"id", "rentPoint"})
 public class Address {
     @Id
     private Long id;
@@ -35,7 +35,7 @@ public class Address {
     private int buildingNumber;
 
     @MapsId
-    @OneToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH })
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH})
     @JoinColumn(name = "id")
     private RentPoint rentPoint;
 

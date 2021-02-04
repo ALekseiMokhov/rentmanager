@@ -13,7 +13,7 @@ public interface ISubscriptionService {
 
     Boolean isValid(long id);
 
-    List <SubscriptionDto> getAll();
+    List<SubscriptionDto> getAll();
 
     UserDto getSubscriptionHolder(long id);
 }

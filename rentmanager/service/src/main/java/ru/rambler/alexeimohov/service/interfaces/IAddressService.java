@@ -17,7 +17,7 @@ public interface IAddressService {
 
     void saveOrUpdate(AddressDto dto);
 
-    List <AddressDto> getAddressesByCity(String cityName);
+    List<AddressDto> getAddressesByCity(String cityName);
 
-    List <AddressDto> getAll();
+    List<AddressDto> getAll();
 }

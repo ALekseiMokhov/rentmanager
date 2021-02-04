@@ -39,29 +39,29 @@ public class TestUserDao {
     @Transactional
     void init() {
         this.message = new Message();
-        this.message.setText( "Welcome to our site, Evgeny!" );
+        this.message.setText("Welcome to our site, Evgeny!");
 
         this.subscription = new Subscription();
-        subscription.setStartDate( LocalDate.of( 2020, 01, 01 ) );
-        subscription.setExpirationDate( LocalDate.of( 2020, 02, 01 ) );
-        subscription.setPrice( 20.5 );
+        subscription.setStartDate(LocalDate.of(2020, 01, 01));
+        subscription.setExpirationDate(LocalDate.of(2020, 02, 01));
+        subscription.setPrice(20.5);
 
         this.card = new Card();
-        card.setAvailableFunds( 1000 );
+        card.setAvailableFunds(1000);
 
 
         this.user = new User();
-        user.setUsername( "Evgeny Ivanov" );
-        user.setEmail( "coder@gmail.com" );
-        user.setPassword( "4fwfm2n8qlb" );
-        user.setPhoneNumber( 8_999_306_22_22l );
-        user.setRole( Role.ROLE_USER );
-        user.setPrivilege( Privilege.NEWBIE );
-        user.setSubscription( subscription );
-        user.addMessage( message );
-        user.addCreditCard( card );
+        user.setUsername("Evgeny Ivanov");
+        user.setEmail("coder@gmail.com");
+        user.setPassword("4fwfm2n8qlb");
+        user.setPhoneNumber(8_999_306_22_22l);
+        user.setRole(Role.ROLE_USER);
+        user.setPrivilege(Privilege.NEWBIE);
+        user.setSubscription(subscription);
+        user.addMessage(message);
+        user.addCreditCard(card);
 
-        userDao.save( user );
+        userDao.save(user);
     }
 
     @Test
@@ -69,28 +69,28 @@ public class TestUserDao {
     @Rollback
     void persistAndExpectEqualObjects() {
 
-        User retrieved = userDao.findById( 1l );
-        Message message = messageDao.findById( retrieved.getId() );
-        List <Message> messages = messageDao.findAll();
+        User retrieved = userDao.findById(1l);
+        Message message = messageDao.findById(retrieved.getId());
+        List<Message> messages = messageDao.findAll();
 
-        Assertions.assertEquals( "Evgeny Ivanov", retrieved.getUsername() );
-        Assertions.assertEquals( "Welcome to our site, Evgeny!", message.getText() );
-        Assertions.assertEquals( 1, messages.size() );
+        Assertions.assertEquals("Evgeny Ivanov", retrieved.getUsername());
+        Assertions.assertEquals("Welcome to our site, Evgeny!", message.getText());
+        Assertions.assertEquals(1, messages.size());
     }
 
     @Test
     @Transactional
     @Rollback
     void deleteMessageAndExpectConsistency() {
-        System.out.println( userDao.findAll().size() );
-        User retrieved = userDao.findByUserName( "Evgeny Ivanov" );
-        Message toDelete = retrieved.getMessages().get( 0 );
-        Assertions.assertNotNull( toDelete );
+        System.out.println(userDao.findAll().size());
+        User retrieved = userDao.findByUserName("Evgeny Ivanov");
+        Message toDelete = retrieved.getMessages().get(0);
+        Assertions.assertNotNull(toDelete);
         Long id = toDelete.getId();
-        retrieved.removeMessage( toDelete );
-        userDao.update( retrieved );
+        retrieved.removeMessage(toDelete);
+        userDao.update(retrieved);
 
-        Assertions.assertNull( messageDao.findById( id ).getUser() );
+        Assertions.assertNull(messageDao.findById(id).getUser());
 
     }
 
@@ -98,15 +98,15 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void deleteSubscriptionAndExpectConsistency() {
-        User userRetrieved = userDao.findByUserName( "Evgeny Ivanov" );
+        User userRetrieved = userDao.findByUserName("Evgeny Ivanov");
         Subscription retrievedSub = userRetrieved.getSubscription();
 
-        Assertions.assertNotNull( retrievedSub );
+        Assertions.assertNotNull(retrievedSub);
 
-        userRetrieved.setSubscription( null );
-        userDao.update( userRetrieved );
+        userRetrieved.setSubscription(null);
+        userDao.update(userRetrieved);
 
-        Assertions.assertEquals( 0, subscriptionDao.findAll().size() );
+        Assertions.assertEquals(0, subscriptionDao.findAll().size());
 
     }
 
@@ -114,8 +114,8 @@ public class TestUserDao {
     @Transactional
     @Rollback
     void updateChildEntityAndExpectConsistency() {
-        User userRetrieved = userDao.findByUserName( "Evgeny Ivanov" );
-        Assertions.assertEquals( 1000, userDao.findByUserName( "Evgeny Ivanov" ).getCreditCards().get( 0 ).getAvailableFunds() );
+        User userRetrieved = userDao.findByUserName("Evgeny Ivanov");
+        Assertions.assertEquals(1000, userDao.findByUserName("Evgeny Ivanov").getCreditCards().get(0).getAvailableFunds());
 
 
     }

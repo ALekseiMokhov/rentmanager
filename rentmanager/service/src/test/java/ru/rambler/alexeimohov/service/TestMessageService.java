@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 @ExtendWith(MockitoExtension.class)
 class TestMessageService {
 
-    private MessageDao messageDao = Mockito.mock( MessageDaoImplJpa.class );
+    private MessageDao messageDao = Mockito.mock(MessageDaoImplJpa.class);
 
-    private MessageMapper mapper = Mockito.mock( MessageMapperImpl.class );
+    private MessageMapper mapper = Mockito.mock(MessageMapperImpl.class);
 
     @InjectMocks
     private MessageService service;
@@ -33,8 +33,8 @@ class TestMessageService {
 
     @BeforeEach
     void init() {
-        this.message = new Message( 1l, "Text", null, LocalDateTime.MIN );
-        this.messageDto = new MessageDto( "1l", "Text", null, LocalDateTime.MIN.toString() );
+        this.message = new Message(1l, "Text", null, LocalDateTime.MIN);
+        this.messageDto = new MessageDto("1l", "Text", null, LocalDateTime.MIN.toString());
     }
 
 

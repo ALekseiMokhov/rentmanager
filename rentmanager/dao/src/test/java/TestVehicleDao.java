@@ -44,21 +44,21 @@ public class TestVehicleDao {
     @BeforeEach
     @Transactional
     void init() {
-        this.point = new GeometryFactory().createPoint( new Coordinate( 25.9, 23.9 ) );
-        this.rentPoint = new RentPoint( null, "Main", PointType.CENTER, point, new ArrayList <>() );
+        this.point = new GeometryFactory().createPoint(new Coordinate(25.9, 23.9));
+        this.rentPoint = new RentPoint(null, "Main", PointType.CENTER, point, new ArrayList<>());
 
-        this.v1 = new Vehicle( null, "Cool scooter", false,
-                false, 2.3, 2.9, new HashSet <>(), VehicleType.SCOOTER, rentPoint );
-        this.v2 = new Vehicle( null, "Child scooter", false,
-                true, 3.4, 1.9, new HashSet <>(), VehicleType.SCOOTER, rentPoint );
-        this.v3 = new Vehicle( null, "Bike ", true,
-                false, 4.5, 1.0, new HashSet <>(), VehicleType.BIKE, rentPoint );
-        rentPointDao.save( rentPoint );
-        v1.getBookedDates().add( LocalDate.of( 2030, 10, 10 ) );
-        v1.getBookedDates().add( LocalDate.of( 2040, 12, 12 ) );
-        vehicleDao.save( v1 );
-        vehicleDao.save( v2 );
-        vehicleDao.save( v3 );
+        this.v1 = new Vehicle(null, "Cool scooter", false,
+                false, 2.3, 2.9, new HashSet<>(), VehicleType.SCOOTER, rentPoint);
+        this.v2 = new Vehicle(null, "Child scooter", false,
+                true, 3.4, 1.9, new HashSet<>(), VehicleType.SCOOTER, rentPoint);
+        this.v3 = new Vehicle(null, "Bike ", true,
+                false, 4.5, 1.0, new HashSet<>(), VehicleType.BIKE, rentPoint);
+        rentPointDao.save(rentPoint);
+        v1.getBookedDates().add(LocalDate.of(2030, 10, 10));
+        v1.getBookedDates().add(LocalDate.of(2040, 12, 12));
+        vehicleDao.save(v1);
+        vehicleDao.save(v2);
+        vehicleDao.save(v3);
     }
 
 
@@ -66,9 +66,9 @@ public class TestVehicleDao {
     @Transactional
     @Rollback
     void findAllFreeAndExpectConsistency() {
-        List <Vehicle> retrieved = vehicleDao.findAllFreeFromPoint( rentPointDao.findAll().stream().findFirst().get().getId(),
-                LocalDate.of( 2030, 10, 10 ) );
-        Assertions.assertEquals( 2, retrieved.size() );
+        List<Vehicle> retrieved = vehicleDao.findAllFreeFromPoint(rentPointDao.findAll().stream().findFirst().get().getId(),
+                LocalDate.of(2030, 10, 10));
+        Assertions.assertEquals(2, retrieved.size());
 
     }
 
@@ -77,8 +77,8 @@ public class TestVehicleDao {
     @Rollback
     void findAllChildishAndExpectConsistency() {
 
-        List <Vehicle> retrieved = vehicleDao.findAllChildish();
-        Assertions.assertEquals( 1, retrieved.size() );
+        List<Vehicle> retrieved = vehicleDao.findAllChildish();
+        Assertions.assertEquals(1, retrieved.size());
 
     }
 
@@ -87,8 +87,8 @@ public class TestVehicleDao {
     @Rollback
     void findAllAndExpectConsistency() {
 
-        List <Vehicle> retrieved = vehicleDao.findAllFromPoint( rentPointDao.findAll().stream().findFirst().get().getId() );
-        Assertions.assertEquals( 3, retrieved.size() );
+        List<Vehicle> retrieved = vehicleDao.findAllFromPoint(rentPointDao.findAll().stream().findFirst().get().getId());
+        Assertions.assertEquals(3, retrieved.size());
 
 
     }
@@ -98,8 +98,8 @@ public class TestVehicleDao {
     @Rollback
     void getBookedDateAndExpectNoexceptions() {
 
-        Set <LocalDate> retrieved = vehicleDao.getBookedDates( 1l );
-        Assertions.assertEquals( 2, retrieved.size() );
+        Set<LocalDate> retrieved = vehicleDao.getBookedDates(1l);
+        Assertions.assertEquals(2, retrieved.size());
 
 
     }

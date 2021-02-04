@@ -30,15 +30,15 @@ import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestOrderService {
-    private OrderDao orderDao = Mockito.mock( OrderDaoJpaImpl.class );
+    private OrderDao orderDao = Mockito.mock(OrderDaoJpaImpl.class);
 
-    private ApplicationEventPublisher publisher = Mockito.mock( ApplicationEventPublisher.class );
+    private ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class);
 
-    private OrderMapper orderMapper = Mockito.mock( OrderMapperImpl.class );
+    private OrderMapper orderMapper = Mockito.mock(OrderMapperImpl.class);
 
-    private UserMapper userMapper = Mockito.mock( UserMapperImpl.class );
+    private UserMapper userMapper = Mockito.mock(UserMapperImpl.class);
 
-    private VehicleMapper vehicleMapper = Mockito.mock( VehicleMapperImpl.class );
+    private VehicleMapper vehicleMapper = Mockito.mock(VehicleMapperImpl.class);
 
     @InjectMocks
     private OrderService orderService;
@@ -57,21 +57,21 @@ public class TestOrderService {
     @BeforeEach
     void init() {
         this.card = new Card();
-        card.setCreditCardNumber( 1111_1111_1111_1111l );
-        card.setAvailableFunds( 1000_000_000 );
+        card.setCreditCardNumber(1111_1111_1111_1111l);
+        card.setAvailableFunds(1000_000_000);
 
         this.user = new User();
-        user.setUsername( "Alex" );
-        user.setPrivilege( Privilege.NEWBIE );
-        user.getCreditCards().add( card );
+        user.setUsername("Alex");
+        user.setPrivilege(Privilege.NEWBIE);
+        user.getCreditCards().add(card);
 
         this.vehicle = new Vehicle();
 
-        this.order = new Order( 342l, LocalDateTime.now(), LocalDateTime.now(), null, 1111_1111_1111_1111l,
-                8.0, 0.0, false, OrderStatus.IN_RENT, user, vehicle );
-        this.orderDto = new OrderDto( "1", String.valueOf( LocalDateTime.now() ),
-                String.valueOf( LocalDateTime.now() ), null, "1111_1111_1111_1111l", "20",
-                null, "false", "IN_RENT", new UserDto(), new VehicleDto() );
+        this.order = new Order(342l, LocalDateTime.now(), LocalDateTime.now(), null, 1111_1111_1111_1111l,
+                8.0, 0.0, false, OrderStatus.IN_RENT, user, vehicle);
+        this.orderDto = new OrderDto("1", String.valueOf(LocalDateTime.now()),
+                String.valueOf(LocalDateTime.now()), null, "1111_1111_1111_1111l", "20",
+                null, "false", "IN_RENT", new UserDto(), new VehicleDto());
 
     }
 
@@ -79,16 +79,16 @@ public class TestOrderService {
     void createOrderAndExpectConsistency() {
 
         //given
-        given( orderMapper.fromDto( any() ) ).willReturn( order );
-        given( userMapper.fromDto( any() ) ).willReturn( user );
-        given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
+        given(orderMapper.fromDto(any())).willReturn(order);
+        given(userMapper.fromDto(any())).willReturn(user);
+        given(vehicleMapper.fromDto(any())).willReturn(vehicle);
         //when
-        order.setId( null );
-        orderService.saveOrUpdate( orderDto );
+        order.setId(null);
+        orderService.saveOrUpdate(orderDto);
         //then
-        verify( orderDao, times( 1 ) ).save( order );
-        verify( orderDao, never() ).update( order );
-        verify( publisher, times( 1 ) ).publishEvent( any( OrderCreatedEvent.class ) );
+        verify(orderDao, times(1)).save(order);
+        verify(orderDao, never()).update(order);
+        verify(publisher, times(1)).publishEvent(any(OrderCreatedEvent.class));
 
     }
 
@@ -96,15 +96,15 @@ public class TestOrderService {
     void updateOrderAndExpectConsistency() {
 
         //given
-        given( orderMapper.fromDto( any() ) ).willReturn( order );
-        given( userMapper.fromDto( any() ) ).willReturn( user );
-        given( vehicleMapper.fromDto( any() ) ).willReturn( vehicle );
+        given(orderMapper.fromDto(any())).willReturn(order);
+        given(userMapper.fromDto(any())).willReturn(user);
+        given(vehicleMapper.fromDto(any())).willReturn(vehicle);
         //when
-        orderService.saveOrUpdate( orderDto );
+        orderService.saveOrUpdate(orderDto);
         //then
-        verify( orderDao, times( 1 ) ).update( order );
-        verify( orderDao, never() ).save( order );
-        verify( publisher, never() ).publishEvent( any() );
+        verify(orderDao, times(1)).update(order);
+        verify(orderDao, never()).save(order);
+        verify(publisher, never()).publishEvent(any());
 
     }
 
@@ -112,13 +112,13 @@ public class TestOrderService {
     void finishAndExpectPublishingEvent() {
 
         //given
-        given( orderDao.findById( anyLong() ) ).willReturn( order );
-        InOrder inOrder = inOrder( orderDao, publisher );
+        given(orderDao.findById(anyLong())).willReturn(order);
+        InOrder inOrder = inOrder(orderDao, publisher);
         //when
-        orderService.finish( anyLong() );
+        orderService.finish(anyLong());
         //then
-        inOrder.verify( orderDao ).findById( anyLong() );
-        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class ) );
+        inOrder.verify(orderDao).findById(anyLong());
+        inOrder.verify(publisher).publishEvent(any(OrderFinishedEvent.class));
         inOrder.verifyNoMoreInteractions();
     }
 
@@ -126,21 +126,21 @@ public class TestOrderService {
     void cancelAndExpectConsistency() {
 
         //given
-        given( orderDao.findById( anyLong() ) ).willReturn( order );
-        InOrder inOrder = inOrder( orderDao, publisher );
+        given(orderDao.findById(anyLong())).willReturn(order);
+        InOrder inOrder = inOrder(orderDao, publisher);
         //when
-        orderService.cancel( anyLong() );
+        orderService.cancel(anyLong());
         //then
-        Assertions.assertEquals( 0, order.getTotalPrice() );
-        inOrder.verify( orderDao ).findById( anyLong() );
-        inOrder.verify( publisher ).publishEvent( any( OrderFinishedEvent.class ) );
+        Assertions.assertEquals(0, order.getTotalPrice());
+        inOrder.verify(orderDao).findById(anyLong());
+        inOrder.verify(publisher).publishEvent(any(OrderFinishedEvent.class));
         inOrder.verifyNoMoreInteractions();
     }
 
     @Test
     void countTotalPriceFail() {
-        Assertions.assertThrows( IllegalArgumentException.class,
-                () -> orderService.countTotalPrice( LocalDateTime.MAX, LocalDateTime.now(), 2.0, 0, 1 ) );
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> orderService.countTotalPrice(LocalDateTime.MAX, LocalDateTime.now(), 2.0, 0, 1));
     }
 
 }

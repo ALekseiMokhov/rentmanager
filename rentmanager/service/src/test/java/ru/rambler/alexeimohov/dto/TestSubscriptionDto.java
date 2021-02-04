@@ -28,15 +28,15 @@ public class TestSubscriptionDto {
 
     @Test
     void convertEntityToDtoAndExpectConsistency() {
-        SubscriptionDto converted = subscriptionMapper.toDto( subscription );
-        Assertions.assertEquals( "2040-12-31", converted.getExpirationDate() );
-        Assertions.assertEquals( "Sergei", converted.getUser().getUsername() );
+        SubscriptionDto converted = subscriptionMapper.toDto(subscription);
+        Assertions.assertEquals("2040-12-31", converted.getExpirationDate());
+        Assertions.assertEquals("Sergei", converted.getUser().getUsername());
     }
 
     @Test
     void convertDtoToEntityAndExpectConsistency() {
-        Subscription converted = subscriptionMapper.fromDto( subscriptionDto );
-        Assertions.assertEquals( "2040-12-31", converted.getExpirationDate().toString() );
+        Subscription converted = subscriptionMapper.fromDto(subscriptionDto);
+        Assertions.assertEquals("2040-12-31", converted.getExpirationDate().toString());
 
     }
 }

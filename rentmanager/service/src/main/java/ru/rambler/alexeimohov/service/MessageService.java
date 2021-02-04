@@ -70,18 +70,18 @@ public class MessageService implements IMessageService {
         OrderDto dto = event.getOrderDto();
         Message message = new Message();
 
-        message.setDateTimeOfSending( LocalDateTime.now() );
-        message.setUser( userMapper.fromDto( dto.getUserDto() ) );
+        message.setDateTimeOfSending(LocalDateTime.now());
+        message.setUser(userMapper.fromDto(dto.getUserDto()));
 
-        message.setFrom( this.username );
-        message.setTo( dto.getUserDto().getEmail() );
-        message.setSubject( "Order " + dto.getId() + " " + dto.getStatus() );
-        message.setText( String.format( orderFinishedText, dto.getUserDto().getUsername(), dto.getTotalPrice() ) );
+        message.setFrom(this.username);
+        message.setTo(dto.getUserDto().getEmail());
+        message.setSubject("Order " + dto.getId() + " " + dto.getStatus());
+        message.setText(String.format(orderFinishedText, dto.getUserDto().getUsername(), dto.getTotalPrice()));
 
 
-        javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message after order finished event sent!" );
+        javaMailSender.send(message);
+        messageDao.save(message);
+        log.debug("Message after order finished event sent!");
     }
 
     @Override
@@ -92,16 +92,16 @@ public class MessageService implements IMessageService {
         UserDto dto = event.getUserDto();
         Message message = new Message();
 
-        message.setDateTimeOfSending( LocalDateTime.now() );
-        message.setUser( userMapper.fromDto( dto ) );
-        message.setFrom( this.username );
-        message.setTo( dto.getEmail() );
-        message.setSubject( "User registered " + dto.getId() );
-        message.setText( String.format( greetingText, dto.getUsername() ) );
+        message.setDateTimeOfSending(LocalDateTime.now());
+        message.setUser(userMapper.fromDto(dto));
+        message.setFrom(this.username);
+        message.setTo(dto.getEmail());
+        message.setSubject("User registered " + dto.getId());
+        message.setText(String.format(greetingText, dto.getUsername()));
 
-        javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message to new user has been sent!" );
+        javaMailSender.send(message);
+        messageDao.save(message);
+        log.debug("Message to new user has been sent!");
     }
 
     @Override
@@ -110,34 +110,34 @@ public class MessageService implements IMessageService {
     @Async
     public void sendMessageAfterCreateOrder(OrderCreatedEvent event) {
         UserDto dto = event.getOrderDto().getUserDto();
-        User user = userMapper.fromDto( dto );
+        User user = userMapper.fromDto(dto);
         Message message = new Message();
 
-        message.setUser( user );
-        message.setFrom( this.username );
-        message.setTo( user.getEmail() );
-        message.setSubject( "Order booked: " + event.getOrderDto().getId() );
-        message.setText( String.format( orderCreatedText, dto.getUsername(), event.getOrderDto().getId() ) );
+        message.setUser(user);
+        message.setFrom(this.username);
+        message.setTo(user.getEmail());
+        message.setSubject("Order booked: " + event.getOrderDto().getId());
+        message.setText(String.format(orderCreatedText, dto.getUsername(), event.getOrderDto().getId()));
 
-        javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message after new order creation has been sent!" );
+        javaMailSender.send(message);
+        messageDao.save(message);
+        log.debug("Message after new order creation has been sent!");
     }
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Async
     public void sendCustomMessage(UserDto dto, String topic, String text) {
-        User user = userMapper.fromDto( dto );
+        User user = userMapper.fromDto(dto);
         Message message = new Message();
 
-        message.setUser( user );
-        message.setText( text );
-        message.setFrom( this.username );
-        message.setTo( user.getEmail() );
-        message.setSubject( topic );
+        message.setUser(user);
+        message.setText(text);
+        message.setFrom(this.username);
+        message.setTo(user.getEmail());
+        message.setSubject(topic);
 
-        messageDao.save( message );
+        messageDao.save(message);
     }
 
     @Override
@@ -146,29 +146,29 @@ public class MessageService implements IMessageService {
     @Async
     public void sendMessageAfterSetSubscription(SubscriptionSetEvent event) {
         UserDto dto = event.getSubscriptionDto().getUser();
-        User user = userMapper.fromDto( dto );
+        User user = userMapper.fromDto(dto);
         Message message = new Message();
 
-        message.setUser( user );
-        message.setFrom( this.username );
-        message.setTo( user.getEmail() );
-        message.setSubject( "Subscription ordered: " + event.getSubscriptionDto().getId() );
-        message.setText( String.format( subscriptionOrdered, dto.getUsername(),
-                event.getSubscriptionDto().getStartDate(), event.getSubscriptionDto().getPrice() ) );
+        message.setUser(user);
+        message.setFrom(this.username);
+        message.setTo(user.getEmail());
+        message.setSubject("Subscription ordered: " + event.getSubscriptionDto().getId());
+        message.setText(String.format(subscriptionOrdered, dto.getUsername(),
+                event.getSubscriptionDto().getStartDate(), event.getSubscriptionDto().getPrice()));
 
-        javaMailSender.send( message );
-        messageDao.save( message );
-        log.debug( "Message after new order creation has been sent!" );
+        javaMailSender.send(message);
+        messageDao.save(message);
+        log.debug("Message after new order creation has been sent!");
     }
 
     @Override
     public MessageDto getById(Long id) {
-        return messageMapper.toDto( messageDao.findById( id ) );
+        return messageMapper.toDto(messageDao.findById(id));
     }
 
     @Override
-    public List <MessageDto> getAll() {
-        return messageMapper.listToDto( messageDao.findAll() );
+    public List<MessageDto> getAll() {
+        return messageMapper.listToDto(messageDao.findAll());
     }
 
 

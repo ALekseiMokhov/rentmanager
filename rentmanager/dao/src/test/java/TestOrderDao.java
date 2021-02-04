@@ -35,23 +35,23 @@ public class TestOrderDao {
     @Transactional
     void init() {
         this.user = new User();
-        user.setUsername( "Sergey Borisov" );
-        user.setEmail( "spring_coder@gmail.com" );
-        user.setPassword( "7jfw56hjj8qlb" );
-        user.setPhoneNumber( 8_999_444_00_00l );
-        user.setRole( Role.ROLE_ADMIN );
-        user.setPrivilege( Privilege.PARTNER );
+        user.setUsername("Sergey Borisov");
+        user.setEmail("spring_coder@gmail.com");
+        user.setPassword("7jfw56hjj8qlb");
+        user.setPhoneNumber(8_999_444_00_00l);
+        user.setRole(Role.ROLE_ADMIN);
+        user.setPrivilege(Privilege.PARTNER);
 
         this.vehicle = new Vehicle();
-        vehicle.setType( VehicleType.SCOOTER );
-        vehicle.setFinePrice( 30.2 );
-        vehicle.setRentPrice( 5.3 );
+        vehicle.setType(VehicleType.SCOOTER);
+        vehicle.setFinePrice(30.2);
+        vehicle.setRentPrice(5.3);
 
         this.order = new Order();
-        order.setBlockedFunds( 10.6 );
-        order.setHasValidSubscription( false );
-        order.setVehicle( vehicle );
-        order.setUser( user );
+        order.setBlockedFunds(10.6);
+        order.setHasValidSubscription(false);
+        order.setVehicle(vehicle);
+        order.setUser(user);
 
     }
 
@@ -59,12 +59,12 @@ public class TestOrderDao {
     @Transactional
     @Rollback
     void persistOrderAndExpectConsistency() {
-        vehicleDao.save( vehicle );
-        userDao.save( user );
-        orderDao.save( order );
-        Assertions.assertEquals( 1, vehicleDao.findAll().size() );
-        Assertions.assertEquals( order.getUser(), userDao.findByUserName( "Sergey Borisov" ) );
-        Assertions.assertEquals( order.getVehicle(), vehicleDao.findAll().get( 0 ) );
+        vehicleDao.save(vehicle);
+        userDao.save(user);
+        orderDao.save(order);
+        Assertions.assertEquals(1, vehicleDao.findAll().size());
+        Assertions.assertEquals(order.getUser(), userDao.findByUserName("Sergey Borisov"));
+        Assertions.assertEquals(order.getVehicle(), vehicleDao.findAll().get(0));
 
     }
 

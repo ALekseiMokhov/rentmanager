@@ -12,9 +12,9 @@ public interface ICardService {
 
     CardDto getById(long id);
 
-    List <CardDto> getByUserName(String userName);
+    List<CardDto> getByUserName(String userName);
 
-    List <CardDto> getAll();
+    List<CardDto> getAll();
 
 
 }

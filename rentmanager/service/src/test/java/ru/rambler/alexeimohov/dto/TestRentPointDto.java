@@ -32,16 +32,16 @@ public class TestRentPointDto {
 
     @Test
     void MapPointToDtoAndExpectCorrectFieldValues() {
-        RentPointDto dtoMapped = rentPointMapper.toDto( rentPoint );
-        System.out.println( dtoMapped.getCoordinate() );
-        Assertions.assertEquals( "Main point", dtoMapped.getPointName() );
-        Assertions.assertEquals( "POINT (334 58)", dtoMapped.getCoordinate() );
+        RentPointDto dtoMapped = rentPointMapper.toDto(rentPoint);
+        System.out.println(dtoMapped.getCoordinate());
+        Assertions.assertEquals("Main point", dtoMapped.getPointName());
+        Assertions.assertEquals("POINT (334 58)", dtoMapped.getCoordinate());
     }
 
     @Test
     void MapDtoToPointAndExpectCorrectFieldValues() {
-        RentPoint rentPointMapped = rentPointMapper.fromDto( rentPointDto );
-        Assertions.assertEquals( "Susan McCassey", rentPointMapped.getPointName() );
-        Assertions.assertEquals( 222, rentPointMapped.getCoordinate().getX() );
+        RentPoint rentPointMapped = rentPointMapper.fromDto(rentPointDto);
+        Assertions.assertEquals("Susan McCassey", rentPointMapped.getPointName());
+        Assertions.assertEquals(222, rentPointMapped.getCoordinate().getX());
     }
 }

@@ -13,9 +13,9 @@ public interface IRentPointService {
 
     void saveOrUpdate(RentPointDto dto) throws ParseException;
 
-    List <RentPointDto> getAll();
+    List<RentPointDto> getAll();
 
-    List <RentPointDto> getPointsByValue();
+    List<RentPointDto> getPointsByValue();
 
     void remove(Long id);
 

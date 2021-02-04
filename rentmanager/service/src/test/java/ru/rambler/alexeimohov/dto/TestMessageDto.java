@@ -28,16 +28,16 @@ public class TestMessageDto {
 
     @Test
     void convertEntityToDtoAndExpectConsistency() {
-        MessageDto converted = messageMapper.toDto( message );
-        Assertions.assertEquals( "7475", converted.getId() );
-        Assertions.assertEquals( "547469", converted.getUserId() );
+        MessageDto converted = messageMapper.toDto(message);
+        Assertions.assertEquals("7475", converted.getId());
+        Assertions.assertEquals("547469", converted.getUserId());
     }
 
     @Test
     void convertDtoToEntityAndExpectConsistency() {
-        Message converted = messageMapper.fromDto( messageDto );
-        Assertions.assertEquals( 2352l, converted.getId() );
-        Assertions.assertEquals( 2l, converted.getUser().getId() );
+        Message converted = messageMapper.fromDto(messageDto);
+        Assertions.assertEquals(2352l, converted.getId());
+        Assertions.assertEquals(2l, converted.getUser().getId());
 
     }
 }

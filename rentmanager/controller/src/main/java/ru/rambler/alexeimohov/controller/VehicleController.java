@@ -29,77 +29,78 @@ public class VehicleController {
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @PostMapping("/")
     public ResponseEntity createVehicle(@Valid @RequestBody VehicleDto dto) {
-        vehicleService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.CREATED );
+        vehicleService.saveOrUpdate(dto);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @GetMapping("/{id}")
     public VehicleDto getById(@PathVariable long id) {
-        return vehicleService.getById( id );
+        return vehicleService.getById(id);
 
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @PutMapping("/")
     public ResponseEntity updateVehicle(@Valid @RequestBody VehicleDto dto) {
-        vehicleService.saveOrUpdate( dto );
-        return new ResponseEntity( HttpStatus.OK );
+        vehicleService.saveOrUpdate(dto);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PatchMapping("/book/{id}/{date}")
     public ResponseEntity bookVehicle(@PathVariable long id, @PathVariable String date) {
-        vehicleService.setDateForBooking( id, LocalDate.parse( date ) );
-        return new ResponseEntity( HttpStatus.OK );
+        vehicleService.setDateForBooking(id, LocalDate.parse(date));
+        return new ResponseEntity(HttpStatus.OK);
 
     }
 
     @PatchMapping("/cancel/{id}/{date}")
     public ResponseEntity cancelBooking(@PathVariable long id, @PathVariable String date) {
-        vehicleService.cancelBooking( id, LocalDate.parse( date ) );
-        return new ResponseEntity( HttpStatus.OK );
+        vehicleService.cancelBooking(id, LocalDate.parse(date));
+        return new ResponseEntity(HttpStatus.OK);
 
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteVehicle(@PathVariable long id) {
-        vehicleService.remove( id );
-        return new ResponseEntity( HttpStatus.OK );
+        vehicleService.remove(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/")
-    public List <VehicleDto> getAll() {
+    public List<VehicleDto> getAll() {
         return vehicleService.getAll();
 
     }
 
     @GetMapping("/childish")
-    public List <VehicleDto> getAllChildish() {
+    public List<VehicleDto> getAllChildish() {
         return vehicleService.getAllChildish();
 
     }
 
     @GetMapping("/muscular")
-    public List <VehicleDto> get() {
+    public List<VehicleDto> get() {
         return vehicleService.getAllMuscular();
 
     }
 
     @GetMapping("/point/{id}")
-    public List <VehicleDto> get(@PathVariable long id) {
-        return vehicleService.getAllFromPoint( id );
+    public List<VehicleDto> get(@PathVariable long id) {
+        return vehicleService.getAllFromPoint(id);
 
     }
 
     @GetMapping("/point/{id}/{date}")
-    public List <VehicleDto> get(@PathVariable long id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
-        return vehicleService.getAllFreeFromPoint( id, date );
+    public List<VehicleDto> get(@PathVariable long id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        return vehicleService.getAllFreeFromPoint(id, date);
 
     }
+
     @GetMapping("/dates/{id}/")
-    public Set <String> getDates(@PathVariable long id) {
-        return vehicleService.getBookedDatesOfVehicle( id );
+    public Set<String> getDates(@PathVariable long id) {
+        return vehicleService.getBookedDatesOfVehicle(id);
 
     }
 

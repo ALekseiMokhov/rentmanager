@@ -1,9 +1,10 @@
 package ru.rambler.alexeimohov.dao.interfaces;
 
 import java.util.List;
+
 /*
-*
-* Root DAO interface with basic CRUD methods*/
+ *
+ * Root DAO interface with basic CRUD methods*/
 public interface IGenericDao<T> {
 
     T findById(long id);
@@ -12,7 +13,7 @@ public interface IGenericDao<T> {
 
     void save(T object);
 
-    List <T> findAll();
+    List<T> findAll();
 
     void update(T object);
 }

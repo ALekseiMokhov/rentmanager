@@ -17,7 +17,7 @@ public interface IOrderService {
 
     void cancel(Long id);
 
-    List <OrderDto> getAll();
+    List<OrderDto> getAll();
 
 
 }

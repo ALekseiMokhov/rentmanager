@@ -27,38 +27,38 @@ class TestAddressService {
 
     private AddressDto addressDto;
 
-    private AddressDao addressDao = Mockito.mock( AddressDaoImplJpa.class );
+    private AddressDao addressDao = Mockito.mock(AddressDaoImplJpa.class);
 
-    private AddressMapper mapper = Mockito.mock( AddressMapperImpl.class );
+    private AddressMapper mapper = Mockito.mock(AddressMapperImpl.class);
 
     @InjectMocks
     private AddressService service;
 
     @BeforeEach
     void init() {
-        this.address = new Address( 1l, "Orel", "Lenina", 34, null );
+        this.address = new Address(1l, "Orel", "Lenina", 34, null);
         this.addressDto = new AddressDto();
     }
 
     @Test
     void getByIdAndExpectMappingToDto() {
         //given
-        when( addressDao.findById( anyLong() ) ).thenReturn( address );
+        when(addressDao.findById(anyLong())).thenReturn(address);
         //when
-        service.getById( 1l );
+        service.getById(1l);
         //then
-        verify( mapper, times( 1 ) ).toDto( any() );
+        verify(mapper, times(1)).toDto(any());
     }
 
 
     @Test
     void getAddressesByCityAndExpectCertainResult() {
         //given
-        given( addressDao.findAll() ).willReturn( List.of( address, new Address( 3l, "Moscow", "1", 14, null ) ) );
+        given(addressDao.findAll()).willReturn(List.of(address, new Address(3l, "Moscow", "1", 14, null)));
         //when
-        service.getAddressesByCity( "Orel" );
+        service.getAddressesByCity("Orel");
         //then
-        verify( mapper, times( 1 ) ).toDto( any() );
+        verify(mapper, times(1)).toDto(any());
     }
 
 

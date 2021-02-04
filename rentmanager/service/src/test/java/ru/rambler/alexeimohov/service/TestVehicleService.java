@@ -22,15 +22,15 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 class TestVehicleService {
 
-    private VehicleDao vehicleDao = Mockito.mock( VehicleDaoJpaImpl.class );
+    private VehicleDao vehicleDao = Mockito.mock(VehicleDaoJpaImpl.class);
 
-    private VehicleMapper vehicleMapper = Mockito.mock( VehicleMapperImpl.class );
+    private VehicleMapper vehicleMapper = Mockito.mock(VehicleMapperImpl.class);
 
     private Vehicle vehicle;
 
     private LocalDate date;
 
-    private List <Vehicle> vehicleList;
+    private List<Vehicle> vehicleList;
     @InjectMocks
     private VehicleService vehicleService;
 
@@ -43,11 +43,11 @@ class TestVehicleService {
     @Test
     void setDateForBookingAndExpectVehicleBooked() {
         //given
-        given( vehicleDao.findById( anyLong() ) ).willReturn( vehicle );
+        given(vehicleDao.findById(anyLong())).willReturn(vehicle);
         //when
-        vehicleService.setDateForBooking( 1l, date );
+        vehicleService.setDateForBooking(1l, date);
         //then
-        Assertions.assertEquals( true, vehicle.getBookedDates().contains( date ) );
+        Assertions.assertEquals(true, vehicle.getBookedDates().contains(date));
     }
 
 

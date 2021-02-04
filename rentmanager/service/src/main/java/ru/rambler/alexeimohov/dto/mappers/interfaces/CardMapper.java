@@ -18,7 +18,7 @@ public interface CardMapper {
     @Mapping(source = "validFromDate", target = "validFromDate", dateFormat = "yyyy-MM-dd")
     Card fromDto(CardDto dto);
 
-    List <Card> listFromDto(List <CardDto> list);
+    List<Card> listFromDto(List<CardDto> list);
 
-    List <CardDto> listToDto(List <Card> list);
+    List<CardDto> listToDto(List<Card> list);
 }

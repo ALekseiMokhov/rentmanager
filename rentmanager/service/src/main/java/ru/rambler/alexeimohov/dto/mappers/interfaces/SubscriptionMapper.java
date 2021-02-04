@@ -13,7 +13,7 @@ public interface SubscriptionMapper {
 
     SubscriptionDto toDto(Subscription subscription);
 
-    List <Subscription> listFromDto(List <SubscriptionDto> list);
+    List<Subscription> listFromDto(List<SubscriptionDto> list);
 
-    List <SubscriptionDto> listToDto(List <Subscription> list);
+    List<SubscriptionDto> listToDto(List<Subscription> list);
 }

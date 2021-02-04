@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "availableFunds", "blockedFunds" })
+@EqualsAndHashCode(exclude = {"availableFunds", "blockedFunds"})
 @ToString(exclude = "user")
 public class Card {
     @Id

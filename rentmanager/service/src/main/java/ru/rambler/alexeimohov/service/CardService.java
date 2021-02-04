@@ -27,24 +27,24 @@ public class CardService implements ICardService {
 
     @Override
     public CardDto getByCardNumber(long cardNumber) {
-        return cardMapper.toDto( cardDao.findByCardNumber( cardNumber ) );
+        return cardMapper.toDto(cardDao.findByCardNumber(cardNumber));
 
     }
 
     @Override
     public CardDto getById(long id) {
-        return cardMapper.toDto( cardDao.findById( id ) );
+        return cardMapper.toDto(cardDao.findById(id));
     }
 
     @Override
-    public List <CardDto> getByUserName(String userName) {
-        return cardMapper.listToDto( cardDao.findAllByUserName( userName ) );
+    public List<CardDto> getByUserName(String userName) {
+        return cardMapper.listToDto(cardDao.findAllByUserName(userName));
 
     }
 
     @Override
-    public List <CardDto> getAll() {
-        return cardMapper.listToDto( cardDao.findAll() );
+    public List<CardDto> getAll() {
+        return cardMapper.listToDto(cardDao.findAll());
     }
 
 

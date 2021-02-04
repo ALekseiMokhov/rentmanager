@@ -31,17 +31,17 @@ public class TestCardDto {
 
     @Test
     void convertEntityToDtoAndExpectConsistency() {
-        CardDto converted = cardMapper.toDto( card );
-        Assertions.assertEquals( "3333.4", converted.getAvailableFunds() );
-        Assertions.assertEquals( "2040-12-31", converted.getExpirationDate() );
-        Assertions.assertEquals( "547469", converted.getUserId() );
+        CardDto converted = cardMapper.toDto(card);
+        Assertions.assertEquals("3333.4", converted.getAvailableFunds());
+        Assertions.assertEquals("2040-12-31", converted.getExpirationDate());
+        Assertions.assertEquals("547469", converted.getUserId());
     }
 
     @Test
     void convertDtoToEntityAndExpectConsistency() {
-        Card converted = cardMapper.fromDto( cardDto );
-        Assertions.assertEquals( LocalDate.of( 2040, 12, 31 ), converted.getExpirationDate() );
-        Assertions.assertEquals( 1111111111111111l, converted.getCreditCardNumber() );
-        Assertions.assertEquals( 547469l, converted.getUser().getId() );
+        Card converted = cardMapper.fromDto(cardDto);
+        Assertions.assertEquals(LocalDate.of(2040, 12, 31), converted.getExpirationDate());
+        Assertions.assertEquals(1111111111111111l, converted.getCreditCardNumber());
+        Assertions.assertEquals(547469l, converted.getUser().getId());
     }
 }

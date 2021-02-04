@@ -12,7 +12,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
- /*
+
+/*
  * @Linked n:1 to RentPoint (child-parent relationships).
  * Persisted @field bookedDates with a join table*/
 @Entity
@@ -20,7 +21,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id","rentPoint"})
+@EqualsAndHashCode(exclude = {"id", "rentPoint"})
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,7 +55,7 @@ public class Vehicle {
             joinColumns = @JoinColumn(name = "id", referencedColumnName = "id")
     )
     @Column(name = "booked_dates")
-    private Set <LocalDate> bookedDates;
+    private Set<LocalDate> bookedDates;
 
     @NotNull(message = "Vehicle type should be specified!")
     @Enumerated(EnumType.STRING)
@@ -65,7 +66,7 @@ public class Vehicle {
     private RentPoint rentPoint;
 
     public Vehicle() {
-        this.bookedDates = new HashSet <>();
+        this.bookedDates = new HashSet<>();
     }
 }
 

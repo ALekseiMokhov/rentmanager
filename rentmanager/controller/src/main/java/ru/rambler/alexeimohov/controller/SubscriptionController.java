@@ -9,8 +9,9 @@ import ru.rambler.alexeimohov.dto.UserDto;
 import ru.rambler.alexeimohov.service.interfaces.ISubscriptionService;
 
 import java.util.List;
-  /*
-  * Controller linked to ISubscriptionService */
+
+/*
+ * Controller linked to ISubscriptionService */
 @RestController
 @RequestMapping("/subscriptions")
 public class SubscriptionController {
@@ -23,22 +24,22 @@ public class SubscriptionController {
 
     @GetMapping("/{id}")
     public SubscriptionDto getById(@PathVariable long id) {
-        return subscriptionService.getById( id );
+        return subscriptionService.getById(id);
     }
 
     @GetMapping("/is-valid/{id}")
     public Boolean isValid(@PathVariable long id) {
-        return subscriptionService.isValid( id );
+        return subscriptionService.isValid(id);
     }
 
     @GetMapping("/name/{id}")
     public UserDto getHolder(@PathVariable long id) {
-        return subscriptionService.getSubscriptionHolder( id );
+        return subscriptionService.getSubscriptionHolder(id);
     }
 
 
     @GetMapping("/")
-    public List <SubscriptionDto> getAllSubscriptions() {
+    public List<SubscriptionDto> getAllSubscriptions() {
         return subscriptionService.getAll();
     }
 }

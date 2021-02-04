@@ -24,7 +24,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "id", "address" })
+@EqualsAndHashCode(exclude = {"id", "address"})
 public class RentPoint {
 
     @Id
@@ -42,23 +42,25 @@ public class RentPoint {
             fetch = FetchType.LAZY,
             mappedBy = "rentPoint",
             cascade = CascadeType.ALL)
-    private List <Vehicle> vehicles;
+    private List<Vehicle> vehicles;
 
     public RentPoint() {
-        this.vehicles = new ArrayList <>();
+        this.vehicles = new ArrayList<>();
     }
+
     /*
-    * @methods for consistency of JPA link*/
+     * @methods for consistency of JPA link*/
     public void addVehicle(Vehicle vehicle) {
-        vehicles.add( vehicle );
-        vehicle.setRentPoint( this );
+        vehicles.add(vehicle);
+        vehicle.setRentPoint(this);
     }
 
     public void removeVehicle(Vehicle vehicle) {
-        vehicles.remove( vehicle );
-        vehicle.setRentPoint( null );
+        vehicles.remove(vehicle);
+        vehicle.setRentPoint(null);
     }
-    public static Comparator <RentPoint> pointValueComparator = new Comparator <RentPoint>() {
+
+    public static Comparator<RentPoint> pointValueComparator = new Comparator<RentPoint>() {
         @Override
         public int compare(RentPoint p1, RentPoint p2) {
             return (int) (p1.getType().getPointValue() - p2.getType().getPointValue());

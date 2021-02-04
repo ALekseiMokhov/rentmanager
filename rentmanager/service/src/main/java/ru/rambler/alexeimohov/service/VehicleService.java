@@ -32,76 +32,77 @@ public class VehicleService implements IVehicleService {
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
-        vehicleDao.remove( id );
+        vehicleDao.remove(id);
     }
 
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(VehicleDto dto) {
-        Vehicle vehicle = vehicleMapper.fromDto( dto );
+        Vehicle vehicle = vehicleMapper.fromDto(dto);
         if (vehicle.getId() == null) {
-            vehicleDao.save( vehicle );
+            vehicleDao.save(vehicle);
         } else {
-            vehicleDao.update( vehicle );
+            vehicleDao.update(vehicle);
         }
     }
 
     @Transactional(readOnly = false)
     @Override
     public void setDateForBooking(Long id, LocalDate date) {
-        Vehicle vehicle = vehicleDao.findById( id );
-        vehicle.getBookedDates().add( date );
+        Vehicle vehicle = vehicleDao.findById(id);
+        vehicle.getBookedDates().add(date);
     }
+
     @Transactional(readOnly = false)
     @Override
     public void cancelBooking(Long id, LocalDate date) {
-        Vehicle vehicle = vehicleDao.findById( id );
-        vehicle.getBookedDates().remove( date) ;
+        Vehicle vehicle = vehicleDao.findById(id);
+        vehicle.getBookedDates().remove(date);
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Override
     public void setAfterOrderCreated(OrderCreatedEvent event) {
-        Vehicle vehicle = vehicleDao.findById( Long.parseLong( event.getOrderDto().getVehicleDto().getId() ) );
-        vehicle.getBookedDates().add( LocalDate.from( LocalDateTime.parse( event.getOrderDto().getStartTime() ) ) );
+        Vehicle vehicle = vehicleDao.findById(Long.parseLong(event.getOrderDto().getVehicleDto().getId()));
+        vehicle.getBookedDates().add(LocalDate.from(LocalDateTime.parse(event.getOrderDto().getStartTime())));
 
     }
 
     @Override
     public VehicleDto getById(Long id) {
-        return vehicleMapper.toDto( vehicleDao.findById( id ) );
+        return vehicleMapper.toDto(vehicleDao.findById(id));
     }
 
     @Override
-    public List <VehicleDto> getAll() {
-        return vehicleMapper.listToDto( vehicleDao.findAll() );
+    public List<VehicleDto> getAll() {
+        return vehicleMapper.listToDto(vehicleDao.findAll());
     }
 
     @Override
-    public List <VehicleDto> getAllChildish() {
-        return vehicleMapper.listToDto( vehicleDao.findAllChildish() );
+    public List<VehicleDto> getAllChildish() {
+        return vehicleMapper.listToDto(vehicleDao.findAllChildish());
     }
 
     @Override
-    public List <VehicleDto> getAllMuscular() {
-        return vehicleMapper.listToDto( vehicleDao.findAllMuscular() );
+    public List<VehicleDto> getAllMuscular() {
+        return vehicleMapper.listToDto(vehicleDao.findAllMuscular());
     }
 
     @Override
-    public List <VehicleDto> getAllFromPoint(Long id) {
-        return vehicleMapper.listToDto( vehicleDao.findAllFromPoint( id ) );
+    public List<VehicleDto> getAllFromPoint(Long id) {
+        return vehicleMapper.listToDto(vehicleDao.findAllFromPoint(id));
     }
 
     @Override
-    public List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate date) {
-        return vehicleMapper.listToDto( vehicleDao.findAllFreeFromPoint( id, date ) );
+    public List<VehicleDto> getAllFreeFromPoint(Long id, LocalDate date) {
+        return vehicleMapper.listToDto(vehicleDao.findAllFreeFromPoint(id, date));
     }
 
     @Override
-    public Set <String> getBookedDatesOfVehicle(long id) {
+    public Set<String> getBookedDatesOfVehicle(long id) {
 
-        return vehicleDao.getBookedDates( id ).stream()
-                .map( d->d.toString() )
-                .collect( Collectors.toSet() );
+        return vehicleDao.getBookedDates(id).stream()
+                .map(d -> d.toString())
+                .collect(Collectors.toSet());
     }
 }

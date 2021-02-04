@@ -9,12 +9,12 @@ import com.vividsolutions.jts.io.WKTReader;
 public class PointConverter {
 
     public static Point build(int x, int y) {
-        Coordinate coordinate = new Coordinate( x, y );
-        Point point = new GeometryFactory().createPoint( coordinate );
+        Coordinate coordinate = new Coordinate(x, y);
+        Point point = new GeometryFactory().createPoint(coordinate);
         return point;
     }
 
     public static Point fromDto(String input) throws ParseException {
-        return (Point) new WKTReader().read( input );
+        return (Point) new WKTReader().read(input);
     }
 }

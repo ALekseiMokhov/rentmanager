@@ -15,7 +15,7 @@ public interface IVehicleService {
 
     void saveOrUpdate(VehicleDto dto);
 
-    void setDateForBooking(Long id, LocalDate d  );
+    void setDateForBooking(Long id, LocalDate d);
 
     void cancelBooking(Long id, LocalDate date);
 
@@ -24,15 +24,15 @@ public interface IVehicleService {
 
     VehicleDto getById(Long id);
 
-    List <VehicleDto> getAll();
+    List<VehicleDto> getAll();
 
-    List <VehicleDto> getAllChildish();
+    List<VehicleDto> getAllChildish();
 
-    List <VehicleDto> getAllMuscular();
+    List<VehicleDto> getAllMuscular();
 
-    List <VehicleDto> getAllFromPoint(Long id);
+    List<VehicleDto> getAllFromPoint(Long id);
 
-    List <VehicleDto> getAllFreeFromPoint(Long id, LocalDate localDate);
+    List<VehicleDto> getAllFreeFromPoint(Long id, LocalDate localDate);
 
-    Set <String> getBookedDatesOfVehicle(long id);
+    Set<String> getBookedDatesOfVehicle(long id);
 }

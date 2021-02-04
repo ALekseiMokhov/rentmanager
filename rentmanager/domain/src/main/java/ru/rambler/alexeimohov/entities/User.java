@@ -33,7 +33,7 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "subscription", "messages", "creditCards", "privilege" })
+@EqualsAndHashCode(exclude = {"subscription", "messages", "creditCards", "privilege"})
 @ToString
 public class User implements Serializable, UserDetails {
     @Id
@@ -77,18 +77,18 @@ public class User implements Serializable, UserDetails {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
-    private List <Message> messages;
+    private List<Message> messages;
 
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
-    private List <Card> creditCards;
+    private List<Card> creditCards;
 
     public User() {
-        this.creditCards = new ArrayList <>();
-        this.messages = new ArrayList <>();
+        this.creditCards = new ArrayList<>();
+        this.messages = new ArrayList<>();
     }
 
     public User(Long id, String username, String password, Long phoneNumber, String email,
@@ -101,48 +101,48 @@ public class User implements Serializable, UserDetails {
         this.role = role;
         this.subscription = subscription;
         this.privilege = privilege;
-        this.messages = new ArrayList <>();
-        this.creditCards = new ArrayList <>();
+        this.messages = new ArrayList<>();
+        this.creditCards = new ArrayList<>();
     }
 
     public void addMessage(Message message) {
-        messages.add( message );
-        message.setUser( this );
+        messages.add(message);
+        message.setUser(this);
     }
 
     public void removeMessage(Message message) {
-        messages.remove( message );
-        message.setUser( null );
+        messages.remove(message);
+        message.setUser(null);
     }
 
     public void addCreditCard(Card card) {
 
-        creditCards.add( card );
-        card.setUser( this );
+        creditCards.add(card);
+        card.setUser(this);
     }
 
     public void removeCreditCard(Card card) {
-        creditCards.remove( card );
-        card.setUser( null );
+        creditCards.remove(card);
+        card.setUser(null);
     }
 
     public void setSubscription(Subscription subscription) {
         if (subscription == null) {
             if (this.subscription != null) {
-                this.subscription.setUser( null );
+                this.subscription.setUser(null);
             }
         } else {
-            subscription.setUser( this );
+            subscription.setUser(this);
         }
         this.subscription = subscription;
     }
 
     /*UserDetails inherited methods*/
     @Override
-    public Collection <? extends GrantedAuthority> getAuthorities() {
-        List <GrantedAuthority> authorities
-                = new ArrayList <>();
-        authorities.add( new SimpleGrantedAuthority( String.valueOf( role ) ) );
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities
+                = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(String.valueOf(role)));
 
         return authorities;
     }

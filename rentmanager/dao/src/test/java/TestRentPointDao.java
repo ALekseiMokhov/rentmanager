@@ -26,10 +26,10 @@ public class TestRentPointDao {
     @BeforeEach
     void instantiate() {
         this.testingPoint = new RentPoint();
-        testingPoint.setPointName( "Main point" );
-        testingPoint.setType( PointType.CENTER );
-        testingPoint.addVehicle( new Vehicle() );
-        testingPoint.setCoordinate( new GeometryFactory().createPoint( new Coordinate( 2985, 3467 ) ) );
+        testingPoint.setPointName("Main point");
+        testingPoint.setType(PointType.CENTER);
+        testingPoint.addVehicle(new Vehicle());
+        testingPoint.setCoordinate(new GeometryFactory().createPoint(new Coordinate(2985, 3467)));
 
     }
 
@@ -37,10 +37,10 @@ public class TestRentPointDao {
     @Transactional
     @Rollback
     void persistAndExpectNoExceptions() {
-        rentPointDao.save( testingPoint );
+        rentPointDao.save(testingPoint);
 
-        RentPoint pointCreated = rentPointDao.findAll().get( 0 );
-        Assertions.assertNotNull( testingPoint );
-        Assertions.assertEquals( testingPoint, pointCreated );
+        RentPoint pointCreated = rentPointDao.findAll().get(0);
+        Assertions.assertNotNull(testingPoint);
+        Assertions.assertEquals(testingPoint, pointCreated);
     }
 }

@@ -28,7 +28,7 @@ public class Message extends SimpleMailMessage {
     @Length(max = 1024)
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private User user;
 
     @Column(name = "date_time")
@@ -49,7 +49,7 @@ public class Message extends SimpleMailMessage {
 
         return
                 id != null &&
-                        id.equals( ((Message) o).getId() );
+                        id.equals(((Message) o).getId());
     }
 
     @Override

@@ -26,12 +26,12 @@ public class TestConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource( dataSource() );
-        em.setPackagesToScan( new String[]{ "ru.rambler.alexeimohov.entities" } );
+        em.setDataSource(dataSource());
+        em.setPackagesToScan(new String[]{"ru.rambler.alexeimohov.entities"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter( vendorAdapter );
-        em.setJpaProperties( additionalProperties() );
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
 
         return em;
     }
@@ -39,17 +39,17 @@ public class TestConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName( "org.h2.Driver" );
-        dataSource.setUrl( "jdbc:h2:tcp://localhost/~/test" );
-        dataSource.setUsername( "sa" );
-        dataSource.setPassword( "" );
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUrl("jdbc:h2:tcp://localhost/~/test");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("");
         return dataSource;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory( entityManagerFactory().getObject() );
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
     }
@@ -63,10 +63,10 @@ public class TestConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
-        properties.setProperty( "hibernate.dialect", "org.hibernate.spatial.dialect.h2geodb.GeoDBDialect" );
-        properties.setProperty( "hibernate.show_sql", "true" );
-        properties.setProperty( "hibernate.format_sql", "true" );
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.dialect", "org.hibernate.spatial.dialect.h2geodb.GeoDBDialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
 
         return properties;
     }

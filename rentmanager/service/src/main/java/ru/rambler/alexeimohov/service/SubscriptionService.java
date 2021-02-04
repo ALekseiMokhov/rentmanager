@@ -29,23 +29,23 @@ public class SubscriptionService implements ISubscriptionService {
 
     @Override
     public SubscriptionDto getById(long id) {
-        return subscriptionMapper.toDto( subscriptionDao.findById( id ) );
+        return subscriptionMapper.toDto(subscriptionDao.findById(id));
     }
 
 
     @Override
-    public List <SubscriptionDto> getAll() {
-        return subscriptionMapper.listToDto( subscriptionDao.findAll() );
+    public List<SubscriptionDto> getAll() {
+        return subscriptionMapper.listToDto(subscriptionDao.findAll());
     }
 
     @Override
     public UserDto getSubscriptionHolder(long id) {
-        return userMapper.toDto( subscriptionDao.getSubscribeHolder( id ) );
+        return userMapper.toDto(subscriptionDao.getSubscribeHolder(id));
     }
 
     @Override
     public Boolean isValid(long id) {
-        return subscriptionDao.isExpired( id );
+        return subscriptionDao.isExpired(id);
     }
 
 }

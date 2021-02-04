@@ -22,13 +22,13 @@ import static org.mockito.BDDMockito.*;
 public class TestUserService {
 
 
-    private UserDao userDao = Mockito.mock( UserDaoJpaImpl.class );
+    private UserDao userDao = Mockito.mock(UserDaoJpaImpl.class);
 
-    private UserMapper userMapper = Mockito.mock( UserMapperImpl.class );
+    private UserMapper userMapper = Mockito.mock(UserMapperImpl.class);
 
-    private CardMapper cardMapper = Mockito.mock( CardMapperImpl.class );
+    private CardMapper cardMapper = Mockito.mock(CardMapperImpl.class);
 
-    private MessageMapper messageMapper = Mockito.mock( MessageMapperImpl.class );
+    private MessageMapper messageMapper = Mockito.mock(MessageMapperImpl.class);
 
     private User user;
 
@@ -49,53 +49,53 @@ public class TestUserService {
     @Test
     void addCreditCardANdExpectConsistency() {
         //given
-        given( userDao.findById( anyLong() ) ).willReturn( user );
-        given( cardMapper.fromDto( any( CardDto.class ) ) ).willReturn( card );
+        given(userDao.findById(anyLong())).willReturn(user);
+        given(cardMapper.fromDto(any(CardDto.class))).willReturn(card);
         //when
-        userService.addCreditCard( 666l, new CardDto() );
+        userService.addCreditCard(666l, new CardDto());
         //then
-        verify( userDao, times( 1 ) ).findById( 666l );
-        verify( cardMapper, times( 1 ) ).fromDto( any( CardDto.class ) );
-        Assertions.assertEquals( user.getCreditCards().get( 0 ), card );
+        verify(userDao, times(1)).findById(666l);
+        verify(cardMapper, times(1)).fromDto(any(CardDto.class));
+        Assertions.assertEquals(user.getCreditCards().get(0), card);
     }
 
     @Test
     void removeCreditCardAndExpectNullUser() {
         //given
-        given( userDao.findById( anyLong() ) ).willReturn( user );
-        given( cardMapper.fromDto( any( CardDto.class ) ) ).willReturn( card );
-        card.setUser( user );
+        given(userDao.findById(anyLong())).willReturn(user);
+        given(cardMapper.fromDto(any(CardDto.class))).willReturn(card);
+        card.setUser(user);
         //when
-        userService.removeCreditCard( anyLong(), new CardDto() );
+        userService.removeCreditCard(anyLong(), new CardDto());
         //then
-        verify( cardMapper, times( 1 ) ).fromDto( any( CardDto.class ) );
-        Assertions.assertNull( card.getUser() );
+        verify(cardMapper, times(1)).fromDto(any(CardDto.class));
+        Assertions.assertNull(card.getUser());
     }
 
     @Test
     void addMessageAndExpectConsistency() {
         //given
-        given( userDao.findById( anyLong() ) ).willReturn( user );
-        given( messageMapper.fromDto( any( MessageDto.class ) ) ).willReturn( message );
+        given(userDao.findById(anyLong())).willReturn(user);
+        given(messageMapper.fromDto(any(MessageDto.class))).willReturn(message);
         //when
-        userService.addMessage( 25l, new MessageDto() );
+        userService.addMessage(25l, new MessageDto());
         //then
-        verify( userDao, times( 1 ) ).findById( 25l );
-        verify( messageMapper, times( 1 ) ).fromDto( any( MessageDto.class ) );
-        Assertions.assertEquals( user.getMessages().get( 0 ), message );
+        verify(userDao, times(1)).findById(25l);
+        verify(messageMapper, times(1)).fromDto(any(MessageDto.class));
+        Assertions.assertEquals(user.getMessages().get(0), message);
     }
 
     @Test
     void removeMessageAndExpectNullUser() {
         //given
-        given( userDao.findById( anyLong() ) ).willReturn( user );
-        given( messageMapper.fromDto( any( MessageDto.class ) ) ).willReturn( message );
-        message.setUser( user );
+        given(userDao.findById(anyLong())).willReturn(user);
+        given(messageMapper.fromDto(any(MessageDto.class))).willReturn(message);
+        message.setUser(user);
         //when
-        userService.removeMessage( anyLong(), new MessageDto() );
+        userService.removeMessage(anyLong(), new MessageDto());
         //then
-        verify( messageMapper, times( 1 ) ).fromDto( any( MessageDto.class ) );
-        Assertions.assertNull( card.getUser() );
+        verify(messageMapper, times(1)).fromDto(any(MessageDto.class));
+        Assertions.assertNull(card.getUser());
     }
 
 

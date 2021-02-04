@@ -16,13 +16,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.rambler.alexeimohov.jwt.ITokenProvider;
 import ru.rambler.alexeimohov.jwt.JwtAuthenticationFilter;
 import ru.rambler.alexeimohov.service.interfaces.IUserService;
-  /*
-  * Custom security configuration.
-  * @linked to ITokenProvider,AuthenticationEntryPoint,IUserService.
-  * Provides stateless JWT-based authentication and authorization.
-  * Encodes User's password with BCrypt algorithm.
-  * Separates resources for different User's roles.
-  * */
+
+/*
+ * Custom security configuration.
+ * @linked to ITokenProvider,AuthenticationEntryPoint,IUserService.
+ * Provides stateless JWT-based authentication and authorization.
+ * Encodes User's password with BCrypt algorithm.
+ * Separates resources for different User's roles.
+ * */
 @Configuration
 @EnableWebSecurity
 @ComponentScan("ru.rambler.alexeimohov")
@@ -41,7 +42,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter( tokenProvider );
+        return new JwtAuthenticationFilter(tokenProvider);
     }
 
     @Override
@@ -51,19 +52,19 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .formLogin().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint( unauthorizedHandler )
+                .authenticationEntryPoint(unauthorizedHandler)
                 .and()
-                .addFilterBefore( jwtAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class )
+                .addFilterBefore(jwtAuthenticationFilter(),
+                        UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeRequests()
-                .antMatchers( "/", "/users/signup/**", "/users/signin/**" ).permitAll()
-                .antMatchers( "/cards/**", "users/**" ).hasAuthority( "ROLE_ADMIN" )
-                .antMatchers( "/rentpoints/**", "/messages/**" ).hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER" )
-                .antMatchers( "/orders/**" , "/addresses/**", "/subscriptions/**", "/vehicles/**").hasAnyAuthority( "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER" )
+                .antMatchers("/", "/users/signup/**", "/users/signin/**").permitAll()
+                .antMatchers("/cards/**", "users/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/rentpoints/**", "/messages/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                .antMatchers("/orders/**", "/addresses/**", "/subscriptions/**", "/vehicles/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER")
                 .anyRequest().authenticated()
 
         ;
@@ -73,8 +74,8 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService( userService )
-                .passwordEncoder( passwordEncoder() );
+                .userDetailsService(userService)
+                .passwordEncoder(passwordEncoder());
     }
 
 

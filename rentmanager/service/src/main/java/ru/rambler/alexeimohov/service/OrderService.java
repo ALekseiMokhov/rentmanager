@@ -41,83 +41,83 @@ public class OrderService implements IOrderService {
 
     @Override
     public OrderDto getById(Long id) {
-        return orderMapper.toDto( orderDao.findById( id ) );
+        return orderMapper.toDto(orderDao.findById(id));
     }
 
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(OrderDto dto) {
 
-        Order order = orderMapper.fromDto( dto );
-        log.debug( order.toString() );
+        Order order = orderMapper.fromDto(dto);
+        log.debug(order.toString());
 
-        if(order.getCreationTime()==null){
-            order.setCreationTime( LocalDateTime.now() );
+        if (order.getCreationTime() == null) {
+            order.setCreationTime(LocalDateTime.now());
         }
         /*
         calculates amount to be blocked in users card*/
         if (order.getBlockedFunds() == 0) {
-            order.setBlockedFunds( blockingFundsCoef * order.getVehicle().getRentPrice() );
+            order.setBlockedFunds(blockingFundsCoef * order.getVehicle().getRentPrice());
         }
        /*For new Order checks whether Vehicle is free for the Date and amount of funds on user's card is sufficient
        calling @method
        * @throws IllegalArgumentException*/
-       if(order.getId() == null && isValidRequirements( order )==false){
-             throw new IllegalArgumentException("Check card's balance and vehicle's booked dates!");
-       }
-         /*Set status 'created'*/
+        if (order.getId() == null && isValidRequirements(order) == false) {
+            throw new IllegalArgumentException("Check card's balance and vehicle's booked dates!");
+        }
+        /*Set status 'created'*/
         if (order.getId() == null) {
             if (order.getStatus() == null) {
-                order.setStatus( OrderStatus.CREATED );
+                order.setStatus(OrderStatus.CREATED);
             }
-            log.debug( order.toString() );
-            orderDao.save( order );
-            publisher.publishEvent( new OrderCreatedEvent( orderMapper.toDto( order ) ) );
-            log.debug( "order created : " + order.getId() );
+            log.debug(order.toString());
+            orderDao.save(order);
+            publisher.publishEvent(new OrderCreatedEvent(orderMapper.toDto(order)));
+            log.debug("order created : " + order.getId());
         } else {
-            orderDao.update( order );
-            log.debug( "order updated : " + order.getId() );
+            orderDao.update(order);
+            log.debug("order updated : " + order.getId());
         }
     }
 
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
-        orderDao.remove( id );
-        log.debug( "order deleted : " + id );
+        orderDao.remove(id);
+        log.debug("order deleted : " + id);
     }
 
 
     @Transactional(readOnly = false)
     @Override
     public void finish(Long id) {
-        Order order = orderDao.findById( id );
+        Order order = orderDao.findById(id);
 
-        order.setFinishTime( LocalDateTime.now() );
+        order.setFinishTime(LocalDateTime.now());
         if (order.isHasValidSubscription() == false) {
             order.setTotalPrice(
-                    countTotalPrice( order.getStartTime(), order.getFinishTime(),
-                            order.getVehicle().getRentPrice(), order.getVehicle().getFinePrice(), order.getUser().getPrivilege().getCoefficient() ) );
+                    countTotalPrice(order.getStartTime(), order.getFinishTime(),
+                            order.getVehicle().getRentPrice(), order.getVehicle().getFinePrice(), order.getUser().getPrivilege().getCoefficient()));
         }
-        order.setStatus( OrderStatus.FINISHED );
-        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
-        log.debug( "event was published " );
+        order.setStatus(OrderStatus.FINISHED);
+        publisher.publishEvent(new OrderFinishedEvent(orderMapper.toDto(order)));
+        log.debug("event was published ");
 
     }
 
     @Transactional(readOnly = false)
     @Override
     public void cancel(Long id) {
-        Order order = orderDao.findById( id );
-        order.setTotalPrice( 0.0 );
-        order.setStatus( OrderStatus.CANCELLED );
-        publisher.publishEvent( new OrderFinishedEvent( orderMapper.toDto( order ) ) );
-        log.debug( "event was published " );
+        Order order = orderDao.findById(id);
+        order.setTotalPrice(0.0);
+        order.setStatus(OrderStatus.CANCELLED);
+        publisher.publishEvent(new OrderFinishedEvent(orderMapper.toDto(order)));
+        log.debug("event was published ");
     }
 
     @Override
-    public List <OrderDto> getAll() {
-        return orderMapper.listToDto( orderDao.findAll() );
+    public List<OrderDto> getAll() {
+        return orderMapper.listToDto(orderDao.findAll());
     }
 
 
@@ -125,21 +125,22 @@ public class OrderService implements IOrderService {
     @method counts total price
     * */
     public double countTotalPrice(LocalDateTime start, LocalDateTime end, double price, double fine, double coefficient) {
-        if (start.isAfter( end )) {
-            throw new IllegalArgumentException( "Finish time can't be before start time!" );
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("Finish time can't be before start time!");
         }
-        long hours = LocalDateTime.from( start ).until( end, ChronoUnit.HOURS );
+        long hours = LocalDateTime.from(start).until(end, ChronoUnit.HOURS);
         return (price * hours + fine) * coefficient;
     }
+
     /*@methods validates requirements*/
     public boolean isValidRequirements(Order order) {
         if (
-                orderDao.getAvailableFunds( order.getCreditCardNumber() ) <= order.getBlockedFunds()) {
+                orderDao.getAvailableFunds(order.getCreditCardNumber()) <= order.getBlockedFunds()) {
             return false;
         }
         if (
-                orderDao.getBookedDatesOfChosenVehicle( order.getVehicle().getId() )
-                        .contains(java.sql.Date.valueOf (order.getStartTime().toLocalDate()) )) {
+                orderDao.getBookedDatesOfChosenVehicle(order.getVehicle().getId())
+                        .contains(java.sql.Date.valueOf(order.getStartTime().toLocalDate()))) {
 
             return false;
         }

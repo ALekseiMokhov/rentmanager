@@ -19,7 +19,7 @@ public interface IUserService extends UserDetailsService {
 
     void remove(Long id);
 
-    List <UserDto> getAll();
+    List<UserDto> getAll();
 
     UserDto getByUserName(String userName);
 

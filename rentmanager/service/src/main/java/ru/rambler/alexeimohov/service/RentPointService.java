@@ -32,44 +32,44 @@ public class RentPointService implements IRentPointService {
 
     @Transactional(readOnly = false)
     public void saveOrUpdate(RentPointDto dto) throws ParseException {
-        RentPoint rentPoint = mapper.fromDto( dto );
+        RentPoint rentPoint = mapper.fromDto(dto);
         if (rentPoint.getId() == null) {
-            rentPointDao.save( rentPoint );
-            log.debug( "rent point saved " + dto.getPointName() );
+            rentPointDao.save(rentPoint);
+            log.debug("rent point saved " + dto.getPointName());
         } else {
-            rentPointDao.update( mapper.fromDto( dto ) );
-            log.debug( "rent point updated " + dto.getPointName() );
+            rentPointDao.update(mapper.fromDto(dto));
+            log.debug("rent point updated " + dto.getPointName());
         }
     }
 
     public RentPointDto getById(Long id) {
-        return mapper.toDto( rentPointDao.findById( id ) );
+        return mapper.toDto(rentPointDao.findById(id));
     }
 
     @Transactional(readOnly = false)
     public void remove(Long id) {
-        rentPointDao.remove( id );
-        log.info( "rentpoint was deleted: " + id );
+        rentPointDao.remove(id);
+        log.info("rentpoint was deleted: " + id);
     }
 
-    public List <RentPointDto> getAll() {
+    public List<RentPointDto> getAll() {
         return rentPointDao.findAll().stream()
-                .map( p -> mapper.toDto( p ) )
-                .collect( Collectors.toList() );
+                .map(p -> mapper.toDto(p))
+                .collect(Collectors.toList());
     }
 
     @Override
     public RentPointDto getByCoordinate(Double x, Double y) {
-        RentPoint retrieved = rentPointDao.getByCoordinate( new GeometryFactory().createPoint( new Coordinate( x, y ) ) );
-        log.debug( "Rent point was retrieved by coordinate: " + "(" + x + "," + y + ")" );
-        return mapper.toDto( retrieved );
+        RentPoint retrieved = rentPointDao.getByCoordinate(new GeometryFactory().createPoint(new Coordinate(x, y)));
+        log.debug("Rent point was retrieved by coordinate: " + "(" + x + "," + y + ")");
+        return mapper.toDto(retrieved);
 
     }
 
-    public List <RentPointDto> getPointsByValue() {
+    public List<RentPointDto> getPointsByValue() {
         return rentPointDao.findAll().stream()
-                .sorted( RentPoint.pointValueComparator )
-                .map( p -> mapper.toDto( p ) )
-                .collect( Collectors.toList() );
+                .sorted(RentPoint.pointValueComparator)
+                .map(p -> mapper.toDto(p))
+                .collect(Collectors.toList());
     }
 }

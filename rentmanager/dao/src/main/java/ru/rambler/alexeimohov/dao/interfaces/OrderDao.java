@@ -6,8 +6,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
-public interface OrderDao extends IGenericDao <Order> {
+public interface OrderDao extends IGenericDao<Order> {
     double getAvailableFunds(long creditCardNumber);
 
-    Set <Date> getBookedDatesOfChosenVehicle(long id);
+    Set<Date> getBookedDatesOfChosenVehicle(long id);
 }

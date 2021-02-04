@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GeometryConverter {
     public Point asPoint(String str) throws ParseException {
-        return (Point) new WKTReader().read( str );
+        return (Point) new WKTReader().read(str);
     }
 
     public String asDto(Point point) {

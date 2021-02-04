@@ -22,7 +22,7 @@ public interface OrderMapper {
     @InheritInverseConfiguration
     Order fromDto(OrderDto dto);
 
-    List <Order> listFromDto(List <OrderDto> list);
+    List<Order> listFromDto(List<OrderDto> list);
 
-    List <OrderDto> listToDto(List <Order> list);
+    List<OrderDto> listToDto(List<Order> list);
 }

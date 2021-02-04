@@ -22,43 +22,43 @@ AppControllerAdvice {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity handleAccessDeniedException(Exception e, WebRequest request) {
-        log.debug( "Handling Exception: " + e );
+        log.debug("Handling Exception: " + e);
 
-        return ResponseEntity.status( HttpStatus.FORBIDDEN ).body( "Access denied! " + e.getMessage() );
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied! " + e.getMessage());
     }
 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity handleExpiredJwtException(Exception e, WebRequest request) {
-        log.debug( "Handling Exception: " + e );
+        log.debug("Handling Exception: " + e);
 
-        return ResponseEntity.status( HttpStatus.UNAUTHORIZED ).body( "Jwt token has been expired! " + e.getMessage() );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Jwt token has been expired! " + e.getMessage());
     }
 
     @ExceptionHandler(javax.validation.ConstraintViolationException.class)
     public ResponseEntity handleConstraintViolationException(Exception e, WebRequest request) {
-        log.debug( "Handling Exception: " + e );
+        log.debug("Handling Exception: " + e);
 
-        return ResponseEntity.status( HttpStatus.UNAUTHORIZED ).body( "DB constraint has been violated! " + e.getMessage() );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("DB constraint has been violated! " + e.getMessage());
     }
 
     @ExceptionHandler(MailException.class)
     public ResponseEntity handleMailException(Exception e, WebRequest request) {
-        log.debug( "Handling Exception: " + e );
+        log.debug("Handling Exception: " + e);
 
-        return ResponseEntity.status( HttpStatus.UNAUTHORIZED ).body( "Message wasn't sent! " + e.getMessage() );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Message wasn't sent! " + e.getMessage());
     }
 
-    @ExceptionHandler({ SQLException.class, IllegalArgumentException.class, NullPointerException.class })
+    @ExceptionHandler({SQLException.class, IllegalArgumentException.class, NullPointerException.class})
     public ResponseEntity handleInternalException(Exception e, WebRequest request) {
-        log.debug( "server error : " + e.getLocalizedMessage() );
+        log.debug("server error : " + e.getLocalizedMessage());
 
-        return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( e.getMessage() );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
-    @ExceptionHandler({ RuntimeException.class })
+    @ExceptionHandler({RuntimeException.class})
     public ResponseEntity handleRuntimeException(Exception e, WebRequest request) {
-        log.debug( "server runtime exception : " + e.getLocalizedMessage() );
-        return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( e.getMessage() );
+        log.debug("server runtime exception : " + e.getLocalizedMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 
     }
 

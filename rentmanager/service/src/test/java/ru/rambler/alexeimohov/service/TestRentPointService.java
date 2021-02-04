@@ -16,9 +16,9 @@ import static org.mockito.BDDMockito.*;
 @ExtendWith(MockitoExtension.class)
 class TestRentPointService {
 
-    private RentPointDao rentPointDao = Mockito.mock( RentPointDaoJpaImpl.class );
+    private RentPointDao rentPointDao = Mockito.mock(RentPointDaoJpaImpl.class);
 
-    private RentPointMapper rentPointMapper = Mockito.mock( RentPointMapperImpl.class );
+    private RentPointMapper rentPointMapper = Mockito.mock(RentPointMapperImpl.class);
 
     @InjectMocks
     private RentPointService rentPointService;
@@ -26,8 +26,8 @@ class TestRentPointService {
     @Test
     void getByCoordinateShouldTriggerDao() {
         //when
-        rentPointService.getByCoordinate( 2.34, 4782.0 );
+        rentPointService.getByCoordinate(2.34, 4782.0);
         //then
-        verify( rentPointDao, times( 1 ) ).getByCoordinate( any( Point.class ) );
+        verify(rentPointDao, times(1)).getByCoordinate(any(Point.class));
     }
 }

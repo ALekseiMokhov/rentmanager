@@ -9,8 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
-   /*
-   * Utility config class responsible for tuning MailSender bean. */
+
+/*
+ * Utility config class responsible for tuning MailSender bean. */
 @Configuration
 @PropertySource("classpath:application.properties")
 public class UtilConfig {
@@ -39,16 +40,16 @@ public class UtilConfig {
     @Bean
     public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost( host );
-        mailSender.setUsername( username );
-        mailSender.setPassword( password );
-        mailSender.setPort( port );
-        mailSender.setProtocol( protocol );
+        mailSender.setHost(host);
+        mailSender.setUsername(username);
+        mailSender.setPassword(password);
+        mailSender.setPort(port);
+        mailSender.setProtocol(protocol);
 
         Properties properties = mailSender.getJavaMailProperties();
-        properties.setProperty( "mail.debug", debug );
-        properties.setProperty( "mail.smtp.auth", auth );
-        properties.setProperty( "mail.smtp.starttls.enable", enable );
+        properties.setProperty("mail.debug", debug);
+        properties.setProperty("mail.smtp.auth", auth);
+        properties.setProperty("mail.smtp.starttls.enable", enable);
 
         return mailSender;
     }

@@ -26,19 +26,19 @@ public class MessageController {
 
     @GetMapping("/{id}")
     public MessageDto getById(@RequestParam long id) {
-        return messageService.getById( id );
+        return messageService.getById(id);
     }
 
 
     @GetMapping("/")
-    public List <MessageDto> getAllMessages() {
+    public List<MessageDto> getAllMessages() {
         return messageService.getAll();
     }
 
     @PostMapping("/{topic}")
     public ResponseEntity sendCustomMessage(@PathVariable String topic, @RequestBody UserDto dto, @RequestBody String text) {
-        messageService.sendCustomMessage( dto, topic, text );
+        messageService.sendCustomMessage(dto, topic, text);
 
-        return new ResponseEntity( HttpStatus.CREATED );
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

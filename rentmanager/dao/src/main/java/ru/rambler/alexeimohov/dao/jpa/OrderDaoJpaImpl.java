@@ -12,52 +12,53 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 /*
  * Order DAO JPA implementation. Uses JPQL queries to sort data*/
 @Repository
 public class OrderDaoJpaImpl extends GenericDaoJpa implements OrderDao {
     @Override
     public Order findById(long id) {
-        return ((Order) entityManager.createQuery( OrderQueries.FIND_ORDER_BY_ID )
-                .setParameter( "id", id )
+        return ((Order) entityManager.createQuery(OrderQueries.FIND_ORDER_BY_ID)
+                .setParameter("id", id)
                 .getSingleResult());
     }
 
     @Override
     public double getAvailableFunds(long creditCardNumber) {
-        double actualFunds = (double) entityManager.createQuery( CardQueries.FIND_AVAILABLE_FUNDS )
-                .setParameter( "number", creditCardNumber )
+        double actualFunds = (double) entityManager.createQuery(CardQueries.FIND_AVAILABLE_FUNDS)
+                .setParameter("number", creditCardNumber)
                 .getSingleResult();
         return actualFunds;
     }
 
     @Override
-    public Set <Date> getBookedDatesOfChosenVehicle(long id) {
-        Set <Date> retrieved = new HashSet <>();
-        retrieved.addAll( entityManager.createNativeQuery( VehicleQueries.GET_BOOKED_DATES_NATIVE_QUERY )
-                .setParameter( 1, id )
-                .getResultList() );
+    public Set<Date> getBookedDatesOfChosenVehicle(long id) {
+        Set<Date> retrieved = new HashSet<>();
+        retrieved.addAll(entityManager.createNativeQuery(VehicleQueries.GET_BOOKED_DATES_NATIVE_QUERY)
+                .setParameter(1, id)
+                .getResultList());
         return retrieved;
     }
 
     @Override
     public void remove(long id) {
-        entityManager.remove( this.findById( id ) );
+        entityManager.remove(this.findById(id));
     }
 
     @Override
     public void save(Order object) {
-        entityManager.persist( object );
+        entityManager.persist(object);
     }
 
     @Override
-    public List <Order> findAll() {
-        return entityManager.createQuery( OrderQueries.FIND_ALL_ORDERS )
+    public List<Order> findAll() {
+        return entityManager.createQuery(OrderQueries.FIND_ALL_ORDERS)
                 .getResultList();
     }
 
     @Override
     public void update(Order object) {
-        entityManager.merge( object );
+        entityManager.merge(object);
     }
 }

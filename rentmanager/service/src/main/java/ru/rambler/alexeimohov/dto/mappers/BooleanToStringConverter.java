@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class BooleanToStringConverter {
 
     public Boolean asBoolean(String var) {
-        if (var.equals( "true" )) {
+        if (var.equals("true")) {
             return true;
         }
         return false;

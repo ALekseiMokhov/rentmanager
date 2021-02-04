@@ -47,6 +47,7 @@ public class PersistenceConfig {
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setChangeLog("classpath:db/migration/db.changelog-master.xml");
+        liquibase.setContexts(env.getProperty("liquibase.context"));
         liquibase.setDataSource(dataSource());
         return liquibase;
     }

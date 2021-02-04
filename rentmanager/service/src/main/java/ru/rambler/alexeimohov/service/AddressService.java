@@ -28,44 +28,44 @@ public class AddressService implements IAddressService {
     }
 
     public AddressDto getById(Long id) {
-        return mapper.toDto( addressDao.findById( id ) );
+        return mapper.toDto(addressDao.findById(id));
     }
 
     @Override
     @Transactional(readOnly = false)
     public void saveOrUpdate(AddressDto dto) {
-        Address address = mapper.fromDto( dto );
+        Address address = mapper.fromDto(dto);
         try {
             if (address.getId() == null) {
-                addressDao.save( address );
+                addressDao.save(address);
             } else {
-                addressDao.update( address );
+                addressDao.update(address);
             }
         } catch (Exception e) {
-            throw new RuntimeException( "Unable to save address " + address.toString() );
+            throw new RuntimeException("Unable to save address " + address.toString());
         }
     }
 
     @Transactional(readOnly = false)
     public void remove(Long id) {
-        addressDao.remove( id );
-        log.info( "card deleted : " + id );
+        addressDao.remove(id);
+        log.info("card deleted : " + id);
     }
 
-    public List <AddressDto> getAddressesByCity(String cityName) {
-        return addressDao.findAllSortedByCity( cityName ).stream()
-                .map( a -> mapper.toDto( a ) )
-                .collect( Collectors.toList() );
+    public List<AddressDto> getAddressesByCity(String cityName) {
+        return addressDao.findAllSortedByCity(cityName).stream()
+                .map(a -> mapper.toDto(a))
+                .collect(Collectors.toList());
     }
 
     public AddressDto getAddressByPointId(long id) {
-        return mapper.toDto( addressDao.findById( id ) );
+        return mapper.toDto(addressDao.findById(id));
     }
 
     @Override
-    public List <AddressDto> getAll() {
+    public List<AddressDto> getAll() {
         return addressDao.findAll().stream()
-                .map( a -> mapper.toDto( a ) )
-                .collect( Collectors.toList() );
+                .map(a -> mapper.toDto(a))
+                .collect(Collectors.toList());
     }
 }

@@ -16,7 +16,7 @@ public interface IMessageService {
 
     MessageDto getById(Long id);
 
-    List <MessageDto> getAll();
+    List<MessageDto> getAll();
 
     void sendCustomMessage(UserDto to, String topic, String text);
 

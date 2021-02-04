@@ -8,7 +8,7 @@ import ru.rambler.alexeimohov.entities.User;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = { GeometryConverter.class, MessageMapper.class })
+@Mapper(componentModel = "spring", uses = {GeometryConverter.class, MessageMapper.class})
 public interface UserMapper {
 
 
@@ -18,7 +18,7 @@ public interface UserMapper {
     User fromDto(UserDto dto);
 
 
-    List <User> listFromDto(List <UserDto> list);
+    List<User> listFromDto(List<UserDto> list);
 
-    List <UserDto> listToDto(List <User> list);
+    List<UserDto> listToDto(List<User> list);
 }

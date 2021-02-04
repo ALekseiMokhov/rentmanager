@@ -60,105 +60,106 @@ public class UserService implements IUserService {
 
     @Override
     public UserDto getById(Long id) {
-        return userMapper.toDto( userDao.findById( id ) );
+        return userMapper.toDto(userDao.findById(id));
     }
 
     @Transactional(readOnly = false)
     @Override
     public void remove(Long id) {
-        userDao.remove( id );
+        userDao.remove(id);
     }
 
     @Override
-    public List <UserDto> getAll() {
-        return userMapper.listToDto( userDao.findAll() );
+    public List<UserDto> getAll() {
+        return userMapper.listToDto(userDao.findAll());
     }
 
     @Override
     public UserDto getByUserName(String userName) {
-        return userMapper.toDto( userDao.findByUserName( userName ) );
+        return userMapper.toDto(userDao.findByUserName(userName));
     }
 
     @Transactional(readOnly = false)
     @Override
     public void saveOrUpdate(UserDto dto) {
-        User user = userMapper.fromDto( dto );
+        User user = userMapper.fromDto(dto);
         if (user.getId() == null) {
-            userDao.save( user );
-            log.debug( "user has been saved: " + user.getUsername() );
-            publisher.publishEvent( new UserRegisteredEvent( userMapper.toDto( user ) ) );
+            userDao.save(user);
+            log.debug("user has been saved: " + user.getUsername());
+            publisher.publishEvent(new UserRegisteredEvent(userMapper.toDto(user)));
         } else {
-            userDao.update( user );
-            log.debug( "user has been updated: " + user.getUsername() );
+            userDao.update(user);
+            log.debug("user has been updated: " + user.getUsername());
         }
     }
-         /*TODO fix persience and handle listener*/
+
+    /*TODO fix persience and handle listener*/
     @Override
     @Transactional(readOnly = false)
     public void setSubscription(SubscriptionDto dto) {
-        Subscription subscription = subscriptionMapper.fromDto( dto );
-        User user = userDao.findById( subscription.getUser().getId());
-        user.setSubscription( subscription );
-        user.setHasValidSubscription( true );
-        publisher.publishEvent( new SubscriptionSetEvent( subscriptionMapper.toDto( subscription ) ) );
+        Subscription subscription = subscriptionMapper.fromDto(dto);
+        User user = userDao.findById(subscription.getUser().getId());
+        user.setSubscription(subscription);
+        user.setHasValidSubscription(true);
+        publisher.publishEvent(new SubscriptionSetEvent(subscriptionMapper.toDto(subscription)));
     }
 
     @Override
     @Transactional(readOnly = false)
 
     public void removeSubscription(long id) {
-        User user = userDao.findById( id );
-        user.setSubscription( null );
-        user.setHasValidSubscription( false );
+        User user = userDao.findById(id);
+        user.setSubscription(null);
+        user.setHasValidSubscription(false);
     }
 
     @Transactional(readOnly = false)
     @Override
     public void addCreditCard(long id, CardDto carDto) {
-        User user = userDao.findById( id );
-        user.addCreditCard( cardMapper.fromDto( carDto ) );
-        log.debug( "user's cards " + user.getCreditCards().size() );
+        User user = userDao.findById(id);
+        user.addCreditCard(cardMapper.fromDto(carDto));
+        log.debug("user's cards " + user.getCreditCards().size());
     }
 
     @Transactional(readOnly = false)
     @Override
     public void removeCreditCard(long id, CardDto carDto) {
-        User user = userDao.findById( id );
-        user.removeCreditCard( cardMapper.fromDto( carDto ) );
+        User user = userDao.findById(id);
+        user.removeCreditCard(cardMapper.fromDto(carDto));
     }
 
     @Transactional(readOnly = false)
     @Override
     public void addMessage(long id, MessageDto messageDto) {
-        User user = userDao.findById( id );
-        user.addMessage( messageMapper.fromDto( messageDto ) );
+        User user = userDao.findById(id);
+        user.addMessage(messageMapper.fromDto(messageDto));
 
     }
 
     @Transactional(readOnly = false)
     @Override
     public void removeMessage(long id, MessageDto messageDto) {
-        User user = userDao.findById( id );
-        user.removeMessage( messageMapper.fromDto( messageDto ) );
+        User user = userDao.findById(id);
+        user.removeMessage(messageMapper.fromDto(messageDto));
     }
 
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderFinishedEvent(OrderFinishedEvent event) {
 
-        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getUsername() );
+        User retrieved = userDao.findByUserName(event.getOrderDto().getUserDto().getUsername());
 
         Card card = retrieved.getCreditCards().stream()
-                .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
+                .filter(c -> c.getCreditCardNumber() == Long.parseLong(event.getOrderDto().getCreditCardNumber()))
                 .findFirst()
                 .get();
 
-        unBlockFunds( card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
-        writeOff( card, Double.parseDouble( event.getOrderDto().getTotalPrice() ) );
+        unBlockFunds(card, Double.parseDouble(event.getOrderDto().getBlockedFunds()));
+        writeOff(card, Double.parseDouble(event.getOrderDto().getTotalPrice()));
 
-        userDao.update( retrieved );
+        userDao.update(retrieved);
 
-        log.debug( "Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds() );
+        log.debug("Card retrieved: " + card.getId() + "\n" + "card's available funds: " + card.getAvailableFunds());
 
     }
 
@@ -166,15 +167,15 @@ public class UserService implements IUserService {
     @TransactionalEventListener
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void onOrderCreatedEvent(OrderCreatedEvent event) {
-        User retrieved = userDao.findByUserName( event.getOrderDto().getUserDto().getUsername() );
+        User retrieved = userDao.findByUserName(event.getOrderDto().getUserDto().getUsername());
 
         Card card = retrieved.getCreditCards().stream()
-                .filter( c -> c.getCreditCardNumber() == Long.parseLong( event.getOrderDto().getCreditCardNumber() ) )
+                .filter(c -> c.getCreditCardNumber() == Long.parseLong(event.getOrderDto().getCreditCardNumber()))
                 .findFirst()
                 .get();
 
 
-        blockFunds( card, Double.parseDouble( event.getOrderDto().getBlockedFunds() ) );
+        blockFunds(card, Double.parseDouble(event.getOrderDto().getBlockedFunds()));
 
 
     }
@@ -182,9 +183,9 @@ public class UserService implements IUserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User retrieved = userDao.findByUserName( username );
+        User retrieved = userDao.findByUserName(username);
         if (retrieved == null) {
-            throw new IllegalArgumentException( "User " + username + "doesn't exist!" );
+            throw new IllegalArgumentException("User " + username + "doesn't exist!");
         }
         return retrieved;
     }
@@ -192,26 +193,26 @@ public class UserService implements IUserService {
     public void addFunds(Card card, double amount) {
         synchronized (this) {
             double balance = card.getAvailableFunds() + amount;
-            card.setAvailableFunds( balance );
+            card.setAvailableFunds(balance);
         }
     }
 
     public void writeOff(Card card, double amount) {
         synchronized (this) {
             double balance = card.getAvailableFunds() - amount;
-            card.setAvailableFunds( balance );
+            card.setAvailableFunds(balance);
         }
     }
 
     public void blockFunds(Card card, double amount) {
-        writeOff( card, amount );
+        writeOff(card, amount);
         double blockedFunds = card.getBlockedFunds() + amount;
-        card.setBlockedFunds( blockedFunds );
+        card.setBlockedFunds(blockedFunds);
     }
 
     public void unBlockFunds(Card card, double amount) {
-        writeOff( card, amount );
+        writeOff(card, amount);
         double blockedFunds = card.getBlockedFunds() - amount;
-        card.setBlockedFunds( blockedFunds );
+        card.setBlockedFunds(blockedFunds);
     }
 }

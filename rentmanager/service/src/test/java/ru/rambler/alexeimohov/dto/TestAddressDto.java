@@ -29,15 +29,15 @@ public class TestAddressDto {
 
     @Test
     void convertEntityToDtoAndExpectConsistency() {
-        AddressDto converted = addressMapper.toDto( address );
-        Assertions.assertEquals( "Moscow", converted.getCity() );
-        Assertions.assertEquals( "232", converted.getBuildingNumber() );
+        AddressDto converted = addressMapper.toDto(address);
+        Assertions.assertEquals("Moscow", converted.getCity());
+        Assertions.assertEquals("232", converted.getBuildingNumber());
     }
 
     @Test
     void convertDtoToEntityAndExpectConsistency() {
-        Address converted = addressMapper.fromDto( addressDto );
-        Assertions.assertEquals( 693l, converted.getId() );
-        Assertions.assertEquals( 1, converted.getBuildingNumber() );
+        Address converted = addressMapper.fromDto(addressDto);
+        Assertions.assertEquals(693l, converted.getId());
+        Assertions.assertEquals(1, converted.getBuildingNumber());
     }
 }

@@ -29,18 +29,18 @@ public class TestUserDto {
 
     @Test
     void ConvertUserToDtoAndExpectNotNullHasSubscription() {
-        user.setSubscription( null );
-        UserDto converted = userMapper.toDto( user );
-        Assertions.assertEquals( "EXCLUSIVE", converted.getPrivilege() );
-        Assertions.assertNull( converted.getPassword() );
-        Assertions.assertEquals( "true", converted.getHasValidSubscription() );
+        user.setSubscription(null);
+        UserDto converted = userMapper.toDto(user);
+        Assertions.assertEquals("EXCLUSIVE", converted.getPrivilege());
+        Assertions.assertNull(converted.getPassword());
+        Assertions.assertEquals("true", converted.getHasValidSubscription());
     }
 
     @Test
     void reverseConvertFromDto() {
-        User converted = userMapper.fromDto( userDto );
-        Assertions.assertEquals( converted.getRole(), Role.ROLE_USER );
-        Assertions.assertNotNull( converted.getPassword() );
+        User converted = userMapper.fromDto(userDto);
+        Assertions.assertEquals(converted.getRole(), Role.ROLE_USER);
+        Assertions.assertNotNull(converted.getPassword());
 
     }
 }

@@ -2,25 +2,25 @@ version: '3'
 services:
 
   db:
-   image: mysql:latest
-   container_name: mysql
-   environment:
-     MYSQL_ROOT_PASSWORD: "123"
-     MYSQL_DATABASE: "first"
-   ports:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123"
+      MYSQL_DATABASE: "first"
+    ports:
       - "3306:3306"
 
   tomcat:
-   build:
-     context: ./
-     dockerfile: Dockerfile
-   container_name: app
-   links:
-        - db
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: app
+    links:
+      - db
 
-   ports:
+    ports:
       - "8080:8080"
- #  volumes:
-   # - web-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/rentmanager.war
+    #  volumes:
+    # - web-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/rentmanager.war
 
 

@@ -10,7 +10,7 @@ import ru.rambler.alexeimohov.entities.Vehicle;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = { GeometryConverter.class, BooleanToStringConverter.class })
+@Mapper(componentModel = "spring", uses = {GeometryConverter.class, BooleanToStringConverter.class})
 public interface VehicleMapper {
     @Mapping(source = "isChildish", target = "isChildish")
     @Mapping(source = "isHumanPowered", target = "isHumanPowered")
@@ -20,7 +20,7 @@ public interface VehicleMapper {
     Vehicle fromDto(VehicleDto dto);
 
 
-    List <Vehicle> listFromDto(List <VehicleDto> list);
+    List<Vehicle> listFromDto(List<VehicleDto> list);
 
-    List <VehicleDto> listToDto(List <Vehicle> list);
+    List<VehicleDto> listToDto(List<Vehicle> list);
 }
